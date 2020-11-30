@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
 import Routes  from "./Routes";
 import reducers from "./reducers";
 import {createStore, applyMiddleware} from 'redux';
