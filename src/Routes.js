@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
     BrowserRouter as Router,
     Switch,
@@ -6,30 +6,21 @@ import {
 } from "react-router-dom";
 import Login from "./components/Login";
 
-class Routes extends Component{
 
-    constructor(props){
-        super(props);
-    }
+export default function Routes() {
 
-    render(){
+    return(
 
-        return(
+        <Router>
 
-            <Router>
+            <Switch>
 
-                <Switch>
+                <Route exact path="/" component={Login} />
 
-                    <Route exact path="/" component={Login} />
+            </Switch>
 
-                </Switch>
+        </Router>
 
-            </Router>
-
-        );
-
-    }
+    );
 
 }
-
-export default Routes;

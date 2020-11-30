@@ -1,25 +1,36 @@
-import React, {Component} from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes  from "./Routes";
+import reducers from "./reducers";
+import {createStore, applyMiddleware} from 'redux';
+import ReduxThunk from "redux-thunk";
+import { Provider } from 'react-redux';
+import { persistStore} from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react';
 
-class App extends Component{
 
-    constructor(props){
+export default function App() {
 
-        super(props);
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
-    }
+    const persistor = persistStore(store);
 
-    render(){
 
-      return(
+    return(
 
-          <Routes/>
+        <Provider store={store}>
 
-      );
 
-    }
+            <PersistGate loading={null} persistor={persistor}>
+
+                <Routes/>
+
+            </PersistGate>
+
+
+        </Provider>
+
+    );
+
 
 }
-
-export default App;
