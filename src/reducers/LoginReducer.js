@@ -6,7 +6,12 @@ import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 import {
     LOGOUT_SUCCESS,
     CHECK_EMAIL,
-    CHECK_EMAIL_SUCCESS, CHECK_EMAIL_FAILURE
+    CHECK_EMAIL_SUCCESS,
+    CHECK_EMAIL_FAILURE,
+    LOGIN_ADMIN,
+    LOGIN_ADMIN_FAILURE,
+    LOGIN_ADMIN_SUCCESS,
+    LOGIN_PAGE_CHANGED
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -16,12 +21,39 @@ const INITIAL_STATE = {
     logged_in: false,
     current_page: 1,
     loading: false,
-    email_error: ''
+    email_error: '',
+    login_errors: []
 };
 
 const LoginReducer =  (state = INITIAL_STATE , action) => {
 
     switch (action.type) {
+        case LOGIN_PAGE_CHANGED:
+            return{
+                ...state,
+                current_page: 1
+            };
+        case LOGIN_ADMIN_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+                access_token: action.payload.access_token,
+                client: action.payload.client,
+                uid: action.payload.uid,
+                logged_in: true
+            };
+        case LOGIN_ADMIN_FAILURE:
+            return{
+                ...state,
+                loading: false,
+                login_errors: action.payload
+            };
+        case LOGIN_ADMIN:
+            return{
+                ...state,
+                loading: true,
+                login_errors: []
+            };
         case CHECK_EMAIL_FAILURE:
             return{
                 ...state,

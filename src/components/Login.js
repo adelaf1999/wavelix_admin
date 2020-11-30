@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button,  Alert, Spinner } from "react-bootstrap";
-import {  checkEmail } from "../actions";
+import {  checkEmail, loginAdmin, loginPageChanged } from "../actions";
+import _ from "lodash";
 
 class Login extends Component {
 
@@ -9,15 +10,47 @@ class Login extends Component {
 
         super(props);
 
+        const history = props.history;
+
         const email = "";
 
+        const password = "";
+
+        const verification_code = "";
+
+        const password_invalid = false;
+
+        const verification_code_invalid = false;
+
+        const email_invalid = false;
+
         this.state = {
-            email
+            history,
+            email,
+            password,
+            verification_code,
+            password_invalid,
+            verification_code_invalid,
+            email_invalid
         };
 
     }
 
 
+    componentDidMount(){
+
+        const { logged_in } = this.props;
+
+        const {  history } = this.state;
+
+        if(logged_in){
+
+            history.push("/home");
+
+        }
+
+
+    }
 
     checkEmailButton(){
 
@@ -52,8 +85,26 @@ class Login extends Component {
                     variant="success"
                     className="submit-button"
                     onClick={(e) => {
+
                         e.preventDefault();
-                        this.props.checkEmail(this.state.email);
+
+                        const { email } = this.state;
+
+                        const { checkEmail } = this.props;
+
+                        this.setState({email_invalid: false});
+
+                        if(_.isEmpty(email)){
+
+                            this.setState({email_invalid: true});
+
+                        }else{
+
+                            checkEmail(email);
+
+                        }
+
+
                     }}
                 >
                     CONTINUE
@@ -83,11 +134,110 @@ class Login extends Component {
 
     }
 
+    loginButton(){
+
+        const { loading } = this.props;
+
+
+        if(loading){
+
+            return(
+
+                <Button variant="success" className="submit-button" disabled>
+
+                    <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                    />
+
+
+                </Button>
+
+            );
+
+
+        }else{
+
+            return(
+
+                <Button
+                    variant="success"
+                    className="submit-button"
+                    onClick={(e) => {
+
+                        e.preventDefault();
+
+                        this.setState({password_invalid: false, verification_code_invalid: false});
+
+                        const { email, password, verification_code, history } = this.state;
+
+
+                        let is_valid = true;
+
+                        if(_.isEmpty(password)){
+
+                            is_valid = false;
+
+                            this.setState({password_invalid: true});
+
+                        }
+
+                        if(_.isEmpty(verification_code)){
+
+                            is_valid = false;
+
+                            this.setState({verification_code_invalid: true});
+
+                        }
+
+                        if(is_valid){
+
+                            this.props.loginAdmin(email, password, verification_code, history);
+
+                        }
+
+
+
+                    }}
+                >
+                   LOGIN
+                </Button>
+
+            );
+
+        }
+
+
+    }
+
+    loginError(){
+
+        const {  login_errors } = this.props;
+
+
+        return _.map(login_errors, (error, index) => {
+
+            return(
+
+                <Alert variant="danger" key={index}>
+                    {error}
+                </Alert>
+
+
+            );
+
+        })
+
+    }
+
     renderScreen(){
 
         const { current_page } = this.props;
 
-        if(current_page === 1 ){
+        if(current_page === 1){
 
             return(
 
@@ -106,7 +256,12 @@ class Login extends Component {
                                 onChange={(e) => {
                                     this.setState({email: e.target.value});
                                 }}
+                                isInvalid={this.state.email_invalid}
                             />
+
+                            <Form.Control.Feedback type="invalid">
+                                email is invalid
+                            </Form.Control.Feedback>
 
                         </Form.Group>
 
@@ -126,6 +281,117 @@ class Login extends Component {
             return(
 
                 <div>
+
+                    <p className="notice-text">
+                        Enter the verification code sent to {this.state.email}. If you forgot your password,
+                        please contact the administrator.
+                    </p>
+
+
+                    <Form onSubmit={(e) => e.preventDefault()} >
+
+
+                        <Form.Group controlId="formBasicPassword" className="input-container">
+
+                            <Form.Label>Password</Form.Label>
+
+                            <Form.Control
+                                type="password"
+                                placeholder="password"
+                                value={this.state.password}
+                                onChange={(e) => {
+                                    this.setState({password: e.target.value});
+                                }}
+                                isInvalid={this.state.password_invalid}
+                            />
+
+                            <Form.Control.Feedback type="invalid">
+                                password is invalid
+                            </Form.Control.Feedback>
+
+                        </Form.Group>
+
+
+                        <Form.Group className="input-container">
+
+                            <Form.Label>Verification Code</Form.Label>
+
+                            <Form.Control
+                                placeholder="code"
+                                value={this.state.verification_code}
+                                onChange={(e) => {
+                                    this.setState({verification_code: e.target.value});
+                                }}
+                                isInvalid={this.state.verification_code_invalid}
+                            />
+
+                            <Form.Control.Feedback type="invalid">
+                                code is invalid
+                            </Form.Control.Feedback>
+
+                        </Form.Group>
+
+
+                        {this.loginError()}
+
+                        {this.loginButton()}
+
+
+                        <Button
+                            variant="primary"
+                            className="submit-button"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.setState({
+                                    email: '',
+                                    password: '',
+                                    verification_code: '',
+                                    password_invalid: false,
+                                    verification_code_invalid: false,
+                                    email_invalid: false
+                                });
+
+
+                                this.props.loginPageChanged(1);
+
+                            }}
+                        >
+                            BACK
+                        </Button>
+
+
+                        <div className="buttons-container">
+
+                            <Button
+                                variant="outline-secondary"
+                                className="button-link-width"
+                                onClick={(e) => {
+                                    e.preventDefault();
+
+                                }}
+                            >
+                                Resend Verification Code
+                            </Button>
+
+                            <Button
+                                variant="outline-secondary"
+                                className="button-link-width"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                }}
+                            >
+                                Resend Account Unlock Link
+                            </Button>
+
+                        </div>
+
+
+
+
+
+                    </Form>
 
                 </div>
 
@@ -157,18 +423,24 @@ const mapStateToProps = (state) => {
     const {
         current_page,
         loading,
-        email_error
+        email_error,
+        login_errors,
+        logged_in
     } = state.login;
 
 
     return {
         current_page,
         loading,
-        email_error
+        email_error,
+        login_errors,
+        logged_in
     };
 };
 
 
 export default connect(mapStateToProps, {
-    checkEmail
+    checkEmail,
+    loginAdmin,
+    loginPageChanged
 })(Login)
