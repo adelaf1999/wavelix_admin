@@ -11,7 +11,7 @@ import {
     LOGIN_ADMIN,
     LOGIN_ADMIN_FAILURE,
     LOGIN_ADMIN_SUCCESS,
-    LOGIN_PAGE_CHANGED
+    LOGIN_PAGE_CHANGED, RESEND_AUTH_EMAIL, RESEND_AUTH_EMAIL_COMPLETE, CLOSE_EMAIL_MODAL
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -22,12 +22,30 @@ const INITIAL_STATE = {
     current_page: 1,
     loading: false,
     email_error: '',
-    login_errors: []
+    login_errors: [],
+    resending_email: false,
+    email_modal_visible: false
 };
 
 const LoginReducer =  (state = INITIAL_STATE , action) => {
 
     switch (action.type) {
+        case CLOSE_EMAIL_MODAL:
+            return{
+                ...state,
+                email_modal_visible: false
+            };
+        case RESEND_AUTH_EMAIL_COMPLETE:
+            return{
+                ...state,
+                resending_email: false,
+                email_modal_visible: true
+            };
+        case RESEND_AUTH_EMAIL:
+            return{
+                ...state,
+                resending_email: true
+            };
         case LOGIN_PAGE_CHANGED:
             return{
                 ...state,

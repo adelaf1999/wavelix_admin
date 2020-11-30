@@ -7,11 +7,90 @@ import {
     LOGIN_ADMIN_ROUTE,
     LOGIN_ADMIN_FAILURE,
     LOGIN_ADMIN_SUCCESS,
-    LOGIN_PAGE_CHANGED
+    LOGIN_PAGE_CHANGED,
+    RESEND_AUTH_EMAIL,
+    RESEND_AUTH_EMAIL_COMPLETE,
+    RESEND_UNLOCK_LINK_ROUTE,
+    CLOSE_EMAIL_MODAL,
+    RESEND_VERIFICATION_CODE_ROUTE
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+export const closeEmailModal = () => {
+
+    return{
+        type: CLOSE_EMAIL_MODAL
+    }
+
+};
+
+export const resendVerificationCode = (email) => {
+
+    return(dispatch) => {
+
+        dispatch({type: RESEND_AUTH_EMAIL});
+
+        const config = {
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+
+        let bodyFormData = getFormData({
+            email: email
+        });
+
+        axios.post(RESEND_VERIFICATION_CODE_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                dispatch({type: RESEND_AUTH_EMAIL_COMPLETE});
+
+            }).catch(error => {
+
+            console.log(error);
+
+        });
+
+
+    };
+
+};
+
+export const resendUnlockLink = (email) => {
+
+    return(dispatch) => {
+
+        dispatch({type: RESEND_AUTH_EMAIL});
+
+        const config = {
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+
+        let bodyFormData = getFormData({
+            email: email
+        });
+
+        axios.post(RESEND_UNLOCK_LINK_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                dispatch({type: RESEND_AUTH_EMAIL_COMPLETE});
+
+            }).catch(error => {
+
+            console.log(error);
+
+        });
+
+
+    };
+
+};
 
 export const loginPageChanged = (page) => {
 

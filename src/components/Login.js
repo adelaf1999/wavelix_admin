@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, Button,  Alert, Spinner } from "react-bootstrap";
-import {  checkEmail, loginAdmin, loginPageChanged } from "../actions";
+import { Form, Button,  Alert, Spinner, Modal } from "react-bootstrap";
+import {
+    checkEmail,
+    loginAdmin,
+    loginPageChanged,
+    resendUnlockLink,
+    resendVerificationCode,
+    closeEmailModal
+} from "../actions";
 import _ from "lodash";
 
 class Login extends Component {
@@ -203,7 +210,7 @@ class Login extends Component {
 
                     }}
                 >
-                   LOGIN
+                    LOGIN
                 </Button>
 
             );
@@ -230,6 +237,112 @@ class Login extends Component {
             );
 
         })
+
+    }
+
+
+    resendEmailButtons(){
+
+
+        const { email, resending_email } = this.state;
+
+        const { resendVerificationCode, resendUnlockLink  } = this.props;
+
+        if(resending_email){
+
+            return(
+
+                <div className="spinner-container">
+
+                    <Spinner animation="border" variant="primary" />
+
+                </div>
+            )
+
+        }else{
+
+            return(
+
+                <div className="buttons-container">
+
+                    <Button
+                        variant="outline-secondary"
+                        className="button-link-width"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            resendVerificationCode(email);
+                        }}
+                    >
+                        Resend Verification Code
+                    </Button>
+
+                    <Button
+                        variant="outline-secondary"
+                        className="button-link-width"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            resendUnlockLink(email);
+                        }}
+                    >
+                        Resend Account Unlock Link
+                    </Button>
+
+                </div>
+
+            );
+
+        }
+
+    }
+
+
+
+    emailModal(){
+
+        const { email_modal_visible, closeEmailModal } = this.props;
+
+
+        if(email_modal_visible){
+
+            return(
+
+                <Modal
+                    show={email_modal_visible}
+                    onHide={() => {
+                        closeEmailModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Successfully sent email</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>Please check your email inbox and spam folder</Modal.Body>
+
+                    <Modal.Footer>
+
+
+                        <Button variant="primary" onClick={() => {
+                            closeEmailModal();
+                        }}>
+                            Close
+                        </Button>
+
+                    </Modal.Footer>
+
+
+                </Modal>
+
+            );
+
+        }
+
+
 
     }
 
@@ -362,33 +475,9 @@ class Login extends Component {
                         </Button>
 
 
-                        <div className="buttons-container">
+                        {this.resendEmailButtons()}
 
-                            <Button
-                                variant="outline-secondary"
-                                className="button-link-width"
-                                onClick={(e) => {
-                                    e.preventDefault();
-
-                                }}
-                            >
-                                Resend Verification Code
-                            </Button>
-
-                            <Button
-                                variant="outline-secondary"
-                                className="button-link-width"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                }}
-                            >
-                                Resend Account Unlock Link
-                            </Button>
-
-                        </div>
-
-
-
+                        {this.emailModal()}
 
 
                     </Form>
@@ -425,7 +514,9 @@ const mapStateToProps = (state) => {
         loading,
         email_error,
         login_errors,
-        logged_in
+        logged_in,
+        resending_email,
+        email_modal_visible
     } = state.login;
 
 
@@ -434,7 +525,9 @@ const mapStateToProps = (state) => {
         loading,
         email_error,
         login_errors,
-        logged_in
+        logged_in,
+        resending_email,
+        email_modal_visible
     };
 };
 
@@ -442,5 +535,8 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     checkEmail,
     loginAdmin,
-    loginPageChanged
+    loginPageChanged,
+    resendUnlockLink,
+    resendVerificationCode,
+    closeEmailModal
 })(Login)

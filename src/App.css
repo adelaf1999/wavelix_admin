@@ -6,3 +6,9 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
+.spinner-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
