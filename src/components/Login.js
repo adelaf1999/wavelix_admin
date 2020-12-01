@@ -68,18 +68,11 @@ class Login extends Component {
 
             return(
 
-                <Button variant="success" className="submit-button" disabled>
+                <div className="spinner-container">
 
-                    <Spinner
-                        as="span"
-                        animation="border"
-                        size="sm"
-                        role="status"
-                        aria-hidden="true"
-                    />
+                    <Spinner animation="border" variant="primary" />
 
-
-                </Button>
+                </div>
 
             );
 
