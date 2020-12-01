@@ -169,6 +169,9 @@ export const loginAdmin = (email, password, verification_code, history) => {
         axios.post(LOGIN_ADMIN_ROUTE, bodyFormData, config)
             .then(response => {
 
+                const data = response.data.data;
+
+                const roles = data.roles;
 
                 const headers = response.headers;
 
@@ -181,7 +184,8 @@ export const loginAdmin = (email, password, verification_code, history) => {
                 dispatch({type: LOGIN_ADMIN_SUCCESS, payload: {
                     access_token: access_token,
                     client: client,
-                    uid: uid
+                    uid: uid,
+                    roles: roles
                 }});
 
                 history.push("/home");

@@ -86,14 +86,16 @@ const mapStateToProps = (state) => {
     const {
         access_token,
         client,
-        uid
+        uid,
+        roles
     } = state.login;
 
 
     return {
         access_token,
         client,
-        uid
+        uid,
+        roles
     };
 
 
