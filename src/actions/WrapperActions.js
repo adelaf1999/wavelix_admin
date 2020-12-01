@@ -1,7 +1,8 @@
 import {
     GET_ROLES_ROUTE,
     GET_ROLES_COMPLETE,
-    LOGOUT_SUCCESS
+    LOGOUT_SUCCESS,
+    OPEN_TIMEOUT_MODAL
 } from "./types";
 import axios from "axios";
 
@@ -37,9 +38,13 @@ export const getRoles = (access_token, client, uid, history) => {
 
                     const status = error.response.status;
 
-                    if(status === 401 || status === 404 || status === 500){
+                    if(status === 401 || status === 440 || status === 404 || status === 500){
 
                         dispatch({type: LOGOUT_SUCCESS});
+
+                        if(status === 440){
+                            dispatch({type: OPEN_TIMEOUT_MODAL});
+                        }
 
                         history.push("/");
 

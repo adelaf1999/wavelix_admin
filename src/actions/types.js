@@ -22,6 +22,8 @@ export const RESEND_AUTH_EMAIL = "resend_auth_email";
 export const RESEND_AUTH_EMAIL_COMPLETE = "resend_auth_email_complete";
 export const CLOSE_EMAIL_MODAL = "close_email_modal";
 export const LOGOUT_SUCCESS = "logout_success";
+export const OPEN_TIMEOUT_MODAL = "open_timeout_modal";
+export const CLOSE_TIMEOUT_MODAL = "close_timeout_modal";
 
 // Wrapper Types
 export const GET_ROLES_COMPLETE = "get_roles_complete";

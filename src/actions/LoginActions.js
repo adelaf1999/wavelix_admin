@@ -14,12 +14,23 @@ import {
     CLOSE_EMAIL_MODAL,
     RESEND_VERIFICATION_CODE_ROUTE,
     LOGOUT_SUCCESS,
-    LOGOUT_ROUTE
+    LOGOUT_ROUTE,
+    OPEN_TIMEOUT_MODAL,
+    CLOSE_TIMEOUT_MODAL
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
 
+
+
+export const closeTimeoutModal = () => {
+
+    return{
+      type: CLOSE_TIMEOUT_MODAL
+    };
+
+};
 
 export const logoutAdmin = (access_token, client, uid, history) => {
 

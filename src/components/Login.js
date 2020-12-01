@@ -7,7 +7,8 @@ import {
     loginPageChanged,
     resendUnlockLink,
     resendVerificationCode,
-    closeEmailModal
+    closeEmailModal,
+    closeTimeoutModal
 } from "../actions";
 import _ from "lodash";
 import axios from "axios";
@@ -398,6 +399,51 @@ class Login extends Component {
 
     }
 
+
+    timeoutModal(){
+
+        const { timeout_modal_visible, closeTimeoutModal } = this.props;
+
+        if(timeout_modal_visible){
+
+            return(
+                <Modal
+                    show={timeout_modal_visible}
+                    onHide={() => {
+                        closeTimeoutModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Your session has expired</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>Please login again to continue</Modal.Body>
+
+                    <Modal.Footer>
+
+
+                        <Button variant="primary" onClick={() => {
+                            closeTimeoutModal();
+                        }}>
+                            Close
+                        </Button>
+
+                    </Modal.Footer>
+
+
+                </Modal>
+            )
+
+        }
+
+    }
+
     renderScreen(){
 
         const { current_page } = this.props;
@@ -433,6 +479,8 @@ class Login extends Component {
                         {this.emailError()}
 
                         {this.checkEmailButton()}
+
+                        {this.timeoutModal()}
 
 
                     </Form>
@@ -605,7 +653,8 @@ const mapStateToProps = (state) => {
         login_errors,
         logged_in,
         resending_email,
-        email_modal_visible
+        email_modal_visible,
+        timeout_modal_visible
     } = state.login;
 
 
@@ -616,7 +665,8 @@ const mapStateToProps = (state) => {
         login_errors,
         logged_in,
         resending_email,
-        email_modal_visible
+        email_modal_visible,
+        timeout_modal_visible
     };
 };
 
@@ -627,5 +677,6 @@ export default connect(mapStateToProps, {
     loginPageChanged,
     resendUnlockLink,
     resendVerificationCode,
-    closeEmailModal
+    closeEmailModal,
+    closeTimeoutModal
 })(Login)

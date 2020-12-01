@@ -15,7 +15,9 @@ import {
     RESEND_AUTH_EMAIL,
     RESEND_AUTH_EMAIL_COMPLETE,
     CLOSE_EMAIL_MODAL,
-    GET_ROLES_COMPLETE
+    GET_ROLES_COMPLETE,
+    OPEN_TIMEOUT_MODAL,
+    CLOSE_TIMEOUT_MODAL
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -29,12 +31,23 @@ const INITIAL_STATE = {
     email_error: '',
     login_errors: [],
     resending_email: false,
-    email_modal_visible: false
+    email_modal_visible: false,
+    timeout_modal_visible: false
 };
 
 const LoginReducer =  (state = INITIAL_STATE , action) => {
 
     switch (action.type) {
+        case CLOSE_TIMEOUT_MODAL:
+            return{
+                ...state,
+                timeout_modal_visible: false
+            };
+        case OPEN_TIMEOUT_MODAL:
+            return{
+                ...state,
+                timeout_modal_visible: true
+            };
         case GET_ROLES_COMPLETE:
             return{
                 ...state,
