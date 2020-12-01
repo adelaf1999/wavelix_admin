@@ -5,6 +5,7 @@ export const CHECK_EMAIL_ROUTE = `${BACKEND_URL}/check-admin-email`;
 export const LOGIN_ADMIN_ROUTE = `${BACKEND_URL}/admin_auth/sign_in`;
 export const RESEND_VERIFICATION_CODE_ROUTE = `${BACKEND_URL}/resend-admin-verification-code`;
 export const RESEND_UNLOCK_LINK_ROUTE = `${BACKEND_URL}/admin_auth/unlock`;
+export const VERIFY_RECAPTCHA_TOKEN_ROUTE = `${BACKEND_URL}/verify-recaptcha-token`;
 
 // Login Types
 export const CHECK_EMAIL = "check_email";

@@ -10,6 +10,9 @@ import {
     closeEmailModal
 } from "../actions";
 import _ from "lodash";
+import axios from "axios";
+import Recaptcha from 'react-google-invisible-recaptcha';
+import { VERIFY_RECAPTCHA_TOKEN_ROUTE } from "../actions/types";
 
 class Login extends Component {
 
@@ -31,6 +34,10 @@ class Login extends Component {
 
         const email_invalid = false;
 
+        const verifying_recaptcha = false;
+
+        const recaptcha_error = "";
+
         this.state = {
             history,
             email,
@@ -38,7 +45,9 @@ class Login extends Component {
             verification_code,
             password_invalid,
             verification_code_invalid,
-            email_invalid
+            email_invalid,
+            verifying_recaptcha,
+            recaptcha_error
         };
 
     }
@@ -59,12 +68,36 @@ class Login extends Component {
 
     }
 
+
+
+    submitEmail(){
+
+        const { email } = this.state;
+
+        const { checkEmail } = this.props;
+
+        this.setState({email_invalid: false});
+
+        if(_.isEmpty(email)){
+
+            this.setState({email_invalid: true});
+
+        }else{
+
+            checkEmail(email);
+
+        }
+
+    }
+
     checkEmailButton(){
 
         const { loading } = this.props;
 
+        const { verifying_recaptcha } = this.state;
 
-        if(loading){
+
+        if(loading || verifying_recaptcha){
 
             return(
 
@@ -88,21 +121,9 @@ class Login extends Component {
 
                         e.preventDefault();
 
-                        const { email } = this.state;
+                        this.setState({recaptcha_error: ''});
 
-                        const { checkEmail } = this.props;
-
-                        this.setState({email_invalid: false});
-
-                        if(_.isEmpty(email)){
-
-                            this.setState({email_invalid: true});
-
-                        }else{
-
-                            checkEmail(email);
-
-                        }
+                        this.recaptcha.execute();
 
 
                     }}
@@ -120,6 +141,8 @@ class Login extends Component {
 
         const { email_error } = this.props;
 
+        const { recaptcha_error } = this.state;
+
         if(email_error.length > 0){
 
             return(
@@ -130,10 +153,20 @@ class Login extends Component {
 
             );
 
+        }else if(recaptcha_error.length > 0){
+
+            return(
+
+                <Alert variant="danger">
+                    {recaptcha_error}
+                </Alert>
+
+            );
+
         }
 
     }
-    
+
 
     loginButtons(){
 
@@ -157,80 +190,80 @@ class Login extends Component {
 
             return(
 
-              <div>
+                <div>
 
-                  <Button
-                      variant="success"
-                      className="submit-button"
-                      onClick={(e) => {
+                    <Button
+                        variant="success"
+                        className="submit-button"
+                        onClick={(e) => {
 
-                          e.preventDefault();
+                            e.preventDefault();
 
-                          this.setState({password_invalid: false, verification_code_invalid: false});
+                            this.setState({password_invalid: false, verification_code_invalid: false});
 
-                          const { email, password, verification_code, history } = this.state;
-
-
-                          let is_valid = true;
-
-                          if(_.isEmpty(password)){
-
-                              is_valid = false;
-
-                              this.setState({password_invalid: true});
-
-                          }
-
-                          if(_.isEmpty(verification_code)){
-
-                              is_valid = false;
-
-                              this.setState({verification_code_invalid: true});
-
-                          }
-
-                          if(is_valid){
-
-                              this.props.loginAdmin(email, password, verification_code, history);
-
-                          }
+                            const { email, password, verification_code, history } = this.state;
 
 
+                            let is_valid = true;
 
-                      }}
-                  >
-                      LOGIN
-                  </Button>
+                            if(_.isEmpty(password)){
 
+                                is_valid = false;
 
-                  <Button
-                      variant="primary"
-                      className="submit-button"
-                      onClick={(e) => {
+                                this.setState({password_invalid: true});
 
-                          e.preventDefault();
+                            }
 
-                          this.setState({
-                              email: '',
-                              password: '',
-                              verification_code: '',
-                              password_invalid: false,
-                              verification_code_invalid: false,
-                              email_invalid: false
-                          });
+                            if(_.isEmpty(verification_code)){
 
+                                is_valid = false;
 
-                          this.props.loginPageChanged(1);
+                                this.setState({verification_code_invalid: true});
 
-                      }}
-                  >
-                      BACK
-                  </Button>
+                            }
+
+                            if(is_valid){
+
+                                this.props.loginAdmin(email, password, verification_code, history);
+
+                            }
 
 
-                  {this.resendEmailButtons()}
 
-              </div>
+                        }}
+                    >
+                        LOGIN
+                    </Button>
+
+
+                    <Button
+                        variant="primary"
+                        className="submit-button"
+                        onClick={(e) => {
+
+                            e.preventDefault();
+
+                            this.setState({
+                                email: '',
+                                password: '',
+                                verification_code: '',
+                                password_invalid: false,
+                                verification_code_invalid: false,
+                                email_invalid: false
+                            });
+
+
+                            this.props.loginPageChanged(1);
+
+                        }}
+                    >
+                        BACK
+                    </Button>
+
+
+                    {this.resendEmailButtons()}
+
+                </div>
 
             );
 
@@ -404,6 +437,8 @@ class Login extends Component {
 
                     </Form>
 
+
+
                 </div>
 
             );
@@ -486,11 +521,74 @@ class Login extends Component {
 
         return(
 
-            <div className="center-container form-container" >
+            <div>
 
-                {this.renderScreen()}
+                <div className="center-container form-container" >
+
+                    {this.renderScreen()}
+
+                </div>
+
+
+                <Recaptcha
+                    ref={ ref => this.recaptcha = ref }
+                    sitekey="6LeFo_QZAAAAACRFtPWMSRJAUzrbMasKK_Cx8Ttn"
+                    onResolved={() => {
+
+                        this.setState({verifying_recaptcha: true});
+
+                        const token =  this.recaptcha.getResponse();
+
+                        console.log(token);
+
+                        const config = {
+                            headers: {
+                                "Accept": "application/json"
+                            }
+                        };
+
+                        let bodyFormData = new FormData();
+
+                        bodyFormData.append('token', token);
+
+                        bodyFormData.append('is_admin', true);
+
+                        axios.post(VERIFY_RECAPTCHA_TOKEN_ROUTE, bodyFormData, config)
+                            .then(response => {
+
+                                const data = response.data;
+
+                                const success = data.success;
+
+                                this.setState({verifying_recaptcha: false});
+
+                                if(success){
+
+                                    this.submitEmail();
+
+                                }else{
+
+                                    this.setState({recaptcha_error: 'An error occurred. Please try again'});
+
+                                }
+
+
+
+                            }).catch(error => {
+
+                            console.log(error);
+
+                            this.setState({recaptcha_error: 'An error occurred. Please try again', verifying_recaptcha: false});
+
+                        });
+
+
+                    }}
+                />
 
             </div>
+
+
 
         );
 
