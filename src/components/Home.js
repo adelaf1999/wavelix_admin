@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logoutAdmin } from "../actions";
-import { Button } from "react-bootstrap";
+import TopHeader from "./TopHeader";
 
 class Home extends Component{
 
@@ -39,22 +39,7 @@ class Home extends Component{
 
             <div>
 
-                <Button
-                    variant="danger"
-
-                    onClick={(e) => {
-
-                        e.preventDefault();
-
-                        const { logoutAdmin, access_token, client, uid } = this.props;
-
-                        logoutAdmin(access_token, client, uid, this.state.history);
-
-                    }}
-                >
-                    LOGOUT
-                </Button>
-
+                <TopHeader history={this.state.history}/>
 
             </div>
 
