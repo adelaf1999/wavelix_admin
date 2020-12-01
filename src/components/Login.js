@@ -133,8 +133,9 @@ class Login extends Component {
         }
 
     }
+    
 
-    loginButton(){
+    loginButtons(){
 
         const { loading } = this.props;
 
@@ -143,18 +144,11 @@ class Login extends Component {
 
             return(
 
-                <Button variant="success" className="submit-button" disabled>
+                <div className="spinner-container">
 
-                    <Spinner
-                        as="span"
-                        animation="border"
-                        size="sm"
-                        role="status"
-                        aria-hidden="true"
-                    />
+                    <Spinner animation="border" variant="primary" />
 
-
-                </Button>
+                </div>
 
             );
 
@@ -163,48 +157,80 @@ class Login extends Component {
 
             return(
 
-                <Button
-                    variant="success"
-                    className="submit-button"
-                    onClick={(e) => {
+              <div>
 
-                        e.preventDefault();
+                  <Button
+                      variant="success"
+                      className="submit-button"
+                      onClick={(e) => {
 
-                        this.setState({password_invalid: false, verification_code_invalid: false});
+                          e.preventDefault();
 
-                        const { email, password, verification_code, history } = this.state;
+                          this.setState({password_invalid: false, verification_code_invalid: false});
 
-
-                        let is_valid = true;
-
-                        if(_.isEmpty(password)){
-
-                            is_valid = false;
-
-                            this.setState({password_invalid: true});
-
-                        }
-
-                        if(_.isEmpty(verification_code)){
-
-                            is_valid = false;
-
-                            this.setState({verification_code_invalid: true});
-
-                        }
-
-                        if(is_valid){
-
-                            this.props.loginAdmin(email, password, verification_code, history);
-
-                        }
+                          const { email, password, verification_code, history } = this.state;
 
 
+                          let is_valid = true;
 
-                    }}
-                >
-                    LOGIN
-                </Button>
+                          if(_.isEmpty(password)){
+
+                              is_valid = false;
+
+                              this.setState({password_invalid: true});
+
+                          }
+
+                          if(_.isEmpty(verification_code)){
+
+                              is_valid = false;
+
+                              this.setState({verification_code_invalid: true});
+
+                          }
+
+                          if(is_valid){
+
+                              this.props.loginAdmin(email, password, verification_code, history);
+
+                          }
+
+
+
+                      }}
+                  >
+                      LOGIN
+                  </Button>
+
+
+                  <Button
+                      variant="primary"
+                      className="submit-button"
+                      onClick={(e) => {
+
+                          e.preventDefault();
+
+                          this.setState({
+                              email: '',
+                              password: '',
+                              verification_code: '',
+                              password_invalid: false,
+                              verification_code_invalid: false,
+                              email_invalid: false
+                          });
+
+
+                          this.props.loginPageChanged(1);
+
+                      }}
+                  >
+                      BACK
+                  </Button>
+
+
+                  {this.resendEmailButtons()}
+
+              </div>
 
             );
 
@@ -440,35 +466,7 @@ class Login extends Component {
 
                         {this.loginError()}
 
-                        {this.loginButton()}
-
-
-                        <Button
-                            variant="primary"
-                            className="submit-button"
-                            onClick={(e) => {
-
-                                e.preventDefault();
-
-                                this.setState({
-                                    email: '',
-                                    password: '',
-                                    verification_code: '',
-                                    password_invalid: false,
-                                    verification_code_invalid: false,
-                                    email_invalid: false
-                                });
-
-
-                                this.props.loginPageChanged(1);
-
-                            }}
-                        >
-                            BACK
-                        </Button>
-
-
-                        {this.resendEmailButtons()}
+                        {this.loginButtons()}
 
                         {this.emailModal()}
 

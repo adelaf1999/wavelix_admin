@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d195e98-fbd2-42d9-b726-6c7e9b6ac1da" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.eslintcache" afterPath="$PROJECT_DIR$/.eslintcache" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Login.js" afterPath="$PROJECT_DIR$/src/components/Login.js" />
     </list>
@@ -20,11 +21,21 @@
       <file leaf-file-name="Login.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10">
-              <caret line="74" column="22" lean-forward="false" selection-start-line="74" selection-start-column="22" selection-end-line="74" selection-end-column="22" />
+            <state relative-caret-position="239">
+              <caret line="135" column="4" lean-forward="false" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="4" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginReducer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/reducers/LoginReducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-765">
+              <caret line="21" column="19" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -44,6 +55,7 @@
       <find>loginAdmin</find>
       <find>BACK</find>
       <find>CONTINUE</find>
+      <find>LOGIN</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -206,12 +218,12 @@
       <workItem from="1606644672376" duration="2513000" />
       <workItem from="1606720638030" duration="5498000" />
       <workItem from="1606728605971" duration="10879000" />
-      <workItem from="1606807866359" duration="657000" />
+      <workItem from="1606807866359" duration="1265000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22921000" />
+    <option name="totallyTimeSpent" value="23529000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-63" y="0" width="3840" height="2080" extended-state="6" />
@@ -254,7 +266,7 @@
         <state relative-caret-position="249">
           <caret line="21" column="19" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
           <folding>
-            <element signature="e#0#48#0" expanded="true" />
+            <element signature="e#0#48#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -264,7 +276,7 @@
         <state relative-caret-position="854">
           <caret line="58" column="7" lean-forward="true" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="17" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -488,7 +500,7 @@
         <state relative-caret-position="720">
           <caret line="16" column="79" lean-forward="true" selection-start-line="16" selection-start-column="79" selection-end-line="16" selection-end-column="79" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -498,7 +510,7 @@
         <state relative-caret-position="900">
           <caret line="20" column="40" lean-forward="false" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -515,7 +527,7 @@
         <state relative-caret-position="854">
           <caret line="58" column="7" lean-forward="true" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="17" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -532,16 +544,6 @@
         <state relative-caret-position="810">
           <caret line="18" column="53" lean-forward="false" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/LoginReducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="21" column="19" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -568,10 +570,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/LoginReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-765">
+          <caret line="21" column="19" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10">
-          <caret line="74" column="22" lean-forward="false" selection-start-line="74" selection-start-column="22" selection-end-line="74" selection-end-column="22" />
+        <state relative-caret-position="239">
+          <caret line="135" column="4" lean-forward="false" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="4" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
