@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { logoutAdmin } from "../actions";
+import { Button } from "react-bootstrap";
 
 class Home extends Component{
 
@@ -38,7 +39,22 @@ class Home extends Component{
 
             <div>
 
-                <p style={{textAlign:'center', fontSize: 22}}>Hello from Home.js</p>
+                <Button
+                    variant="danger"
+
+                    onClick={(e) => {
+
+                        e.preventDefault();
+
+                        const { logoutAdmin, access_token, client, uid } = this.props;
+
+                        logoutAdmin(access_token, client, uid, this.state.history);
+
+                    }}
+                >
+                    LOGOUT
+                </Button>
+
 
             </div>
 
@@ -71,4 +87,6 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps, {
+    logoutAdmin
+})(Home)
