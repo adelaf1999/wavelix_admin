@@ -27,7 +27,7 @@ import { getFormData } from "../helpers";
 export const closeTimeoutModal = () => {
 
     return{
-      type: CLOSE_TIMEOUT_MODAL
+        type: CLOSE_TIMEOUT_MODAL
     };
 
 };
@@ -58,13 +58,9 @@ export const logoutAdmin = (access_token, client, uid, history) => {
 
                 const status = error.response.status;
 
-                if(status === 401 || status === 404 || status === 500){
+                dispatch({type: LOGOUT_SUCCESS});
 
-                    dispatch({type: LOGOUT_SUCCESS});
-
-                    history.push("/");
-
-                }
+                history.push("/");
 
             }
 
