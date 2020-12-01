@@ -38,17 +38,15 @@ export const getRoles = (access_token, client, uid, history) => {
 
                     const status = error.response.status;
 
-                    if(status === 401 || status === 440 || status === 404 || status === 500){
+                    dispatch({type: LOGOUT_SUCCESS});
 
-                        dispatch({type: LOGOUT_SUCCESS});
+                    if(status === 440){
 
-                        if(status === 440){
-                            dispatch({type: OPEN_TIMEOUT_MODAL});
-                        }
-
-                        history.push("/");
+                        dispatch({type: OPEN_TIMEOUT_MODAL});
 
                     }
+
+                    history.push("/");
 
                 }
 
