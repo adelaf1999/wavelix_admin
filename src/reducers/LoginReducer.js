@@ -11,7 +11,11 @@ import {
     LOGIN_ADMIN,
     LOGIN_ADMIN_FAILURE,
     LOGIN_ADMIN_SUCCESS,
-    LOGIN_PAGE_CHANGED, RESEND_AUTH_EMAIL, RESEND_AUTH_EMAIL_COMPLETE, CLOSE_EMAIL_MODAL
+    LOGIN_PAGE_CHANGED,
+    RESEND_AUTH_EMAIL,
+    RESEND_AUTH_EMAIL_COMPLETE,
+    CLOSE_EMAIL_MODAL,
+    GET_ROLES_COMPLETE
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -31,6 +35,11 @@ const INITIAL_STATE = {
 const LoginReducer =  (state = INITIAL_STATE , action) => {
 
     switch (action.type) {
+        case GET_ROLES_COMPLETE:
+            return{
+                ...state,
+                roles: action.payload
+            };
         case CLOSE_EMAIL_MODAL:
             return{
                 ...state,

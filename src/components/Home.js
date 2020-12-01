@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logoutAdmin } from "../actions";
 import TopHeader from "./TopHeader";
+import Wrapper from "./Wrapper";
 
 class Home extends Component{
 
@@ -37,11 +38,19 @@ class Home extends Component{
 
         return(
 
-            <div>
+            <Wrapper
+                history={this.state.history}
+            >
 
-                <TopHeader history={this.state.history}/>
+                <div>
 
-            </div>
+                    <TopHeader
+                        history={this.state.history}
+                    />
+
+                </div>
+
+            </Wrapper>
 
         );
 

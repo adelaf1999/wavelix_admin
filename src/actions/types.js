@@ -7,6 +7,7 @@ export const RESEND_VERIFICATION_CODE_ROUTE = `${BACKEND_URL}/resend-admin-verif
 export const RESEND_UNLOCK_LINK_ROUTE = `${BACKEND_URL}/admin_auth/unlock`;
 export const VERIFY_RECAPTCHA_TOKEN_ROUTE = `${BACKEND_URL}/verify-recaptcha-token`;
 export const LOGOUT_ROUTE = `${BACKEND_URL}/admin_auth/sign_out`;
+export const GET_ROLES_ROUTE = `${BACKEND_URL}/get-admin-roles`;
 
 
 // Login Types
@@ -21,3 +22,6 @@ export const RESEND_AUTH_EMAIL = "resend_auth_email";
 export const RESEND_AUTH_EMAIL_COMPLETE = "resend_auth_email_complete";
 export const CLOSE_EMAIL_MODAL = "close_email_modal";
 export const LOGOUT_SUCCESS = "logout_success";
+
+// Wrapper Types
+export const GET_ROLES_COMPLETE = "get_roles_complete";
