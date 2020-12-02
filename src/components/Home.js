@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
     logoutAdmin,
-    initializeHomePage
+    initializeHomePage,
+    changeMyEmail,
+    openCredentialModal,
+    closeCredentialModal,
+    changeMyPassword
 } from "../actions";
 import TopHeader from "./TopHeader";
 import Wrapper from "./Wrapper";
-import {  Spinner, Image, Card, Row, Col ,  Button, Form} from "react-bootstrap";
+import {  Spinner, Image, Card, Row, Col ,  Button, Form, Modal, Alert} from "react-bootstrap";
 import _ from "lodash";
 
 class Home extends Component{
@@ -17,8 +21,14 @@ class Home extends Component{
 
         const history = props.history;
 
+        const credential_modal_mode = null; // { 0: email, 1: password }
+
+        const credential = "";
+
         this.state = {
-            history
+            history,
+            credential_modal_mode,
+            credential
         };
 
     }
@@ -74,6 +84,170 @@ class Home extends Component{
         return text;
 
     }
+
+
+    exitCredentialModal(){
+
+        const { closeCredentialModal } = this.props;
+
+        closeCredentialModal();
+
+        this.setState({credential_modal_mode: null, credential: ''});
+
+    }
+
+
+    credentialError(){
+
+        const { credential_error } = this.props;
+
+        if(credential_error.length > 0){
+
+            return(
+
+                <Alert variant="danger">
+                    {credential_error}
+                </Alert>
+
+            );
+
+        }
+
+    }
+
+
+    changingCredentialSpinner(){
+
+        const { changing_credential } = this.props;
+
+        if(changing_credential){
+
+            return(
+
+                <div className="spinner-container">
+
+                    <Spinner animation="border" variant="primary" />
+
+                </div>
+
+
+            );
+
+        }
+
+
+    }
+
+
+    credentialModal(){
+
+        const {
+            credential_modal_visible,
+            access_token,
+            client,
+            uid,
+            changeMyEmail,
+            changeMyPassword
+        } = this.props;
+
+
+        const { history, credential_modal_mode, credential } = this.state;
+
+        if(credential_modal_visible && credential_modal_mode !== null){
+
+            return(
+
+                <Modal
+                    show={credential_modal_visible}
+                    onHide={() => {
+                        this.exitCredentialModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Change {credential_modal_mode === 0 ? 'Email' : 'Password'}</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+
+                        <Form.Group controlId="formPlaintextCredential">
+
+                            <Form.Label>
+                                {credential_modal_mode === 0 ? 'Email' : 'Password ( at least 8 characters long )'}
+                            </Form.Label>
+
+                            <Form.Control
+                                type={credential_modal_mode === 0 ? 'email' : 'password'}
+                                placeholder={credential_modal_mode === 0 ? 'email' : 'password'}
+                                onChange={(e) => {
+                                    this.setState({credential: e.target.value});
+                                }}
+                            />
+
+                        </Form.Group>
+
+                        {this.changingCredentialSpinner()}
+
+                        {this.credentialError()}
+
+
+
+                    </Modal.Body>
+
+                    <Modal.Footer>
+
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                this.exitCredentialModal();
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        <Button
+                            variant="primary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                if(credential_modal_mode === 0){
+
+                                    changeMyEmail(credential, access_token, client, uid, history);
+
+                                }else{
+
+                                    changeMyPassword(credential, access_token, client, uid, history);
+
+                                }
+
+                            }}
+                        >
+                            Submit
+                        </Button>
+
+                    </Modal.Footer>
+
+
+                </Modal>
+
+
+            );
+
+        }
+
+
+    }
+
 
     show() {
 
@@ -142,7 +316,11 @@ class Home extends Component{
                                         </Form.Label>
 
                                         <Col sm="10">
-                                            <Form.Control plaintext readOnly defaultValue={name} />
+                                            <Form.Control
+                                                readOnly
+                                                type="text"
+                                                value={name}
+                                            />
                                         </Col>
 
                                     </Form.Group>
@@ -155,7 +333,13 @@ class Home extends Component{
                                         </Form.Label>
 
                                         <Col sm="10">
-                                            <Form.Control plaintext readOnly defaultValue={email} />
+
+                                            <Form.Control
+                                                readOnly
+                                                type="text"
+                                                value={email}
+                                            />
+
                                         </Col>
 
                                     </Form.Group>
@@ -164,11 +348,17 @@ class Home extends Component{
                                     <Form.Group as={Row} controlId="formPlaintextRoles">
 
                                         <Form.Label column sm="2">
-                                           Roles
+                                            Roles
                                         </Form.Label>
 
                                         <Col sm="10">
-                                            <Form.Control plaintext readOnly defaultValue={this.getRoles()} />
+
+                                            <Form.Control
+                                                readOnly
+                                                type="text"
+                                                value={this.getRoles()}
+                                            />
+
                                         </Col>
 
                                     </Form.Group>
@@ -186,28 +376,41 @@ class Home extends Component{
 
                             <Card.Footer className="footer-buttons-container" >
 
+                                <Button
+                                    variant="outline-primary"
+                                    className="footer-button"
+                                    onClick={(e) => {
+
+                                        e.preventDefault();
+
+                                        this.props.openCredentialModal();
+
+                                        this.setState({credential_modal_mode: 0});
+
+
+                                    }}
+                                >
+                                    Change email
+                                </Button>
+
 
                                 <Button
                                     variant="outline-primary"
                                     className="footer-button"
                                     onClick={(e) => {
+
                                         e.preventDefault();
+
+                                        this.props.openCredentialModal();
+
+                                        this.setState({credential_modal_mode: 1});
 
                                     }}
                                 >
                                     Change password
                                 </Button>
 
-                                <Button
-                                    variant="outline-primary"
-                                    className="footer-button"
-                                    onClick={(e) => {
-                                        e.preventDefault();
 
-                                    }}
-                                >
-                                    Change Email
-                                </Button>
 
                             </Card.Footer>
 
@@ -219,6 +422,9 @@ class Home extends Component{
 
                     </div>
 
+
+
+                    {this.credentialModal()}
 
 
                 </div>
@@ -275,7 +481,10 @@ const mapStateToProps = (state) => {
         initializing_page,
         profile_photo,
         name,
-        email
+        email,
+        changing_credential,
+        credential_error,
+        credential_modal_visible
     } = state.home;
 
 
@@ -288,7 +497,10 @@ const mapStateToProps = (state) => {
         initializing_page,
         profile_photo,
         name,
-        email
+        email,
+        changing_credential,
+        credential_error,
+        credential_modal_visible
     };
 
 
@@ -297,5 +509,9 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     logoutAdmin,
-    initializeHomePage
+    initializeHomePage,
+    changeMyEmail,
+    openCredentialModal,
+    closeCredentialModal,
+    changeMyPassword
 })(Home)

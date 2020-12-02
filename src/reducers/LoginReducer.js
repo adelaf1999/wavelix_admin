@@ -17,7 +17,8 @@ import {
     CLOSE_EMAIL_MODAL,
     GET_ROLES_COMPLETE,
     OPEN_TIMEOUT_MODAL,
-    CLOSE_TIMEOUT_MODAL
+    CLOSE_TIMEOUT_MODAL,
+    CHANGE_MY_EMAIL_SUCCESS
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -38,6 +39,11 @@ const INITIAL_STATE = {
 const LoginReducer =  (state = INITIAL_STATE , action) => {
 
     switch (action.type) {
+        case CHANGE_MY_EMAIL_SUCCESS:
+            return{
+                ...state,
+                uid: action.payload.uid
+            };
         case CLOSE_TIMEOUT_MODAL:
             return{
                 ...state,

@@ -9,6 +9,8 @@ export const VERIFY_RECAPTCHA_TOKEN_ROUTE = `${BACKEND_URL}/verify-recaptcha-tok
 export const LOGOUT_ROUTE = `${BACKEND_URL}/admin_auth/sign_out`;
 export const GET_ROLES_ROUTE = `${BACKEND_URL}/get-admin-roles`;
 export const INITIALIZE_HOME_PAGE_ROUTE = `${BACKEND_URL}/admin-home-index`;
+export const CHANGE_MY_EMAIL_ROUTE = `${BACKEND_URL}/change-my-admin-email`;
+export const CHANGE_MY_PASSWORD_ROUTE = `${BACKEND_URL}/change-my-admin-password`;
 
 
 // Login Types
@@ -32,3 +34,9 @@ export const GET_ROLES_COMPLETE = "get_roles_complete";
 // Home Types
 export const INITIALIZE_HOME_PAGE = "initialize_home_page";
 export const INITIALIZE_HOME_PAGE_COMPLETE = "initialize_home_page_complete";
+export const CHANGE_CREDENTIAL = "change_credential";
+export const CHANGE_MY_EMAIL_SUCCESS = "change_my_email_success";
+export const CHANGE_MY_PASSWORD_SUCCESS = "change_my_password_success";
+export const CHANGE_CREDENTIAL_ERROR = "change_credential_error";
+export const OPEN_CREDENTIAL_MODAL = "open_credential_modal";
+export const CLOSE_CREDENTIAL_MODAL = "close_credential_modal";
