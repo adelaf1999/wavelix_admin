@@ -6,7 +6,8 @@ import {
     changeMyEmail,
     openCredentialModal,
     closeCredentialModal,
-    changeMyPassword
+    changeMyPassword,
+    clearHomeState
 } from "../actions";
 import TopHeader from "./TopHeader";
 import Wrapper from "./Wrapper";
@@ -31,6 +32,10 @@ class Home extends Component{
             credential
         };
 
+    }
+
+    componentWillUnmount(){
+        this.props.clearHomeState();
     }
 
     componentDidMount(){
@@ -513,5 +518,6 @@ export default connect(mapStateToProps, {
     changeMyEmail,
     openCredentialModal,
     closeCredentialModal,
-    changeMyPassword
+    changeMyPassword,
+    clearHomeState
 })(Home)

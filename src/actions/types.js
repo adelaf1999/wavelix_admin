@@ -40,3 +40,4 @@ export const CHANGE_MY_PASSWORD_SUCCESS = "change_my_password_success";
 export const CHANGE_CREDENTIAL_ERROR = "change_credential_error";
 export const OPEN_CREDENTIAL_MODAL = "open_credential_modal";
 export const CLOSE_CREDENTIAL_MODAL = "close_credential_modal";
+export const CLEAR_HOME_STATE = "clear_home_state";

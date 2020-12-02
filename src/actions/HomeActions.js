@@ -11,11 +11,18 @@ import {
     OPEN_CREDENTIAL_MODAL,
     CLOSE_CREDENTIAL_MODAL,
     CHANGE_MY_PASSWORD_ROUTE,
-    CHANGE_MY_PASSWORD_SUCCESS
+    CHANGE_MY_PASSWORD_SUCCESS,
+    CLEAR_HOME_STATE
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+export const clearHomeState = () => {
+    return{
+      type: CLEAR_HOME_STATE
+    };
+};
 
 export const closeCredentialModal = () => {
 

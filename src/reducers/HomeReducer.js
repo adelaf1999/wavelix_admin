@@ -6,7 +6,9 @@ import {
     INITIALIZE_HOME_PAGE_COMPLETE,
     LOGOUT_SUCCESS,
     OPEN_CREDENTIAL_MODAL,
-    CLOSE_CREDENTIAL_MODAL, CHANGE_MY_PASSWORD_SUCCESS
+    CLOSE_CREDENTIAL_MODAL,
+    CHANGE_MY_PASSWORD_SUCCESS,
+    CLEAR_HOME_STATE
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -70,6 +72,11 @@ export default (state = INITIAL_STATE, action) => {
             return{
                 ...state,
                 initializing_page: true
+            };
+        case CLEAR_HOME_STATE:
+            return{
+                ...state,
+                ...INITIAL_STATE
             };
         case LOGOUT_SUCCESS:
             return {
