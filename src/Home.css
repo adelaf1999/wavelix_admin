@@ -1,0 +1,49 @@
+.profile-photo{
+    width: 150px;
+    height: 185px;
+    object-fit: cover;
+}
+
+.page-container{
+    margin-top: 2rem;
+}
+
+.header-container{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.account-container{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.account-card-container{
+    width: 60%;
+}
+
+.name-text{
+    margin-left: 3rem;
+    font-size: 25px;
+}
+
+.account-tile{
+    font-size: 20px;
+    padding: 1rem;
+}
+
+.footer-buttons-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.footer-button{
+    width: 45%;
+}

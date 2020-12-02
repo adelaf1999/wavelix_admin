@@ -1,10 +1,15 @@
 import {combineReducers} from 'redux';
-import LoginReducer from "./LoginReducer";
 import storage from 'redux-persist/lib/storage';
 import { LOGOUT_SUCCESS } from "../actions/types";
 
+
+import LoginReducer from "./LoginReducer";
+import HomeReducer from "./HomeReducer";
+
+
 const appReducer = combineReducers({
-    login: LoginReducer
+    login: LoginReducer,
+    home: HomeReducer
 });
 
 

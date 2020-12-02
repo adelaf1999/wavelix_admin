@@ -8,6 +8,7 @@ export const RESEND_UNLOCK_LINK_ROUTE = `${BACKEND_URL}/admin_auth/unlock`;
 export const VERIFY_RECAPTCHA_TOKEN_ROUTE = `${BACKEND_URL}/verify-recaptcha-token`;
 export const LOGOUT_ROUTE = `${BACKEND_URL}/admin_auth/sign_out`;
 export const GET_ROLES_ROUTE = `${BACKEND_URL}/get-admin-roles`;
+export const INITIALIZE_HOME_PAGE_ROUTE = `${BACKEND_URL}/admin-home-index`;
 
 
 // Login Types
@@ -27,3 +28,7 @@ export const CLOSE_TIMEOUT_MODAL = "close_timeout_modal";
 
 // Wrapper Types
 export const GET_ROLES_COMPLETE = "get_roles_complete";
+
+// Home Types
+export const INITIALIZE_HOME_PAGE = "initialize_home_page";
+export const INITIALIZE_HOME_PAGE_COMPLETE = "initialize_home_page_complete";

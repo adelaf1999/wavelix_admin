@@ -15,7 +15,6 @@ import {
     RESEND_VERIFICATION_CODE_ROUTE,
     LOGOUT_SUCCESS,
     LOGOUT_ROUTE,
-    OPEN_TIMEOUT_MODAL,
     CLOSE_TIMEOUT_MODAL
 } from "./types";
 
@@ -56,7 +55,7 @@ export const logoutAdmin = (access_token, client, uid, history) => {
 
             if(error.response !== undefined){
 
-                const status = error.response.status;
+                // const status = error.response.status;
 
                 dispatch({type: LOGOUT_SUCCESS});
 
