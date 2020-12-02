@@ -1,11 +1,11 @@
 .profile-photo{
     width: 150px;
-    height: 185px;
+    height: 180px;
     object-fit: cover;
 }
 
 .page-container{
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
 
 .header-container{

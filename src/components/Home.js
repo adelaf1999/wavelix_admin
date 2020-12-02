@@ -286,7 +286,7 @@ class Home extends Component{
                     <div className="header-container">
 
 
-                        <Image className="profile-photo" src={profile_photo} roundedCircle />
+                        <Image className="profile-photo" src={profile_photo} rounded />
 
 
                     </div>
