@@ -68,34 +68,13 @@ class Login extends Component {
 
 
     }
-
-
-
-    submitEmail(){
-
-        const { email } = this.state;
-
-        const { checkEmail } = this.props;
-
-        this.setState({email_invalid: false});
-
-        if(_.isEmpty(email)){
-
-            this.setState({email_invalid: true});
-
-        }else{
-
-            checkEmail(email);
-
-        }
-
-    }
+    
 
     checkEmailButton(){
 
         const { loading } = this.props;
 
-        const { verifying_recaptcha } = this.state;
+        const { verifying_recaptcha, email } = this.state;
 
 
         if(loading || verifying_recaptcha){
@@ -122,9 +101,21 @@ class Login extends Component {
 
                         e.preventDefault();
 
-                        this.setState({recaptcha_error: ''});
+                        this.setState({recaptcha_error: '', email_invalid: false});
 
-                        this.recaptcha.execute();
+
+                        if(_.isEmpty(email)){
+
+                            this.setState({email_invalid: true});
+
+                        }else{
+
+                            this.recaptcha.execute();
+                        }
+
+
+
+
 
 
                     }}
@@ -612,7 +603,11 @@ class Login extends Component {
 
                                 if(success){
 
-                                    this.submitEmail();
+                                    const { email } = this.state;
+
+                                    const { checkEmail } = this.props;
+
+                                    checkEmail(email);
 
                                 }else{
 
