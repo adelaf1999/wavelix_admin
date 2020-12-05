@@ -6,3 +6,17 @@
     height: 180px;
     object-fit: cover;
 }
+#role-selector-container{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+#role-selector-group{
+    width: 20%;
+}
+#no-accounts-notice{
+    text-align: center;
+    font-size: 25px;
+}

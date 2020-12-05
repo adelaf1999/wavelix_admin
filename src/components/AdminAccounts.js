@@ -4,10 +4,11 @@ import TopHeader from "./TopHeader";
 import Wrapper from "./Wrapper";
 import {
     getAdminAccounts,
-    clearAdminAccountsState
+    clearAdminAccountsState,
+    searchAdmins
 } from "../actions";
 import _ from "lodash";
-import {  Spinner, Form, FormControl, Button, Table, Image, Col} from "react-bootstrap";
+import {  Spinner, Form, FormControl, Button, Table, Image} from "react-bootstrap";
 import { getAdminRoles } from "../helpers";
 
 class AdminAccounts extends Component{
@@ -18,8 +19,14 @@ class AdminAccounts extends Component{
 
         const history = props.history;
 
+        const selected_role = null;
+
+        const search = "";
+
         this.state = {
-            history
+            history,
+            selected_role,
+            search
         };
 
     }
@@ -203,9 +210,122 @@ class AdminAccounts extends Component{
 
     }
 
+
+    getAvailableRoles(){
+
+        const {  available_roles } = this.props;
+
+        let roles = [];
+
+        roles.push({ label: 'Select Role', value: ''});
+
+        _.map(available_roles, (role, index) => {
+
+            roles.push({
+                label: _.startCase( role.split("_").join(" ") ),
+                value: role
+            });
+
+        });
+
+        return roles;
+
+    }
+
+
+    renderAdmins(){
+
+        const { searching_admins, admins } = this.props;
+
+
+        if(searching_admins){
+
+            return(
+
+
+                <div className="center-container">
+
+                    <div className="spinner-container">
+
+                        <Spinner animation="border" variant="primary" />
+
+                    </div>
+
+                </div>
+
+            );
+
+        }else if(admins.length === 0){
+
+            return(
+
+
+                <div className="center-container">
+
+                    <p id="no-accounts-notice">No Accounts Found</p>
+
+                </div>
+
+            );
+
+        }else{
+
+            return(
+
+                <Table striped bordered hover>
+
+                    <thead>
+
+                    <tr>
+                        <th>Profile Photo</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Roles</th>
+                        <th>Current Sign-In Ip</th>
+                        <th>Last Sign-In Ip</th>
+                        <th></th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    {this.renderAccounts()}
+
+                    </tbody>
+
+                </Table>
+
+            );
+
+        }
+
+    }
+
+
+    // startSearch(){
+    //
+    //     const {
+    //
+    //     }
+    //         = this.props;
+    //
+    //     const {
+    //         search,
+    //         selected_role,
+    //         history
+    //     } = this.state;
+    //
+    //     searchAdmins(search, selected_role, access_token, client, uid, history );
+    //
+    //
+    // }
+
     show(){
 
-        const { initializing_page } = this.props;
+        const { initializing_page,   searchAdmins, access_token, client, uid } = this.props;
+
+        const { history } = this.state;
 
         if(initializing_page){
 
@@ -238,38 +358,71 @@ class AdminAccounts extends Component{
                             placeholder="Search by name or email"
                             className="mr-sm-2"
                             id="searchbar"
+                            onChange={(e) => {
+
+                                const new_search = e.target.value;
+                                
+
+                                this.setState({search: new_search});
+
+                                searchAdmins(new_search, this.state.selected_role, access_token, client, uid, history);
+
+
+
+                            }}
                         />
 
                         {this.createAccountButton()}
 
                     </Form>
 
+                    <Form id="role-selector-container">
+
+                        <Form.Group id="role-selector-group" controlId="roleSelector">
+
+                            <Form.Label>Role</Form.Label>
+
+                            <Form.Control
+                                as="select"
+                                onChange={(e) => {
+
+                                    const new_selected_role = e.target.value;
+
+                                    if(_.isEmpty(new_selected_role)){
+
+                                        this.setState({selected_role: null});
+
+                                    }else{
+
+                                        this.setState({selected_role: new_selected_role});
+                                    }
 
 
+                                    searchAdmins(this.state.search, new_selected_role, access_token, client, uid, history);
 
-                    <Table striped bordered hover>
+                                }}
+                            >
 
-                        <thead>
+                                {
+                                    this.getAvailableRoles().map((role, index) => (
+                                    <option
+                                        key={index}
+                                        value={role.value}
+                                    >
+                                        {role.label}
+                                    </option>
+                                    ))
+                                }
 
-                        <tr>
-                            <th>Profile Photo</th>
-                            <th>Full Name</th>
-                            <th>Email</th>
-                            <th>Roles</th>
-                            <th>Current Sign-In Ip</th>
-                            <th>Last Sign-In Ip</th>
-                            <th></th>
-                        </tr>
+                            </Form.Control>
 
-                        </thead>
+                        </Form.Group>
 
-                        <tbody>
 
-                        {this.renderAccounts()}
+                    </Form>
 
-                        </tbody>
 
-                    </Table>
+                    {this.renderAdmins()}
 
 
 
@@ -324,7 +477,8 @@ const mapStateToProps = (state) => {
     const {
         initializing_page,
         admins,
-        available_roles
+        available_roles,
+        searching_admins
     } = state.admin_accounts;
 
     return {
@@ -335,11 +489,13 @@ const mapStateToProps = (state) => {
         roles,
         initializing_page,
         admins,
-        available_roles
+        available_roles,
+        searching_admins
     };
 };
 
 export default connect(mapStateToProps, {
     getAdminAccounts,
-    clearAdminAccountsState
+    clearAdminAccountsState,
+    searchAdmins
 })(AdminAccounts);

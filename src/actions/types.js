@@ -12,6 +12,7 @@ export const INITIALIZE_HOME_PAGE_ROUTE = `${BACKEND_URL}/admin-home-index`;
 export const CHANGE_MY_EMAIL_ROUTE = `${BACKEND_URL}/change-my-admin-email`;
 export const CHANGE_MY_PASSWORD_ROUTE = `${BACKEND_URL}/change-my-admin-password`;
 export const GET_ADMIN_ACCOUNTS_ROUTE = `${BACKEND_URL}/admins-accounts`;
+export const SEARCH_ADMIN_ROUTE = `${BACKEND_URL}/search-admin`;
 
 
 // Login Types
@@ -47,3 +48,5 @@ export const CLEAR_HOME_STATE = "clear_home_state";
 export const GET_ADMIN_ACCOUNTS = "get_admin_accounts";
 export const GET_ADMIN_ACCOUNTS_COMPLETE = "get_admin_accounts_complete";
 export const CLEAR_ADMIN_ACCOUNTS_STATE = "clear_admin_accounts_state";
+export const SEARCH_ADMINS = "search_admins";
+export const SEARCH_ADMINS_COMPLETE = "search_admins_complete";
