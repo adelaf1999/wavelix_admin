@@ -361,7 +361,6 @@ class AdminAccounts extends Component{
                             onChange={(e) => {
 
                                 const new_search = e.target.value;
-                                
 
                                 this.setState({search: new_search});
 

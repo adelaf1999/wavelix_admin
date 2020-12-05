@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d195e98-fbd2-42d9-b726-6c7e9b6ac1da" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.eslintcache" afterPath="$PROJECT_DIR$/.eslintcache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AdminAccounts.css" afterPath="$PROJECT_DIR$/src/AdminAccounts.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.css" afterPath="$PROJECT_DIR$/src/App.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/AdminAccountsActions.js" afterPath="$PROJECT_DIR$/src/actions/AdminAccountsActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/types.js" afterPath="$PROJECT_DIR$/src/actions/types.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/AdminAccounts.js" afterPath="$PROJECT_DIR$/src/components/AdminAccounts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/AdminAccountsReducer.js" afterPath="$PROJECT_DIR$/src/reducers/AdminAccountsReducer.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -33,14 +28,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminAccounts.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AdminAccounts.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/AdminAccounts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="363" column="32" lean-forward="false" selection-start-line="363" selection-start-column="32" selection-end-line="363" selection-end-column="32" />
+            <state relative-caret-position="280">
+              <caret line="362" column="66" lean-forward="false" selection-start-line="362" selection-start-column="66" selection-end-line="362" selection-end-column="66" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1080">
+              <caret line="24" column="7" lean-forward="false" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -134,7 +139,6 @@
       <list>
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/public/manifest.json" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/actions/index.js" />
         <option value="$PROJECT_DIR$/src/Router.js" />
         <option value="$PROJECT_DIR$/package.json" />
@@ -169,6 +173,7 @@
         <option value="$PROJECT_DIR$/src/AdminAccounts.css" />
         <option value="$PROJECT_DIR$/src/actions/AdminAccountsActions.js" />
         <option value="$PROJECT_DIR$/src/components/AdminAccounts.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -314,7 +319,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60608000" />
+    <option name="totallyTimeSpent" value="60741000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-2" width="3840" height="2080" extended-state="6" />
@@ -493,13 +498,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="990">
           <caret line="22" column="25" lean-forward="false" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="24" column="6" lean-forward="false" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -724,11 +722,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/AdminAccounts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="363" column="32" lean-forward="false" selection-start-line="363" selection-start-column="32" selection-end-line="363" selection-end-column="32" />
+        <state relative-caret-position="280">
+          <caret line="362" column="66" lean-forward="false" selection-start-line="362" selection-start-column="66" selection-end-line="362" selection-end-column="66" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1080">
+          <caret line="24" column="7" lean-forward="false" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
