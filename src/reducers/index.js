@@ -5,11 +5,13 @@ import { LOGOUT_SUCCESS } from "../actions/types";
 
 import LoginReducer from "./LoginReducer";
 import HomeReducer from "./HomeReducer";
+import AdminAccountsReducer from "./AdminAccountsReducer";
 
 
 const appReducer = combineReducers({
     login: LoginReducer,
-    home: HomeReducer
+    home: HomeReducer,
+    admin_accounts: AdminAccountsReducer
 });
 
 

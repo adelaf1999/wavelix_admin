@@ -11,6 +11,7 @@ export const GET_ROLES_ROUTE = `${BACKEND_URL}/get-admin-roles`;
 export const INITIALIZE_HOME_PAGE_ROUTE = `${BACKEND_URL}/admin-home-index`;
 export const CHANGE_MY_EMAIL_ROUTE = `${BACKEND_URL}/change-my-admin-email`;
 export const CHANGE_MY_PASSWORD_ROUTE = `${BACKEND_URL}/change-my-admin-password`;
+export const GET_ADMIN_ACCOUNTS_ROUTE = `${BACKEND_URL}/admins-accounts`;
 
 
 // Login Types
@@ -41,3 +42,8 @@ export const CHANGE_CREDENTIAL_ERROR = "change_credential_error";
 export const OPEN_CREDENTIAL_MODAL = "open_credential_modal";
 export const CLOSE_CREDENTIAL_MODAL = "close_credential_modal";
 export const CLEAR_HOME_STATE = "clear_home_state";
+
+// AdminAccounts Types
+export const GET_ADMIN_ACCOUNTS = "get_admin_accounts";
+export const GET_ADMIN_ACCOUNTS_COMPLETE = "get_admin_accounts_complete";
+export const CLEAR_ADMIN_ACCOUNTS_STATE = "clear_admin_accounts_state";

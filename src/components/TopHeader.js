@@ -17,6 +17,33 @@ class TopHeader extends Component{
 
     }
 
+
+    adminsTab(){
+
+        const { roles } = this.props;
+
+        const { history } = this.state;
+
+        if(roles.includes("root_admin") || roles.includes("employee_manager")){
+
+            return(
+
+                <Nav.Link
+                    onClick={() => {
+                        history.push("/admin-accounts");
+                    }}
+                    className="nav-link"
+                >
+                   Admins
+                </Nav.Link>
+
+
+            );
+
+        }
+
+    }
+
     render(){
 
         const { history } = this.state;
@@ -49,6 +76,8 @@ class TopHeader extends Component{
                     >
                         Home
                     </Nav.Link>
+
+                    {this.adminsTab()}
 
                 </Nav>
 
