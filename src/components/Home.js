@@ -13,6 +13,7 @@ import TopHeader from "./TopHeader";
 import Wrapper from "./Wrapper";
 import {  Spinner, Image, Card, Row, Col ,  Button, Form, Modal, Alert} from "react-bootstrap";
 import _ from "lodash";
+import { getAdminRoles } from "../helpers";
 
 class Home extends Component{
 
@@ -64,31 +65,7 @@ class Home extends Component{
     }
 
 
-    getRoles(){
 
-        const { roles } = this.props;
-
-        let text = "";
-
-        for(let i = 0; i < roles.length; i++){
-
-            const role = roles[i];
-
-            if(i === 0){
-
-                text += _.startCase( role.split("_").join(" ") );
-
-            }else{
-
-                text += ( ", " + _.startCase( role.split("_").join(" ")  ) );
-
-            }
-
-        }
-
-        return text;
-
-    }
 
 
     exitCredentialModal(){
@@ -361,7 +338,7 @@ class Home extends Component{
                                             <Form.Control
                                                 readOnly
                                                 type="text"
-                                                value={this.getRoles()}
+                                                value={getAdminRoles(this.props.roles)}
                                             />
 
                                         </Col>

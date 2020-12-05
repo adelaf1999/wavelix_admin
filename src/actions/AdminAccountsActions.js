@@ -42,7 +42,7 @@ export const getAdminAccounts = (access_token, client, uid, history) => {
 
                 const available_roles = data.available_roles;
 
-                // console.log(admins);
+                console.log(admins);
                 //
                 // console.log(available_roles);
 

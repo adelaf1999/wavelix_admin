@@ -7,7 +7,8 @@ import {
     clearAdminAccountsState
 } from "../actions";
 import _ from "lodash";
-import {  Spinner } from "react-bootstrap";
+import {  Spinner, Form, FormControl, Button, Table, Image, Col} from "react-bootstrap";
+import { getAdminRoles } from "../helpers";
 
 class AdminAccounts extends Component{
 
@@ -61,6 +62,147 @@ class AdminAccounts extends Component{
     }
 
 
+    createAccountButton(){
+
+        const { roles  } = this.props;
+
+        if( roles.includes("root_admin") ){
+
+            return(
+
+                <Button
+                    variant="outline-primary"
+                    id="create-admin-button"
+                >
+                    Create Account
+                </Button>
+
+            );
+
+        }
+
+    }
+
+
+
+
+    editAdminButton(){
+
+        return(
+
+            <Button variant="link">Edit</Button>
+
+        );
+
+    }
+
+
+    editAdmin(admin_roles){
+
+        const current_admin_roles = this.props.roles;
+
+        if(current_admin_roles.includes("root_admin")){
+
+            if(!admin_roles.includes("root_admin")){
+
+                return(
+
+                    <div>
+
+                        {this.editAdminButton()}
+
+                    </div>
+
+                );
+
+            }
+
+        }else{
+
+            if(!admin_roles.includes("root_admin") && !admin_roles.includes("employee_manager") ){
+
+                return(
+
+
+
+                    <div>
+
+                        {this.editAdminButton()}
+
+                    </div>
+
+
+                );
+
+            }
+
+        }
+
+
+    }
+
+
+
+    renderAccounts(){
+
+        const { admins } = this.props;
+
+        return _.map(admins, (admin, index) => {
+
+            return(
+
+                <tr key={index}>
+
+                    <td >
+
+
+
+                        <Image
+                            src={admin.profile_photo}
+                            thumbnail
+                            id="admin-profile-photo"
+                        />
+
+
+
+
+
+                    </td>
+
+                    <td>
+                        {admin.full_name}
+                    </td>
+
+                    <td>
+                        { _.isEmpty(admin.email) ? 'N/A' : admin.email }
+                    </td>
+
+                    <td>
+                        {getAdminRoles(admin.roles)}
+                    </td>
+
+
+                    <td>
+                        { _.isEmpty(admin.current_sign_in_ip) ? 'N/A' : admin.current_sign_in_ip  }
+                    </td>
+
+                    <td>
+                        { _.isEmpty(admin.last_sign_in_ip) ? 'N/A' : admin.last_sign_in_ip  }
+                    </td>
+
+                    <td>
+                        {this.editAdmin(admin.roles)}
+                    </td>
+
+                </tr>
+
+            );
+
+        });
+
+
+    }
+
     show(){
 
         const { initializing_page } = this.props;
@@ -80,6 +222,60 @@ class AdminAccounts extends Component{
                 </div>
 
 
+
+            );
+
+        }else{
+
+            return(
+
+                <div className="page-container">
+
+                    <Form id="searchbar-container" inline>
+
+                        <FormControl
+                            type="text"
+                            placeholder="Search by name or email"
+                            className="mr-sm-2"
+                            id="searchbar"
+                        />
+
+                        {this.createAccountButton()}
+
+                    </Form>
+
+
+
+
+                    <Table striped bordered hover>
+
+                        <thead>
+
+                        <tr>
+                            <th>Profile Photo</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Roles</th>
+                            <th>Current Sign-In Ip</th>
+                            <th>Last Sign-In Ip</th>
+                            <th></th>
+                        </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        {this.renderAccounts()}
+
+                        </tbody>
+
+                    </Table>
+
+
+
+
+
+                </div>
 
             );
 

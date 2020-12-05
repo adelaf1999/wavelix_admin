@@ -4,10 +4,6 @@
     object-fit: cover;
 }
 
-.page-container{
-    margin-top: 3rem;
-}
-
 .header-container{
     display: flex;
     flex: 1;
