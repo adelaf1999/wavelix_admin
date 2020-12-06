@@ -93,18 +93,32 @@ class AdminAccounts extends Component{
 
 
 
-    editAdminButton(){
+    editAdminButton(admin_id){
+
+        const history = this.state.history;
 
         return(
 
-            <Button variant="link">Edit</Button>
+            <Button
+                variant="link"
+                onClick={() => {
+                    history.push(`/view-admin-account/admin_id=${admin_id}`);
+                }}
+            >
+                Edit
+            </Button>
 
         );
 
     }
 
 
-    editAdmin(admin_roles){
+    editAdmin(admin){
+
+
+        const admin_roles = admin.roles;
+
+        const admin_id = admin.id;
 
         const current_admin_roles = this.props.roles;
 
@@ -116,7 +130,7 @@ class AdminAccounts extends Component{
 
                     <div>
 
-                        {this.editAdminButton()}
+                        {this.editAdminButton(admin_id)}
 
                     </div>
 
@@ -134,7 +148,7 @@ class AdminAccounts extends Component{
 
                     <div>
 
-                        {this.editAdminButton()}
+                        {this.editAdminButton(admin_id)}
 
                     </div>
 
@@ -198,7 +212,7 @@ class AdminAccounts extends Component{
                     </td>
 
                     <td>
-                        {this.editAdmin(admin.roles)}
+                        {this.editAdmin(admin)}
                     </td>
 
                 </tr>
@@ -303,23 +317,7 @@ class AdminAccounts extends Component{
     }
 
 
-    // startSearch(){
-    //
-    //     const {
-    //
-    //     }
-    //         = this.props;
-    //
-    //     const {
-    //         search,
-    //         selected_role,
-    //         history
-    //     } = this.state;
-    //
-    //     searchAdmins(search, selected_role, access_token, client, uid, history );
-    //
-    //
-    // }
+
 
     show(){
 

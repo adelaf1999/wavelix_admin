@@ -13,6 +13,7 @@ export const CHANGE_MY_EMAIL_ROUTE = `${BACKEND_URL}/change-my-admin-email`;
 export const CHANGE_MY_PASSWORD_ROUTE = `${BACKEND_URL}/change-my-admin-password`;
 export const GET_ADMIN_ACCOUNTS_ROUTE = `${BACKEND_URL}/admins-accounts`;
 export const SEARCH_ADMIN_ROUTE = `${BACKEND_URL}/search-admin`;
+export const VIEW_ADMIN_ACCOUNT_ROUTE = `${BACKEND_URL}/view-admin-account`;
 
 
 // Login Types
@@ -50,3 +51,9 @@ export const GET_ADMIN_ACCOUNTS_COMPLETE = "get_admin_accounts_complete";
 export const CLEAR_ADMIN_ACCOUNTS_STATE = "clear_admin_accounts_state";
 export const SEARCH_ADMINS = "search_admins";
 export const SEARCH_ADMINS_COMPLETE = "search_admins_complete";
+
+//ViewAdminAccount Types
+export const VIEW_ADMIN_ACCOUNT = "view_admin_account";
+export const VIEW_ADMIN_ACCOUNT_SUCCESS = "view_admin_account_success";
+export const VIEW_ADMIN_ACCOUNT_FAILURE = "view_admin_account_failure";
+export const CLEAR_VIEW_ADMIN_ACCOUNT_STATE = "clear_view_admin_account_state";
