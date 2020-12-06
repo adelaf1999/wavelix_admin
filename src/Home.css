@@ -1,25 +1,3 @@
-.profile-photo{
-    width: 150px;
-    height: 180px;
-    object-fit: cover;
-}
-
-.header-container{
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 3rem;
-}
-
-.account-container{
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 3rem;
-}
-
 .account-card-container{
     width: 60%;
 }

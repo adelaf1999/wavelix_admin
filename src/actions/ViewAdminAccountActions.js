@@ -58,12 +58,25 @@ export const viewAdminAccount = (admin_id, access_token, client, uid, history) =
 
                     const available_roles = data.available_roles;
 
+                    const current_sign_in_ip = data.current_sign_in_ip;
+
+                    const last_sign_in_ip = data.last_sign_in_ip;
+
+
+                    console.log(current_sign_in_ip);
+
+                    console.log(last_sign_in_ip);
+
+
+
                     dispatch({type: VIEW_ADMIN_ACCOUNT_SUCCESS, payload: {
                         admin_profile_photo: admin_profile_photo,
                         admin_full_name: admin_full_name,
                         admin_email: admin_email,
                         admin_roles: admin_roles,
-                        available_roles: available_roles
+                        available_roles: available_roles,
+                        current_sign_in_ip: current_sign_in_ip,
+                        last_sign_in_ip: last_sign_in_ip
                     }})
 
 

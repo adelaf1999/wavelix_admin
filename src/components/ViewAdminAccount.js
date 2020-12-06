@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Wrapper from "./Wrapper";
 import _ from "lodash";
-import {  Spinner, Form, FormControl, Button, Table, Image} from "react-bootstrap";
+import {  Spinner, Image, Card, Row, Col ,  Button, Form, Modal, Alert} from "react-bootstrap";
 import { getAdminRoles } from "../helpers";
 import {
     viewAdminAccount,
@@ -70,7 +70,16 @@ class ViewAdminAccount extends Component{
 
     show(){
 
-        const { initializing_page } = this.props;
+        const {
+            initializing_page,
+            admin_profile_photo,
+            admin_full_name,
+            admin_email,
+            admin_roles,
+            available_roles,
+            current_sign_in_ip,
+            last_sign_in_ip
+        } = this.props;
 
         if(initializing_page){
 
@@ -86,6 +95,188 @@ class ViewAdminAccount extends Component{
 
                 </div>
 
+
+            );
+
+        }else{
+
+            return(
+
+                <div className="page-container">
+
+                    <div className="header-container">
+
+                        <Image className="profile-photo" src={admin_profile_photo} thumbnail />
+
+                    </div>
+
+
+                    <div className="account-container">
+
+                        <Card id="view-admin-account-card">
+
+
+
+                            <Card.Body>
+
+
+                                <Form>
+
+
+                                    <Form.Group  >
+
+                                        <Form.Label >
+                                            Full Name
+                                        </Form.Label>
+
+
+                                            <Form.Control
+                                                readOnly
+                                                type="text"
+                                                value={admin_full_name}
+                                            />
+
+
+                                    </Form.Group>
+
+
+                                    <Form.Group >
+
+                                        <Form.Label >
+                                            Email
+                                        </Form.Label>
+
+
+
+                                            <Form.Control
+                                                readOnly
+                                                type="text"
+                                                value={admin_email}
+                                            />
+
+
+                                    </Form.Group>
+
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Roles
+                                        </Form.Label>
+
+
+
+                                            <Form.Control
+                                                readOnly
+                                                type="text"
+                                                value={getAdminRoles(admin_roles)}
+                                            />
+
+                                    </Form.Group>
+
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Current Sign In Ip
+                                        </Form.Label>
+
+
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={_.isEmpty(current_sign_in_ip) ? 'N/A' : current_sign_in_ip}
+                                        />
+
+                                    </Form.Group>
+
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Last Sign In Ip
+                                        </Form.Label>
+
+
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={_.isEmpty(last_sign_in_ip) ? 'N/A' : last_sign_in_ip}
+                                        />
+
+                                    </Form.Group>
+
+
+                                </Form>
+
+
+
+
+                            </Card.Body>
+
+
+
+
+                            <div id="view-admin-account-footer" >
+
+                                <Button
+                                    variant="outline-primary"
+                                    className="view-admin-account-button"
+                                    onClick={(e) => {
+
+                                        e.preventDefault();
+
+
+
+
+                                    }}
+                                >
+                                    Change Password
+                                </Button>
+
+
+                                <Button
+                                    variant="outline-primary"
+                                    className="view-admin-account-button"
+                                    onClick={(e) => {
+
+                                        e.preventDefault();
+
+
+
+                                    }}
+                                >
+                                    Change Roles
+                                </Button>
+
+
+                                <Button
+                                    variant="outline-danger"
+                                    className="view-admin-account-button"
+                                    onClick={(e) => {
+
+                                        e.preventDefault();
+
+
+
+                                    }}
+                                >
+                                    Delete Account
+                                </Button>
+
+
+
+                            </div>
+
+
+
+                        </Card>
+
+                    </div>
+
+                </div>
 
             );
 
@@ -134,7 +325,9 @@ const mapStateToProps = (state) => {
         admin_full_name,
         admin_email,
         admin_roles,
-        available_roles
+        available_roles,
+        current_sign_in_ip,
+        last_sign_in_ip
     } = state.view_admin_account;
 
     return {
@@ -148,7 +341,9 @@ const mapStateToProps = (state) => {
         admin_full_name,
         admin_email,
         admin_roles,
-        available_roles
+        available_roles,
+        current_sign_in_ip,
+        last_sign_in_ip
     };
 };
 
