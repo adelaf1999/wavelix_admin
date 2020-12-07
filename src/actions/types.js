@@ -15,6 +15,7 @@ export const GET_ADMIN_ACCOUNTS_ROUTE = `${BACKEND_URL}/admins-accounts`;
 export const SEARCH_ADMIN_ROUTE = `${BACKEND_URL}/search-admin`;
 export const VIEW_ADMIN_ACCOUNT_ROUTE = `${BACKEND_URL}/view-admin-account`;
 export const CHANGE_ADMIN_ACCOUNT_PASSWORD_ROUTE = `${BACKEND_URL}/change-admin-account-password`;
+export const DESTROY_ADMIN_ACCOUNT_ROUTE = `${BACKEND_URL}/destroy-admin-account`;
 
 
 // Login Types

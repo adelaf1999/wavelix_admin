@@ -9,7 +9,8 @@ import {
     clearViewAdminAccountState,
     changeAdminAccountPassword,
     openChangePasswordModal,
-    closeChangePasswordModal
+    closeChangePasswordModal,
+    destroyAdminAccount
 } from "../actions";
 
 
@@ -25,10 +26,13 @@ class ViewAdminAccount extends Component{
 
         const password = "";
 
+        const destroy_account_modal_visible = false;
+
         this.state = {
             history,
             params,
-            password
+            password,
+            destroy_account_modal_visible
         };
 
     }
@@ -255,6 +259,117 @@ class ViewAdminAccount extends Component{
 
     }
 
+    exitDestroyAccountModal(){
+        this.setState({destroy_account_modal_visible: false});
+    }
+
+    destroyAccountModalBody(){
+
+        const { roles } = this.props;
+
+        if(!roles.includes("root_admin")){
+
+            return(
+
+                <Modal.Body>
+
+                    <p>The account will be permanently delete. Please inform the administrator before deleting an admin account</p>
+
+                </Modal.Body>
+
+            );
+
+
+        }else{
+
+            return(
+
+                <Modal.Body>
+
+                    <p>The account will be permanently deleted.</p>
+
+                </Modal.Body>
+
+            );
+
+        }
+
+
+    }
+
+    destroyAccountModal(){
+
+        const { destroy_account_modal_visible, history } = this.state;
+
+        const { access_token, client, uid, destroyAdminAccount } = this.props;
+
+        const admin_id = this.state.params.admin_id;
+
+        if(destroy_account_modal_visible){
+
+            return(
+
+                <Modal
+                    show={destroy_account_modal_visible}
+                    onHide={() => {
+                        this.exitDestroyAccountModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Are you sure?</Modal.Title>
+
+                    </Modal.Header>
+
+
+                    {this.destroyAccountModalBody()}
+
+                    <Modal.Footer>
+
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                this.exitDestroyAccountModal();
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        <Button
+                            variant="danger"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                destroyAdminAccount(admin_id, access_token, client, uid, history );
+
+                            }}
+                        >
+                            Delete Account
+                        </Button>
+
+
+
+
+                    </Modal.Footer>
+
+
+                </Modal>
+
+
+            );
+
+        }
+
+    }
+
     show(){
 
         const {
@@ -441,7 +556,7 @@ class ViewAdminAccount extends Component{
 
                                         e.preventDefault();
 
-
+                                        this.setState({destroy_account_modal_visible: true});
 
                                     }}
                                 >
@@ -460,6 +575,7 @@ class ViewAdminAccount extends Component{
 
                     {this.changePasswordModal()}
 
+                    {this.destroyAccountModal()}
 
                 </div>
 
@@ -545,5 +661,6 @@ export default connect(mapStateToProps, {
     clearViewAdminAccountState,
     changeAdminAccountPassword,
     openChangePasswordModal,
-    closeChangePasswordModal
+    closeChangePasswordModal,
+    destroyAdminAccount
 })(ViewAdminAccount);

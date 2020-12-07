@@ -11,11 +11,63 @@ import {
     CHANGE_ADMIN_ACCOUNT_PASSWORD_FAILURE,
     CHANGE_ADMIN_ACCOUNT_PASSWORD_SUCCESS,
     OPEN_CHANGE_PASSWORD_MODAL,
-    CLOSE_CHANGE_PASSWORD_MODAL
+    CLOSE_CHANGE_PASSWORD_MODAL,
+    DESTROY_ADMIN_ACCOUNT_ROUTE
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+
+export const destroyAdminAccount = (admin_id, access_token, client, uid, history) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = getFormData({
+            admin_id: admin_id
+        });
+
+        axios.post(DESTROY_ADMIN_ACCOUNT_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                history.push("/admin-accounts");
+
+                dispatch({type: CLEAR_VIEW_ADMIN_ACCOUNT_STATE});
+
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+    };
+
+};
+
 
 export const closeChangePasswordModal = () => {
 
