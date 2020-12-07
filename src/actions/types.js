@@ -16,6 +16,7 @@ export const SEARCH_ADMIN_ROUTE = `${BACKEND_URL}/search-admin`;
 export const VIEW_ADMIN_ACCOUNT_ROUTE = `${BACKEND_URL}/view-admin-account`;
 export const CHANGE_ADMIN_ACCOUNT_PASSWORD_ROUTE = `${BACKEND_URL}/change-admin-account-password`;
 export const DESTROY_ADMIN_ACCOUNT_ROUTE = `${BACKEND_URL}/destroy-admin-account`;
+export const CHANGE_ADMIN_ACCOUNT_ROLES_ROUTE = `${BACKEND_URL}/change-admin-account-roles`;
 
 
 // Login Types
@@ -64,3 +65,8 @@ export const CHANGE_ADMIN_ACCOUNT_PASSWORD_SUCCESS = "change_admin_account_passw
 export const CHANGE_ADMIN_ACCOUNT_PASSWORD_FAILURE = "change_admin_account_password_failure";
 export const OPEN_CHANGE_PASSWORD_MODAL = "open_change_password_modal";
 export const CLOSE_CHANGE_PASSWORD_MODAL = "close_change_password_modal";
+export const CHANGE_ADMIN_ACCOUNT_ROLES = "change_admin_account_roles";
+export const CHANGE_ADMIN_ACCOUNT_ROLES_SUCCESS = "change_admin_account_roles_success";
+export const CHANGE_ADMIN_ACCOUNT_ROLES_FAILURE = "change_admin_account_roles_failure";
+export const OPEN_CHANGE_ROLES_MODAL = "open_change_roles_modal";
+export const CLOSE_CHANGE_ROLES_MODAL = "close_change_roles_modal";

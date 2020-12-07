@@ -12,11 +12,122 @@ import {
     CHANGE_ADMIN_ACCOUNT_PASSWORD_SUCCESS,
     OPEN_CHANGE_PASSWORD_MODAL,
     CLOSE_CHANGE_PASSWORD_MODAL,
-    DESTROY_ADMIN_ACCOUNT_ROUTE
+    DESTROY_ADMIN_ACCOUNT_ROUTE,
+    CHANGE_ADMIN_ACCOUNT_ROLES,
+    CHANGE_ADMIN_ACCOUNT_ROLES_FAILURE,
+    CHANGE_ADMIN_ACCOUNT_ROLES_SUCCESS,
+    CHANGE_ADMIN_ACCOUNT_ROLES_ROUTE,
+    OPEN_CHANGE_ROLES_MODAL,
+    CLOSE_CHANGE_ROLES_MODAL
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+export const closeChangeRolesModal = () => {
+
+    return{
+      type: CLOSE_CHANGE_ROLES_MODAL
+    };
+
+};
+
+
+export const openChangeRolesModal = () => {
+
+    return{
+      type: OPEN_CHANGE_ROLES_MODAL
+    };
+
+};
+
+
+export const changeAdminAccountRoles = (admin_id, roles, access_token, client, uid, history) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        roles = JSON.stringify(roles);
+
+        let bodyFormData = getFormData({
+            admin_id: admin_id,
+            roles: roles
+        });
+
+        dispatch({type: CHANGE_ADMIN_ACCOUNT_ROLES});
+
+
+        axios.post(CHANGE_ADMIN_ACCOUNT_ROLES_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                const data = response.data;
+
+                const success = data.success;
+
+                if(success){
+
+                    dispatch({type: CHANGE_ADMIN_ACCOUNT_ROLES_SUCCESS, payload: {
+                        admin_roles: data.admin_roles,
+                        roles_success_message: 'Successfully Changed roles'
+                    }});
+
+                }else{
+
+                    const error_code = data.error_code;
+
+                    if(error_code === 0 || error_code === 1){
+
+                        history.push("/admin-accounts");
+
+                        dispatch({type: CLEAR_VIEW_ADMIN_ACCOUNT_STATE});
+
+
+                    }else{
+
+                        const message = data.message;
+
+                        dispatch({type: CHANGE_ADMIN_ACCOUNT_ROLES_FAILURE, payload: message});
+
+
+                    }
+
+
+
+                }
+
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+
+    };
+
+};
 
 
 export const destroyAdminAccount = (admin_id, access_token, client, uid, history) => {

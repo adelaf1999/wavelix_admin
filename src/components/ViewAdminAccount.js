@@ -10,7 +10,10 @@ import {
     changeAdminAccountPassword,
     openChangePasswordModal,
     closeChangePasswordModal,
-    destroyAdminAccount
+    destroyAdminAccount,
+    changeAdminAccountRoles,
+    openChangeRolesModal,
+    closeChangeRolesModal
 } from "../actions";
 
 
@@ -28,11 +31,14 @@ class ViewAdminAccount extends Component{
 
         const destroy_account_modal_visible = false;
 
+        const selected_roles = [];
+
         this.state = {
             history,
             params,
             password,
-            destroy_account_modal_visible
+            destroy_account_modal_visible,
+            selected_roles
         };
 
     }
@@ -370,6 +376,242 @@ class ViewAdminAccount extends Component{
 
     }
 
+    exitChangeRolesModal(){
+
+        this.props.closeChangeRolesModal();
+
+        this.setState({ selected_roles: []});
+
+    }
+
+
+
+
+
+    changeRolesModalButton(){
+
+        const { selected_roles, history } = this.state;
+
+        const { access_token, client, uid, changeAdminAccountRoles } = this.props;
+
+        const admin_id = this.state.params.admin_id;
+
+
+        if(selected_roles.length > 0){
+
+            return(
+
+                <Button
+                    variant="primary"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        changeAdminAccountRoles(admin_id, selected_roles, access_token, client, uid, history);
+                    }}
+                >
+                    Save
+                </Button>
+
+            );
+
+        }else{
+
+            return(
+
+                <Button
+                    disabled
+                    variant="primary"
+                    onClick={(e) => {
+                        e.preventDefault();
+                    }}
+                >
+                    Save
+                </Button>
+            );
+
+        }
+
+    }
+
+
+    changingRoles(){
+
+        const { changing_roles } = this.props;
+
+        if(changing_roles){
+
+            return(
+
+                <div className="spinner-container">
+
+                    <Spinner animation="border" variant="primary" />
+
+                </div>
+
+
+            );
+
+        }
+
+    }
+
+    rolesMessage(){
+
+        const { roles_success_message, roles_error_message} = this.props;
+
+        if(roles_error_message.length > 0){
+
+            return(
+                <Alert
+                    variant="danger"
+                    className="edit-roles-alert"
+                >
+                    {roles_error_message}
+                </Alert>
+            );
+
+        }else if(roles_success_message.length > 0){
+
+            return(
+                <Alert
+                    variant="success"
+                    className="edit-roles-alert"
+                >
+                    {roles_success_message}
+                </Alert>
+            );
+
+        }
+
+
+    }
+
+
+    changeRolesModalBody(){
+
+        const {  selected_roles } = this.state;
+
+        const {  available_roles } = this.props;
+
+
+        return(
+
+            <Modal.Body>
+
+                {
+                    _.map(available_roles, (role, index) => {
+
+                        return(
+
+                            <Form.Check
+                                type="checkbox"
+                                label={_.startCase( role.split("_").join(" ") )}
+                                key={index}
+                                checked={selected_roles.includes(role)}
+                                onChange={(e) => {
+
+                                    const checked = e.target.checked;
+
+                                    if(checked){
+
+                                        let new_selected_roles = selected_roles;
+
+                                        new_selected_roles.push(role);
+
+                                        this.setState({selected_roles: new_selected_roles});
+
+                                    }else{
+
+                                        let new_selected_roles = selected_roles;
+
+                                        _.remove(new_selected_roles, function(selected_role) {
+                                            return role === selected_role;
+                                        });
+
+
+                                        this.setState({selected_roles: new_selected_roles});
+
+                                    }
+
+                                }}
+                            />
+
+                        );
+
+                    })
+                }
+
+
+
+            </Modal.Body>
+
+        );
+
+
+
+    }
+
+    changeRolesModal(){
+
+        const { change_roles_modal_visible} = this.props;
+
+        if(change_roles_modal_visible){
+
+            return(
+
+                <Modal
+                    show={change_roles_modal_visible}
+                    onHide={() => {
+                        this.exitChangeRolesModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Edit Roles</Modal.Title>
+
+                    </Modal.Header>
+
+
+                    {this.changeRolesModalBody()}
+
+
+                    {this.changingRoles()}
+
+                    {this.rolesMessage()}
+
+                    <Modal.Footer>
+
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                this.exitChangeRolesModal();
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        {this.changeRolesModalButton()}
+
+
+
+                    </Modal.Footer>
+
+
+                </Modal>
+
+
+            );
+
+        }
+
+    }
+
     show(){
 
         const {
@@ -379,7 +621,8 @@ class ViewAdminAccount extends Component{
             admin_email,
             admin_roles,
             current_sign_in_ip,
-            last_sign_in_ip
+            last_sign_in_ip,
+            openChangeRolesModal
         } = this.props;
 
         if(initializing_page){
@@ -541,6 +784,17 @@ class ViewAdminAccount extends Component{
 
                                         e.preventDefault();
 
+                                        let selected_roles = [];
+
+                                        _.map(admin_roles, (role, index) => {
+
+                                            selected_roles.push(role);
+
+                                        });
+
+                                        this.setState({selected_roles: selected_roles});
+
+                                        openChangeRolesModal();
 
 
                                     }}
@@ -576,6 +830,8 @@ class ViewAdminAccount extends Component{
                     {this.changePasswordModal()}
 
                     {this.destroyAccountModal()}
+
+                    {this.changeRolesModal()}
 
                 </div>
 
@@ -632,7 +888,11 @@ const mapStateToProps = (state) => {
         change_password_modal_visible,
         changing_password,
         password_success_message,
-        password_error_message
+        password_error_message,
+        change_roles_modal_visible,
+        changing_roles,
+        roles_success_message,
+        roles_error_message
     } = state.view_admin_account;
 
     return {
@@ -652,7 +912,11 @@ const mapStateToProps = (state) => {
         change_password_modal_visible,
         changing_password,
         password_success_message,
-        password_error_message
+        password_error_message,
+        change_roles_modal_visible,
+        changing_roles,
+        roles_success_message,
+        roles_error_message
     };
 };
 
@@ -662,5 +926,8 @@ export default connect(mapStateToProps, {
     changeAdminAccountPassword,
     openChangePasswordModal,
     closeChangePasswordModal,
-    destroyAdminAccount
+    destroyAdminAccount,
+    changeAdminAccountRoles,
+    openChangeRolesModal,
+    closeChangeRolesModal
 })(ViewAdminAccount);

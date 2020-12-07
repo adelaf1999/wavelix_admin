@@ -8,7 +8,12 @@ import {
     CLOSE_CHANGE_PASSWORD_MODAL,
     CHANGE_ADMIN_ACCOUNT_PASSWORD,
     CHANGE_ADMIN_ACCOUNT_PASSWORD_FAILURE,
-    CHANGE_ADMIN_ACCOUNT_PASSWORD_SUCCESS
+    CHANGE_ADMIN_ACCOUNT_PASSWORD_SUCCESS,
+    OPEN_CHANGE_ROLES_MODAL,
+    CLOSE_CHANGE_ROLES_MODAL,
+    CHANGE_ADMIN_ACCOUNT_ROLES,
+    CHANGE_ADMIN_ACCOUNT_ROLES_FAILURE,
+    CHANGE_ADMIN_ACCOUNT_ROLES_SUCCESS
 } from "../actions/types";
 
 
@@ -24,11 +29,48 @@ const INITIAL_STATE = {
     change_password_modal_visible: false,
     changing_password: false,
     password_success_message: '',
-    password_error_message: ''
+    password_error_message: '',
+    change_roles_modal_visible: false,
+    changing_roles: false,
+    roles_success_message: '',
+    roles_error_message: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case CHANGE_ADMIN_ACCOUNT_ROLES_SUCCESS:
+            return{
+                ...state,
+                changing_roles: false,
+                admin_roles: action.payload.admin_roles,
+                roles_success_message: action.payload.roles_success_message
+            };
+        case CHANGE_ADMIN_ACCOUNT_ROLES_FAILURE:
+            return{
+                ...state,
+                changing_roles: false,
+                roles_error_message: action.payload
+            };
+        case CHANGE_ADMIN_ACCOUNT_ROLES:
+            return{
+                ...state,
+                changing_roles: true,
+                roles_success_message: '',
+                roles_error_message: ''
+            };
+        case CLOSE_CHANGE_ROLES_MODAL:
+            return{
+                ...state,
+                change_roles_modal_visible: false,
+                changing_roles: false,
+                roles_success_message: '',
+                roles_error_message: ''
+            };
+        case OPEN_CHANGE_ROLES_MODAL:
+            return{
+                ...state,
+                change_roles_modal_visible: true
+            };
         case CHANGE_ADMIN_ACCOUNT_PASSWORD_SUCCESS:
             return{
                 ...state,
