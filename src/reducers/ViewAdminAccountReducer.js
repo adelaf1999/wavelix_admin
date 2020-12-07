@@ -3,7 +3,12 @@ import {
     VIEW_ADMIN_ACCOUNT,
     VIEW_ADMIN_ACCOUNT_SUCCESS,
     VIEW_ADMIN_ACCOUNT_FAILURE,
-    CLEAR_VIEW_ADMIN_ACCOUNT_STATE
+    CLEAR_VIEW_ADMIN_ACCOUNT_STATE,
+    OPEN_CHANGE_PASSWORD_MODAL,
+    CLOSE_CHANGE_PASSWORD_MODAL,
+    CHANGE_ADMIN_ACCOUNT_PASSWORD,
+    CHANGE_ADMIN_ACCOUNT_PASSWORD_FAILURE,
+    CHANGE_ADMIN_ACCOUNT_PASSWORD_SUCCESS
 } from "../actions/types";
 
 
@@ -15,11 +20,47 @@ const INITIAL_STATE = {
     admin_roles: [],
     available_roles: [],
     current_sign_in_ip: null,
-    last_sign_in_ip: null
+    last_sign_in_ip: null,
+    change_password_modal_visible: false,
+    changing_password: false,
+    password_success_message: '',
+    password_error_message: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case CHANGE_ADMIN_ACCOUNT_PASSWORD_SUCCESS:
+            return{
+                ...state,
+                changing_password: false,
+                password_success_message: action.payload
+            };
+        case CHANGE_ADMIN_ACCOUNT_PASSWORD_FAILURE:
+            return{
+                ...state,
+                changing_password: false,
+                password_error_message: action.payload
+            };
+        case CHANGE_ADMIN_ACCOUNT_PASSWORD:
+            return{
+                ...state,
+                changing_password: true,
+                password_success_message: '',
+                password_error_message: ''
+            };
+        case CLOSE_CHANGE_PASSWORD_MODAL:
+            return{
+                ...state,
+                change_password_modal_visible: false,
+                changing_password: false,
+                password_success_message: '',
+                password_error_message: ''
+            };
+        case OPEN_CHANGE_PASSWORD_MODAL:
+            return{
+                ...state,
+                change_password_modal_visible: true
+            };
         case VIEW_ADMIN_ACCOUNT_SUCCESS:
             return{
                 ...state,

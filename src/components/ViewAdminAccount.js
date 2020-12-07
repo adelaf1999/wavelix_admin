@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Wrapper from "./Wrapper";
 import _ from "lodash";
-import {  Spinner, Image, Card, Row, Col ,  Button, Form, Modal, Alert} from "react-bootstrap";
+import {  Spinner, Image, Card,  Button, Form, Modal, Alert} from "react-bootstrap";
 import { getAdminRoles } from "../helpers";
 import {
     viewAdminAccount,
-    clearViewAdminAccountState
+    clearViewAdminAccountState,
+    changeAdminAccountPassword,
+    openChangePasswordModal,
+    closeChangePasswordModal
 } from "../actions";
 
 
@@ -20,9 +23,12 @@ class ViewAdminAccount extends Component{
 
         const params = props.match.params;
 
+        const password = "";
+
         this.state = {
             history,
-            params
+            params,
+            password
         };
 
     }
@@ -67,6 +73,187 @@ class ViewAdminAccount extends Component{
 
     }
 
+    exitChangePasswordModal(){
+
+        this.props.closeChangePasswordModal();
+
+        this.setState({password: ''});
+
+    }
+
+    changingPasswordSpinner(){
+
+        const { changing_password } = this.props;
+
+        if(changing_password){
+
+            return(
+
+                <div className="spinner-container">
+
+                    <Spinner animation="border" variant="primary" />
+
+                </div>
+
+
+            );
+
+        }
+
+    }
+
+    passwordMessage(){
+
+        const { password_success_message, password_error_message } = this.props;
+
+        if(password_error_message.length > 0){
+
+            return(
+                <Alert variant="danger">
+                    {password_error_message}
+                </Alert>
+            );
+
+        }else if(password_success_message.length > 0){
+
+            return(
+                <Alert variant="success">
+                    {password_success_message}
+                </Alert>
+            );
+
+        }
+
+
+    }
+
+
+    changePasswordButton(){
+
+        const { password, history } = this.state;
+
+        const { access_token, client, uid, changeAdminAccountPassword } = this.props;
+
+        const admin_id = this.state.params.admin_id;
+
+        if(!_.isEmpty(password) && password.length >=8 ){
+
+
+            return(
+
+                <Button
+                    variant="primary"
+                    onClick={(e) => {
+
+                        e.preventDefault();
+
+                        changeAdminAccountPassword(admin_id, password, access_token, client, uid, history);
+
+                    }}
+                >
+                    Submit
+                </Button>
+
+            );
+
+        }else{
+
+            return(
+
+                <Button
+                    disabled
+                    variant="primary"
+                >
+                    Submit
+                </Button>
+
+            );
+
+        }
+
+    }
+
+    changePasswordModal(){
+
+        const {  change_password_modal_visible } = this.props;
+
+        if(change_password_modal_visible){
+
+            return(
+
+                <Modal
+                    show={change_password_modal_visible}
+                    onHide={() => {
+                        this.exitChangePasswordModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Change Password</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+
+                        <Form.Group >
+
+                            <Form.Label>
+                                 Password ( at least 8 characters long )
+                            </Form.Label>
+
+                            <Form.Control
+                                type='password'
+                                placeholder='password'
+                                onChange={(e) => {
+
+                                    e.preventDefault();
+
+                                    this.setState({password: e.target.value});
+
+                                }}
+                            />
+
+                        </Form.Group>
+
+                        {this.changingPasswordSpinner()}
+
+                        {this.passwordMessage()}
+
+
+
+                    </Modal.Body>
+
+                    <Modal.Footer>
+
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                this.exitChangePasswordModal();
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        {this.changePasswordButton()}
+
+                    </Modal.Footer>
+
+
+                </Modal>
+
+            );
+
+        }
+
+    }
 
     show(){
 
@@ -76,7 +263,6 @@ class ViewAdminAccount extends Component{
             admin_full_name,
             admin_email,
             admin_roles,
-            available_roles,
             current_sign_in_ip,
             last_sign_in_ip
         } = this.props;
@@ -225,12 +411,8 @@ class ViewAdminAccount extends Component{
                                     variant="outline-primary"
                                     className="view-admin-account-button"
                                     onClick={(e) => {
-
                                         e.preventDefault();
-
-
-
-
+                                        this.props.openChangePasswordModal();
                                     }}
                                 >
                                     Change Password
@@ -275,6 +457,9 @@ class ViewAdminAccount extends Component{
                         </Card>
 
                     </div>
+
+                    {this.changePasswordModal()}
+
 
                 </div>
 
@@ -327,7 +512,11 @@ const mapStateToProps = (state) => {
         admin_roles,
         available_roles,
         current_sign_in_ip,
-        last_sign_in_ip
+        last_sign_in_ip,
+        change_password_modal_visible,
+        changing_password,
+        password_success_message,
+        password_error_message
     } = state.view_admin_account;
 
     return {
@@ -343,11 +532,18 @@ const mapStateToProps = (state) => {
         admin_roles,
         available_roles,
         current_sign_in_ip,
-        last_sign_in_ip
+        last_sign_in_ip,
+        change_password_modal_visible,
+        changing_password,
+        password_success_message,
+        password_error_message
     };
 };
 
 export default connect(mapStateToProps, {
     viewAdminAccount,
-    clearViewAdminAccountState
+    clearViewAdminAccountState,
+    changeAdminAccountPassword,
+    openChangePasswordModal,
+    closeChangePasswordModal
 })(ViewAdminAccount);

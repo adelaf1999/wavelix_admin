@@ -5,11 +5,113 @@ import {
     VIEW_ADMIN_ACCOUNT,
     VIEW_ADMIN_ACCOUNT_FAILURE,
     VIEW_ADMIN_ACCOUNT_SUCCESS,
-    CLEAR_VIEW_ADMIN_ACCOUNT_STATE
+    CLEAR_VIEW_ADMIN_ACCOUNT_STATE,
+    CHANGE_ADMIN_ACCOUNT_PASSWORD_ROUTE,
+    CHANGE_ADMIN_ACCOUNT_PASSWORD,
+    CHANGE_ADMIN_ACCOUNT_PASSWORD_FAILURE,
+    CHANGE_ADMIN_ACCOUNT_PASSWORD_SUCCESS,
+    OPEN_CHANGE_PASSWORD_MODAL,
+    CLOSE_CHANGE_PASSWORD_MODAL
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+export const closeChangePasswordModal = () => {
+
+    return{
+      type: CLOSE_CHANGE_PASSWORD_MODAL
+    };
+
+};
+
+
+export const openChangePasswordModal = () => {
+
+    return{
+        type: OPEN_CHANGE_PASSWORD_MODAL
+    };
+
+};
+
+export const changeAdminAccountPassword = (admin_id, password, access_token, client, uid, history) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = getFormData({
+            admin_id: admin_id,
+            password: password
+        });
+
+        dispatch({type: CHANGE_ADMIN_ACCOUNT_PASSWORD});
+
+        axios.post(CHANGE_ADMIN_ACCOUNT_PASSWORD_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                const data = response.data;
+
+                const success = data.success;
+
+                if(success){
+
+                    dispatch({type: CHANGE_ADMIN_ACCOUNT_PASSWORD_SUCCESS, payload: 'Successfully changed password'});
+
+                }else{
+
+                    const error_code = data.error_code;
+
+                    if(error_code === 0 || error_code === 1){
+
+                        history.push("/admin-accounts");
+
+                        dispatch({type: CLEAR_VIEW_ADMIN_ACCOUNT_STATE});
+
+
+                    }else{
+
+                        const message = data.message;
+
+                        dispatch({type: CHANGE_ADMIN_ACCOUNT_PASSWORD_FAILURE, payload: message});
+
+
+                    }
+
+                }
+
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+    };
+
+};
+
 
 export const clearViewAdminAccountState = () => {
 
