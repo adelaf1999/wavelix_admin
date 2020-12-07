@@ -486,6 +486,22 @@ class ViewAdminAccount extends Component{
     }
 
 
+    changeRolesNotice(){
+
+        const { roles } = this.props;
+
+        if(!roles.includes("root_admin")){
+
+            return(
+
+                <p>Please inform the administrator before changing roles.</p>
+            );
+
+        }
+
+    }
+
+
     changeRolesModalBody(){
 
         const {  selected_roles } = this.state;
@@ -496,6 +512,8 @@ class ViewAdminAccount extends Component{
         return(
 
             <Modal.Body>
+
+                {this.changeRolesNotice()}
 
                 {
                     _.map(available_roles, (role, index) => {
