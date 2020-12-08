@@ -6,14 +6,22 @@ import {
     GET_ADMIN_ACCOUNTS_ROUTE,
     CLEAR_ADMIN_ACCOUNTS_STATE,
     SEARCH_ADMIN_ROUTE,
-    SEARCH_ADMINS,
-    SEARCH_ADMINS_COMPLETE
+    SEARCH_ADMINS_COMPLETE,
+    SEARCH_ADMINS_LIMIT_CHANGED
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
 import _ from "lodash";
 
+export const searchAdminsLimitChanged = (limit) => {
+
+    return{
+        type: SEARCH_ADMINS_LIMIT_CHANGED,
+        payload: limit
+    };
+
+};
 
 export const searchAdmins = (limit, search, role, access_token, client, uid, history) => {
 
@@ -47,8 +55,6 @@ export const searchAdmins = (limit, search, role, access_token, client, uid, his
 
         });
 
-
-        dispatch({type: SEARCH_ADMINS});
 
         axios.post(SEARCH_ADMIN_ROUTE, bodyFormData, config)
             .then(response => {

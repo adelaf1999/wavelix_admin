@@ -54,8 +54,8 @@ export const CLEAR_HOME_STATE = "clear_home_state";
 export const GET_ADMIN_ACCOUNTS = "get_admin_accounts";
 export const GET_ADMIN_ACCOUNTS_COMPLETE = "get_admin_accounts_complete";
 export const CLEAR_ADMIN_ACCOUNTS_STATE = "clear_admin_accounts_state";
-export const SEARCH_ADMINS = "search_admins";
 export const SEARCH_ADMINS_COMPLETE = "search_admins_complete";
+export const SEARCH_ADMINS_LIMIT_CHANGED = "search_admins_limit_changed";
 
 //ViewAdminAccount Types
 export const VIEW_ADMIN_ACCOUNT = "view_admin_account";

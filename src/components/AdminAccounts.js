@@ -5,7 +5,8 @@ import Wrapper from "./Wrapper";
 import {
     getAdminAccounts,
     clearAdminAccountsState,
-    searchAdmins
+    searchAdmins,
+    searchAdminsLimitChanged
 } from "../actions";
 import _ from "lodash";
 import {  Spinner, Form, FormControl, Button, Table, Image} from "react-bootstrap";
@@ -23,6 +24,8 @@ class AdminAccounts extends Component{
 
         const search = "";
 
+        this.handleScroll = this.handleScroll.bind(this);
+
         this.state = {
             history,
             selected_role,
@@ -31,12 +34,51 @@ class AdminAccounts extends Component{
 
     }
 
-    componentWillUnmount(){
-        this.props.clearAdminAccountsState();
+    handleScroll() {
+
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+
+        const body = document.body;
+
+        const html = document.documentElement;
+
+        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+
+        const windowBottom = windowHeight + window.pageYOffset;
+
+        if (windowBottom >= docHeight) {
+
+            console.log("bottom reached");
+
+            const { limit, searchAdminsLimitChanged, access_token, client, uid, searchAdmins } = this.props;
+
+            const { search, selected_role, history } = this.state;
+
+            const new_limit = limit + 30;
+
+            searchAdminsLimitChanged(new_limit);
+
+            searchAdmins(new_limit, search, selected_role, access_token, client, uid, history);
+
+
+
+        }
     }
 
 
+    componentWillUnmount(){
+
+        window.removeEventListener("scroll", this.handleScroll);
+
+        this.props.clearAdminAccountsState();
+
+    }
+
+
+
     componentDidMount(){
+
+        window.addEventListener("scroll", this.handleScroll);
 
         const {
             logged_in,
@@ -254,27 +296,9 @@ class AdminAccounts extends Component{
 
     renderAdmins(){
 
-        const { searching_admins, admins } = this.props;
+        const {  admins } = this.props;
 
-
-        if(searching_admins){
-
-            return(
-
-
-                <div className="center-container">
-
-                    <div className="spinner-container">
-
-                        <Spinner animation="border" variant="primary" />
-
-                    </div>
-
-                </div>
-
-            );
-
-        }else if(admins.length === 0){
+        if(admins.length === 0){
 
             return(
 
@@ -480,7 +504,6 @@ const mapStateToProps = (state) => {
         initializing_page,
         admins,
         available_roles,
-        searching_admins,
         limit
     } = state.admin_accounts;
 
@@ -493,7 +516,6 @@ const mapStateToProps = (state) => {
         initializing_page,
         admins,
         available_roles,
-        searching_admins,
         limit
     };
 };
@@ -501,5 +523,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     getAdminAccounts,
     clearAdminAccountsState,
-    searchAdmins
+    searchAdmins,
+    searchAdminsLimitChanged
 })(AdminAccounts);
