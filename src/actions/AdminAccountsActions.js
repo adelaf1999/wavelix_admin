@@ -95,7 +95,7 @@ export const clearAdminAccountsState = () => {
 };
 
 
-export const getAdminAccounts = (access_token, client, uid, history) => {
+export const getAdminAccounts = (limit, access_token, client, uid, history) => {
 
     return(dispatch) => {
 
@@ -108,9 +108,13 @@ export const getAdminAccounts = (access_token, client, uid, history) => {
             }
         };
 
+        let bodyFormData = getFormData({
+            limit: limit
+        });
+
         dispatch({type: GET_ADMIN_ACCOUNTS});
 
-        axios.get(GET_ADMIN_ACCOUNTS_ROUTE, config)
+        axios.post(GET_ADMIN_ACCOUNTS_ROUTE, bodyFormData, config)
             .then(response => {
 
                 const data = response.data;

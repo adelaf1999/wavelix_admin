@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6d195e98-fbd2-42d9-b726-6c7e9b6ac1da" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.eslintcache" afterPath="$PROJECT_DIR$/.eslintcache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ViewAdminAccount.css" afterPath="$PROJECT_DIR$/src/ViewAdminAccount.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/ViewAdminAccountActions.js" afterPath="$PROJECT_DIR$/src/actions/ViewAdminAccountActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ViewAdminAccount.js" afterPath="$PROJECT_DIR$/src/components/ViewAdminAccount.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/ViewAdminAccountReducer.js" afterPath="$PROJECT_DIR$/src/reducers/ViewAdminAccountReducer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/AdminAccountsActions.js" afterPath="$PROJECT_DIR$/src/actions/AdminAccountsActions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/AdminAccounts.js" afterPath="$PROJECT_DIR$/src/components/AdminAccounts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/AdminAccountsReducer.js" afterPath="$PROJECT_DIR$/src/reducers/AdminAccountsReducer.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,44 +20,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="ViewAdminAccount.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/ViewAdminAccount.js">
+      <file leaf-file-name="types.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/actions/types.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="464" column="37" lean-forward="false" selection-start-line="464" selection-start-column="37" selection-end-line="464" selection-end-column="37" />
+            <state relative-caret-position="0">
+              <caret line="55" column="71" lean-forward="false" selection-start-line="55" selection-start-column="71" selection-end-line="55" selection-end-column="71" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ViewAdminAccount.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ViewAdminAccount.css">
+      <file leaf-file-name="AdminAccounts.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/AdminAccounts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ViewAdminAccountActions.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/actions/ViewAdminAccountActions.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5034">
-              <caret line="182" column="28" lean-forward="false" selection-start-line="182" selection-start-column="18" selection-end-line="182" selection-end-column="28" />
+            <state relative-caret-position="1225">
+              <caret line="63" column="36" lean-forward="false" selection-start-line="63" selection-start-column="36" selection-end-line="63" selection-end-column="36" />
               <folding>
-                <element signature="e#0#692#0" expanded="true" />
+                <element signature="e#0#41#0" expanded="true" />
+                <marker date="1607445316711" expanded="true" signature="9785:9787" ph="{&quot;getAdminAccounts&quot;: getAdminAccounts...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ViewAdminAccountReducer.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/reducers/ViewAdminAccountReducer.js">
+      <file leaf-file-name="AdminAccountsActions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/actions/AdminAccountsActions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-423">
-              <caret line="53" column="25" lean-forward="false" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
-              <folding />
+            <state relative-caret-position="640">
+              <caret line="97" column="13" lean-forward="true" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#259#0" expanded="true" />
+                <marker date="1607445316743" expanded="true" signature="7:213" ph="..." />
+                <marker date="1607445316743" expanded="true" signature="1012:1646" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdminAccountsReducer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/reducers/AdminAccountsReducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="630">
+              <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#190#0" expanded="true" />
+                <marker date="1607445316735" expanded="true" signature="7:135" ph="..." />
+                <marker date="1607445316735" expanded="true" signature="703:717" ph="{&quot;admins&quot;: action.payload...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,8 +83,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>componentWil</find>
-      <find>CONTINUE</find>
       <find>onChange</find>
       <find>startSe</find>
       <find>edit</find>
@@ -104,6 +111,8 @@
       <find>roles_success_message</find>
       <find>CHANGE_ADMIN_ACCOUNT_PASS</find>
       <find>changePass</find>
+      <find>getAdmi</find>
+      <find>getAdminAccounts</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -137,14 +146,11 @@
         <option value="$PROJECT_DIR$/src/components/TopHeader.js" />
         <option value="$PROJECT_DIR$/src/helpers/index.js" />
         <option value="$PROJECT_DIR$/src/helpers/adminProfileHelper.js" />
-        <option value="$PROJECT_DIR$/src/reducers/AdminAccountsReducer.js" />
         <option value="$PROJECT_DIR$/src/AdminAccounts.css" />
-        <option value="$PROJECT_DIR$/src/actions/AdminAccountsActions.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/Home.css" />
         <option value="$PROJECT_DIR$/src/components/Home.js" />
         <option value="$PROJECT_DIR$/src/Routes.js" />
-        <option value="$PROJECT_DIR$/src/components/AdminAccounts.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/actions/index.js" />
         <option value="$PROJECT_DIR$/src/reducers/index.js" />
@@ -157,6 +163,9 @@
         <option value="$PROJECT_DIR$/src/actions/ViewAdminAccountActions.js" />
         <option value="$PROJECT_DIR$/src/reducers/ViewAdminAccountReducer.js" />
         <option value="$PROJECT_DIR$/src/components/ViewAdminAccount.js" />
+        <option value="$PROJECT_DIR$/src/actions/AdminAccountsActions.js" />
+        <option value="$PROJECT_DIR$/src/reducers/AdminAccountsReducer.js" />
+        <option value="$PROJECT_DIR$/src/components/AdminAccounts.js" />
       </list>
     </option>
   </component>
@@ -199,7 +208,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -240,7 +249,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -308,14 +317,15 @@
       <workItem from="1607332213710" duration="10982000" />
       <workItem from="1607346588252" duration="390000" />
       <workItem from="1607421147759" duration="13787000" />
+      <workItem from="1607445214980" duration="253000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94571000" />
+    <option name="totallyTimeSpent" value="94824000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-2" width="3840" height="2080" extended-state="6" />
+    <frame x="167" y="455" width="3840" height="2080" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15286459" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -571,17 +581,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="5" column="44" lean-forward="false" selection-start-line="5" selection-start-column="44" selection-end-line="5" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/AdminAccountsActions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="133" column="15" lean-forward="true" selection-start-line="133" selection-start-column="14" selection-end-line="151" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#259#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -589,7 +588,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1124">
           <caret line="77" column="14" lean-forward="true" selection-start-line="77" selection-start-column="14" selection-end-line="78" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -599,24 +597,6 @@
           <caret line="17" column="51" lean-forward="false" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
           <folding>
             <element signature="e#0#38#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/AdminAccountsReducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1034">
-          <caret line="41" column="12" lean-forward="false" selection-start-line="41" selection-start-column="7" selection-end-line="45" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/AdminAccounts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="335" column="15" lean-forward="false" selection-start-line="335" selection-start-column="15" selection-end-line="343" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -633,7 +613,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1035">
           <caret line="23" column="1" lean-forward="true" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -641,25 +620,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1108">
           <caret line="376" column="19" lean-forward="true" selection-start-line="352" selection-start-column="15" selection-end-line="382" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/actions/types.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2024">
-          <caret line="89" column="85" lean-forward="false" selection-start-line="89" selection-start-column="85" selection-end-line="89" selection-end-column="85" />
+        <state relative-caret-position="0">
+          <caret line="55" column="71" lean-forward="false" selection-start-line="55" selection-start-column="71" selection-end-line="55" selection-end-column="71" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/CreateAdminAccountActions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3600">
-          <caret line="80" column="27" lean-forward="false" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#597#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -667,9 +635,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1350">
           <caret line="48" column="32" lean-forward="false" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#521#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -695,7 +660,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
           <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -711,9 +675,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5034">
           <caret line="182" column="28" lean-forward="false" selection-start-line="182" selection-start-column="18" selection-end-line="182" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#692#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -721,7 +682,51 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-423">
           <caret line="53" column="25" lean-forward="false" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/CreateAdminAccountActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="899">
+          <caret line="103" column="12" lean-forward="false" selection-start-line="103" selection-start-column="12" selection-end-line="109" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#597#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/AdminAccountsReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#190#0" expanded="true" />
+            <marker date="1607445316735" expanded="true" signature="7:135" ph="..." />
+            <marker date="1607445316735" expanded="true" signature="703:717" ph="{&quot;admins&quot;: action.payload...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/AdminAccountsActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="97" column="13" lean-forward="true" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#259#0" expanded="true" />
+            <marker date="1607445316743" expanded="true" signature="7:213" ph="..." />
+            <marker date="1607445316743" expanded="true" signature="1012:1646" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/AdminAccounts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1225">
+          <caret line="63" column="36" lean-forward="false" selection-start-line="63" selection-start-column="36" selection-end-line="63" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <marker date="1607445316711" expanded="true" signature="9785:9787" ph="{&quot;getAdminAccounts&quot;: getAdminAccounts...}" />
+          </folding>
         </state>
       </provider>
     </entry>

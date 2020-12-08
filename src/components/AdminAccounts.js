@@ -44,7 +44,8 @@ class AdminAccounts extends Component{
             client,
             uid,
             roles,
-            getAdminAccounts
+            getAdminAccounts,
+            limit
         } = this.props;
 
         const { history } = this.state;
@@ -60,7 +61,7 @@ class AdminAccounts extends Component{
 
         }else{
 
-            getAdminAccounts(access_token, client, uid, history);
+            getAdminAccounts(limit, access_token, client, uid, history);
 
         }
 
@@ -479,7 +480,8 @@ const mapStateToProps = (state) => {
         initializing_page,
         admins,
         available_roles,
-        searching_admins
+        searching_admins,
+        limit
     } = state.admin_accounts;
 
     return {
@@ -491,7 +493,8 @@ const mapStateToProps = (state) => {
         initializing_page,
         admins,
         available_roles,
-        searching_admins
+        searching_admins,
+        limit
     };
 };
 

@@ -11,7 +11,8 @@ const INITIAL_STATE = {
     initializing_page: false,
     admins: [],
     available_roles: [],
-    searching_admins: false
+    searching_admins: false,
+    limit: 50
 };
 
 export default (state = INITIAL_STATE, action) => {
