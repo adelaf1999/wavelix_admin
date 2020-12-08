@@ -80,6 +80,10 @@ class AdminAccounts extends Component{
                 <Button
                     variant="outline-primary"
                     id="create-admin-button"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        this.state.history.push("/create-admin-account");
+                    }}
                 >
                     Create Account
                 </Button>

@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import AdminAccounts from "./components/AdminAccounts";
 import ViewAdminAccount from "./components/ViewAdminAccount";
+import CreateAdminAccount from "./components/CreateAdminAccount";
 
 export default function Routes() {
 
@@ -27,6 +28,9 @@ export default function Routes() {
 
 
                 <Route exact path="/view-admin-account/admin_id=:admin_id" component={ViewAdminAccount} />
+
+
+                <Route exact path="/create-admin-account" component={CreateAdminAccount} />
 
 
 

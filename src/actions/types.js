@@ -17,6 +17,8 @@ export const VIEW_ADMIN_ACCOUNT_ROUTE = `${BACKEND_URL}/view-admin-account`;
 export const CHANGE_ADMIN_ACCOUNT_PASSWORD_ROUTE = `${BACKEND_URL}/change-admin-account-password`;
 export const DESTROY_ADMIN_ACCOUNT_ROUTE = `${BACKEND_URL}/destroy-admin-account`;
 export const CHANGE_ADMIN_ACCOUNT_ROLES_ROUTE = `${BACKEND_URL}/change-admin-account-roles`;
+export const NEW_ADMIN_ACCOUNT_ROUTE = `${BACKEND_URL}/new-admin-account`;
+export const CREATE_ADMIN_ACCOUNT_ROUTE = `${BACKEND_URL}/create-admin-account`;
 
 
 // Login Types
@@ -70,3 +72,19 @@ export const CHANGE_ADMIN_ACCOUNT_ROLES_SUCCESS = "change_admin_account_roles_su
 export const CHANGE_ADMIN_ACCOUNT_ROLES_FAILURE = "change_admin_account_roles_failure";
 export const OPEN_CHANGE_ROLES_MODAL = "open_change_roles_modal";
 export const CLOSE_CHANGE_ROLES_MODAL = "close_change_roles_modal";
+
+//CreateAdminAccount Types
+export const INITIALIZE_NEW_ADMIN_ACCOUNT = "initialize_new_admin_account";
+export const INITIALIZE_NEW_ADMIN_ACCOUNT_COMPLETE = "initialize_new_admin_account_complete";
+export const CLEAR_CREATE_ADMIN_ACCOUNT_STATE = "clear_create_admin_account_state";
+export const CREATE_ADMIN_ACCOUNT = "create_admin_account";
+export const CREATE_ADMIN_ACCOUNT_SUCCESS = "create_admin_account_success";
+export const CREATE_ADMIN_ACCOUNT_FAILURE = "create_admin_account_failure";
+export const CREATE_ADMIN_EMAIL_ERROR = "create_admin_email_error";
+export const CREATE_ADMIN_PASSWORD_ERROR = "create_admin_password_error";
+export const CREATE_ADMIN_FULL_NAME_ERROR = "create_admin_full_name_error";
+export const CREATE_ADMIN_PHOTO_ERROR = "create_admin_photo_error";
+export const CREATE_ADMIN_ROLES_ERROR = "create_admin_roles_error";
+export const CREATE_ADMIN_ERROR = "create_admin_error";
+export const CLOSE_CREATE_ADMIN_SUCCESS_MODAL = "close_create_admin_success_modal";
+export const CLEAR_CREATE_ADMIN_ACCOUNT_ERRORS = "clear_create_admin_account_errors";

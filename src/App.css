@@ -3,6 +3,7 @@
 @import "Home.css";
 @import "AdminAccounts.css";
 @import "ViewAdminAccount.css";
+@import "CreateAdminAccount.css";
 
 .center-container{
     position: absolute;

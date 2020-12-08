@@ -1,0 +1,26 @@
+#create-admin-account-title{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 3rem;
+}
+#create-admin-container{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+#create-admin-account-form{
+    width: 50%;
+}
+.create-admin-account-field{
+    margin-bottom: 2rem;
+}
+#create-admin-account-submit{
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 18px;
+}
+.create-admin-error{
+    margin-top: 2rem;
+}

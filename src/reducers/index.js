@@ -7,13 +7,15 @@ import LoginReducer from "./LoginReducer";
 import HomeReducer from "./HomeReducer";
 import AdminAccountsReducer from "./AdminAccountsReducer";
 import ViewAdminAccountReducer from "./ViewAdminAccountReducer";
+import CreateAdminAccountReducer from "./CreateAdminAccountReducer";
 
 
 const appReducer = combineReducers({
     login: LoginReducer,
     home: HomeReducer,
     admin_accounts: AdminAccountsReducer,
-    view_admin_account: ViewAdminAccountReducer
+    view_admin_account: ViewAdminAccountReducer,
+    create_admin_account: CreateAdminAccountReducer
 });
 
 
