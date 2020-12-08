@@ -326,7 +326,7 @@ class AdminAccounts extends Component{
 
     show(){
 
-        const { initializing_page,   searchAdmins, access_token, client, uid } = this.props;
+        const { initializing_page,   searchAdmins, access_token, client, uid, limit} = this.props;
 
         const { history } = this.state;
 
@@ -367,7 +367,7 @@ class AdminAccounts extends Component{
 
                                 this.setState({search: new_search});
 
-                                searchAdmins(new_search, this.state.selected_role, access_token, client, uid, history);
+                                searchAdmins(limit, new_search, this.state.selected_role, access_token, client, uid, history);
 
 
 
@@ -400,7 +400,7 @@ class AdminAccounts extends Component{
                                     }
 
 
-                                    searchAdmins(this.state.search, new_selected_role, access_token, client, uid, history);
+                                    searchAdmins(limit, this.state.search, new_selected_role, access_token, client, uid, history);
 
                                 }}
                             >

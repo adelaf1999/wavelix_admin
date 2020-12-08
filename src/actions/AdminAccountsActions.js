@@ -15,7 +15,7 @@ import { getFormData } from "../helpers";
 import _ from "lodash";
 
 
-export const searchAdmins = (search, role, access_token, client, uid, history) => {
+export const searchAdmins = (limit, search, role, access_token, client, uid, history) => {
 
     return(dispatch) => {
 
@@ -31,7 +31,8 @@ export const searchAdmins = (search, role, access_token, client, uid, history) =
         let bodyFormData = new FormData();
 
         let data = {
-            search: search
+            search: search,
+            limit: limit
         };
 
         if(!_.isEmpty(role)){

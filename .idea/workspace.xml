@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d195e98-fbd2-42d9-b726-6c7e9b6ac1da" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.eslintcache" afterPath="$PROJECT_DIR$/.eslintcache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/AdminAccountsActions.js" afterPath="$PROJECT_DIR$/src/actions/AdminAccountsActions.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/AdminAccounts.js" afterPath="$PROJECT_DIR$/src/components/AdminAccounts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/AdminAccountsReducer.js" afterPath="$PROJECT_DIR$/src/reducers/AdminAccountsReducer.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,28 +27,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminAccounts.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AdminAccounts.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/AdminAccounts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1225">
-              <caret line="63" column="36" lean-forward="false" selection-start-line="63" selection-start-column="36" selection-end-line="63" selection-end-column="36" />
+            <state relative-caret-position="2530">
+              <caret line="369" column="47" lean-forward="true" selection-start-line="369" selection-start-column="47" selection-end-line="369" selection-end-column="47" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
-                <marker date="1607445316711" expanded="true" signature="9785:9787" ph="{&quot;getAdminAccounts&quot;: getAdminAccounts...}" />
+                <marker date="1607445821403" expanded="true" signature="9805:9807" ph="{&quot;getAdminAccounts&quot;: getAdminAccounts...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminAccountsActions.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AdminAccountsActions.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/actions/AdminAccountsActions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
-              <caret line="97" column="13" lean-forward="true" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="29" />
+            <state relative-caret-position="1405">
+              <caret line="34" column="24" lean-forward="false" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
               <folding>
                 <element signature="e#0#259#0" expanded="true" />
-                <marker date="1607445316743" expanded="true" signature="7:213" ph="..." />
-                <marker date="1607445316743" expanded="true" signature="1012:1646" ph="{...}" />
+                <marker date="1607445821415" expanded="true" signature="7:213" ph="..." />
+                <marker date="1607445821415" expanded="true" signature="1045:1679" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -83,8 +80,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>onChange</find>
-      <find>startSe</find>
       <find>edit</find>
       <find>onPress</find>
       <find>pass</find>
@@ -113,6 +108,8 @@
       <find>changePass</find>
       <find>getAdmi</find>
       <find>getAdminAccounts</find>
+      <find>searchA</find>
+      <find>searchAdmins(</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -163,9 +160,9 @@
         <option value="$PROJECT_DIR$/src/actions/ViewAdminAccountActions.js" />
         <option value="$PROJECT_DIR$/src/reducers/ViewAdminAccountReducer.js" />
         <option value="$PROJECT_DIR$/src/components/ViewAdminAccount.js" />
-        <option value="$PROJECT_DIR$/src/actions/AdminAccountsActions.js" />
         <option value="$PROJECT_DIR$/src/reducers/AdminAccountsReducer.js" />
         <option value="$PROJECT_DIR$/src/components/AdminAccounts.js" />
+        <option value="$PROJECT_DIR$/src/actions/AdminAccountsActions.js" />
       </list>
     </option>
   </component>
@@ -317,12 +314,12 @@
       <workItem from="1607332213710" duration="10982000" />
       <workItem from="1607346588252" duration="390000" />
       <workItem from="1607421147759" duration="13787000" />
-      <workItem from="1607445214980" duration="253000" />
+      <workItem from="1607445214980" duration="607000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94824000" />
+    <option name="totallyTimeSpent" value="95178000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="167" y="455" width="3840" height="2080" extended-state="6" />
@@ -707,25 +704,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/AdminAccountsActions.js">
+    <entry file="file://$PROJECT_DIR$/src/components/AdminAccounts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="97" column="13" lean-forward="true" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="29" />
+        <state relative-caret-position="2530">
+          <caret line="369" column="47" lean-forward="true" selection-start-line="369" selection-start-column="47" selection-end-line="369" selection-end-column="47" />
           <folding>
-            <element signature="e#0#259#0" expanded="true" />
-            <marker date="1607445316743" expanded="true" signature="7:213" ph="..." />
-            <marker date="1607445316743" expanded="true" signature="1012:1646" ph="{...}" />
+            <element signature="e#0#41#0" expanded="true" />
+            <marker date="1607445821403" expanded="true" signature="9805:9807" ph="{&quot;getAdminAccounts&quot;: getAdminAccounts...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/AdminAccounts.js">
+    <entry file="file://$PROJECT_DIR$/src/actions/AdminAccountsActions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1225">
-          <caret line="63" column="36" lean-forward="false" selection-start-line="63" selection-start-column="36" selection-end-line="63" selection-end-column="36" />
+        <state relative-caret-position="1405">
+          <caret line="34" column="24" lean-forward="false" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
-            <marker date="1607445316711" expanded="true" signature="9785:9787" ph="{&quot;getAdminAccounts&quot;: getAdminAccounts...}" />
+            <element signature="e#0#259#0" expanded="true" />
+            <marker date="1607445821415" expanded="true" signature="7:213" ph="..." />
+            <marker date="1607445821415" expanded="true" signature="1045:1679" ph="{...}" />
           </folding>
         </state>
       </provider>
