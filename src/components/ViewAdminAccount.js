@@ -93,9 +93,9 @@ class ViewAdminAccount extends Component{
 
     changingPasswordSpinner(){
 
-        const { changing_password } = this.props;
+        const { editing_account } = this.props;
 
-        if(changing_password){
+        if(editing_account){
 
             return(
 
@@ -114,21 +114,25 @@ class ViewAdminAccount extends Component{
 
     passwordMessage(){
 
-        const { password_success_message, password_error_message } = this.props;
+        const { edit_account_success_message, edit_account_error_message } = this.props;
 
-        if(password_error_message.length > 0){
+        if(edit_account_error_message.length > 0){
 
             return(
-                <Alert variant="danger">
-                    {password_error_message}
+                <Alert
+                    variant="danger"
+                >
+                    {edit_account_error_message}
                 </Alert>
             );
 
-        }else if(password_success_message.length > 0){
+        }else if(edit_account_success_message.length > 0){
 
             return(
-                <Alert variant="success">
-                    {password_success_message}
+                <Alert
+                    variant="success"
+                >
+                    {edit_account_success_message}
                 </Alert>
             );
 
@@ -435,9 +439,9 @@ class ViewAdminAccount extends Component{
 
     changingRoles(){
 
-        const { changing_roles } = this.props;
+        const { editing_account } = this.props;
 
-        if(changing_roles){
+        if(editing_account){
 
             return(
 
@@ -456,27 +460,27 @@ class ViewAdminAccount extends Component{
 
     rolesMessage(){
 
-        const { roles_success_message, roles_error_message} = this.props;
+        const { edit_account_success_message, edit_account_error_message} = this.props;
 
-        if(roles_error_message.length > 0){
+        if(edit_account_error_message.length > 0){
 
             return(
                 <Alert
                     variant="danger"
-                    className="edit-roles-alert"
+                    className="edit-admin-account-alert"
                 >
-                    {roles_error_message}
+                    {edit_account_error_message}
                 </Alert>
             );
 
-        }else if(roles_success_message.length > 0){
+        }else if(edit_account_success_message.length > 0){
 
             return(
                 <Alert
                     variant="success"
-                    className="edit-roles-alert"
+                    className="edit-admin-account-alert"
                 >
-                    {roles_success_message}
+                    {edit_account_success_message}
                 </Alert>
             );
 
@@ -904,13 +908,10 @@ const mapStateToProps = (state) => {
         current_sign_in_ip,
         last_sign_in_ip,
         change_password_modal_visible,
-        changing_password,
-        password_success_message,
-        password_error_message,
         change_roles_modal_visible,
-        changing_roles,
-        roles_success_message,
-        roles_error_message
+        editing_account,
+        edit_account_success_message,
+        edit_account_error_message
     } = state.view_admin_account;
 
     return {
@@ -928,13 +929,10 @@ const mapStateToProps = (state) => {
         current_sign_in_ip,
         last_sign_in_ip,
         change_password_modal_visible,
-        changing_password,
-        password_success_message,
-        password_error_message,
         change_roles_modal_visible,
-        changing_roles,
-        roles_success_message,
-        roles_error_message
+        editing_account,
+        edit_account_success_message,
+        edit_account_error_message
     };
 };
 

@@ -27,13 +27,10 @@ const INITIAL_STATE = {
     current_sign_in_ip: null,
     last_sign_in_ip: null,
     change_password_modal_visible: false,
-    changing_password: false,
-    password_success_message: '',
-    password_error_message: '',
     change_roles_modal_visible: false,
-    changing_roles: false,
-    roles_success_message: '',
-    roles_error_message: ''
+    editing_account: false,
+    edit_account_success_message: '',
+    edit_account_error_message: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -41,30 +38,30 @@ export default (state = INITIAL_STATE, action) => {
         case CHANGE_ADMIN_ACCOUNT_ROLES_SUCCESS:
             return{
                 ...state,
-                changing_roles: false,
+                editing_account: false,
                 admin_roles: action.payload.admin_roles,
-                roles_success_message: action.payload.roles_success_message
+                edit_account_success_message: action.payload.edit_account_success_message
             };
         case CHANGE_ADMIN_ACCOUNT_ROLES_FAILURE:
             return{
                 ...state,
-                changing_roles: false,
-                roles_error_message: action.payload
+                editing_account: false,
+                edit_account_error_message: action.payload
             };
         case CHANGE_ADMIN_ACCOUNT_ROLES:
             return{
                 ...state,
-                changing_roles: true,
-                roles_success_message: '',
-                roles_error_message: ''
+                editing_account: true,
+                edit_account_success_message: '',
+                edit_account_error_message: ''
             };
         case CLOSE_CHANGE_ROLES_MODAL:
             return{
                 ...state,
                 change_roles_modal_visible: false,
-                changing_roles: false,
-                roles_success_message: '',
-                roles_error_message: ''
+                editing_account: false,
+                edit_account_success_message: '',
+                edit_account_error_message: ''
             };
         case OPEN_CHANGE_ROLES_MODAL:
             return{
@@ -74,29 +71,29 @@ export default (state = INITIAL_STATE, action) => {
         case CHANGE_ADMIN_ACCOUNT_PASSWORD_SUCCESS:
             return{
                 ...state,
-                changing_password: false,
-                password_success_message: action.payload
+                editing_account: false,
+                edit_account_success_message: action.payload
             };
         case CHANGE_ADMIN_ACCOUNT_PASSWORD_FAILURE:
             return{
                 ...state,
-                changing_password: false,
-                password_error_message: action.payload
+                editing_account: false,
+                edit_account_error_message: action.payload
             };
         case CHANGE_ADMIN_ACCOUNT_PASSWORD:
             return{
                 ...state,
-                changing_password: true,
-                password_success_message: '',
-                password_error_message: ''
+                editing_account: true,
+                edit_account_success_message: '',
+                edit_account_error_message: ''
             };
         case CLOSE_CHANGE_PASSWORD_MODAL:
             return{
                 ...state,
                 change_password_modal_visible: false,
-                changing_password: false,
-                password_success_message: '',
-                password_error_message: ''
+                editing_account: false,
+                edit_account_success_message: '',
+                edit_account_error_message: ''
             };
         case OPEN_CHANGE_PASSWORD_MODAL:
             return{

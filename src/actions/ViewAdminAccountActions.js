@@ -76,7 +76,7 @@ export const changeAdminAccountRoles = (admin_id, roles, access_token, client, u
 
                     dispatch({type: CHANGE_ADMIN_ACCOUNT_ROLES_SUCCESS, payload: {
                         admin_roles: data.admin_roles,
-                        roles_success_message: 'Successfully Changed roles'
+                        edit_account_success_message: 'Successfully Changed roles'
                     }});
 
                 }else{
