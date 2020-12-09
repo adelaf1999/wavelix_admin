@@ -18,7 +18,8 @@ import {
     GET_ROLES_COMPLETE,
     OPEN_TIMEOUT_MODAL,
     CLOSE_TIMEOUT_MODAL,
-    CHANGE_MY_EMAIL_SUCCESS
+    CHANGE_MY_EMAIL_SUCCESS,
+    ROLES_CHANGED
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -39,6 +40,11 @@ const INITIAL_STATE = {
 const LoginReducer =  (state = INITIAL_STATE , action) => {
 
     switch (action.type) {
+        case ROLES_CHANGED:
+            return{
+                ...state,
+                roles: action.payload
+            };
         case CHANGE_MY_EMAIL_SUCCESS:
             return{
                 ...state,

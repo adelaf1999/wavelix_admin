@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import {
-    getRoles
+    getRoles,
+    rolesChanged
 } from "../actions";
 import actionCable from "actioncable";
 import { ACTION_CABLE_ROUTE } from "../actions/types";
@@ -34,7 +35,8 @@ class Wrapper extends Component{
             access_token,
             client,
             uid,
-            getRoles
+            getRoles,
+            rolesChanged
         } = this.props;
 
         getRoles(access_token, client, uid, this.state.history);
@@ -64,6 +66,14 @@ class Wrapper extends Component{
                         console.log("AdminChannel Received!");
 
                         console.log(data);
+
+                        if(data.roles !== undefined){
+
+                            const new_roles = data.roles;
+
+                            rolesChanged(new_roles);
+
+                        }
 
                     }
                 }
@@ -127,5 +137,6 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, {
-    getRoles
+    getRoles,
+    rolesChanged
 })(Wrapper);

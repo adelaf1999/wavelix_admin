@@ -15,13 +15,21 @@ import {
     RESEND_VERIFICATION_CODE_ROUTE,
     LOGOUT_SUCCESS,
     LOGOUT_ROUTE,
-    CLOSE_TIMEOUT_MODAL
+    CLOSE_TIMEOUT_MODAL,
+    ROLES_CHANGED
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
 
+export const rolesChanged = (roles) => {
 
+    return{
+      type: ROLES_CHANGED,
+      payload: roles
+    };
+
+};
 
 export const closeTimeoutModal = () => {
 

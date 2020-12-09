@@ -36,6 +36,7 @@ export const CLOSE_EMAIL_MODAL = "close_email_modal";
 export const LOGOUT_SUCCESS = "logout_success";
 export const OPEN_TIMEOUT_MODAL = "open_timeout_modal";
 export const CLOSE_TIMEOUT_MODAL = "close_timeout_modal";
+export const ROLES_CHANGED = "roles_changed";
 
 // Wrapper Types
 export const GET_ROLES_COMPLETE = "get_roles_complete";
