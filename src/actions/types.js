@@ -1,6 +1,7 @@
 export const BACKEND_DOMAIN =  ( !process.env.NODE_ENV || process.env.NODE_ENV === 'development')  ?  "localhost:3000" : 'api.wavelix.com';
 export const BACKEND_URL =  `${ ( !process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? 'http' : 'https'}://${BACKEND_DOMAIN}`;
 
+export const ACTION_CABLE_ROUTE = `ws://${BACKEND_DOMAIN}/cable`;
 export const CHECK_EMAIL_ROUTE = `${BACKEND_URL}/check-admin-email`;
 export const LOGIN_ADMIN_ROUTE = `${BACKEND_URL}/admin_auth/sign_in`;
 export const RESEND_VERIFICATION_CODE_ROUTE = `${BACKEND_URL}/resend-admin-verification-code`;
