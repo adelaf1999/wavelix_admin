@@ -79,6 +79,15 @@ class TopHeader extends Component{
 
                     {this.adminsTab()}
 
+                    <Nav.Link
+                        onClick={() => {
+                            history.push("/customer-accounts");
+                        }}
+                        className="nav-link"
+                    >
+                        Customers
+                    </Nav.Link>
+
                 </Nav>
 
                 <Nav>

@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import AdminAccounts from "./components/AdminAccounts";
 import ViewAdminAccount from "./components/ViewAdminAccount";
 import CreateAdminAccount from "./components/CreateAdminAccount";
+import CustomerAccounts from  "./components/CustomerAccounts";
 
 export default function Routes() {
 
@@ -31,6 +32,9 @@ export default function Routes() {
 
 
                 <Route exact path="/create-admin-account" component={CreateAdminAccount} />
+
+
+                <Route exact path="/customer-accounts" component={CustomerAccounts} />
 
 
 
