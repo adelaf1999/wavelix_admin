@@ -5,6 +5,7 @@
 @import "ViewAdminAccount.css";
 @import "CreateAdminAccount.css";
 @import "CustomerAccounts.css";
+@import "ViewCustomerAccount.css";
 
 .center-container{
     position: absolute;

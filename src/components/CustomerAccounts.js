@@ -144,7 +144,7 @@ class CustomerAccounts extends Component{
                         <Button
                             variant="link"
                             onClick={() => {
-
+                                history.push(`/customer-accounts/customer_user_id=${customer_account.id}`);
                             }}
                         >
                             View

@@ -5,3 +5,4 @@ export * from "./AdminAccountsActions";
 export * from "./ViewAdminAccountActions";
 export * from "./CreateAdminAccountActions";
 export * from "./CustomerAccountsActions";
+export * from "./ViewCustomerAccountActions";

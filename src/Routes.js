@@ -10,6 +10,7 @@ import AdminAccounts from "./components/AdminAccounts";
 import ViewAdminAccount from "./components/ViewAdminAccount";
 import CreateAdminAccount from "./components/CreateAdminAccount";
 import CustomerAccounts from  "./components/CustomerAccounts";
+import ViewCustomerAccount from "./components/ViewCustomerAccount";
 
 export default function Routes() {
 
@@ -35,6 +36,9 @@ export default function Routes() {
 
 
                 <Route exact path="/customer-accounts" component={CustomerAccounts} />
+
+
+                <Route exact path="/customer-accounts/customer_user_id=:customer_user_id" component={ViewCustomerAccount} />
 
 
 

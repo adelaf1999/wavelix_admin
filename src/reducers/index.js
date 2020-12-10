@@ -9,6 +9,7 @@ import AdminAccountsReducer from "./AdminAccountsReducer";
 import ViewAdminAccountReducer from "./ViewAdminAccountReducer";
 import CreateAdminAccountReducer from "./CreateAdminAccountReducer";
 import CustomerAccountsReducer from "./CustomerAccountsReducer";
+import ViewCustomerAccountReducer from "./ViewCustomerAccountReducer";
 
 
 const appReducer = combineReducers({
@@ -17,7 +18,8 @@ const appReducer = combineReducers({
     admin_accounts: AdminAccountsReducer,
     view_admin_account: ViewAdminAccountReducer,
     create_admin_account: CreateAdminAccountReducer,
-    customer_accounts: CustomerAccountsReducer
+    customer_accounts: CustomerAccountsReducer,
+    view_customer_account: ViewCustomerAccountReducer
 });
 
 

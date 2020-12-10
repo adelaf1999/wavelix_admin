@@ -22,6 +22,7 @@ export const NEW_ADMIN_ACCOUNT_ROUTE = `${BACKEND_URL}/new-admin-account`;
 export const CREATE_ADMIN_ACCOUNT_ROUTE = `${BACKEND_URL}/create-admin-account`;
 export const GET_CUSTOMER_ACCOUNTS_ROUTE =  `${BACKEND_URL}/get-customer-accounts`;
 export const SEARCH_CUSTOMER_ACCOUNTS_ROUTE = `${BACKEND_URL}/search-customer-accounts`;
+export const VIEW_CUSTOMER_ACCOUNT_ROUTE = `${BACKEND_URL}/view-customer-account`;
 
 
 // Login Types
@@ -99,3 +100,8 @@ export const GET_CUSTOMER_ACCOUNTS_COMPLETE = "get_customer_accounts_complete";
 export const CLEAR_CUSTOMER_ACCOUNTS_STATE = "clear_customer_accounts_state";
 export const SEARCH_CUSTOMER_ACCOUNTS_COMPLETE = "search_customer_accounts_complete";
 export const SEARCH_CUSTOMER_ACCOUNTS_LIMIT_CHANGED = "search_customer_accounts_limit_changed";
+
+//ViewCustomerAccount Types
+export const GET_CUSTOMER_DATA = "get_customer_data";
+export const GET_CUSTOMER_DATA_COMPLETE = "get_customer_data_complete";
+export const CLEAR_VIEW_CUSTOMER_ACCOUNT_STATE = "clear_view_customer_account_state";
