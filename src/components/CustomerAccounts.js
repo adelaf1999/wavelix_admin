@@ -5,7 +5,8 @@ import Wrapper from "./Wrapper";
 import {
     getCustomerAccounts,
     clearCustomerAccountsState,
-    searchCustomers
+    searchCustomers,
+    searchCustomerAccountsLimitChanged
 } from "../actions";
 import _ from "lodash";
 import {  Spinner, Form, FormControl, Button, Table} from "react-bootstrap";
@@ -21,6 +22,8 @@ class CustomerAccounts extends Component{
 
         const search = "";
 
+        this.handleScroll = this.handleScroll.bind(this);
+
         this.state = {
             history,
             search
@@ -28,13 +31,53 @@ class CustomerAccounts extends Component{
 
     }
 
+    handleScroll() {
+
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+
+        const body = document.body;
+
+        const html = document.documentElement;
+
+        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+
+        const windowBottom = windowHeight + window.pageYOffset;
+
+        if (windowBottom >= docHeight) {
+
+            console.log("bottom reached");
+
+            const {
+                limit,
+                searchCustomerAccountsLimitChanged,
+                access_token,
+                client,
+                uid,
+                searchCustomers
+            } = this.props;
+
+            const { search,  history } = this.state;
+
+            const new_limit = limit + 50;
+
+            searchCustomerAccountsLimitChanged(new_limit);
+
+            searchCustomers(new_limit, search, access_token, client, uid, history);
+
+        }
+    }
+
     componentWillUnmount(){
+
+        window.removeEventListener("scroll", this.handleScroll);
 
         this.props.clearCustomerAccountsState();
 
     }
 
     componentDidMount(){
+
+        window.addEventListener("scroll", this.handleScroll);
 
         const {
             logged_in,
@@ -300,7 +343,8 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     getCustomerAccounts,
     clearCustomerAccountsState,
-    searchCustomers
+    searchCustomers,
+    searchCustomerAccountsLimitChanged
 })(CustomerAccounts);
 
 

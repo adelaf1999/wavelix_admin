@@ -98,3 +98,4 @@ export const GET_CUSTOMER_ACCOUNTS = "get_customer_accounts";
 export const GET_CUSTOMER_ACCOUNTS_COMPLETE = "get_customer_accounts_complete";
 export const CLEAR_CUSTOMER_ACCOUNTS_STATE = "clear_customer_accounts_state";
 export const SEARCH_CUSTOMER_ACCOUNTS_COMPLETE = "search_customer_accounts_complete";
+export const SEARCH_CUSTOMER_ACCOUNTS_LIMIT_CHANGED = "search_customer_accounts_limit_changed";

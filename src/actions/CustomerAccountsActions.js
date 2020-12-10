@@ -6,12 +6,22 @@ import {
     GET_CUSTOMER_ACCOUNTS_ROUTE,
     CLEAR_CUSTOMER_ACCOUNTS_STATE,
     SEARCH_CUSTOMER_ACCOUNTS_COMPLETE,
-    SEARCH_CUSTOMER_ACCOUNTS_ROUTE
+    SEARCH_CUSTOMER_ACCOUNTS_ROUTE,
+    SEARCH_CUSTOMER_ACCOUNTS_LIMIT_CHANGED
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
 import _ from "lodash";
+
+export const searchCustomerAccountsLimitChanged = (limit) => {
+
+    return{
+      type: SEARCH_CUSTOMER_ACCOUNTS_LIMIT_CHANGED,
+      payload: limit
+    };
+
+};
 
 export const searchCustomers = ( limit, search, access_token, client, uid, history ) => {
 
