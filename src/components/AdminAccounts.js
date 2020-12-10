@@ -125,7 +125,7 @@ class AdminAccounts extends Component{
                     id="create-admin-button"
                     onClick={(e) => {
                         e.preventDefault();
-                        this.state.history.push("/create-admin-account");
+                        this.state.history.push("/admin-accounts/create");
                     }}
                 >
                     Create Account
@@ -149,7 +149,7 @@ class AdminAccounts extends Component{
             <Button
                 variant="link"
                 onClick={() => {
-                    history.push(`/view-admin-account/admin_id=${admin_id}`);
+                    history.push(`/admin-accounts/admin_id=${admin_id}`);
                 }}
             >
                 Edit

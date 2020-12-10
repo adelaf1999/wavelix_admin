@@ -85,7 +85,7 @@ export const changeAdminAccountRoles = (admin_id, roles, access_token, client, u
 
                     if(error_code === 0 || error_code === 1){
 
-                        history.push("/admin-accounts");
+                        history.goBack();
 
                         dispatch({type: CLEAR_VIEW_ADMIN_ACCOUNT_STATE});
 
@@ -150,7 +150,7 @@ export const destroyAdminAccount = (admin_id, access_token, client, uid, history
         axios.post(DESTROY_ADMIN_ACCOUNT_ROUTE, bodyFormData, config)
             .then(response => {
 
-                history.push("/admin-accounts");
+                history.goBack();
 
                 dispatch({type: CLEAR_VIEW_ADMIN_ACCOUNT_STATE});
 
@@ -234,7 +234,7 @@ export const changeAdminAccountPassword = (admin_id, password, access_token, cli
 
                     if(error_code === 0 || error_code === 1){
 
-                        history.push("/admin-accounts");
+                        history.goBack();
 
                         dispatch({type: CLEAR_VIEW_ADMIN_ACCOUNT_STATE});
 

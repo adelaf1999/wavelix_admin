@@ -29,10 +29,10 @@ export default function Routes() {
                 <Route exact path="/admin-accounts" component={AdminAccounts} />
 
 
-                <Route exact path="/view-admin-account/admin_id=:admin_id" component={ViewAdminAccount} />
+                <Route exact path="/admin-accounts/admin_id=:admin_id" component={ViewAdminAccount} />
 
 
-                <Route exact path="/create-admin-account" component={CreateAdminAccount} />
+                <Route exact path="/admin-accounts/create" component={CreateAdminAccount} />
 
 
                 <Route exact path="/customer-accounts" component={CustomerAccounts} />
