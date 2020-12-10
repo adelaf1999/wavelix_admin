@@ -4,6 +4,7 @@
 @import "AdminAccounts.css";
 @import "ViewAdminAccount.css";
 @import "CreateAdminAccount.css";
+@import "CustomerAccounts.css";
 
 .center-container{
     position: absolute;
@@ -52,4 +53,8 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 2rem;
+}
+.no-accounts-notice{
+    text-align: center;
+    font-size: 25px;
 }

@@ -305,7 +305,7 @@ class AdminAccounts extends Component{
 
                 <div className="center-container">
 
-                    <p id="no-accounts-notice">No Accounts Found</p>
+                    <p className="no-accounts-notice">No Accounts Found</p>
 
                 </div>
 

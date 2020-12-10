@@ -57,6 +57,117 @@ class CustomerAccounts extends Component{
 
     }
 
+
+    renderAccounts(){
+
+        const {customer_accounts} = this.props;
+
+        const { history } = this.state;
+
+        return _.map(customer_accounts, (customer_account, index) => {
+
+            return(
+
+                <tr key={index}>
+
+                    <td>
+                        {customer_account.full_name}
+                    </td>
+
+
+                    <td>
+                        {customer_account.email}
+                    </td>
+
+                    <td>
+                        {customer_account.username}
+                    </td>
+
+
+                    <td>
+                        {customer_account.phone_number}
+                    </td>
+
+                    <td>
+                        {customer_account.country}
+                    </td>
+
+                    <td>
+
+                        <Button
+                            variant="link"
+                            onClick={() => {
+
+                            }}
+                        >
+                            View
+                        </Button>
+
+                    </td>
+
+
+
+
+                </tr>
+
+            );
+
+        });
+
+
+    }
+
+    renderCustomerAccounts(){
+
+        const { customer_accounts } = this.props;
+
+        if(customer_accounts.length === 0){
+
+            return(
+
+                <div className="center-container">
+
+                    <p className="no-accounts-notice">No Accounts Found</p>
+
+                </div>
+
+            );
+
+        }else{
+
+            return(
+
+                <Table striped bordered hover>
+
+                    <thead>
+
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Phone Number</th>
+                        <th>Country</th>
+                        <th></th>
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {this.renderAccounts()}
+
+                    </tbody>
+
+
+                </Table>
+
+            );
+
+        }
+
+    }
+
     show(){
 
         const { initializing_page } = this.props;
@@ -76,6 +187,31 @@ class CustomerAccounts extends Component{
                 </div>
 
 
+
+            );
+
+        }else{
+
+            return(
+
+                <div className="page-container">
+
+                    <Form id="customer-accounts-searchbar" inline>
+
+                        <FormControl
+                            type="text"
+                            placeholder="Search by name, username or phone number"
+                            className="mr-sm-2"
+                            id="searchbar"
+                        />
+
+                    </Form>
+
+
+                    {this.renderCustomerAccounts()}
+
+
+                </div>
 
             );
 
