@@ -4,12 +4,72 @@ import {
     GET_CUSTOMER_ACCOUNTS,
     GET_CUSTOMER_ACCOUNTS_COMPLETE,
     GET_CUSTOMER_ACCOUNTS_ROUTE,
-    CLEAR_CUSTOMER_ACCOUNTS_STATE
+    CLEAR_CUSTOMER_ACCOUNTS_STATE,
+    SEARCH_CUSTOMER_ACCOUNTS_COMPLETE,
+    SEARCH_CUSTOMER_ACCOUNTS_ROUTE
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
 import _ from "lodash";
+
+export const searchCustomers = ( limit, search, access_token, client, uid, history ) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = getFormData({
+            limit: limit,
+            search: search
+        });
+
+
+        axios.post(SEARCH_CUSTOMER_ACCOUNTS_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                const data = response.data;
+
+                const customer_accounts = data.customer_accounts;
+
+                dispatch({type: SEARCH_CUSTOMER_ACCOUNTS_COMPLETE, payload: customer_accounts});
+
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+
+
+
+    };
+
+
+
+};
 
 export const clearCustomerAccountsState = () => {
 

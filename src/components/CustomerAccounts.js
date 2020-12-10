@@ -4,7 +4,8 @@ import TopHeader from "./TopHeader";
 import Wrapper from "./Wrapper";
 import {
     getCustomerAccounts,
-    clearCustomerAccountsState
+    clearCustomerAccountsState,
+    searchCustomers
 } from "../actions";
 import _ from "lodash";
 import {  Spinner, Form, FormControl, Button, Table} from "react-bootstrap";
@@ -18,8 +19,11 @@ class CustomerAccounts extends Component{
 
         const history = props.history;
 
+        const search = "";
+
         this.state = {
-            history
+            history,
+            search
         };
 
     }
@@ -170,7 +174,16 @@ class CustomerAccounts extends Component{
 
     show(){
 
-        const { initializing_page } = this.props;
+        const {
+            initializing_page,
+            access_token,
+            client,
+            uid,
+            limit,
+            searchCustomers
+        } = this.props;
+
+        const { history } = this.state;
 
         if(initializing_page){
 
@@ -203,6 +216,15 @@ class CustomerAccounts extends Component{
                             placeholder="Search by name, username or phone number"
                             className="mr-sm-2"
                             id="searchbar"
+                            onChange={(e) => {
+
+                                const new_search = e.target.value;
+
+                                this.setState({search: new_search});
+
+                                searchCustomers(limit, new_search, access_token, client, uid, history);
+
+                            }}
                         />
 
                     </Form>
@@ -277,7 +299,8 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     getCustomerAccounts,
-    clearCustomerAccountsState
+    clearCustomerAccountsState,
+    searchCustomers
 })(CustomerAccounts);
 
 
