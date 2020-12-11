@@ -88,6 +88,16 @@ class TopHeader extends Component{
                         Customers
                     </Nav.Link>
 
+                    <Nav.Link
+                        onClick={() => {
+                            history.push("/store-accounts");
+                        }}
+                        className="nav-link"
+                    >
+                        Stores
+                    </Nav.Link>
+
+
                 </Nav>
 
                 <Nav>

@@ -4,6 +4,7 @@ import {
     Switch,
     Route
 } from "react-router-dom";
+
 import Login from "./components/Login";
 import Home from "./components/Home";
 import AdminAccounts from "./components/AdminAccounts";
@@ -11,6 +12,8 @@ import ViewAdminAccount from "./components/ViewAdminAccount";
 import CreateAdminAccount from "./components/CreateAdminAccount";
 import CustomerAccounts from  "./components/CustomerAccounts";
 import ViewCustomerAccount from "./components/ViewCustomerAccount";
+import StoreAccounts from "./components/StoreAccounts";
+
 
 export default function Routes() {
 
@@ -41,6 +44,7 @@ export default function Routes() {
                 <Route exact path="/customer-accounts/customer_user_id=:customer_user_id" component={ViewCustomerAccount} />
 
 
+                <Route exact path="/store-accounts" component={StoreAccounts} />
 
             </Switch>
 
