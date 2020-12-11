@@ -378,7 +378,7 @@ class AdminAccounts extends Component{
 
                 <div className="page-container">
 
-                    <Form id="searchbar-container" inline>
+                    <Form className="searchbar-container" inline>
 
                         <FormControl
                             type="text"

@@ -47,10 +47,10 @@ export const initializeStoreAccountsPage = (limit, access_token, client, uid, hi
 
                 const account_status_options = data.account_status_options;
 
+
                 const review_status_options = data.review_status_options;
 
                 const countries = data.countries;
-                
 
 
                 dispatch({type: INITIALIZE_STORE_ACCOUNTS_PAGE_COMPLETE, payload: {

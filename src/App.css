@@ -6,6 +6,7 @@
 @import "CreateAdminAccount.css";
 @import "CustomerAccounts.css";
 @import "ViewCustomerAccount.css";
+@import "StoreAccounts.css";
 
 .center-container{
     position: absolute;
@@ -22,7 +23,7 @@
 .page-container{
     margin-top: 3rem;
 }
-#searchbar-container{
+.searchbar-container{
     display: flex;
     flex: 1;
     align-items: center;

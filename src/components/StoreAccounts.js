@@ -55,6 +55,117 @@ class StoreAccounts extends Component{
 
     }
 
+    getCountries(){
+
+        const { countries } = this.props;
+
+        let country_options = [];
+
+        country_options.push({ label: 'Select Country', value: ''});
+
+        _.map(countries, (country_name, country_code) => {
+
+
+            country_options.push({
+                label: country_name,
+                value: country_code
+            });
+
+        });
+
+
+        return _.map(country_options, (country, index) => {
+
+
+            return(
+
+                <option
+                    key={index}
+                    value={country.value}
+                >
+                    {country.label}
+                </option>
+
+            );
+
+        });
+
+
+
+    }
+
+
+    accountStatusOptions(){
+
+        const { account_status_options } = this.props;
+
+        let options = [];
+
+        options.push({ label: 'Select Status', value: ''});
+
+        _.map(account_status_options, (label, value) => {
+
+            options.push({
+                label: _.startCase(label),
+                value: value
+            });
+
+        });
+
+        return _.map(options, (option, index) => {
+
+
+            return(
+
+                <option
+                    key={index}
+                    value={option.value}
+                >
+                    {option.label}
+                </option>
+
+            );
+
+        });
+
+
+    }
+
+    reviewStatusOptions(){
+
+        const { review_status_options } = this.props;
+
+        let options = [];
+
+        options.push({ label: 'Select Status', value: ''});
+
+        _.map(review_status_options, (label, value) => {
+
+            options.push({
+                label: _.startCase(label),
+                value: value
+            });
+
+        });
+
+        return _.map(options, (option, index) => {
+
+
+            return(
+
+                <option
+                    key={index}
+                    value={option.value}
+                >
+                    {option.label}
+                </option>
+
+            );
+
+        });
+
+    }
+
     show(){
 
         const {
@@ -85,6 +196,71 @@ class StoreAccounts extends Component{
             return(
 
                 <div className="page-container">
+
+                    <Form className="searchbar-container" inline>
+
+                        <FormControl
+                            type="text"
+                            placeholder="Search by store username, store owner name or store name"
+                            className="mr-sm-2"
+                            id="searchbar"
+                        />
+
+                    </Form>
+
+
+                    <Form id="store-accounts-filters-container">
+
+
+                        <Form.Group className="store-account-filter-group" >
+
+                            <Form.Label>Country</Form.Label>
+
+                            <Form.Control
+                                as="select"
+                            >
+
+                                {this.getCountries()}
+
+                            </Form.Control>
+
+                        </Form.Group>
+
+
+                        <Form.Group className="store-account-filter-group" >
+
+                            <Form.Label>Account Status</Form.Label>
+
+                            <Form.Control
+                                as="select"
+                            >
+
+                                {this.accountStatusOptions()}
+
+                            </Form.Control>
+
+                        </Form.Group>
+
+
+
+                        <Form.Group className="store-account-filter-group" >
+
+                            <Form.Label>Review Status</Form.Label>
+
+                            <Form.Control
+                                as="select"
+                            >
+
+                                {this.reviewStatusOptions()}
+
+                            </Form.Control>
+
+                        </Form.Group>
+
+
+                    </Form>
+
+
 
                 </div>
 
