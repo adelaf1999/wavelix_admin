@@ -166,6 +166,138 @@ class StoreAccounts extends Component{
 
     }
 
+
+    renderAccounts(){
+
+        const { store_accounts } = this.props;
+
+        return _.map(store_accounts, (store_account, index) => {
+
+            console.log(store_account);
+
+            return(
+
+                <tr key={index}>
+
+                    <td >
+
+                        {store_account.store_username}
+
+                    </td>
+
+                    <td >
+
+                        {store_account.store_name }
+
+                    </td>
+
+                    <td >
+
+                        {store_account.store_owner}
+
+                    </td>
+
+                    <td >
+
+                        {store_account.country}
+
+                    </td>
+
+                    <td >
+
+                        {_.startCase(store_account.account_status)}
+
+                    </td>
+
+                    <td >
+
+                        {_.startCase(store_account.review_status)}
+
+                    </td>
+
+                    <td >
+
+                        {store_account.registered_at}
+
+                    </td>
+
+                    <td>
+
+
+                        <Button
+                            variant="link"
+                        >
+                            View
+                        </Button>
+
+                    </td>
+
+                </tr>
+
+            );
+
+        });
+
+    }
+
+    renderStores(){
+
+
+        const { store_accounts } = this.props;
+
+
+        if(store_accounts.length === 0){
+
+            return(
+
+
+                <div className="center-container">
+
+                    <p className="no-accounts-notice">No Accounts Found</p>
+
+                </div>
+
+            );
+
+        }else{
+
+            return(
+
+                <Table striped bordered hover>
+
+                    <thead>
+
+                    <tr>
+                        <th>Store Username</th>
+                        <th>Store Name</th>
+                        <th>Store Owner</th>
+                        <th>Country</th>
+                        <th>Account Status</th>
+                        <th>Review Status</th>
+                        <th>Registered At</th>
+                        <th></th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+
+                        {this.renderAccounts()}
+
+
+                    </tbody>
+
+                </Table>
+
+
+            );
+
+        }
+
+
+    }
+
     show(){
 
         const {
@@ -259,6 +391,9 @@ class StoreAccounts extends Component{
 
 
                     </Form>
+
+
+                    {this.renderStores()}
 
 
 
