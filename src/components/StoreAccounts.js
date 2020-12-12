@@ -4,7 +4,8 @@ import TopHeader from "./TopHeader";
 import Wrapper from "./Wrapper";
 import {
     initializeStoreAccountsPage,
-    clearStoreAccountsState
+    clearStoreAccountsState,
+    searchStoreAccounts
 } from "../actions";
 import _ from "lodash";
 import {  Spinner, Form, FormControl, Button, Table} from "react-bootstrap";
@@ -17,8 +18,20 @@ class StoreAccounts extends Component{
 
         const history = props.history;
 
+        const search = "";
+
+        const selected_country = null;
+
+        const selected_account_status = null;
+
+        const selected_review_status = null;
+
         this.state = {
-            history
+            history,
+            search,
+            selected_country,
+            selected_account_status,
+            selected_review_status
         };
 
     }
@@ -301,7 +314,12 @@ class StoreAccounts extends Component{
     show(){
 
         const {
-            initializing_page
+            initializing_page,
+            searchStoreAccounts,
+            limit,
+            access_token,
+            client,
+            uid
         } = this.props;
 
 
@@ -336,6 +354,29 @@ class StoreAccounts extends Component{
                             placeholder="Search by store username, store owner name or store name"
                             className="mr-sm-2"
                             id="searchbar"
+                            onChange={(e) => {
+
+                                const new_search = e.target.value;
+
+                                this.setState({search: new_search});
+
+
+                                const { selected_country, selected_account_status, selected_review_status, history } = this.state;
+
+                                searchStoreAccounts(
+                                    limit,
+                                    new_search,
+                                    selected_country,
+                                    selected_account_status,
+                                    selected_review_status,
+                                    access_token,
+                                    client,
+                                    uid,
+                                    history
+                                );
+
+
+                            }}
                         />
 
                     </Form>
@@ -350,6 +391,36 @@ class StoreAccounts extends Component{
 
                             <Form.Control
                                 as="select"
+                                onChange={(e) => {
+
+                                    const new_selected_country = e.target.value;
+
+                                    if(_.isEmpty(new_selected_country)){
+
+                                        this.setState({selected_country: null});
+
+                                    }else{
+
+                                        this.setState({selected_country: new_selected_country});
+                                    }
+
+
+                                    const { search, selected_account_status, selected_review_status, history } = this.state;
+
+                                    searchStoreAccounts(
+                                        limit,
+                                        search,
+                                        new_selected_country,
+                                        selected_account_status,
+                                        selected_review_status,
+                                        access_token,
+                                        client,
+                                        uid,
+                                        history
+                                    );
+
+
+                                }}
                             >
 
                                 {this.getCountries()}
@@ -365,6 +436,35 @@ class StoreAccounts extends Component{
 
                             <Form.Control
                                 as="select"
+                                onChange={(e) => {
+
+                                    const new_selected_account_status = e.target.value;
+
+                                    if(_.isEmpty(new_selected_account_status)){
+
+                                        this.setState({selected_account_status: null});
+
+                                    }else{
+
+                                        this.setState({selected_account_status: new_selected_account_status});
+                                    }
+
+
+                                    const { selected_country, search, selected_review_status, history } = this.state;
+
+                                    searchStoreAccounts(
+                                        limit,
+                                        search,
+                                        selected_country,
+                                        new_selected_account_status,
+                                        selected_review_status,
+                                        access_token,
+                                        client,
+                                        uid,
+                                        history
+                                    );
+
+                                }}
                             >
 
                                 {this.accountStatusOptions()}
@@ -381,6 +481,35 @@ class StoreAccounts extends Component{
 
                             <Form.Control
                                 as="select"
+                                onChange={(e) => {
+
+                                    const new_selected_review_status = e.target.value;
+
+                                    if(_.isEmpty(new_selected_review_status)){
+
+                                        this.setState({selected_review_status: null});
+
+                                    }else{
+
+                                        this.setState({selected_review_status: new_selected_review_status});
+                                    }
+
+                                    const { selected_country, selected_account_status, search, history } = this.state;
+
+                                    searchStoreAccounts(
+                                        limit,
+                                        search,
+                                        selected_country,
+                                        selected_account_status,
+                                        new_selected_review_status,
+                                        access_token,
+                                        client,
+                                        uid,
+                                        history
+                                    );
+
+
+                                }}
                             >
 
                                 {this.reviewStatusOptions()}
@@ -468,5 +597,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     initializeStoreAccountsPage,
-    clearStoreAccountsState
+    clearStoreAccountsState,
+    searchStoreAccounts
 })(StoreAccounts);

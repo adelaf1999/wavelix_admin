@@ -2,7 +2,8 @@ import {
     LOGOUT_SUCCESS,
     INITIALIZE_STORE_ACCOUNTS_PAGE,
     INITIALIZE_STORE_ACCOUNTS_PAGE_COMPLETE,
-    CLEAR_STORE_ACCOUNTS_STATE
+    CLEAR_STORE_ACCOUNTS_STATE,
+    SEARCH_STORE_ACCOUNTS_COMPLETE
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -16,6 +17,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case SEARCH_STORE_ACCOUNTS_COMPLETE:
+            return{
+                ...state,
+                store_accounts: action.payload
+            };
         case INITIALIZE_STORE_ACCOUNTS_PAGE_COMPLETE:
             return{
                 ...state,
