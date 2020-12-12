@@ -6,12 +6,22 @@ import {
     GET_STORE_ACCOUNTS_ROUTE,
     CLEAR_STORE_ACCOUNTS_STATE,
     SEARCH_STORE_ACCOUNTS_ROUTE,
-    SEARCH_STORE_ACCOUNTS_COMPLETE
+    SEARCH_STORE_ACCOUNTS_COMPLETE,
+    SEARCH_STORE_ACCOUNTS_LIMIT_CHANGED
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
 import _ from "lodash";
+
+export const searchStoreAccountsLimitChanged = (limit) => {
+
+    return{
+        type: SEARCH_STORE_ACCOUNTS_LIMIT_CHANGED,
+        payload: limit
+    };
+
+};
 
 export const searchStoreAccounts = (limit, search, selected_country, selected_account_status, selected_review_status, access_token, client, uid, history) => {
 

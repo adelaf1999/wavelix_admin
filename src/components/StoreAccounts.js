@@ -5,7 +5,8 @@ import Wrapper from "./Wrapper";
 import {
     initializeStoreAccountsPage,
     clearStoreAccountsState,
-    searchStoreAccounts
+    searchStoreAccounts,
+    searchStoreAccountsLimitChanged
 } from "../actions";
 import _ from "lodash";
 import {  Spinner, Form, FormControl, Button, Table} from "react-bootstrap";
@@ -26,6 +27,8 @@ class StoreAccounts extends Component{
 
         const selected_review_status = null;
 
+        this.handleScroll = this.handleScroll.bind(this);
+
         this.state = {
             history,
             search,
@@ -36,12 +39,59 @@ class StoreAccounts extends Component{
 
     }
 
+
+    handleScroll() {
+
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+
+        const body = document.body;
+
+        const html = document.documentElement;
+
+        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+
+        const windowBottom = windowHeight + window.pageYOffset;
+
+        if (windowBottom >= docHeight) {
+
+            console.log("bottom reached");
+
+            const {searchStoreAccounts, limit, access_token, client, uid, searchStoreAccountsLimitChanged} = this.props;
+
+            const { search, selected_country, selected_account_status, selected_review_status, history } = this.state;
+
+            const new_limit = limit + 50;
+
+            searchStoreAccountsLimitChanged(new_limit);
+
+            searchStoreAccounts(
+                new_limit,
+                search,
+                selected_country,
+                selected_account_status,
+                selected_review_status,
+                access_token,
+                client,
+                uid,
+                history
+            );
+
+
+        }
+    }
+
+
     componentWillUnmount(){
+
+        window.removeEventListener("scroll", this.handleScroll);
+
         this.props.clearStoreAccountsState();
+
     }
 
     componentDidMount(){
 
+        window.addEventListener("scroll", this.handleScroll);
 
         const {
             logged_in,
@@ -598,5 +648,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     initializeStoreAccountsPage,
     clearStoreAccountsState,
-    searchStoreAccounts
+    searchStoreAccounts,
+    searchStoreAccountsLimitChanged
 })(StoreAccounts);

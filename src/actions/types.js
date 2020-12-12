@@ -113,3 +113,4 @@ export const INITIALIZE_STORE_ACCOUNTS_PAGE = "initialize_store_accounts_page";
 export const INITIALIZE_STORE_ACCOUNTS_PAGE_COMPLETE = "initialize_store_accounts_page_complete";
 export const CLEAR_STORE_ACCOUNTS_STATE = "clear_store_accounts_state";
 export const SEARCH_STORE_ACCOUNTS_COMPLETE = "search_store_accounts_complete";
+export const SEARCH_STORE_ACCOUNTS_LIMIT_CHANGED = "search_store_accounts_limit_changed";
