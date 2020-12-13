@@ -10,6 +10,8 @@ import {
 } from "../actions";
 import _ from "lodash";
 import {  Spinner, Form, FormControl, Button, Table} from "react-bootstrap";
+import actionCable from "actioncable";
+import { ACTION_CABLE_ROUTE } from "../actions/types";
 
 class StoreAccounts extends Component{
 
@@ -29,12 +31,18 @@ class StoreAccounts extends Component{
 
         this.handleScroll = this.handleScroll.bind(this);
 
+        const cable = actionCable.createConsumer(ACTION_CABLE_ROUTE);
+
+        const store_accounts_channel_subscription = null;
+
         this.state = {
             history,
             search,
             selected_country,
             selected_account_status,
-            selected_review_status
+            selected_review_status,
+            cable,
+            store_accounts_channel_subscription
         };
 
     }
@@ -83,6 +91,17 @@ class StoreAccounts extends Component{
 
     componentWillUnmount(){
 
+        const cable = this.state.cable;
+
+        const store_accounts_channel_subscription = this.state.store_accounts_channel_subscription;
+
+        if(store_accounts_channel_subscription !== null){
+
+            cable.subscriptions.remove(store_accounts_channel_subscription);
+
+        }
+
+
         window.removeEventListener("scroll", this.handleScroll);
 
         this.props.clearStoreAccountsState();
@@ -102,7 +121,7 @@ class StoreAccounts extends Component{
             initializeStoreAccountsPage
         } = this.props;
 
-        const { history } = this.state;
+        const { history, cable } = this.state;
 
 
         if(!logged_in){
@@ -112,6 +131,60 @@ class StoreAccounts extends Component{
         }else{
 
             initializeStoreAccountsPage(limit, access_token, client, uid, history);
+
+            let store_accounts_channel_subscription = this.state.store_accounts_channel_subscription;
+
+            if(store_accounts_channel_subscription === null){
+
+                store_accounts_channel_subscription = cable.subscriptions.create(
+                    {
+                        channel: 'StoreAccountsChannel',
+                        access_token: access_token,
+                        client: client,
+                        uid: uid
+                    },
+                    {
+                        connected: () => {
+
+                            console.log('StoreAccountsChannel Connected!');
+
+                        },
+                        received: (data) => {
+
+                            console.log("StoreAccountsChannel Received!");
+
+                            console.log(data);
+
+                            if(data.new_store_registered){
+
+
+                                const { searchStoreAccounts } = this.props;
+
+                                const { search, selected_country, selected_account_status, selected_review_status } = this.state;
+
+
+                                searchStoreAccounts(
+                                    limit,
+                                    search,
+                                    selected_country,
+                                    selected_account_status,
+                                    selected_review_status,
+                                    access_token,
+                                    client,
+                                    uid,
+                                    history
+                                );
+
+                            }
+
+                        }
+                    }
+                );
+
+                this.setState({store_accounts_channel_subscription: store_accounts_channel_subscription});
+
+            }
+
 
         }
 
@@ -235,8 +308,6 @@ class StoreAccounts extends Component{
         const { store_accounts } = this.props;
 
         return _.map(store_accounts, (store_account, index) => {
-
-            console.log(store_account);
 
             return(
 
