@@ -117,6 +117,8 @@ class ViewStoreAccount extends Component{
                     }
                 );
 
+                this.setState({store_account_channel_subscription: store_account_channel_subscription});
+
             }
 
 
