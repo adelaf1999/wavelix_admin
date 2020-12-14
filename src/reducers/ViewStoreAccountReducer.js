@@ -22,7 +22,8 @@ const INITIAL_STATE = {
     store_number: '',
     verified_by: '',
     declined_verification: null,
-    current_reviewers: []
+    current_reviewers: [],
+    store_email: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -37,6 +38,7 @@ export default (state = INITIAL_STATE, action) => {
                 initializing_page: false,
                 store_owner: action.payload.store_owner,
                 store_username: action.payload.store_username,
+                store_name: action.payload.store_name,
                 status: action.payload.status,
                 review_status: action.payload.review_status,
                 country: action.payload.country,
@@ -47,7 +49,8 @@ export default (state = INITIAL_STATE, action) => {
                 store_owner_number: action.payload.store_owner_number,
                 store_number: action.payload.store_number,
                 verified_by: action.payload.verified_by,
-                declined_verification: action.payload.declined_verification
+                declined_verification: action.payload.declined_verification,
+                store_email: action.payload.store_email
             };
         case GET_STORE_DATA:
             return{

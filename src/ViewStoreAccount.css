@@ -1,0 +1,23 @@
+#view-store-account-container{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-direction: column;
+}
+#view-store-account-card{
+    width: 60%;
+    margin-top: 2rem;
+}
+#view-store-data-container{
+    display: flex;
+    flex: 1;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.view-store-data-button{
+    width: 45%;
+}

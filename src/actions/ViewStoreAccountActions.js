@@ -60,6 +60,8 @@ export const getStoreData = (store_user_id, access_token, client, uid, history) 
 
                     const store_username = data.store_username;
 
+                    const store_name = data.store_name;
+
                     const status = data.status;
 
                     const review_status = data.review_status;
@@ -82,35 +84,12 @@ export const getStoreData = (store_user_id, access_token, client, uid, history) 
 
                     const declined_verification = data.declined_verification;
 
-                    console.log(store_owner);
-
-                    console.log(store_username);
-
-                    console.log(status);
-
-                    console.log(review_status);
-
-                    console.log(country);
-
-                    console.log(has_sensitive_products);
-
-                    console.log(business_license);
-
-                    console.log(registered_at);
-
-                    console.log(location);
-
-                    console.log(store_owner_number);
-
-                    console.log(store_number);
-
-                    console.log(verified_by);
-
-                    console.log(declined_verification);
+                    const store_email = data.store_email;
 
                     dispatch({type: GET_STORE_DATA_COMPLETE, payload: {
                         store_owner: store_owner,
                         store_username: store_username,
+                        store_name: store_name,
                         status: status,
                         review_status: review_status,
                         country: country,
@@ -121,7 +100,8 @@ export const getStoreData = (store_user_id, access_token, client, uid, history) 
                         store_owner_number: store_owner_number,
                         store_number: store_number,
                         verified_by: verified_by,
-                        declined_verification: declined_verification
+                        declined_verification: declined_verification,
+                        store_email: store_email
                     }});
 
 
