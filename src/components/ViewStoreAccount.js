@@ -7,7 +7,7 @@ import {
     storeAccountReviewersChanged
 } from "../actions";
 import _ from "lodash";
-import {  Spinner, Card,  Button, Form, Modal} from "react-bootstrap";
+import {  Spinner, Card,  Button, Form, Modal, Alert, ListGroup} from "react-bootstrap";
 import actionCable from "actioncable";
 import { ACTION_CABLE_ROUTE } from "../actions/types";
 
@@ -105,9 +105,11 @@ class ViewStoreAccount extends Component{
 
                             if(data.current_reviewers !== undefined){
 
-                                console.log("current reviewers ", data.current_reviewers);
+                                const current_reviewers = data.current_reviewers;
 
-                                storeAccountReviewersChanged(data.current_reviewers);
+                                console.log(current_reviewers);
+
+                                storeAccountReviewersChanged(current_reviewers);
 
                             }
 
@@ -206,6 +208,236 @@ class ViewStoreAccount extends Component{
     }
 
 
+    currentReviewers(){
+
+
+        const { current_reviewers } = this.props;
+
+        if( current_reviewers.length > 0){
+
+            return(
+
+                <div >
+
+
+                    <Form.Label className="store-verification-label">
+                        Currently Reviewing
+                    </Form.Label>
+
+
+
+                    <div >
+
+                        {
+                            _.map(current_reviewers, (reviewer, index) => {
+
+                                return(
+
+                                    <Button
+                                        key={index}
+                                        variant="outline-success"
+                                        id="store-reviewer-button"
+                                    >
+                                        {reviewer + " •" }
+                                    </Button>
+
+                                );
+
+                            })
+                        }
+
+                    </div>
+
+
+
+
+                </div>
+
+
+
+            );
+
+
+        }
+
+
+
+    }
+
+
+    storeVerificationCard(){
+
+        const { roles, store_owner, store_name, store_number} = this.props;
+
+        if(roles.includes("root_admin") || roles.includes("account_manager")){
+
+            return(
+
+                <Card className="view-store-account-card">
+
+                    <Card.Header
+                        as="h5"
+                        className="view-store-account-card-header"
+                    >
+                        Store Verification Guidelines
+                    </Card.Header>
+
+                    <Card.Body id="store-verification-card-body">
+
+
+                        <Form>
+
+                            {this.currentReviewers()}
+
+
+                            <div>
+
+                                <Form.Label className="store-verification-label">
+                                    Guidelines
+                                </Form.Label>
+
+                                <Alert
+                                    variant="warning"
+                                    className="store-verification-instructions"
+                                >
+                                    Please do all of the following tasks to verify and validate all of the store's information.
+                                    If the store is legit, legal and all information is correct, click on the accept verification
+                                    button. Else, click on the decline verification button and enter the reason for declining verification.
+                                    Please don't forget to check the time in the store's country before calling to avoid disturbing the
+                                    person you are calling.
+                                </Alert>
+
+
+                                <Alert variant="primary" className="store-verification-process">
+                                    Document Validation and Internet Search
+                                </Alert>
+
+                                <ListGroup className="store-verification-guidelines-container">
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Make sure the business license is certified and signed by a sworn translator,
+                                        a notary public or other relevant government authority.
+                                    </ListGroup.Item>
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Check if the store owner name is included in the business license.
+                                    </ListGroup.Item>
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Lookup information about the store on Google and view its location
+                                        on Google Maps by clicking the view store location button above. Make sure the store
+                                        exists and that its present on Google Maps. If it exists on Google Maps, check
+                                        if the store number matches that on Google (could be wrong on Google or different
+                                        number could be provided).
+                                    </ListGroup.Item>
+
+                                </ListGroup>
+
+
+                                <Alert variant="primary" className="store-verification-process">
+                                    Calling the Store
+                                </Alert>
+
+
+                                <ListGroup className="store-verification-guidelines-container">
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Call the store and ask them if the store owner ({store_owner}) is present and if he or she
+                                        is the store owner.
+                                    </ListGroup.Item>
+
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                       When talking to the store owner say and ask them the following:<br/>
+                                        1) Hello this is [YOUR NAME] from Wavelix an online marketplace and e-commerce company.<br/>
+                                        2) Did you sign up your store on our platform?<br/>
+                                        3) Thank the store owner and tell them once their store is verified they will receive an email.<br/>
+                                    </ListGroup.Item>
+
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+
+                                    </ListGroup.Item>
+
+                                </ListGroup>
+
+
+                                <Alert variant="primary" className="store-verification-process">
+                                    Contacting the government authority
+                                </Alert>
+
+
+                                <ListGroup className="store-verification-guidelines-container">
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Lookup the official contact information of the relevant government authority,
+                                        or call the number of the authority provided on the business license if available
+                                        (make sure it is legit). Call them if possible or email them, if emailing them
+                                        you may also attach the business license as well.
+                                    </ListGroup.Item>
+
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        When contacting them tell them and ask them about the following:<br/>
+                                        1) Hello this is [YOUR NAME] from Wavelix an online marketplace and e-commerce company.
+                                        We are currently verifying businesses signing up for our platform and would like to ask
+                                        a couple of questions to verify a store that just signed up.<br/>
+                                        2) Is there a store or company called {store_name} in your jurisdiction and is it
+                                        legally authorized to conduct business?<br/>
+                                        3) Do you have information about what the store sells?<br/>
+                                        4) Is the owner of the store called {store_owner}?<br/>
+                                        5) Do you know what the number of {store_name} is? (check if it matches the store
+                                        number ({store_number}) ignoring international dialing code.<br/>
+                                        6) Thank the person on the phone.<br/>
+                                    </ListGroup.Item>
+
+
+
+
+
+                                </ListGroup>
+
+
+
+
+                            </div>
+
+
+                        </Form>
+
+
+
+                    </Card.Body>
+
+
+
+                </Card>
+
+            );
+
+
+        }
+
+
+
+    }
+
     show(){
 
         const {
@@ -250,7 +482,14 @@ class ViewStoreAccount extends Component{
 
                     <div id="view-store-account-container">
 
-                        <Card id="view-store-account-card">
+                        <Card className="view-store-account-card">
+
+                            <Card.Header
+                                as="h5"
+                                className="view-store-account-card-header"
+                            >
+                                {store_name}
+                            </Card.Header>
 
                             <Card.Body>
 
@@ -479,6 +718,9 @@ class ViewStoreAccount extends Component{
                             </Card.Body>
 
                         </Card>
+
+
+                        {this.storeVerificationCard()}
 
                     </div>
 

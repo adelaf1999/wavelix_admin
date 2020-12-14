@@ -35,6 +35,7 @@ export default (state = INITIAL_STATE, action) => {
             };
         case GET_STORE_DATA_COMPLETE:
             return{
+                ...state,
                 initializing_page: false,
                 store_owner: action.payload.store_owner,
                 store_username: action.payload.store_username,

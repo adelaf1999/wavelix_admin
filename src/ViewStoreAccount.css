@@ -6,7 +6,7 @@
     margin-bottom: 2rem;
     flex-direction: column;
 }
-#view-store-account-card{
+.view-store-account-card{
     width: 60%;
     margin-top: 2rem;
 }
@@ -20,4 +20,35 @@
 }
 .view-store-data-button{
     width: 45%;
+}
+.view-store-account-card-header{
+    text-align: center;
+    padding: 1rem;
+}
+
+#store-verification-card-body{
+    margin-top: 1rem;
+}
+.store-verification-label{
+    font-size: 20px;
+    margin-bottom: 1.5rem;
+}
+#store-reviewer-button{
+    margin-right: 1rem;
+    font-size: 18px;
+    margin-bottom: 1.5rem;
+}
+.store-verification-instructions{
+    font-size: 18px;
+    margin-bottom: 1.5rem;
+}
+.store-verification-guidelines-container{
+    margin-bottom: 1.5rem;
+}
+.store-verification-process{
+    font-size: 18px;
+    margin-bottom: 1.5rem;
+}
+.store-verification-guidelines{
+    font-size: 18px;
 }
