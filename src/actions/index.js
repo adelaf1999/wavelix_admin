@@ -7,3 +7,4 @@ export * from "./CreateAdminAccountActions";
 export * from "./CustomerAccountsActions";
 export * from "./ViewCustomerAccountActions";
 export * from "./StoreAccountsActions";
+export * from "./ViewStoreAccountActions";

@@ -25,6 +25,7 @@ export const SEARCH_CUSTOMER_ACCOUNTS_ROUTE = `${BACKEND_URL}/search-customer-ac
 export const VIEW_CUSTOMER_ACCOUNT_ROUTE = `${BACKEND_URL}/view-customer-account`;
 export const GET_STORE_ACCOUNTS_ROUTE = `${BACKEND_URL}/get-store-accounts`;
 export const SEARCH_STORE_ACCOUNTS_ROUTE = `${BACKEND_URL}/search-store-accounts`;
+export const VIEW_STORE_ACCOUNT_ROUTE = `${BACKEND_URL}/view-store-account`;
 
 
 // Login Types
@@ -114,3 +115,9 @@ export const INITIALIZE_STORE_ACCOUNTS_PAGE_COMPLETE = "initialize_store_account
 export const CLEAR_STORE_ACCOUNTS_STATE = "clear_store_accounts_state";
 export const SEARCH_STORE_ACCOUNTS_COMPLETE = "search_store_accounts_complete";
 export const SEARCH_STORE_ACCOUNTS_LIMIT_CHANGED = "search_store_accounts_limit_changed";
+
+//ViewStoreAccount Types
+export const GET_STORE_DATA = "get_store_data";
+export const GET_STORE_DATA_COMPLETE = "get_store_data_complete";
+export const CLEAR_VIEW_STORE_ACCOUNT_STATE = "clear_view_store_account_state";
+export const STORE_ACCOUNT_REVIEWERS_CHANGED = "store_account_reviewers_changed";

@@ -11,6 +11,7 @@ import CreateAdminAccountReducer from "./CreateAdminAccountReducer";
 import CustomerAccountsReducer from "./CustomerAccountsReducer";
 import ViewCustomerAccountReducer from "./ViewCustomerAccountReducer";
 import StoreAccountsReducer from "./StoreAccountsReducer";
+import ViewStoreAccountReducer from "./ViewStoreAccountReducer";
 
 
 const appReducer = combineReducers({
@@ -21,7 +22,8 @@ const appReducer = combineReducers({
     create_admin_account: CreateAdminAccountReducer,
     customer_accounts: CustomerAccountsReducer,
     view_customer_account: ViewCustomerAccountReducer,
-    store_accounts: StoreAccountsReducer
+    store_accounts: StoreAccountsReducer,
+    view_store_account: ViewStoreAccountReducer
 });
 
 

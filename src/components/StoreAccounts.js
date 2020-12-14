@@ -307,6 +307,8 @@ class StoreAccounts extends Component{
 
         const { store_accounts } = this.props;
 
+        const { history } = this.state;
+
         return _.map(store_accounts, (store_account, index) => {
 
             return(
@@ -360,6 +362,10 @@ class StoreAccounts extends Component{
 
                         <Button
                             variant="link"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                history.push(`/store-accounts/store_user_id=${store_account.id}`);
+                            }}
                         >
                             View
                         </Button>
