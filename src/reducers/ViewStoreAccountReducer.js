@@ -26,7 +26,8 @@ const INITIAL_STATE = {
     verified_by: '',
     current_reviewers: [],
     store_email: '',
-    admins_declined: []
+    admins_declined: [],
+    unverified_reasons: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -69,7 +70,8 @@ export default (state = INITIAL_STATE, action) => {
                 store_number: action.payload.store_number,
                 verified_by: action.payload.verified_by,
                 store_email: action.payload.store_email,
-                admins_declined: action.payload.admins_declined
+                admins_declined: action.payload.admins_declined,
+                unverified_reasons: action.payload.unverified_reasons
             };
         case GET_STORE_DATA:
             return{

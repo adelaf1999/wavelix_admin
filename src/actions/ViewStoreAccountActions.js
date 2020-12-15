@@ -116,6 +116,8 @@ export const getStoreData = (store_user_id, access_token, client, uid, history) 
 
                     const admins_declined = data.admins_declined;
 
+                    const unverified_reasons = data.unverified_reasons;
+
                     dispatch({type: GET_STORE_DATA_COMPLETE, payload: {
                         store_owner: store_owner,
                         store_username: store_username,
@@ -131,7 +133,8 @@ export const getStoreData = (store_user_id, access_token, client, uid, history) 
                         store_number: store_number,
                         verified_by: verified_by,
                         store_email: store_email,
-                        admins_declined: admins_declined
+                        admins_declined: admins_declined,
+                        unverified_reasons: unverified_reasons
                     }});
 
 

@@ -139,7 +139,7 @@ class ViewStoreAccount extends Component{
 
                                 storeAccountVerifiedByChanged(verified_by);
 
-                                
+
                             }
 
 
@@ -828,7 +828,8 @@ const mapStateToProps = (state) => {
         store_number,
         verified_by,
         current_reviewers,
-        store_email
+        store_email,
+        unverified_reasons
     } = state.view_store_account;
 
 
@@ -854,7 +855,8 @@ const mapStateToProps = (state) => {
         store_number,
         verified_by,
         current_reviewers,
-        store_email
+        store_email,
+        unverified_reasons
     };
 
 
