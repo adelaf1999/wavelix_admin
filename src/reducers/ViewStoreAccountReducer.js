@@ -6,7 +6,9 @@ import {
     STORE_ACCOUNT_REVIEWERS_CHANGED,
     STORE_ACCOUNT_STATUS_CHANGED,
     STORE_ACCOUNT_REVIEW_STATUS_CHANGED,
-    STORE_ACCOUNT_VERIFIED_BY_CHANGED
+    STORE_ACCOUNT_VERIFIED_BY_CHANGED,
+    STORE_ACCOUNT_ADMINS_DECLINED_CHANGED,
+    STORE_ACCOUNT_UNVERIFIED_REASONS_CHANGED
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -32,6 +34,16 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case STORE_ACCOUNT_UNVERIFIED_REASONS_CHANGED:
+            return{
+                ...state,
+                unverified_reasons: action.payload
+            };
+        case STORE_ACCOUNT_ADMINS_DECLINED_CHANGED:
+            return{
+                ...state,
+                admins_declined: action.payload
+            };
         case STORE_ACCOUNT_VERIFIED_BY_CHANGED:
             return{
                 ...state,

@@ -7,7 +7,9 @@ import {
     storeAccountReviewersChanged,
     storeAccountStatusChanged,
     storeAccountReviewStatusChanged,
-    storeAccountVerifiedByChanged
+    storeAccountVerifiedByChanged,
+    storeAccountAdminsDeclinedChanged,
+    storeAccountUnverifiedReasonsChanged
 } from "../actions";
 import _ from "lodash";
 import {  Spinner, Card,  Button, Form, Modal, Alert, ListGroup} from "react-bootstrap";
@@ -67,7 +69,9 @@ class ViewStoreAccount extends Component{
             storeAccountReviewersChanged,
             storeAccountStatusChanged,
             storeAccountReviewStatusChanged,
-            storeAccountVerifiedByChanged
+            storeAccountVerifiedByChanged,
+            storeAccountAdminsDeclinedChanged,
+            storeAccountUnverifiedReasonsChanged
         } = this.props;
 
         const { history, params, cable } = this.state;
@@ -152,6 +156,28 @@ class ViewStoreAccount extends Component{
                                 storeAccountReviewersChanged(current_reviewers);
 
                             }
+
+
+                            if(data.admins_declined !== undefined){
+
+                                const admins_declined = data.admins_declined;
+
+                                console.log(admins_declined);
+
+                                storeAccountAdminsDeclinedChanged(admins_declined);
+
+                            }
+
+                            if(data.unverified_reasons !== undefined){
+
+                                const unverified_reasons = data.unverified_reasons;
+
+                                console.log(unverified_reasons);
+
+                                storeAccountUnverifiedReasonsChanged(unverified_reasons);
+
+                            }
+
 
                         }
                     }
@@ -868,5 +894,7 @@ export default connect(mapStateToProps, {
     storeAccountReviewersChanged,
     storeAccountStatusChanged,
     storeAccountReviewStatusChanged,
-    storeAccountVerifiedByChanged
+    storeAccountVerifiedByChanged,
+    storeAccountAdminsDeclinedChanged,
+    storeAccountUnverifiedReasonsChanged
 })(ViewStoreAccount);

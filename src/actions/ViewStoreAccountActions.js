@@ -8,11 +8,29 @@ import {
     STORE_ACCOUNT_REVIEWERS_CHANGED,
     STORE_ACCOUNT_STATUS_CHANGED,
     STORE_ACCOUNT_REVIEW_STATUS_CHANGED,
-    STORE_ACCOUNT_VERIFIED_BY_CHANGED
+    STORE_ACCOUNT_VERIFIED_BY_CHANGED,
+    STORE_ACCOUNT_ADMINS_DECLINED_CHANGED,
+    STORE_ACCOUNT_UNVERIFIED_REASONS_CHANGED
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+export const storeAccountUnverifiedReasonsChanged = (unverified_reasons) => {
+
+    return{
+      type: STORE_ACCOUNT_UNVERIFIED_REASONS_CHANGED,
+      payload: unverified_reasons
+    };
+
+};
+
+export const storeAccountAdminsDeclinedChanged = (admins_declined) => {
+    return{
+      type: STORE_ACCOUNT_ADMINS_DECLINED_CHANGED,
+      payload: admins_declined
+    };
+};
 
 export const storeAccountVerifiedByChanged = (verified_by) => {
 

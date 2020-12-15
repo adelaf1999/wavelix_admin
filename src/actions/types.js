@@ -125,3 +125,5 @@ export const STORE_ACCOUNT_REVIEWERS_CHANGED = "store_account_reviewers_changed"
 export const STORE_ACCOUNT_STATUS_CHANGED = "store_account_status_changed";
 export const STORE_ACCOUNT_REVIEW_STATUS_CHANGED = "store_account_review_status_changed";
 export const STORE_ACCOUNT_VERIFIED_BY_CHANGED = "store_account_verified_by_changed";
+export const STORE_ACCOUNT_ADMINS_DECLINED_CHANGED = "store_account_admins_declined_changed";
+export const STORE_ACCOUNT_UNVERIFIED_REASONS_CHANGED = "store_account_unverified_reasons_changed";
