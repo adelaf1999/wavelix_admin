@@ -26,6 +26,7 @@ export const VIEW_CUSTOMER_ACCOUNT_ROUTE = `${BACKEND_URL}/view-customer-account
 export const GET_STORE_ACCOUNTS_ROUTE = `${BACKEND_URL}/get-store-accounts`;
 export const SEARCH_STORE_ACCOUNTS_ROUTE = `${BACKEND_URL}/search-store-accounts`;
 export const VIEW_STORE_ACCOUNT_ROUTE = `${BACKEND_URL}/view-store-account`;
+export const ACCEPT_STORE_VERIFICATION_ROUTE = `${BACKEND_URL}/accept-store-verification`;
 
 
 // Login Types

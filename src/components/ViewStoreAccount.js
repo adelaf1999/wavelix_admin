@@ -9,7 +9,8 @@ import {
     storeAccountReviewStatusChanged,
     storeAccountVerifiedByChanged,
     storeAccountAdminsDeclinedChanged,
-    storeAccountUnverifiedReasonsChanged
+    storeAccountUnverifiedReasonsChanged,
+    acceptStoreVerification
 } from "../actions";
 import _ from "lodash";
 import {  Spinner, Card,  Button, Form, Modal, Alert, ListGroup} from "react-bootstrap";
@@ -32,12 +33,15 @@ class ViewStoreAccount extends Component{
 
         const business_license_modal_visible = false;
 
+        const accept_verification_modal_visible = false;
+
         this.state = {
             history,
             params,
             cable,
             store_account_channel_subscription,
-            business_license_modal_visible
+            business_license_modal_visible,
+            accept_verification_modal_visible
         };
     }
 
@@ -396,6 +400,7 @@ class ViewStoreAccount extends Component{
                     variant="outline-success"
                     onClick={(e) => {
                         e.preventDefault();
+                        this.setState({accept_verification_modal_visible: true});
                     }}
                     className="store-verification-button"
                 >
@@ -610,6 +615,99 @@ class ViewStoreAccount extends Component{
         }
 
 
+
+    }
+
+
+    exitStoreVerificationModal(){
+        this.setState({accept_verification_modal_visible: false});
+    }
+
+    acceptStoreVerificationModal(){
+
+        const { accept_verification_modal_visible, history, params } = this.state;
+
+        const store_user_id = params.store_user_id;
+
+        if(accept_verification_modal_visible){
+
+            return(
+
+                <Modal
+                    show={accept_verification_modal_visible}
+                    onHide={() => {
+                        this.exitStoreVerificationModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Accept Verification</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+                        <p>
+                            By accepting the verification request, you confirm that you have gone
+                            through all necessary store verification guidelines and have made
+                            sure that the store business license is valid, that the store owner
+                            has indeed created an account for their store, and that the store is
+                            legally authorized to conduct business  in its jurisdiction.
+                        </p>
+
+                    </Modal.Body>
+
+                    <Modal.Footer>
+
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitStoreVerificationModal();
+
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        <Button
+                            variant="success"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                const {
+                                    acceptStoreVerification,
+                                    access_token,
+                                    client,
+                                    uid
+                                } = this.props;
+
+                                acceptStoreVerification(store_user_id, access_token, client, uid, history);
+
+                                this.exitStoreVerificationModal();
+
+                            }}
+                        >
+                            Accept
+                        </Button>
+
+                    </Modal.Footer>
+
+
+                </Modal>
+
+            );
+
+        }
 
     }
 
@@ -902,6 +1000,8 @@ class ViewStoreAccount extends Component{
 
                     {this.businessLicenseModal()}
 
+                    {this.acceptStoreVerificationModal()}
+
                 </div>
 
             );
@@ -1005,5 +1105,6 @@ export default connect(mapStateToProps, {
     storeAccountReviewStatusChanged,
     storeAccountVerifiedByChanged,
     storeAccountAdminsDeclinedChanged,
-    storeAccountUnverifiedReasonsChanged
+    storeAccountUnverifiedReasonsChanged,
+    acceptStoreVerification
 })(ViewStoreAccount);

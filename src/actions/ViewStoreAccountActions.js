@@ -10,11 +10,59 @@ import {
     STORE_ACCOUNT_REVIEW_STATUS_CHANGED,
     STORE_ACCOUNT_VERIFIED_BY_CHANGED,
     STORE_ACCOUNT_ADMINS_DECLINED_CHANGED,
-    STORE_ACCOUNT_UNVERIFIED_REASONS_CHANGED
+    STORE_ACCOUNT_UNVERIFIED_REASONS_CHANGED,
+    ACCEPT_STORE_VERIFICATION_ROUTE
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+export const acceptStoreVerification = (store_user_id, access_token, client, uid, history) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = getFormData({
+            store_user_id: store_user_id
+        });
+
+        axios.post(ACCEPT_STORE_VERIFICATION_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                console.log(response);
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+
+    };
+
+};
 
 export const storeAccountUnverifiedReasonsChanged = (unverified_reasons) => {
 
