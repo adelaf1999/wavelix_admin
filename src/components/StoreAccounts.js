@@ -6,7 +6,8 @@ import {
     initializeStoreAccountsPage,
     clearStoreAccountsState,
     searchStoreAccounts,
-    searchStoreAccountsLimitChanged
+    searchStoreAccountsLimitChanged,
+    storeAccountsChanged
 } from "../actions";
 import _ from "lodash";
 import {  Spinner, Form, FormControl, Button, Table} from "react-bootstrap";
@@ -118,7 +119,8 @@ class StoreAccounts extends Component{
             client,
             uid,
             limit,
-            initializeStoreAccountsPage
+            initializeStoreAccountsPage,
+            storeAccountsChanged
         } = this.props;
 
         const { history, cable } = this.state;
@@ -176,6 +178,30 @@ class StoreAccounts extends Component{
                                 );
 
                             }
+
+
+                            if(data.store_account_item !== undefined){
+
+                                // console.log("New store account item received");
+
+                                const store_account_item = data.store_account_item;
+
+                                let store_accounts = _.cloneDeep(this.props.store_accounts);
+
+                                const store_account_index = _.findIndex(store_accounts, { id: store_account_item.id });
+
+                                if(store_account_index !== -1){
+
+                                    store_accounts[store_account_index] = store_account_item;
+
+                                    // console.log(store_accounts);
+
+                                    storeAccountsChanged(store_accounts);
+
+                                }
+
+                            }
+
 
                         }
                     }
@@ -726,5 +752,6 @@ export default connect(mapStateToProps, {
     initializeStoreAccountsPage,
     clearStoreAccountsState,
     searchStoreAccounts,
-    searchStoreAccountsLimitChanged
+    searchStoreAccountsLimitChanged,
+    storeAccountsChanged
 })(StoreAccounts);

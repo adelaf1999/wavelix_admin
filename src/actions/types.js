@@ -115,6 +115,7 @@ export const INITIALIZE_STORE_ACCOUNTS_PAGE_COMPLETE = "initialize_store_account
 export const CLEAR_STORE_ACCOUNTS_STATE = "clear_store_accounts_state";
 export const SEARCH_STORE_ACCOUNTS_COMPLETE = "search_store_accounts_complete";
 export const SEARCH_STORE_ACCOUNTS_LIMIT_CHANGED = "search_store_accounts_limit_changed";
+export const STORE_ACCOUNTS_CHANGED = "store_accounts_changed";
 
 //ViewStoreAccount Types
 export const GET_STORE_DATA = "get_store_data";

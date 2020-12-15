@@ -7,12 +7,22 @@ import {
     CLEAR_STORE_ACCOUNTS_STATE,
     SEARCH_STORE_ACCOUNTS_ROUTE,
     SEARCH_STORE_ACCOUNTS_COMPLETE,
-    SEARCH_STORE_ACCOUNTS_LIMIT_CHANGED
+    SEARCH_STORE_ACCOUNTS_LIMIT_CHANGED,
+    STORE_ACCOUNTS_CHANGED
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
 import _ from "lodash";
+
+export const storeAccountsChanged = (store_accounts) => {
+
+    return{
+      type: STORE_ACCOUNTS_CHANGED,
+      payload: store_accounts
+    };
+
+};
 
 export const searchStoreAccountsLimitChanged = (limit) => {
 

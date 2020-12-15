@@ -4,7 +4,8 @@ import {
     INITIALIZE_STORE_ACCOUNTS_PAGE_COMPLETE,
     CLEAR_STORE_ACCOUNTS_STATE,
     SEARCH_STORE_ACCOUNTS_COMPLETE,
-    SEARCH_STORE_ACCOUNTS_LIMIT_CHANGED
+    SEARCH_STORE_ACCOUNTS_LIMIT_CHANGED,
+    STORE_ACCOUNTS_CHANGED
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -18,6 +19,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case STORE_ACCOUNTS_CHANGED:
+            return{
+                ...state,
+                store_accounts: action.payload
+            };
         case SEARCH_STORE_ACCOUNTS_LIMIT_CHANGED:
             return{
                 ...state,
