@@ -4,7 +4,10 @@ import Wrapper from "./Wrapper";
 import {
     getStoreData,
     clearViewStoreAccountState,
-    storeAccountReviewersChanged
+    storeAccountReviewersChanged,
+    storeAccountStatusChanged,
+    storeAccountReviewStatusChanged,
+    storeAccountVerifiedByChanged
 } from "../actions";
 import _ from "lodash";
 import {  Spinner, Card,  Button, Form, Modal, Alert, ListGroup} from "react-bootstrap";
@@ -61,7 +64,10 @@ class ViewStoreAccount extends Component{
             client,
             uid,
             getStoreData,
-            storeAccountReviewersChanged
+            storeAccountReviewersChanged,
+            storeAccountStatusChanged,
+            storeAccountReviewStatusChanged,
+            storeAccountVerifiedByChanged
         } = this.props;
 
         const { history, params, cable } = this.state;
@@ -102,6 +108,40 @@ class ViewStoreAccount extends Component{
                             console.log("StoreAccountChannel Received!");
 
                             console.log(data);
+
+
+                            if(data.status !== undefined){
+
+                                const account_status = data.status;
+
+                                console.log(account_status);
+
+                                storeAccountStatusChanged(account_status);
+
+                            }
+
+
+                            if(data.review_status !== undefined){
+
+                                const review_status = data.review_status;
+
+                                console.log(review_status);
+
+                                storeAccountReviewStatusChanged(review_status);
+
+                            }
+
+                            if(data.verified_by !== undefined){
+
+                                const verified_by = data.verified_by;
+
+                                console.log(verified_by);
+
+                                storeAccountVerifiedByChanged(verified_by);
+
+                                
+                            }
+
 
                             if(data.current_reviewers !== undefined){
 
@@ -823,5 +863,8 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     getStoreData,
     clearViewStoreAccountState,
-    storeAccountReviewersChanged
+    storeAccountReviewersChanged,
+    storeAccountStatusChanged,
+    storeAccountReviewStatusChanged,
+    storeAccountVerifiedByChanged
 })(ViewStoreAccount);

@@ -5,11 +5,41 @@ import {
     GET_STORE_DATA,
     GET_STORE_DATA_COMPLETE,
     CLEAR_VIEW_STORE_ACCOUNT_STATE,
-    STORE_ACCOUNT_REVIEWERS_CHANGED
+    STORE_ACCOUNT_REVIEWERS_CHANGED,
+    STORE_ACCOUNT_STATUS_CHANGED,
+    STORE_ACCOUNT_REVIEW_STATUS_CHANGED,
+    STORE_ACCOUNT_VERIFIED_BY_CHANGED
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+export const storeAccountVerifiedByChanged = (verified_by) => {
+
+    return{
+      type: STORE_ACCOUNT_VERIFIED_BY_CHANGED,
+      payload: verified_by
+    };
+
+};
+
+export const storeAccountReviewStatusChanged = (review_status) => {
+
+    return{
+      type: STORE_ACCOUNT_REVIEW_STATUS_CHANGED,
+      payload: review_status
+    };
+
+};
+
+export const storeAccountStatusChanged = (status) => {
+
+    return{
+      type: STORE_ACCOUNT_STATUS_CHANGED,
+      payload: status
+    };
+
+};
 
 export const storeAccountReviewersChanged = (current_reviewers) => {
 

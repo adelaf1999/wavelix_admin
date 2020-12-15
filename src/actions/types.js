@@ -122,3 +122,6 @@ export const GET_STORE_DATA = "get_store_data";
 export const GET_STORE_DATA_COMPLETE = "get_store_data_complete";
 export const CLEAR_VIEW_STORE_ACCOUNT_STATE = "clear_view_store_account_state";
 export const STORE_ACCOUNT_REVIEWERS_CHANGED = "store_account_reviewers_changed";
+export const STORE_ACCOUNT_STATUS_CHANGED = "store_account_status_changed";
+export const STORE_ACCOUNT_REVIEW_STATUS_CHANGED = "store_account_review_status_changed";
+export const STORE_ACCOUNT_VERIFIED_BY_CHANGED = "store_account_verified_by_changed";
