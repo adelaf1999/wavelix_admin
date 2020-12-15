@@ -10,7 +10,8 @@ import {
     storeAccountVerifiedByChanged,
     storeAccountAdminsDeclinedChanged,
     storeAccountUnverifiedReasonsChanged,
-    acceptStoreVerification
+    acceptStoreVerification,
+    declineStoreVerification
 } from "../actions";
 import _ from "lodash";
 import {  Spinner, Card,  Button, Form, Modal, Alert, ListGroup} from "react-bootstrap";
@@ -35,13 +36,19 @@ class ViewStoreAccount extends Component{
 
         const accept_verification_modal_visible = false;
 
+        const decline_verification_modal_visible = false;
+
+        const declined_reason = "";
+
         this.state = {
             history,
             params,
             cable,
             store_account_channel_subscription,
             business_license_modal_visible,
-            accept_verification_modal_visible
+            accept_verification_modal_visible,
+            decline_verification_modal_visible,
+            declined_reason
         };
     }
 
@@ -425,7 +432,11 @@ class ViewStoreAccount extends Component{
                 <Button
                     variant="outline-danger"
                     onClick={(e) => {
+
                         e.preventDefault();
+
+                        this.setState({decline_verification_modal_visible: true});
+
                     }}
                     className="store-verification-button"
                 >
@@ -619,11 +630,152 @@ class ViewStoreAccount extends Component{
     }
 
 
-    exitStoreVerificationModal(){
+    exitDeclineVerificationModal(){
+        this.setState({decline_verification_modal_visible: false, declined_reason: ''});
+    }
+
+    declineVerificationModalButton(){
+
+        const { declined_reason, params, history } = this.state;
+
+        const store_user_id = params.store_user_id;
+
+        if(_.isEmpty(declined_reason)){
+
+            return(
+
+                <Button
+                    disabled
+                    variant="danger"
+                >
+                    Decline
+                </Button>
+
+            );
+
+        }else{
+
+            return(
+
+                <Button
+                    variant="danger"
+                    onClick={(e) => {
+
+                        e.preventDefault();
+
+                        const {
+                            access_token,
+                            client,
+                            uid,
+                            declineStoreVerification
+                        } = this.props;
+
+                        declineStoreVerification(
+                            store_user_id,
+                            declined_reason,
+                            access_token,
+                            client,
+                            uid,
+                            history
+                        );
+
+                        this.exitDeclineVerificationModal();
+
+                    }}
+                >
+                    Decline
+                </Button>
+
+            );
+
+        }
+
+
+    }
+
+    declineVerificationModal(){
+
+        const { decline_verification_modal_visible} = this.state;
+
+
+        if(decline_verification_modal_visible){
+
+            return(
+
+                <Modal
+                    show={decline_verification_modal_visible}
+                    onHide={() => {
+                        this.exitDeclineVerificationModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Decline Verification</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+                        <Form.Group controlId="formPlaintextCredential">
+
+                            <Form.Label>
+                                Please enter the reason(s) for declining verification
+                            </Form.Label>
+
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                onChange={(e) => {
+                                    this.setState({declined_reason: e.target.value});
+                                }}
+                            />
+
+                        </Form.Group>
+
+                    </Modal.Body>
+
+                    <Modal.Footer>
+
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitDeclineVerificationModal();
+
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        {this.declineVerificationModalButton()}
+
+                    </Modal.Footer>
+
+
+                </Modal>
+
+
+            );
+
+        }
+
+
+    }
+
+
+    exitAcceptVerificationModal(){
         this.setState({accept_verification_modal_visible: false});
     }
 
-    acceptStoreVerificationModal(){
+    acceptVerificationModal(){
 
         const { accept_verification_modal_visible, history, params } = this.state;
 
@@ -636,7 +788,7 @@ class ViewStoreAccount extends Component{
                 <Modal
                     show={accept_verification_modal_visible}
                     onHide={() => {
-                        this.exitStoreVerificationModal();
+                        this.exitAcceptVerificationModal();
                     }}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
@@ -670,7 +822,7 @@ class ViewStoreAccount extends Component{
 
                                 e.preventDefault();
 
-                                this.exitStoreVerificationModal();
+                                this.exitAcceptVerificationModal();
 
                             }}
                         >
@@ -693,7 +845,7 @@ class ViewStoreAccount extends Component{
 
                                 acceptStoreVerification(store_user_id, access_token, client, uid, history);
 
-                                this.exitStoreVerificationModal();
+                                this.exitAcceptVerificationModal();
 
                             }}
                         >
@@ -1000,7 +1152,9 @@ class ViewStoreAccount extends Component{
 
                     {this.businessLicenseModal()}
 
-                    {this.acceptStoreVerificationModal()}
+                    {this.acceptVerificationModal()}
+
+                    {this.declineVerificationModal()}
 
                 </div>
 
@@ -1106,5 +1260,6 @@ export default connect(mapStateToProps, {
     storeAccountVerifiedByChanged,
     storeAccountAdminsDeclinedChanged,
     storeAccountUnverifiedReasonsChanged,
-    acceptStoreVerification
+    acceptStoreVerification,
+    declineStoreVerification
 })(ViewStoreAccount);
