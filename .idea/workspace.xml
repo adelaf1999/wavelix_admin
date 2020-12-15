@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6d195e98-fbd2-42d9-b726-6c7e9b6ac1da" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.eslintcache" afterPath="$PROJECT_DIR$/.eslintcache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/ViewStoreAccountActions.js" afterPath="$PROJECT_DIR$/src/actions/ViewStoreAccountActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/types.js" afterPath="$PROJECT_DIR$/src/actions/types.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ViewStoreAccount.css" afterPath="$PROJECT_DIR$/src/ViewStoreAccount.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ViewStoreAccount.js" afterPath="$PROJECT_DIR$/src/components/ViewStoreAccount.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/ViewStoreAccountReducer.js" afterPath="$PROJECT_DIR$/src/reducers/ViewStoreAccountReducer.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,21 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="types.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/actions/types.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1574">
-              <caret line="128" column="99" lean-forward="false" selection-start-line="128" selection-start-column="99" selection-end-line="128" selection-end-column="99" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ViewStoreAccount.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/ViewStoreAccount.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1219">
-              <caret line="175" column="0" lean-forward="true" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
+            <state relative-caret-position="576">
+              <caret line="415" column="32" lean-forward="true" selection-start-line="415" selection-start-column="32" selection-end-line="415" selection-end-column="65" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -42,24 +31,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ViewStoreAccountActions.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/actions/ViewStoreAccountActions.js">
+      <file leaf-file-name="ViewStoreAccountReducer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/reducers/ViewStoreAccountReducer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="3" column="6" lean-forward="true" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-              <folding />
+            <state relative-caret-position="1350">
+              <caret line="30" column="15" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#379#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ViewStoreAccountReducer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reducers/ViewStoreAccountReducer.js">
+      <file leaf-file-name="ViewCustomerAccount.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/ViewCustomerAccount.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1485">
-              <caret line="39" column="50" lean-forward="false" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="50" />
+            <state relative-caret-position="579">
+              <caret line="106" column="26" lean-forward="true" selection-start-line="106" selection-start-column="26" selection-end-line="114" selection-end-column="37" />
               <folding>
-                <element signature="e#0#379#0" expanded="true" />
+                <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ViewStoreAccount.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ViewStoreAccount.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1709">
+              <caret line="60" column="22" lean-forward="false" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -76,12 +77,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>password_error_message</find>
-      <find>roles_error_message</find>
-      <find>roles_success_message</find>
-      <find>CHANGE_ADMIN_ACCOUNT_PASS</find>
-      <find>changePass</find>
-      <find>getAdmi</find>
       <find>getAdminAccounts</find>
       <find>searchA</find>
       <find>searchAdmins(</find>
@@ -106,6 +101,12 @@
       <find>declined_verification</find>
       <find>declined_verification</find>
       <find>store_accounts_ch</find>
+      <find>view-store-account-card</find>
+      <find>view-store-</find>
+      <find>store-verification</find>
+      <find>store-verification-gui</find>
+      <find>dialing</find>
+      <find>&lt;Button</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,7 +154,6 @@
         <option value="$PROJECT_DIR$/src/actions/index.js" />
         <option value="$PROJECT_DIR$/src/Routes.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
-        <option value="$PROJECT_DIR$/src/ViewStoreAccount.css" />
         <option value="$PROJECT_DIR$/src/reducers/index.js" />
         <option value="$PROJECT_DIR$/src/reducers/LoginReducer.js" />
         <option value="$PROJECT_DIR$/src/actions/LoginActions.js" />
@@ -164,6 +164,7 @@
         <option value="$PROJECT_DIR$/src/actions/types.js" />
         <option value="$PROJECT_DIR$/src/actions/ViewStoreAccountActions.js" />
         <option value="$PROJECT_DIR$/src/reducers/ViewStoreAccountReducer.js" />
+        <option value="$PROJECT_DIR$/src/ViewStoreAccount.css" />
         <option value="$PROJECT_DIR$/src/components/ViewStoreAccount.js" />
       </list>
     </option>
@@ -187,10 +188,9 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-199" />
-    <option name="y" value="90" />
-    <option name="width" value="2048" />
-    <option name="height" value="1112" />
+    <option name="x" value="1050" />
+    <option name="width" value="2038" />
+    <option name="height" value="1131" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -326,15 +326,15 @@
       <workItem from="1607765768500" duration="3522000" />
       <workItem from="1607850413380" duration="1908000" />
       <workItem from="1607936023111" duration="13854000" />
-      <workItem from="1608019244719" duration="7970000" />
+      <workItem from="1608019244719" duration="10342000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143953000" />
+    <option name="totallyTimeSpent" value="146325000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-199" y="90" width="3840" height="2080" extended-state="6" />
+    <frame x="0" y="-2" width="3840" height="2080" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19583334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -586,13 +586,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/ViewCustomerAccountReducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="23" column="8" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="56" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/actions/ViewCustomerAccountActions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1755">
@@ -622,16 +615,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ViewCustomerAccount.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="579">
-          <caret line="106" column="27" lean-forward="false" selection-start-line="106" selection-start-column="27" selection-end-line="114" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-17">
@@ -644,14 +627,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1051">
           <caret line="220" column="26" lean-forward="false" selection-start-line="220" selection-start-column="26" selection-end-line="220" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ViewStoreAccount.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1349">
-          <caret line="45" column="22" lean-forward="false" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -756,16 +731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/ViewStoreAccountReducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1485">
-          <caret line="39" column="50" lean-forward="false" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#379#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/actions/types.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1574">
@@ -777,15 +742,51 @@
     <entry file="file://$PROJECT_DIR$/src/actions/ViewStoreAccountActions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="3" column="6" lean-forward="true" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+          <caret line="3" column="29" lean-forward="true" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/ViewCustomerAccountReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="25" column="19" lean-forward="true" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ViewCustomerAccount.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="579">
+          <caret line="106" column="26" lean-forward="true" selection-start-line="106" selection-start-column="26" selection-end-line="114" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/ViewStoreAccountReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1350">
+          <caret line="30" column="15" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#379#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ViewStoreAccount.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1709">
+          <caret line="60" column="22" lean-forward="false" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/ViewStoreAccount.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1219">
-          <caret line="175" column="0" lean-forward="true" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
+        <state relative-caret-position="576">
+          <caret line="415" column="32" lean-forward="true" selection-start-line="415" selection-start-column="32" selection-end-line="415" selection-end-column="65" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

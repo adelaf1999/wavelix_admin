@@ -52,3 +52,11 @@
 .store-verification-guidelines{
     font-size: 18px;
 }
+.store-unverified-reason-card{
+    margin-bottom: 1.5rem;
+}
+.store-verification-button{
+    width: 100%;
+    font-size: 18px;
+    margin-bottom: 1.5rem;
+}

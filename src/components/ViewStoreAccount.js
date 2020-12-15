@@ -328,10 +328,110 @@ class ViewStoreAccount extends Component{
 
         }
 
+    }
 
+    unverifiedReasons(){
+
+        const { unverified_reasons } = this.props;
+
+        if(unverified_reasons.length > 0){
+
+            return(
+
+                <div>
+
+
+                    <Form.Label className="store-verification-label">
+                        Reviewers Declined Reasons
+                    </Form.Label>
+
+
+                    {
+                        _.map(unverified_reasons, (unverified_reason, index) => {
+
+                            return(
+
+                                <Card
+                                    key={index}
+                                    className="store-unverified-reason-card"
+                                >
+
+                                    <Card.Header>{_.startCase(unverified_reason.admin_name)}</Card.Header>
+
+                                    <Card.Body>
+
+                                        <Card.Text>
+                                            {unverified_reason.reason}
+                                        </Card.Text>
+
+
+                                    </Card.Body>
+
+                                </Card>
+
+                            );
+
+                        })
+                    }
+
+
+                </div>
+
+            );
+
+
+        }
 
     }
 
+    acceptVerificationButton(){
+
+        const { status } = this.props;
+
+        if(status !== "verified"){
+
+            return(
+
+                <Button
+                    variant="outline-success"
+                    onClick={(e) => {
+                        e.preventDefault();
+                    }}
+                    className="store-verification-button"
+                >
+                    Accept Verification
+                </Button>
+
+            );
+
+        }
+
+    }
+
+
+    declineVerificationButton(){
+
+        const { status , admins_declined, id} = this.props;
+
+        if(status !== "verified" && !admins_declined.includes(id)){
+
+            return(
+
+                <Button
+                    variant="outline-danger"
+                    onClick={(e) => {
+                        e.preventDefault();
+                    }}
+                    className="store-verification-button"
+                >
+                    Decline Verification
+                </Button>
+
+            );
+
+        }
+
+    }
 
     storeVerificationCard(){
 
@@ -471,7 +571,7 @@ class ViewStoreAccount extends Component{
                                         3) Do you have information about what the store sells?<br/>
                                         4) Is the owner of the store called {store_owner}?<br/>
                                         5) Do you know what the number of {store_name} is? (check if it matches the store
-                                        number ({store_number}) ignoring international dialing code.<br/>
+                                        number ({store_number}) ignoring international dialing code.)<br/>
                                         6) Thank the person on the phone.<br/>
                                     </ListGroup.Item>
 
@@ -480,6 +580,13 @@ class ViewStoreAccount extends Component{
 
 
                                 </ListGroup>
+
+                                {this.acceptVerificationButton()}
+
+                                {this.declineVerificationButton()}
+
+
+                                {this.unverifiedReasons()}
 
 
 
@@ -855,6 +962,7 @@ const mapStateToProps = (state) => {
         verified_by,
         current_reviewers,
         store_email,
+        admins_declined,
         unverified_reasons
     } = state.view_store_account;
 
@@ -882,6 +990,7 @@ const mapStateToProps = (state) => {
         verified_by,
         current_reviewers,
         store_email,
+        admins_declined,
         unverified_reasons
     };
 
