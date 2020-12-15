@@ -768,7 +768,8 @@ const mapStateToProps = (state) => {
         client,
         uid,
         logged_in,
-        roles
+        roles,
+        id
     } = state.login;
 
     const {
@@ -786,7 +787,6 @@ const mapStateToProps = (state) => {
         store_owner_number,
         store_number,
         verified_by,
-        declined_verification,
         current_reviewers,
         store_email
     } = state.view_store_account;
@@ -798,6 +798,7 @@ const mapStateToProps = (state) => {
         uid,
         logged_in,
         roles,
+        id,
         initializing_page,
         store_owner,
         store_username,
@@ -812,7 +813,6 @@ const mapStateToProps = (state) => {
         store_owner_number,
         store_number,
         verified_by,
-        declined_verification,
         current_reviewers,
         store_email
     };

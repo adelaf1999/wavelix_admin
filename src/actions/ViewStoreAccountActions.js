@@ -82,9 +82,9 @@ export const getStoreData = (store_user_id, access_token, client, uid, history) 
 
                     const verified_by = data.verified_by;
 
-                    const declined_verification = data.declined_verification;
-
                     const store_email = data.store_email;
+
+                    const admins_declined = data.admins_declined;
 
                     dispatch({type: GET_STORE_DATA_COMPLETE, payload: {
                         store_owner: store_owner,
@@ -100,8 +100,8 @@ export const getStoreData = (store_user_id, access_token, client, uid, history) 
                         store_owner_number: store_owner_number,
                         store_number: store_number,
                         verified_by: verified_by,
-                        declined_verification: declined_verification,
-                        store_email: store_email
+                        store_email: store_email,
+                        admins_declined: admins_declined
                     }});
 
 
