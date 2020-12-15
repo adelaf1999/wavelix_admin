@@ -187,6 +187,8 @@ export const loginAdmin = (email, password, verification_code, history) => {
 
                 const roles = data.roles;
 
+                const id = data.id;
+
                 const headers = response.headers;
 
                 const access_token = headers["access-token"];
@@ -199,7 +201,8 @@ export const loginAdmin = (email, password, verification_code, history) => {
                     access_token: access_token,
                     client: client,
                     uid: uid,
-                    roles: roles
+                    roles: roles,
+                    id: id
                 }});
 
                 history.push("/home");

@@ -39,6 +39,10 @@ const rootReducer = ( state, action ) => {
 
         storage.removeItem('login:logged_in').then(() => console.log("logged_in removed"));
 
+        storage.removeItem('login:roles').then(() => console.log("roles removed"));
+
+        storage.removeItem('login:id').then(() => console.log("id removed"));
+
     }
 
     return appReducer(state, action);

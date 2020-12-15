@@ -28,6 +28,7 @@ const INITIAL_STATE = {
     uid: '',
     logged_in: false,
     roles: [],
+    id: '',
     current_page: 1,
     loading: false,
     email_error: '',
@@ -94,7 +95,8 @@ const LoginReducer =  (state = INITIAL_STATE , action) => {
                 client: action.payload.client,
                 uid: action.payload.uid,
                 logged_in: true,
-                roles: action.payload.roles
+                roles: action.payload.roles,
+                id: action.payload.id
             };
         case LOGIN_ADMIN_FAILURE:
             return{
@@ -145,7 +147,8 @@ const persistConfig = {
         'client',
         'uid',
         'logged_in',
-        'roles'
+        'roles',
+        'id'
     ],
     stateReconciler: autoMergeLevel1
 };
