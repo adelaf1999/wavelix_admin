@@ -25,12 +25,15 @@ class DriverAccounts extends Component{
 
         const selected_country = null;
 
+        const selected_review_status = null;
+
         this.state = {
             history,
             search,
             driver_verified,
             account_blocked,
-            selected_country
+            selected_country,
+            selected_review_status
         };
 
     }
@@ -104,9 +107,45 @@ class DriverAccounts extends Component{
 
         });
 
+    }
 
+
+    reviewStatusOptions(){
+
+        const { review_status_options } = this.props;
+
+        let options = [];
+
+        options.push({ label: 'Select Option', value: ''});
+
+        _.map(review_status_options, (label, value) => {
+
+            options.push({
+                label: _.startCase(label),
+                value: value
+            });
+
+        });
+
+        return _.map(options, (option, index) => {
+
+
+            return(
+
+                <option
+                    key={index}
+                    value={option.value}
+                >
+                    {option.label}
+                </option>
+
+            );
+
+        });
 
     }
+
+
 
     show(){
 
@@ -290,6 +329,37 @@ class DriverAccounts extends Component{
                             </Form.Control>
 
                         </Form.Group>
+
+
+
+                        <Form.Group className="driver-account-filter-group" >
+
+                            <Form.Label>Review Status</Form.Label>
+
+                            <Form.Control
+                                as="select"
+                                onChange={(e) => {
+
+                                    const new_selected_review_status = e.target.value;
+
+                                    if(_.isEmpty(new_selected_review_status)){
+
+                                        this.setState({selected_review_status: null});
+
+                                    }else{
+
+                                        this.setState({selected_review_status: new_selected_review_status});
+                                    }
+
+                                }}
+                            >
+
+                                {this.reviewStatusOptions()}
+
+                            </Form.Control>
+
+                        </Form.Group>
+
 
 
                     </Form>

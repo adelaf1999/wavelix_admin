@@ -29,11 +29,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DriverAccounts.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DriverAccounts.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/DriverAccounts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="760">
-              <caret line="272" column="80" lean-forward="false" selection-start-line="272" selection-start-column="80" selection-end-line="272" selection-end-column="80" />
+            <state relative-caret-position="558">
+              <caret line="342" column="86" lean-forward="false" selection-start-line="342" selection-start-column="86" selection-end-line="342" selection-end-column="86" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -44,8 +44,8 @@
       <file leaf-file-name="StoreAccounts.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/StoreAccounts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="219" column="5" lean-forward="false" selection-start-line="219" selection-start-column="3" selection-end-line="256" selection-end-column="5" />
+            <state relative-caret-position="59">
+              <caret line="295" column="3" lean-forward="true" selection-start-line="295" selection-start-column="3" selection-end-line="329" selection-end-column="0" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -53,7 +53,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DriverAccounts.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DriverAccounts.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DriverAccounts.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="405">
@@ -362,12 +362,12 @@
       <workItem from="1608206677503" duration="1158000" />
       <workItem from="1608282785746" duration="1283000" />
       <workItem from="1608302870961" duration="5000" />
-      <workItem from="1608368359115" duration="3947000" />
+      <workItem from="1608368359115" duration="4267000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155699000" />
+    <option name="totallyTimeSpent" value="156019000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-2" width="3840" height="2080" extended-state="6" />
@@ -786,8 +786,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/StoreAccounts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="219" column="5" lean-forward="false" selection-start-line="219" selection-start-column="3" selection-end-line="256" selection-end-column="5" />
+        <state relative-caret-position="59">
+          <caret line="295" column="3" lean-forward="true" selection-start-line="295" selection-start-column="3" selection-end-line="329" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/DriverAccounts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="342" column="86" lean-forward="false" selection-start-line="342" selection-start-column="86" selection-end-line="342" selection-end-column="86" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -799,16 +809,6 @@
         <state relative-caret-position="405">
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/DriverAccounts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="272" column="80" lean-forward="false" selection-start-line="272" selection-start-column="80" selection-end-line="272" selection-end-column="80" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
