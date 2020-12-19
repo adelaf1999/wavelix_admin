@@ -23,12 +23,14 @@ class DriverAccounts extends Component{
 
         const account_blocked = null;
 
+        const selected_country = null;
 
         this.state = {
             history,
             search,
             driver_verified,
-            account_blocked
+            account_blocked,
+            selected_country
         };
 
     }
@@ -62,6 +64,46 @@ class DriverAccounts extends Component{
             initializeDriverAccountsPage(limit, access_token, client, uid, history);
 
         }
+
+
+    }
+
+
+    getCountries(){
+
+        const { countries } = this.props;
+
+        let country_options = [];
+
+        country_options.push({ label: 'Select Option', value: ''});
+
+        _.map(countries, (country_name, country_code) => {
+
+
+            country_options.push({
+                label: country_name,
+                value: country_code
+            });
+
+        });
+
+
+        return _.map(country_options, (country, index) => {
+
+
+            return(
+
+                <option
+                    key={index}
+                    value={country.value}
+                >
+                    {country.label}
+                </option>
+
+            );
+
+        });
+
 
 
     }
@@ -216,6 +258,36 @@ class DriverAccounts extends Component{
                             </Form.Control>
 
 
+
+                        </Form.Group>
+
+
+                        <Form.Group className="driver-account-filter-group" >
+
+                            <Form.Label>Country</Form.Label>
+
+                            <Form.Control
+                                as="select"
+                                onChange={(e) => {
+
+                                    const new_selected_country = e.target.value;
+
+                                    if(_.isEmpty(new_selected_country)){
+
+                                        this.setState({selected_country: null});
+
+                                    }else{
+
+                                        this.setState({selected_country: new_selected_country});
+                                    }
+
+
+                                }}
+                            >
+
+                                {this.getCountries()}
+
+                            </Form.Control>
 
                         </Form.Group>
 
