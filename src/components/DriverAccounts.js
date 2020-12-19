@@ -9,6 +9,8 @@ import {
 } from "../actions";
 import {  Spinner, Form, FormControl, Button, Table, Image} from "react-bootstrap";
 import _ from "lodash";
+import actionCable from "actioncable";
+import { ACTION_CABLE_ROUTE } from "../actions/types";
 
 class DriverAccounts extends Component{
 
@@ -28,18 +30,34 @@ class DriverAccounts extends Component{
 
         const selected_review_status = null;
 
+        const cable = actionCable.createConsumer(ACTION_CABLE_ROUTE);
+
+        const driver_accounts_channel_subscription = null;
+
         this.state = {
             history,
             search,
             driver_verified,
             account_blocked,
             selected_country,
-            selected_review_status
+            selected_review_status,
+            cable,
+            driver_accounts_channel_subscription
         };
 
     }
 
     componentWillUnmount(){
+
+        const cable = this.state.cable;
+
+        const driver_accounts_channel_subscription = this.state.driver_accounts_channel_subscription;
+
+        if(driver_accounts_channel_subscription !== null){
+
+            cable.subscriptions.remove(driver_accounts_channel_subscription);
+
+        }
 
         this.props.clearDriverAccountsPage();
 
@@ -57,7 +75,7 @@ class DriverAccounts extends Component{
         } = this.props;
 
 
-        const { history } = this.state;
+        const { history, cable } = this.state;
 
         if(!logged_in){
 
@@ -66,6 +84,39 @@ class DriverAccounts extends Component{
         }else{
 
             initializeDriverAccountsPage(limit, access_token, client, uid, history);
+
+            let driver_accounts_channel_subscription = this.state.driver_accounts_channel_subscription;
+
+            if(driver_accounts_channel_subscription === null){
+
+                driver_accounts_channel_subscription = cable.subscriptions.create(
+                    {
+                        channel: 'DriverAccountsChannel',
+                        access_token: access_token,
+                        client: client,
+                        uid: uid
+                    },
+                    {
+                        connected: () => {
+
+                            console.log('DriverAccountsChannel Connected!');
+
+                        },
+                        received: (data) => {
+
+                            console.log("DriverAccountsChannel Received!");
+
+                            console.log(data);
+
+
+                        }
+                    }
+                );
+
+                this.setState({driver_accounts_channel_subscription: driver_accounts_channel_subscription});
+
+            }
+
 
         }
 
