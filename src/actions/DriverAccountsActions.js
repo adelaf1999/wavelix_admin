@@ -6,13 +6,23 @@ import {
     INITIALIZE_DRIVER_ACCOUNTS_PAGE_COMPLETE,
     CLEAR_DRIVER_ACCOUNTS_STATE,
     SEARCH_DRIVER_ACCOUNTS_ROUTE,
-    SEARCH_DRIVER_ACCOUNTS_COMPLETE
+    SEARCH_DRIVER_ACCOUNTS_COMPLETE,
+    DRIVER_ACCOUNTS_CHANGED
 } from "./types";
 
 import axios from "axios";
 
 import { getFormData } from "../helpers";
 import _ from "lodash";
+
+export const driverAccountsChanged = (driver_accounts) => {
+
+    return{
+      type: DRIVER_ACCOUNTS_CHANGED,
+      payload: driver_accounts
+    };
+
+};
 
 
 export const searchDriverAccounts = (

@@ -5,7 +5,8 @@ import Wrapper from "./Wrapper";
 import {
     initializeDriverAccountsPage,
     clearDriverAccountsPage,
-    searchDriverAccounts
+    searchDriverAccounts,
+    driverAccountsChanged
 } from "../actions";
 import {  Spinner, Form, FormControl, Button, Table, Image} from "react-bootstrap";
 import _ from "lodash";
@@ -71,7 +72,8 @@ class DriverAccounts extends Component{
             client,
             uid,
             limit,
-            initializeDriverAccountsPage
+            initializeDriverAccountsPage,
+            driverAccountsChanged
         } = this.props;
 
 
@@ -140,6 +142,31 @@ class DriverAccounts extends Component{
                                     uid,
                                     history
                                 );
+
+
+                            }
+
+
+                            if(data.driver_account_item !== undefined){
+
+                                console.log("New driver account item received");
+
+                                const driver_account_item = data.driver_account_item;
+
+                                let driver_accounts = _.cloneDeep(this.props.driver_accounts);
+
+                                const driver_account_index = _.findIndex(driver_accounts, { id: driver_account_item.id });
+
+                                if(driver_account_index !== -1){
+
+                                    driver_accounts[driver_account_index] = driver_account_item;
+
+                                    console.log(driver_accounts);
+
+                                    driverAccountsChanged(driver_accounts);
+
+                                }
+
 
 
                             }
@@ -755,5 +782,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     initializeDriverAccountsPage,
     clearDriverAccountsPage,
-    searchDriverAccounts
+    searchDriverAccounts,
+    driverAccountsChanged
 })(DriverAccounts);
