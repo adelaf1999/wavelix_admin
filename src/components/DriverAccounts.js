@@ -108,6 +108,42 @@ class DriverAccounts extends Component{
 
                             console.log(data);
 
+                            if(data.new_driver_registered){
+
+                                const {
+                                    searchDriverAccounts,
+                                    limit,
+                                    access_token,
+                                    client,
+                                    uid
+                                } = this.props;
+
+
+                                const {
+                                    search,
+                                    driver_verified,
+                                    selected_country,
+                                    account_blocked,
+                                    selected_review_status,
+                                    history
+                                } = this.state;
+
+                                searchDriverAccounts(
+                                    limit,
+                                    search,
+                                    driver_verified,
+                                    selected_country,
+                                    account_blocked,
+                                    selected_review_status,
+                                    access_token,
+                                    client,
+                                    uid,
+                                    history
+                                );
+
+
+                            }
+
 
                         }
                     }
