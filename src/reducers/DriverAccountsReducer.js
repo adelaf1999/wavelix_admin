@@ -2,7 +2,8 @@ import {
     LOGOUT_SUCCESS,
     INITIALIZE_DRIVER_ACCOUNTS_PAGE,
     INITIALIZE_DRIVER_ACCOUNTS_PAGE_COMPLETE,
-    CLEAR_DRIVER_ACCOUNTS_STATE
+    CLEAR_DRIVER_ACCOUNTS_STATE,
+    SEARCH_DRIVER_ACCOUNTS_COMPLETE
 } from "../actions/types";
 
 
@@ -16,6 +17,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case SEARCH_DRIVER_ACCOUNTS_COMPLETE:
+            return{
+                ...state,
+                driver_accounts: action.payload
+            };
         case INITIALIZE_DRIVER_ACCOUNTS_PAGE_COMPLETE:
             return{
                 ...state,

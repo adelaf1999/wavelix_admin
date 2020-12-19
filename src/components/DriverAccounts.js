@@ -4,7 +4,8 @@ import TopHeader from "./TopHeader";
 import Wrapper from "./Wrapper";
 import {
     initializeDriverAccountsPage,
-    clearDriverAccountsPage
+    clearDriverAccountsPage,
+    searchDriverAccounts
 } from "../actions";
 import {  Spinner, Form, FormControl, Button, Table, Image} from "react-bootstrap";
 import _ from "lodash";
@@ -268,8 +269,15 @@ class DriverAccounts extends Component{
     show(){
 
         const {
-            initializing_page
+            initializing_page,
+            searchDriverAccounts,
+            limit,
+            access_token,
+            client,
+            uid
         } = this.props;
+
+        const { history } = this.state;
 
         if(initializing_page){
 
@@ -307,6 +315,26 @@ class DriverAccounts extends Component{
 
                                 this.setState({search: new_search});
 
+                                const {
+                                    driver_verified,
+                                    account_blocked,
+                                    selected_country,
+                                    selected_review_status
+                                } = this.state;
+
+                                searchDriverAccounts(
+                                    limit,
+                                    new_search,
+                                    driver_verified,
+                                    selected_country,
+                                    account_blocked,
+                                    selected_review_status,
+                                    access_token,
+                                    client,
+                                    uid,
+                                    history
+                                );
+
                             }}
                         />
 
@@ -325,15 +353,35 @@ class DriverAccounts extends Component{
 
                                     const new_driver_verified = e.target.value;
 
-                                    if(_.isBoolean(new_driver_verified)){
+                                    if( new_driver_verified === "true" || new_driver_verified === "false"){
 
                                         this.setState({driver_verified: new_driver_verified});
 
                                     }else{
 
+
                                         this.setState({driver_verified: null});
                                     }
 
+                                    const {
+                                        search,
+                                        account_blocked,
+                                        selected_country,
+                                        selected_review_status
+                                    } = this.state;
+
+                                    searchDriverAccounts(
+                                        limit,
+                                        search,
+                                        new_driver_verified,
+                                        selected_country,
+                                        account_blocked,
+                                        selected_review_status,
+                                        access_token,
+                                        client,
+                                        uid,
+                                        history
+                                    );
 
 
                                 }}
@@ -377,7 +425,7 @@ class DriverAccounts extends Component{
 
                                     const new_account_blocked = e.target.value;
 
-                                    if(_.isBoolean(new_account_blocked)){
+                                    if(new_account_blocked === "true" || new_account_blocked === "false"){
 
                                         this.setState({account_blocked: new_account_blocked});
 
@@ -385,6 +433,28 @@ class DriverAccounts extends Component{
 
                                         this.setState({account_blocked: null});
                                     }
+
+
+                                    const {
+                                        search,
+                                        driver_verified,
+                                        selected_country,
+                                        selected_review_status
+                                    } = this.state;
+
+
+                                    searchDriverAccounts(
+                                        limit,
+                                        search,
+                                        driver_verified,
+                                        selected_country,
+                                        new_account_blocked,
+                                        selected_review_status,
+                                        access_token,
+                                        client,
+                                        uid,
+                                        history
+                                    );
 
 
 
@@ -438,6 +508,27 @@ class DriverAccounts extends Component{
                                         this.setState({selected_country: new_selected_country});
                                     }
 
+                                    const {
+                                        search,
+                                        driver_verified,
+                                        account_blocked,
+                                        selected_review_status
+                                    } = this.state;
+
+
+                                    searchDriverAccounts(
+                                        limit,
+                                        search,
+                                        driver_verified,
+                                        new_selected_country,
+                                        account_blocked,
+                                        selected_review_status,
+                                        access_token,
+                                        client,
+                                        uid,
+                                        history
+                                    );
+
 
                                 }}
                             >
@@ -468,6 +559,28 @@ class DriverAccounts extends Component{
 
                                         this.setState({selected_review_status: new_selected_review_status});
                                     }
+
+
+                                    const {
+                                        search,
+                                        driver_verified,
+                                        account_blocked,
+                                        selected_country
+                                    } = this.state;
+
+
+                                    searchDriverAccounts(
+                                        limit,
+                                        search,
+                                        driver_verified,
+                                        selected_country,
+                                        account_blocked,
+                                        new_selected_review_status,
+                                        access_token,
+                                        client,
+                                        uid,
+                                        history
+                                    );
 
                                 }}
                             >
@@ -554,5 +667,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     initializeDriverAccountsPage,
-    clearDriverAccountsPage
+    clearDriverAccountsPage,
+    searchDriverAccounts
 })(DriverAccounts);

@@ -29,6 +29,7 @@ export const VIEW_STORE_ACCOUNT_ROUTE = `${BACKEND_URL}/view-store-account`;
 export const ACCEPT_STORE_VERIFICATION_ROUTE = `${BACKEND_URL}/accept-store-verification`;
 export const DECLINE_STORE_VERIFICATION_ROUTE = `${BACKEND_URL}/decline-store-verification`;
 export const GET_DRIVER_ACCOUNTS_ROUTE = `${BACKEND_URL}/get-driver-accounts`;
+export const SEARCH_DRIVER_ACCOUNTS_ROUTE = `${BACKEND_URL}/search-driver-accounts`;
 
 
 // Login Types
@@ -135,3 +136,4 @@ export const STORE_ACCOUNT_UNVERIFIED_REASONS_CHANGED = "store_account_unverifie
 export const INITIALIZE_DRIVER_ACCOUNTS_PAGE = "initialize_driver_accounts_page";
 export const INITIALIZE_DRIVER_ACCOUNTS_PAGE_COMPLETE = "initialize_driver_accounts_page_complete";
 export const CLEAR_DRIVER_ACCOUNTS_STATE = "clear_driver_accounts_state";
+export const SEARCH_DRIVER_ACCOUNTS_COMPLETE = "search_driver_accounts_complete";
