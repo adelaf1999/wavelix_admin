@@ -98,6 +98,16 @@ class TopHeader extends Component{
                     </Nav.Link>
 
 
+                    <Nav.Link
+                        onClick={() => {
+                            history.push("/driver-accounts");
+                        }}
+                        className="nav-link"
+                    >
+                        Drivers
+                    </Nav.Link>
+
+
                 </Nav>
 
                 <Nav>
