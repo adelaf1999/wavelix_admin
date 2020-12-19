@@ -7,13 +7,23 @@ import {
     CLEAR_DRIVER_ACCOUNTS_STATE,
     SEARCH_DRIVER_ACCOUNTS_ROUTE,
     SEARCH_DRIVER_ACCOUNTS_COMPLETE,
-    DRIVER_ACCOUNTS_CHANGED
+    DRIVER_ACCOUNTS_CHANGED,
+    SEARCH_DRIVER_ACCOUNTS_LIMIT_CHANGED
 } from "./types";
 
 import axios from "axios";
 
 import { getFormData } from "../helpers";
 import _ from "lodash";
+
+export const searchDriverAccountsLimitChanged = (limit) => {
+
+    return{
+      type: SEARCH_DRIVER_ACCOUNTS_LIMIT_CHANGED,
+      payload: limit
+    };
+
+};
 
 export const driverAccountsChanged = (driver_accounts) => {
 

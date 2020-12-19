@@ -6,7 +6,8 @@ import {
     initializeDriverAccountsPage,
     clearDriverAccountsPage,
     searchDriverAccounts,
-    driverAccountsChanged
+    driverAccountsChanged,
+    searchDriverAccountsLimitChanged
 } from "../actions";
 import {  Spinner, Form, FormControl, Button, Table, Image} from "react-bootstrap";
 import _ from "lodash";
@@ -35,6 +36,8 @@ class DriverAccounts extends Component{
 
         const driver_accounts_channel_subscription = null;
 
+        this.handleScroll = this.handleScroll.bind(this);
+
         this.state = {
             history,
             search,
@@ -48,6 +51,65 @@ class DriverAccounts extends Component{
 
     }
 
+
+    handleScroll() {
+
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+
+        const body = document.body;
+
+        const html = document.documentElement;
+
+        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+
+        const windowBottom = windowHeight + window.pageYOffset;
+
+        if (windowBottom >= docHeight) {
+
+            console.log("bottom reached");
+
+            const {
+                searchDriverAccounts,
+                searchDriverAccountsLimitChanged,
+                limit,
+                access_token,
+                client,
+                uid
+            } = this.props;
+
+
+            const {
+                search,
+                driver_verified,
+                selected_country,
+                account_blocked,
+                selected_review_status,
+                history
+            } = this.state;
+
+            const new_limit = limit + 50;
+
+            searchDriverAccountsLimitChanged(new_limit);
+
+            searchDriverAccounts(
+                new_limit,
+                search,
+                driver_verified,
+                selected_country,
+                account_blocked,
+                selected_review_status,
+                access_token,
+                client,
+                uid,
+                history
+            );
+
+
+
+        }
+    }
+
+
     componentWillUnmount(){
 
         const cable = this.state.cable;
@@ -60,11 +122,15 @@ class DriverAccounts extends Component{
 
         }
 
+        window.removeEventListener("scroll", this.handleScroll);
+
         this.props.clearDriverAccountsPage();
 
     }
 
     componentDidMount(){
+
+        window.addEventListener("scroll", this.handleScroll);
 
         const {
             logged_in,
@@ -369,6 +435,7 @@ class DriverAccounts extends Component{
                     <tbody>
 
                         {this.renderAccounts()}
+                    
 
                     </tbody>
 
@@ -783,5 +850,6 @@ export default connect(mapStateToProps, {
     initializeDriverAccountsPage,
     clearDriverAccountsPage,
     searchDriverAccounts,
-    driverAccountsChanged
+    driverAccountsChanged,
+    searchDriverAccountsLimitChanged
 })(DriverAccounts);

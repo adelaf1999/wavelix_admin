@@ -137,4 +137,5 @@ export const INITIALIZE_DRIVER_ACCOUNTS_PAGE = "initialize_driver_accounts_page"
 export const INITIALIZE_DRIVER_ACCOUNTS_PAGE_COMPLETE = "initialize_driver_accounts_page_complete";
 export const CLEAR_DRIVER_ACCOUNTS_STATE = "clear_driver_accounts_state";
 export const SEARCH_DRIVER_ACCOUNTS_COMPLETE = "search_driver_accounts_complete";
+export const SEARCH_DRIVER_ACCOUNTS_LIMIT_CHANGED = "search_driver_accounts_limit_changed";
 export const DRIVER_ACCOUNTS_CHANGED = "driver_accounts_changed";

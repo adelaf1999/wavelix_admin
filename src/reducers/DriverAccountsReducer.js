@@ -4,7 +4,8 @@ import {
     INITIALIZE_DRIVER_ACCOUNTS_PAGE_COMPLETE,
     CLEAR_DRIVER_ACCOUNTS_STATE,
     SEARCH_DRIVER_ACCOUNTS_COMPLETE,
-    DRIVER_ACCOUNTS_CHANGED
+    DRIVER_ACCOUNTS_CHANGED,
+    SEARCH_DRIVER_ACCOUNTS_LIMIT_CHANGED
 } from "../actions/types";
 
 
@@ -18,6 +19,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case SEARCH_DRIVER_ACCOUNTS_LIMIT_CHANGED:
+            return{
+                ...state,
+                limit: action.payload
+            };
         case DRIVER_ACCOUNTS_CHANGED:
             return{
                 ...state,
