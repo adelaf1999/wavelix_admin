@@ -6,7 +6,7 @@ import {
     initializeDriverAccountsPage,
     clearDriverAccountsPage
 } from "../actions";
-import {  Spinner } from "react-bootstrap";
+import {  Spinner, Form, FormControl, Button, Table} from "react-bootstrap";
 
 class DriverAccounts extends Component{
 
@@ -16,8 +16,11 @@ class DriverAccounts extends Component{
 
         const history = props.history;
 
+        const search = "";
+
         this.state = {
-            history
+            history,
+            search
         };
 
     }
@@ -82,6 +85,26 @@ class DriverAccounts extends Component{
             return(
 
                 <div className="page-container">
+
+
+                    <Form className="searchbar-container" inline>
+
+                        <FormControl
+                            type="text"
+                            placeholder="Search by driver name"
+                            className="mr-sm-2"
+                            id="searchbar"
+                            onChange={(e) => {
+
+                                const new_search = e.target.value;
+
+                                this.setState({search: new_search});
+
+                            }}
+                        />
+
+                    </Form>
+
 
                 </div>
 
