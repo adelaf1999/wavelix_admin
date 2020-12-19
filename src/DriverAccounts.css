@@ -9,3 +9,8 @@
 .driver-account-filter-group{
     width: 18%;
 }
+#driver-profile-picture{
+    width: 150px;
+    height: 180px;
+    object-fit: cover;
+}
