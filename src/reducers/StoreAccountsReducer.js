@@ -12,9 +12,9 @@ const INITIAL_STATE = {
     initializing_page: false,
     limit: 50,
     store_accounts: [],
-    account_status_options: [],
-    review_status_options: [],
-    countries: []
+    account_status_options: {},
+    review_status_options: {},
+    countries: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
