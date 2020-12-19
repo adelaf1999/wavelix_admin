@@ -1,0 +1,11 @@
+#driver-accounts-filters-container{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 3rem;
+}
+
+.driver-account-filter-group{
+    width: 25%;
+}

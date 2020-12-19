@@ -8,6 +8,7 @@
 @import "ViewCustomerAccount.css";
 @import "StoreAccounts.css";
 @import "ViewStoreAccount.css";
+@import "DriverAccounts.css";
 
 .center-container{
     position: absolute;

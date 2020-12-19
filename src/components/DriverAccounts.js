@@ -7,6 +7,7 @@ import {
     clearDriverAccountsPage
 } from "../actions";
 import {  Spinner, Form, FormControl, Button, Table} from "react-bootstrap";
+import _ from "lodash";
 
 class DriverAccounts extends Component{
 
@@ -18,9 +19,16 @@ class DriverAccounts extends Component{
 
         const search = "";
 
+        const driver_verified = null;
+
+        const account_blocked = null;
+
+
         this.state = {
             history,
-            search
+            search,
+            driver_verified,
+            account_blocked
         };
 
     }
@@ -102,6 +110,115 @@ class DriverAccounts extends Component{
 
                             }}
                         />
+
+                    </Form>
+
+                    <Form id="driver-accounts-filters-container">
+
+
+                        <Form.Group className="driver-account-filter-group" >
+
+                            <Form.Label>Verified</Form.Label>
+
+                            <Form.Control
+                                as="select"
+                                onChange={(e) => {
+
+                                    const new_driver_verified = e.target.value;
+
+                                    if(_.isBoolean(new_driver_verified)){
+
+                                        this.setState({driver_verified: new_driver_verified});
+
+                                    }else{
+
+                                        this.setState({driver_verified: null});
+                                    }
+
+
+
+                                }}
+                            >
+
+                                <option
+                                    value=""
+                                >
+                                    Select option
+                                </option>
+
+
+                                <option
+                                    value={true}
+                                >
+                                    Yes
+                                </option>
+
+
+                                <option
+                                    value={false}
+                                >
+                                    No
+                                </option>
+
+                            </Form.Control>
+
+
+                        </Form.Group>
+
+
+
+                        <Form.Group className="driver-account-filter-group" >
+
+                            <Form.Label>Account Blocked</Form.Label>
+
+
+                            <Form.Control
+                                as="select"
+                                onChange={(e) => {
+
+                                    const new_account_blocked = e.target.value;
+
+                                    if(_.isBoolean(new_account_blocked)){
+
+                                        this.setState({account_blocked: new_account_blocked});
+
+                                    }else{
+
+                                        this.setState({account_blocked: null});
+                                    }
+
+
+
+                                }}
+                            >
+
+                                <option
+                                    value=""
+                                >
+                                    Select option
+                                </option>
+
+
+                                <option
+                                    value={true}
+                                >
+                                    Yes
+                                </option>
+
+
+                                <option
+                                    value={false}
+                                >
+                                    No
+                                </option>
+
+
+                            </Form.Control>
+
+
+
+                        </Form.Group>
+
 
                     </Form>
 
