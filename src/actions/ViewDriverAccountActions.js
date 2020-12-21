@@ -82,42 +82,7 @@ export const getDriverData = (driver_id, access_token, client, uid, history) => 
                     const unverified_reasons = data.unverified_reasons;
 
                     const email = data.email;
-
-                    console.log("profile_picture ", profile_picture);
-
-                    console.log("name ", name);
-
-                    console.log("phone_number ", phone_number);
-
-                    console.log("country ", country);
-
-                    console.log("driver_verified ", driver_verified);
-
-                    console.log("account_blocked ", account_blocked);
-
-                    console.log("review_status ", review_status);
-
-                    console.log("registered_at ", registered_at);
-
-                    console.log("latitude ", latitude);
-
-                    console.log("longitude ", longitude);
-
-                    console.log("driver_license_pictures ", driver_license_pictures);
-
-                    console.log("national_id_pictures ", national_id_pictures);
-
-                    console.log("vehicle_registration_pictures ", vehicle_registration_pictures);
-
-                    console.log("verified_by ", verified_by);
-
-                    console.log("admins_declined ", admins_declined);
-
-                    console.log("unverified_reasons ", unverified_reasons);
-
-                    console.log("email ", email);
-
-
+                    
 
                     dispatch({type: GET_DRIVER_DATA_COMPLETE, payload: {
                         profile_picture: profile_picture,
