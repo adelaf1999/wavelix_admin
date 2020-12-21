@@ -9,7 +9,8 @@ import {
     driverAccountReviewStatusChanged,
     driverAccountUnverifiedReasonsChanged,
     driverAccountDriverVerifiedChanged,
-    driverAccountVerifiedByChanged
+    driverAccountVerifiedByChanged,
+    declineDriverVerification
 } from "../actions";
 import {  Spinner, Image, Card,  Button, Form, Modal, Alert, Accordion, ListGroup} from "react-bootstrap";
 import actionCable from "actioncable";
@@ -30,11 +31,17 @@ class ViewDriverAccount extends Component{
 
         const driver_account_channel_subscription = null;
 
+        const decline_verification_modal_visible = false;
+
+        const declined_reason = "";
+
         this.state = {
             history,
             params,
             cable,
-            driver_account_channel_subscription
+            driver_account_channel_subscription,
+            decline_verification_modal_visible,
+            declined_reason
         };
 
     }
@@ -330,6 +337,7 @@ class ViewDriverAccount extends Component{
                     variant="outline-danger"
                     onClick={(e) => {
                         e.preventDefault();
+                        this.setState({decline_verification_modal_visible: true});
                     }}
                     className="driver-verification-button"
                 >
@@ -375,7 +383,7 @@ class ViewDriverAccount extends Component{
                                         <Card.Text>
                                             {unverified_reason.reason}
                                         </Card.Text>
-                                        
+
                                     </Card.Body>
 
                                 </Card>
@@ -569,6 +577,149 @@ class ViewDriverAccount extends Component{
 
             );
         }
+
+    }
+
+    exitDeclineVerificationModal(){
+
+        this.setState({decline_verification_modal_visible: false, declined_reason: ''});
+
+    }
+
+    declineVerificationModalButton(){
+
+        const { declined_reason, params, history } = this.state;
+
+        const driver_id = params.driver_id;
+
+        if(_.isEmpty(declined_reason)){
+
+            return(
+
+                <Button
+                    disabled
+                    variant="danger"
+                >
+                    Decline
+                </Button>
+
+            );
+
+        }else{
+
+            return(
+
+                <Button
+                    variant="danger"
+                    onClick={(e) => {
+
+                        e.preventDefault();
+
+                        const {
+                            access_token,
+                            client,
+                            uid,
+                            declineDriverVerification
+                        } = this.props;
+
+                        declineDriverVerification(
+                            driver_id,
+                            declined_reason,
+                            access_token,
+                            client,
+                            uid,
+                            history
+                        );
+
+                        this.exitDeclineVerificationModal();
+
+                    }}
+                >
+                    Decline
+                </Button>
+
+            );
+
+        }
+
+
+    }
+
+
+    declineVerificationModal(){
+
+        const { decline_verification_modal_visible} = this.state;
+
+
+        if(decline_verification_modal_visible){
+
+            return(
+
+                <Modal
+                    show={decline_verification_modal_visible}
+                    onHide={() => {
+                        this.exitDeclineVerificationModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Decline Verification</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+                        <Form.Group controlId="formPlaintextCredential">
+
+                            <Form.Label>
+                                Please enter the reason(s) for declining verification
+                            </Form.Label>
+
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                onChange={(e) => {
+                                    this.setState({declined_reason: e.target.value});
+                                }}
+                            />
+
+                        </Form.Group>
+
+                    </Modal.Body>
+
+                    <Modal.Footer>
+
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitDeclineVerificationModal();
+
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        {this.declineVerificationModalButton()}
+
+                    </Modal.Footer>
+
+
+                </Modal>
+
+
+            );
+
+        }
+
 
     }
 
@@ -902,6 +1053,8 @@ class ViewDriverAccount extends Component{
 
                     </div>
 
+                    {this.declineVerificationModal()}
+
                 </div>
 
             );
@@ -1006,5 +1159,6 @@ export default connect(mapStateToProps, {
     driverAccountReviewStatusChanged,
     driverAccountUnverifiedReasonsChanged,
     driverAccountDriverVerifiedChanged,
-    driverAccountVerifiedByChanged
+    driverAccountVerifiedByChanged,
+    declineDriverVerification
 })(ViewDriverAccount);

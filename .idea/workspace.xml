@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6d195e98-fbd2-42d9-b726-6c7e9b6ac1da" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.eslintcache" afterPath="$PROJECT_DIR$/.eslintcache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ViewDriverAccount.css" afterPath="$PROJECT_DIR$/src/ViewDriverAccount.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/ViewDriverAccountActions.js" afterPath="$PROJECT_DIR$/src/actions/ViewDriverAccountActions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/types.js" afterPath="$PROJECT_DIR$/src/actions/types.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ViewDriverAccount.js" afterPath="$PROJECT_DIR$/src/components/ViewDriverAccount.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -21,8 +22,8 @@
       <file leaf-file-name="ViewDriverAccount.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/ViewDriverAccount.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="989">
-              <caret line="377" column="40" lean-forward="false" selection-start-line="377" selection-start-column="40" selection-end-line="377" selection-end-column="40" />
+            <state relative-caret-position="764">
+              <caret line="630" column="30" lean-forward="true" selection-start-line="630" selection-start-column="30" selection-end-line="630" selection-end-column="30" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -30,34 +31,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ViewStoreAccount.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/ViewStoreAccount.js">
+      <file leaf-file-name="types.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/actions/types.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1035">
-              <caret line="343" column="4" lean-forward="true" selection-start-line="343" selection-start-column="4" selection-end-line="395" selection-end-column="5" />
+            <state relative-caret-position="1289">
+              <caret line="33" column="65" lean-forward="false" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ViewDriverAccountActions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/actions/ViewDriverAccountActions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="334">
+              <caret line="20" column="104" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="104" />
               <folding>
-                <element signature="e#0#41#0" expanded="true" />
+                <element signature="e#0#482#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ViewDriverAccount.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ViewDriverAccount.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1574">
-              <caret line="54" column="7" lean-forward="false" selection-start-line="54" selection-start-column="7" selection-end-line="54" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ViewStoreAccount.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ViewStoreAccount.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1153">
-              <caret line="54" column="1" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="56" selection-end-column="1" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -74,7 +65,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>&lt;Formcon</find>
       <find>search</find>
       <find>console.log</find>
       <find>View</find>
@@ -103,6 +93,7 @@
       <find>header-con</find>
       <find>account-con</find>
       <find>storeVeri</find>
+      <find>Decline Verifi</find>
       <find>store-verific</find>
     </findStrings>
   </component>
@@ -157,11 +148,11 @@
         <option value="$PROJECT_DIR$/src/components/ViewStoreAccount.js" />
         <option value="$PROJECT_DIR$/src/Routes.js" />
         <option value="$PROJECT_DIR$/src/components/DriverAccounts.js" />
-        <option value="$PROJECT_DIR$/src/actions/types.js" />
-        <option value="$PROJECT_DIR$/src/actions/ViewDriverAccountActions.js" />
         <option value="$PROJECT_DIR$/src/reducers/ViewDriverAccountReducer.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/ViewDriverAccount.css" />
+        <option value="$PROJECT_DIR$/src/actions/types.js" />
+        <option value="$PROJECT_DIR$/src/actions/ViewDriverAccountActions.js" />
         <option value="$PROJECT_DIR$/src/components/ViewDriverAccount.js" />
       </list>
     </option>
@@ -329,18 +320,18 @@
       <workItem from="1608302870961" duration="5000" />
       <workItem from="1608368359115" duration="12755000" />
       <workItem from="1608539659901" duration="3516000" />
-      <workItem from="1608558206657" duration="3384000" />
+      <workItem from="1608558206657" duration="3916000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="181388000" />
+    <option name="totallyTimeSpent" value="181920000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-2" width="3840" height="2080" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19557291" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19557291" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299735" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -549,6 +540,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3420">
           <caret line="98" column="37" lean-forward="true" selection-start-line="98" selection-start-column="37" selection-end-line="98" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -584,6 +576,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="82" column="34" lean-forward="true" selection-start-line="82" selection-start-column="15" selection-end-line="82" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#350#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -591,6 +586,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="17" column="0" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#358#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -608,6 +606,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1080">
           <caret line="24" column="37" lean-forward="false" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#278#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -657,28 +658,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/ViewStoreAccountActions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="159" column="45" lean-forward="true" selection-start-line="159" selection-start-column="45" selection-end-line="159" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/types.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1394">
-          <caret line="150" column="31" lean-forward="true" selection-start-line="150" selection-start-column="31" selection-end-line="150" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/ViewDriverAccountActions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/TopHeader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="785">
@@ -698,6 +677,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1035">
           <caret line="23" column="1" lean-forward="true" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -705,6 +685,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="7" lean-forward="true" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#196#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -730,16 +713,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ViewStoreAccount.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1035">
-          <caret line="343" column="4" lean-forward="true" selection-start-line="343" selection-start-column="4" selection-end-line="395" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ViewStoreAccount.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1153">
@@ -756,10 +729,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ViewStoreAccount.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="695" column="4" lean-forward="false" selection-start-line="695" selection-start-column="3" selection-end-line="770" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/types.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1289">
+          <caret line="33" column="65" lean-forward="false" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/ViewStoreAccountActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="39" column="6" lean-forward="true" selection-start-line="39" selection-start-column="6" selection-end-line="62" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#499#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/ViewDriverAccountActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="20" column="104" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="104" />
+          <folding>
+            <element signature="e#0#482#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/ViewDriverAccount.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="989">
-          <caret line="377" column="40" lean-forward="false" selection-start-line="377" selection-start-column="40" selection-end-line="377" selection-end-column="40" />
+        <state relative-caret-position="764">
+          <caret line="630" column="30" lean-forward="true" selection-start-line="630" selection-start-column="30" selection-end-line="630" selection-end-column="30" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
