@@ -3,7 +3,12 @@ import {
     GET_DRIVER_DATA,
     GET_DRIVER_DATA_COMPLETE,
     CLEAR_VIEW_DRIVER_ACCOUNT_STATE,
-    DRIVER_ACCOUNT_REVIEWERS_CHANGED
+    DRIVER_ACCOUNT_REVIEWERS_CHANGED,
+    DRIVER_ACCOUNT_ADMINS_DECLINED_CHANGED,
+    DRIVER_ACCOUNT_REVIEW_STATUS_CHANGED,
+    DRIVER_ACCOUNT_UNVERIFIED_REASONS_CHANGED,
+    DRIVER_ACCOUNT_DRIVER_VERIFIED_CHANGED,
+    DRIVER_ACCOUNT_VERIFIED_BY_CHANGED
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -30,6 +35,31 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case  DRIVER_ACCOUNT_VERIFIED_BY_CHANGED:
+            return{
+                ...state,
+                verified_by: action.payload
+            };
+        case DRIVER_ACCOUNT_DRIVER_VERIFIED_CHANGED:
+            return{
+                ...state,
+                driver_verified: action.payload
+            };
+        case DRIVER_ACCOUNT_UNVERIFIED_REASONS_CHANGED:
+            return{
+                ...state,
+                unverified_reasons: action.payload
+            };
+        case DRIVER_ACCOUNT_REVIEW_STATUS_CHANGED:
+            return{
+                ...state,
+                review_status: action.payload
+            };
+        case DRIVER_ACCOUNT_ADMINS_DECLINED_CHANGED:
+            return{
+                ...state,
+                admins_declined: action.payload
+            };
         case DRIVER_ACCOUNT_REVIEWERS_CHANGED:
             return{
                 ...state,

@@ -4,7 +4,12 @@ import Wrapper from "./Wrapper";
 import {
     getDriverData,
     clearViewDriverAccountState,
-    driverAccountReviewersChanged
+    driverAccountReviewersChanged,
+    driverAccountAdminsDeclinedChanged,
+    driverAccountReviewStatusChanged,
+    driverAccountUnverifiedReasonsChanged,
+    driverAccountDriverVerifiedChanged,
+    driverAccountVerifiedByChanged
 } from "../actions";
 import {  Spinner } from "react-bootstrap";
 import actionCable from "actioncable";
@@ -57,7 +62,12 @@ class ViewDriverAccount extends Component{
             client,
             uid,
             getDriverData,
-            driverAccountReviewersChanged
+            driverAccountReviewersChanged,
+            driverAccountAdminsDeclinedChanged,
+            driverAccountReviewStatusChanged,
+            driverAccountUnverifiedReasonsChanged,
+            driverAccountDriverVerifiedChanged,
+            driverAccountVerifiedByChanged
         } = this.props;
 
         const { history, params } = this.state;
@@ -97,6 +107,57 @@ class ViewDriverAccount extends Component{
                             console.log("DriverAccountChannel Received!");
 
                             console.log(data);
+
+                            if(data.verified_by !== undefined){
+
+                                const verified_by = data.verified_by;
+
+                                console.log(verified_by);
+
+                                driverAccountVerifiedByChanged(verified_by);
+
+
+                            }
+
+                            if(data.driver_verified !== undefined){
+
+                                const driver_verified = data.driver_verified;
+
+                                console.log(driver_verified);
+
+                                driverAccountDriverVerifiedChanged(driver_verified);
+
+                            }
+
+                            if(data.unverified_reasons !== undefined){
+
+                                const unverified_reasons = data.unverified_reasons;
+
+                                console.log(unverified_reasons);
+
+                                driverAccountUnverifiedReasonsChanged(unverified_reasons);
+
+                            }
+
+                            if(data.review_status !== undefined){
+
+                                const review_status = data.review_status;
+
+                                console.log(review_status);
+
+                                driverAccountReviewStatusChanged(review_status);
+
+                            }
+
+                            if(data.admins_declined !== undefined){
+
+                                const admins_declined = data.admins_declined;
+
+                                console.log(admins_declined);
+
+                                driverAccountAdminsDeclinedChanged(admins_declined);
+
+                            }
 
 
                             if(data.current_reviewers !== undefined){
@@ -248,5 +309,10 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     getDriverData,
     clearViewDriverAccountState,
-    driverAccountReviewersChanged
+    driverAccountReviewersChanged,
+    driverAccountAdminsDeclinedChanged,
+    driverAccountReviewStatusChanged,
+    driverAccountUnverifiedReasonsChanged,
+    driverAccountDriverVerifiedChanged,
+    driverAccountVerifiedByChanged
 })(ViewDriverAccount);

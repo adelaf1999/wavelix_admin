@@ -5,18 +5,68 @@ import {
     GET_DRIVER_DATA,
     GET_DRIVER_DATA_COMPLETE,
     CLEAR_VIEW_DRIVER_ACCOUNT_STATE,
-    DRIVER_ACCOUNT_REVIEWERS_CHANGED
+    DRIVER_ACCOUNT_REVIEWERS_CHANGED,
+    DRIVER_ACCOUNT_ADMINS_DECLINED_CHANGED,
+    DRIVER_ACCOUNT_REVIEW_STATUS_CHANGED,
+    DRIVER_ACCOUNT_UNVERIFIED_REASONS_CHANGED,
+    DRIVER_ACCOUNT_DRIVER_VERIFIED_CHANGED,
+    DRIVER_ACCOUNT_VERIFIED_BY_CHANGED
 } from "./types";
 
 import axios from "axios";
 
 import { getFormData } from "../helpers";
 
+export const driverAccountVerifiedByChanged = (verified_by) => {
+
+    return{
+      type: DRIVER_ACCOUNT_VERIFIED_BY_CHANGED,
+      payload: verified_by
+    };
+
+};
+
+export const driverAccountDriverVerifiedChanged = (driver_verified) => {
+
+    return{
+      type: DRIVER_ACCOUNT_DRIVER_VERIFIED_CHANGED,
+      payload: driver_verified
+    };
+
+};
+
+export const driverAccountUnverifiedReasonsChanged = (unverified_reasons) => {
+
+    return{
+        type: DRIVER_ACCOUNT_UNVERIFIED_REASONS_CHANGED,
+        payload: unverified_reasons
+    };
+
+};
+
+export const driverAccountReviewStatusChanged = (review_status) => {
+
+    return{
+        type: DRIVER_ACCOUNT_REVIEW_STATUS_CHANGED,
+        payload: review_status
+    };
+
+};
+
+export const driverAccountAdminsDeclinedChanged = (admins_declined) => {
+
+    return{
+        type: DRIVER_ACCOUNT_ADMINS_DECLINED_CHANGED,
+        payload: admins_declined
+    };
+
+};
+
 export const driverAccountReviewersChanged = (current_reviewers) => {
 
     return{
-      type: DRIVER_ACCOUNT_REVIEWERS_CHANGED,
-      payload: current_reviewers
+        type: DRIVER_ACCOUNT_REVIEWERS_CHANGED,
+        payload: current_reviewers
     };
 
 };
@@ -25,7 +75,7 @@ export const driverAccountReviewersChanged = (current_reviewers) => {
 export const clearViewDriverAccountState = () => {
 
     return{
-      type: CLEAR_VIEW_DRIVER_ACCOUNT_STATE
+        type: CLEAR_VIEW_DRIVER_ACCOUNT_STATE
     };
 
 };
