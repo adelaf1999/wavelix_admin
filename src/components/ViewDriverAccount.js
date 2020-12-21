@@ -294,6 +294,107 @@ class ViewDriverAccount extends Component{
 
     }
 
+    acceptVerificationButton(){
+
+        const { driver_verified } = this.props;
+
+        if(!driver_verified){
+
+            return(
+
+                <Button
+                    variant="outline-success"
+                    onClick={(e) => {
+                        e.preventDefault();
+                    }}
+                    className="driver-verification-button"
+                >
+                    Accept Verification
+                </Button>
+
+            );
+
+        }
+
+    }
+
+    declineVerificationButton(){
+
+        const { driver_verified, admins_declined, id } = this.props;
+
+        if(!driver_verified && !admins_declined.includes(id)){
+
+            return(
+
+                <Button
+                    variant="outline-danger"
+                    onClick={(e) => {
+                        e.preventDefault();
+                    }}
+                    className="driver-verification-button"
+                >
+                    Decline Verification
+                </Button>
+
+            );
+
+        }
+
+    }
+
+    unverifiedReasons(){
+
+        const { unverified_reasons } = this.props;
+
+        if(unverified_reasons.length > 0){
+
+            return(
+
+                <div>
+
+
+                    <Form.Label className="driver-verification-label">
+                        Reviewers Declined Reasons
+                    </Form.Label>
+
+
+                    {
+                        _.map(unverified_reasons, (unverified_reason, index) => {
+
+                            return(
+
+                                <Card
+                                    key={index}
+                                    className="driver-unverified-reason-card"
+                                >
+
+                                    <Card.Header>{_.startCase(unverified_reason.admin_name)}</Card.Header>
+
+                                    <Card.Body>
+
+                                        <Card.Text>
+                                            {unverified_reason.reason}
+                                        </Card.Text>
+                                        
+                                    </Card.Body>
+
+                                </Card>
+
+                            );
+
+                        })
+                    }
+
+
+                </div>
+
+            );
+
+
+        }
+
+    }
+
     driverVerificationCard(){
 
         const { roles } = this.props;
@@ -447,14 +548,14 @@ class ViewDriverAccount extends Component{
                                         driver owns the vehicle).
                                     </ListGroup.Item>
 
-                                    
-
-
                                 </ListGroup>
 
 
+                                {this.acceptVerificationButton()}
 
+                                {this.declineVerificationButton()}
 
+                                {this.unverifiedReasons()}
 
 
                             </div>
