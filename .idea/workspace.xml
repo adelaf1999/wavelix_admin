@@ -22,8 +22,8 @@
       <file leaf-file-name="ViewDriverAccount.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/ViewDriverAccount.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="764">
-              <caret line="630" column="30" lean-forward="true" selection-start-line="630" selection-start-column="30" selection-end-line="630" selection-end-column="30" />
+            <state relative-caret-position="572">
+              <caret line="770" column="79" lean-forward="true" selection-start-line="770" selection-start-column="79" selection-end-line="770" selection-end-column="83" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -31,23 +31,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="types.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/actions/types.js">
+      <file leaf-file-name="ViewDriverAccountActions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/actions/ViewDriverAccountActions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1289">
-              <caret line="33" column="65" lean-forward="false" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
-              <folding />
+            <state relative-caret-position="629">
+              <caret line="21" column="26" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="37" />
+              <folding>
+                <element signature="e#0#520#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ViewDriverAccountActions.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/actions/ViewDriverAccountActions.js">
+      <file leaf-file-name="ViewStoreAccount.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/ViewStoreAccount.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="20" column="104" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="104" />
+            <state relative-caret-position="495">
+              <caret line="777" column="3" lean-forward="false" selection-start-line="777" selection-start-column="3" selection-end-line="863" selection-end-column="5" />
               <folding>
-                <element signature="e#0#482#0" expanded="true" />
+                <element signature="e#0#41#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -65,7 +67,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>search</find>
       <find>console.log</find>
       <find>View</find>
       <find>&lt;Butto</find>
@@ -95,6 +96,7 @@
       <find>storeVeri</find>
       <find>Decline Verifi</find>
       <find>store-verific</find>
+      <find>Accept V</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -320,12 +322,12 @@
       <workItem from="1608302870961" duration="5000" />
       <workItem from="1608368359115" duration="12755000" />
       <workItem from="1608539659901" duration="3516000" />
-      <workItem from="1608558206657" duration="3916000" />
+      <workItem from="1608558206657" duration="4695000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="181920000" />
+    <option name="totallyTimeSpent" value="182699000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-2" width="3840" height="2080" extended-state="6" />
@@ -729,48 +731,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ViewStoreAccount.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="695" column="4" lean-forward="false" selection-start-line="695" selection-start-column="3" selection-end-line="770" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/types.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1289">
-          <caret line="33" column="65" lean-forward="false" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/actions/ViewStoreAccountActions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="39" column="6" lean-forward="true" selection-start-line="39" selection-start-column="6" selection-end-line="62" selection-end-column="11" />
+        <state relative-caret-position="409">
+          <caret line="86" column="8" lean-forward="false" selection-start-line="86" selection-start-column="8" selection-end-line="109" selection-end-column="11" />
           <folding>
             <element signature="e#0#499#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/types.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1061">
+          <caret line="34" column="92" lean-forward="false" selection-start-line="34" selection-start-column="92" selection-end-line="34" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ViewStoreAccount.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="777" column="3" lean-forward="false" selection-start-line="777" selection-start-column="3" selection-end-line="863" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/actions/ViewDriverAccountActions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="20" column="104" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="104" />
+        <state relative-caret-position="629">
+          <caret line="21" column="26" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="37" />
           <folding>
-            <element signature="e#0#482#0" expanded="true" />
+            <element signature="e#0#520#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/ViewDriverAccount.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="764">
-          <caret line="630" column="30" lean-forward="true" selection-start-line="630" selection-start-column="30" selection-end-line="630" selection-end-column="30" />
+        <state relative-caret-position="572">
+          <caret line="770" column="79" lean-forward="true" selection-start-line="770" selection-start-column="79" selection-end-line="770" selection-end-column="83" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

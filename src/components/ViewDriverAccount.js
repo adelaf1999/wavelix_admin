@@ -10,7 +10,8 @@ import {
     driverAccountUnverifiedReasonsChanged,
     driverAccountDriverVerifiedChanged,
     driverAccountVerifiedByChanged,
-    declineDriverVerification
+    declineDriverVerification,
+    acceptDriverVerification
 } from "../actions";
 import {  Spinner, Image, Card,  Button, Form, Modal, Alert, Accordion, ListGroup} from "react-bootstrap";
 import actionCable from "actioncable";
@@ -35,13 +36,16 @@ class ViewDriverAccount extends Component{
 
         const declined_reason = "";
 
+        const accept_verification_modal_visible = false;
+
         this.state = {
             history,
             params,
             cable,
             driver_account_channel_subscription,
             decline_verification_modal_visible,
-            declined_reason
+            declined_reason,
+            accept_verification_modal_visible
         };
 
     }
@@ -313,6 +317,7 @@ class ViewDriverAccount extends Component{
                     variant="outline-success"
                     onClick={(e) => {
                         e.preventDefault();
+                        this.setState({accept_verification_modal_visible: true});
                     }}
                     className="driver-verification-button"
                 >
@@ -724,6 +729,102 @@ class ViewDriverAccount extends Component{
     }
 
 
+    exitAcceptVerificationModal(){
+
+        this.setState({accept_verification_modal_visible: false});
+
+    }
+
+
+    acceptVerificationModal(){
+
+        const { accept_verification_modal_visible, history, params } = this.state;
+
+        const driver_id = params.driver_id;
+
+        if(accept_verification_modal_visible){
+
+            return(
+
+                <Modal
+                    show={accept_verification_modal_visible}
+                    onHide={() => {
+                        this.exitAcceptVerificationModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Accept Verification</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+                        <p>
+                            By accepting the verification request, you confirm that you have gone
+                            through all the necessary driver verification guidelines and have made
+                            sure that all the documents are valid, that the driver's information
+                            matches the information in the documents submitted, and that the driver's
+                            profile photo is valid.
+                        </p>
+
+                    </Modal.Body>
+
+                    <Modal.Footer>
+
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitAcceptVerificationModal();
+
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        <Button
+                            variant="success"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                const {
+                                    acceptDriverVerification,
+                                    access_token,
+                                    client,
+                                    uid
+                                } = this.props;
+
+                                acceptDriverVerification(driver_id, access_token, client, uid, history);
+
+                                this.exitAcceptVerificationModal();
+
+                            }}
+                        >
+                            Accept
+                        </Button>
+
+                    </Modal.Footer>
+
+
+                </Modal>
+
+            );
+
+        }
+
+    }
+
+
     show(){
 
         const {
@@ -1053,6 +1154,8 @@ class ViewDriverAccount extends Component{
 
                     </div>
 
+                    {this.acceptVerificationModal()}
+
                     {this.declineVerificationModal()}
 
                 </div>
@@ -1160,5 +1263,6 @@ export default connect(mapStateToProps, {
     driverAccountUnverifiedReasonsChanged,
     driverAccountDriverVerifiedChanged,
     driverAccountVerifiedByChanged,
-    declineDriverVerification
+    declineDriverVerification,
+    acceptDriverVerification
 })(ViewDriverAccount);

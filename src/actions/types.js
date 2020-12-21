@@ -32,6 +32,7 @@ export const GET_DRIVER_ACCOUNTS_ROUTE = `${BACKEND_URL}/get-driver-accounts`;
 export const SEARCH_DRIVER_ACCOUNTS_ROUTE = `${BACKEND_URL}/search-driver-accounts`;
 export const VIEW_DRIVER_ACCOUNT_ROUTE = `${BACKEND_URL}/view-driver-account`;
 export const DECLINE_DRIVER_VERIFICATION_ROUTE = `${BACKEND_URL}/decline-driver-verification`;
+export const ACCEPT_DRIVER_VERIFICATION_ROUTE = `${BACKEND_URL}/accept-driver-verification`;
 
 
 // Login Types

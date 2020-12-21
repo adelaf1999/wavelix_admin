@@ -11,12 +11,60 @@ import {
     DRIVER_ACCOUNT_UNVERIFIED_REASONS_CHANGED,
     DRIVER_ACCOUNT_DRIVER_VERIFIED_CHANGED,
     DRIVER_ACCOUNT_VERIFIED_BY_CHANGED,
-    DECLINE_DRIVER_VERIFICATION_ROUTE
+    DECLINE_DRIVER_VERIFICATION_ROUTE,
+    ACCEPT_DRIVER_VERIFICATION_ROUTE
 } from "./types";
 
 import axios from "axios";
 
 import { getFormData } from "../helpers";
+
+export const acceptDriverVerification = (driver_id, access_token, client, uid, history) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = getFormData({
+            driver_id: driver_id
+        });
+
+        axios.post(ACCEPT_DRIVER_VERIFICATION_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                console.log(response);
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+
+    };
+
+};
 
 export const declineDriverVerification = (driver_id, declined_reason, access_token, client, uid, history) => {
 
