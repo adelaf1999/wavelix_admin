@@ -11,9 +11,10 @@ import {
     driverAccountDriverVerifiedChanged,
     driverAccountVerifiedByChanged
 } from "../actions";
-import {  Spinner } from "react-bootstrap";
+import {  Spinner, Image, Card,  Button, Form, Modal, Alert, Accordion, ListGroup} from "react-bootstrap";
 import actionCable from "actioncable";
 import { ACTION_CABLE_ROUTE } from "../actions/types";
+import _ from "lodash";
 
 class ViewDriverAccount extends Component{
 
@@ -183,9 +184,83 @@ class ViewDriverAccount extends Component{
 
     }
 
+
+    renderVerifiedBy(){
+
+        const {verified_by} = this.props;
+
+        if(!_.isEmpty(verified_by)){
+
+            return(
+
+                <Form.Group>
+
+                    <Form.Label >
+                        Verified By
+                    </Form.Label>
+
+
+                    <Form.Control
+                        readOnly
+                        type="text"
+                        value={verified_by}
+                    />
+
+                </Form.Group>
+
+            );
+
+        }
+
+    }
+
+
+
+
+    renderDocumentPictures(pictures){
+
+
+        return _.map(pictures, (picture, index) => {
+            return(
+
+                <Button
+                    key={index}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.open(picture, "_blank")
+                    }}
+                    variant="link"
+                >
+                    VIEW {`IMAGE-${index + 1}`}
+                </Button>
+
+
+
+            );
+        })
+
+    }
+
     show(){
 
-        const { initializing_page } = this.props;
+        const {
+            initializing_page,
+            profile_picture,
+            name,
+            email,
+            phone_number,
+            country,
+            driver_verified,
+            account_blocked,
+            review_status,
+            registered_at,
+            latitude,
+            longitude,
+            driver_license_pictures,
+            national_id_pictures,
+            vehicle_registration_pictures
+        } = this.props;
+
 
         if(initializing_page){
 
@@ -209,6 +284,289 @@ class ViewDriverAccount extends Component{
             return(
 
                 <div className="page-container">
+
+
+                    <div className="header-container">
+
+                        <Image className="profile-photo" src={profile_picture} thumbnail />
+
+                    </div>
+
+
+                    <div className="account-container">
+
+                        <Card className="view-driver-account-card">
+
+                            <Card.Body>
+
+                                <Form>
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Name
+                                        </Form.Label>
+
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={name}
+                                        />
+
+                                    </Form.Group>
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Phone Number
+                                        </Form.Label>
+
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={phone_number}
+                                        />
+
+                                    </Form.Group>
+
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Email
+                                        </Form.Label>
+
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={email}
+                                        />
+
+                                    </Form.Group>
+
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Country
+                                        </Form.Label>
+
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={country}
+                                        />
+
+                                    </Form.Group>
+
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Verified
+                                        </Form.Label>
+
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={driver_verified ? 'Yes' : 'No'}
+                                        />
+
+                                    </Form.Group>
+
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Account Blocked
+                                        </Form.Label>
+
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={account_blocked ? 'Yes' : 'No'}
+                                        />
+
+                                    </Form.Group>
+
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Review Status
+                                        </Form.Label>
+
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={_.startCase(review_status)}
+                                        />
+
+                                    </Form.Group>
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Registered At
+                                        </Form.Label>
+
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={registered_at}
+                                        />
+
+                                    </Form.Group>
+
+                                    {this.renderVerifiedBy()}
+
+                                    <br/>
+
+                                    <Accordion
+                                        className="view-driver-documents-accordion"
+                                        defaultActiveKey="0"
+                                    >
+
+
+                                        <Card>
+
+                                            <Card.Header>
+
+                                                <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                                    Driver License Pictures
+                                                </Accordion.Toggle>
+
+                                            </Card.Header>
+
+                                            <Accordion.Collapse eventKey="0">
+
+                                                <Card.Body>
+
+                                                    <ListGroup>
+
+                                                        {this.renderDocumentPictures(driver_license_pictures)}
+
+                                                    </ListGroup>
+
+
+                                                </Card.Body>
+
+                                            </Accordion.Collapse>
+
+                                        </Card>
+
+
+                                    </Accordion>
+
+
+
+                                    <Accordion
+                                        className="view-driver-documents-accordion"
+                                        defaultActiveKey="0"
+                                    >
+
+
+                                        <Card>
+
+                                            <Card.Header>
+
+                                                <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                                    National ID Pictures
+                                                </Accordion.Toggle>
+
+                                            </Card.Header>
+
+                                            <Accordion.Collapse eventKey="0">
+
+                                                <Card.Body>
+
+                                                    <ListGroup>
+
+                                                        {this.renderDocumentPictures(national_id_pictures)}
+
+                                                    </ListGroup>
+
+
+                                                </Card.Body>
+
+                                            </Accordion.Collapse>
+
+                                        </Card>
+
+
+                                    </Accordion>
+
+
+                                    <Accordion
+                                        className="view-driver-documents-accordion"
+                                        defaultActiveKey="0"
+                                    >
+
+
+                                        <Card>
+
+                                            <Card.Header>
+
+                                                <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                                    Vehicle Registration Pictures
+                                                </Accordion.Toggle>
+
+                                            </Card.Header>
+
+                                            <Accordion.Collapse eventKey="0">
+
+                                                <Card.Body>
+
+                                                    <ListGroup>
+
+                                                        {this.renderDocumentPictures(vehicle_registration_pictures)}
+
+                                                    </ListGroup>
+
+
+                                                </Card.Body>
+
+                                            </Accordion.Collapse>
+
+                                        </Card>
+
+
+                                    </Accordion>
+
+
+                                    <Button
+                                        variant="outline-primary"
+                                        id="view-driver-location-button"
+                                        onClick={(e) => {
+
+                                            e.preventDefault();
+
+                                            const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+
+                                            window.open(url, "_blank")
+
+                                        }}
+                                    >
+                                        View Last Available Location
+                                    </Button>
+
+
+
+                                </Form>
+
+                            </Card.Body>
+
+                        </Card>
+
+                    </div>
 
                 </div>
 
