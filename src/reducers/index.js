@@ -13,6 +13,7 @@ import ViewCustomerAccountReducer from "./ViewCustomerAccountReducer";
 import StoreAccountsReducer from "./StoreAccountsReducer";
 import ViewStoreAccountReducer from "./ViewStoreAccountReducer";
 import DriverAccountsReducer from "./DriverAccountsReducer";
+import ViewDriverAccountReducer from "./ViewDriverAccountReducer";
 
 
 const appReducer = combineReducers({
@@ -25,7 +26,8 @@ const appReducer = combineReducers({
     view_customer_account: ViewCustomerAccountReducer,
     store_accounts: StoreAccountsReducer,
     view_store_account: ViewStoreAccountReducer,
-    driver_accounts: DriverAccountsReducer
+    driver_accounts: DriverAccountsReducer,
+    view_driver_account: ViewDriverAccountReducer
 });
 
 

@@ -1,0 +1,173 @@
+import {
+    LOGOUT_SUCCESS,
+    OPEN_TIMEOUT_MODAL,
+    VIEW_DRIVER_ACCOUNT_ROUTE,
+    GET_DRIVER_DATA,
+    GET_DRIVER_DATA_COMPLETE,
+    CLEAR_VIEW_DRIVER_ACCOUNT_STATE
+} from "./types";
+
+import axios from "axios";
+
+import { getFormData } from "../helpers";
+
+
+export const clearViewDriverAccountState = () => {
+
+    return{
+      type: CLEAR_VIEW_DRIVER_ACCOUNT_STATE
+    };
+
+};
+
+
+export const getDriverData = (driver_id, access_token, client, uid, history) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = getFormData({
+            driver_id: driver_id
+        });
+
+        dispatch({type: GET_DRIVER_DATA});
+
+        axios.post(VIEW_DRIVER_ACCOUNT_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                const data = response.data;
+
+                const success = data.success;
+
+                if(success){
+
+                    const profile_picture = data.profile_picture;
+
+                    const name = data.name;
+
+                    const phone_number = data.phone_number;
+
+                    const country = data.country;
+
+                    const driver_verified = data.driver_verified;
+
+                    const account_blocked = data.account_blocked;
+
+                    const review_status = data.review_status;
+
+                    const registered_at = data.registered_at;
+
+                    const latitude = data.latitude;
+
+                    const longitude = data.longitude;
+
+                    const driver_license_pictures = data.driver_license_pictures;
+
+                    const national_id_pictures = data.national_id_pictures;
+
+                    const vehicle_registration_pictures = data.vehicle_registration_pictures;
+
+                    const verified_by = data.verified_by;
+
+                    const admins_declined = data.admins_declined;
+
+                    const unverified_reasons = data.unverified_reasons;
+
+                    const email = data.email;
+
+                    console.log("profile_picture ", profile_picture);
+
+                    console.log("name ", name);
+
+                    console.log("phone_number ", phone_number);
+
+                    console.log("country ", country);
+
+                    console.log("driver_verified ", driver_verified);
+
+                    console.log("account_blocked ", account_blocked);
+
+                    console.log("review_status ", review_status);
+
+                    console.log("registered_at ", registered_at);
+
+                    console.log("latitude ", latitude);
+
+                    console.log("longitude ", longitude);
+
+                    console.log("driver_license_pictures ", driver_license_pictures);
+
+                    console.log("national_id_pictures ", national_id_pictures);
+
+                    console.log("vehicle_registration_pictures ", vehicle_registration_pictures);
+
+                    console.log("verified_by ", verified_by);
+
+                    console.log("admins_declined ", admins_declined);
+
+                    console.log("unverified_reasons ", unverified_reasons);
+
+                    console.log("email ", email);
+
+
+
+                    dispatch({type: GET_DRIVER_DATA_COMPLETE, payload: {
+                        profile_picture: profile_picture,
+                        name: name,
+                        phone_number: phone_number,
+                        country: country,
+                        driver_verified: driver_verified,
+                        account_blocked: account_blocked,
+                        review_status: review_status,
+                        registered_at: registered_at,
+                        latitude: latitude,
+                        longitude: longitude,
+                        driver_license_pictures: driver_license_pictures,
+                        national_id_pictures: national_id_pictures,
+                        vehicle_registration_pictures: vehicle_registration_pictures,
+                        verified_by: verified_by,
+                        admins_declined: admins_declined,
+                        unverified_reasons: unverified_reasons,
+                        email: email
+                    }});
+
+
+                }else{
+
+                    history.goBack();
+
+                }
+
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+
+    };
+
+};

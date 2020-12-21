@@ -330,6 +330,8 @@ class DriverAccounts extends Component{
 
         const { driver_accounts } = this.props;
 
+        const { history } = this.state;
+
         return _.map(driver_accounts, (driver_account, index) => {
 
             return(
@@ -376,7 +378,11 @@ class DriverAccounts extends Component{
                         <Button
                             variant="link"
                             onClick={(e) => {
+
                                 e.preventDefault();
+
+                                history.push(`/driver-accounts/driver_id=${driver_account.id}`);
+
                             }}
                         >
                             View

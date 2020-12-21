@@ -85,7 +85,7 @@ class ViewStoreAccount extends Component{
             storeAccountUnverifiedReasonsChanged
         } = this.props;
 
-        const { history, params, cable } = this.state;
+        const { history, params } = this.state;
 
 
         if(!logged_in){

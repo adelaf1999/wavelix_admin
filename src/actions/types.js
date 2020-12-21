@@ -30,6 +30,7 @@ export const ACCEPT_STORE_VERIFICATION_ROUTE = `${BACKEND_URL}/accept-store-veri
 export const DECLINE_STORE_VERIFICATION_ROUTE = `${BACKEND_URL}/decline-store-verification`;
 export const GET_DRIVER_ACCOUNTS_ROUTE = `${BACKEND_URL}/get-driver-accounts`;
 export const SEARCH_DRIVER_ACCOUNTS_ROUTE = `${BACKEND_URL}/search-driver-accounts`;
+export const VIEW_DRIVER_ACCOUNT_ROUTE = `${BACKEND_URL}/view-driver-account`;
 
 
 // Login Types
@@ -139,3 +140,8 @@ export const CLEAR_DRIVER_ACCOUNTS_STATE = "clear_driver_accounts_state";
 export const SEARCH_DRIVER_ACCOUNTS_COMPLETE = "search_driver_accounts_complete";
 export const SEARCH_DRIVER_ACCOUNTS_LIMIT_CHANGED = "search_driver_accounts_limit_changed";
 export const DRIVER_ACCOUNTS_CHANGED = "driver_accounts_changed";
+
+//ViewDriverAccount Types
+export const GET_DRIVER_DATA = "get_driver_data";
+export const GET_DRIVER_DATA_COMPLETE = "get_driver_data_complete";
+export const CLEAR_VIEW_DRIVER_ACCOUNT_STATE = "clear_view_driver_account_state";
