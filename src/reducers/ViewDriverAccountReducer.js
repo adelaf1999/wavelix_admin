@@ -2,7 +2,8 @@ import {
     LOGOUT_SUCCESS,
     GET_DRIVER_DATA,
     GET_DRIVER_DATA_COMPLETE,
-    CLEAR_VIEW_DRIVER_ACCOUNT_STATE
+    CLEAR_VIEW_DRIVER_ACCOUNT_STATE,
+    DRIVER_ACCOUNT_REVIEWERS_CHANGED
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -29,6 +30,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case DRIVER_ACCOUNT_REVIEWERS_CHANGED:
+            return{
+                ...state,
+                current_reviewers: action.payload
+            };
         case GET_DRIVER_DATA_COMPLETE:
             return{
                 ...state,

@@ -4,12 +4,22 @@ import {
     VIEW_DRIVER_ACCOUNT_ROUTE,
     GET_DRIVER_DATA,
     GET_DRIVER_DATA_COMPLETE,
-    CLEAR_VIEW_DRIVER_ACCOUNT_STATE
+    CLEAR_VIEW_DRIVER_ACCOUNT_STATE,
+    DRIVER_ACCOUNT_REVIEWERS_CHANGED
 } from "./types";
 
 import axios from "axios";
 
 import { getFormData } from "../helpers";
+
+export const driverAccountReviewersChanged = (current_reviewers) => {
+
+    return{
+      type: DRIVER_ACCOUNT_REVIEWERS_CHANGED,
+      payload: current_reviewers
+    };
+
+};
 
 
 export const clearViewDriverAccountState = () => {
@@ -82,7 +92,6 @@ export const getDriverData = (driver_id, access_token, client, uid, history) => 
                     const unverified_reasons = data.unverified_reasons;
 
                     const email = data.email;
-                    
 
                     dispatch({type: GET_DRIVER_DATA_COMPLETE, payload: {
                         profile_picture: profile_picture,

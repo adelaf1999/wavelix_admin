@@ -3,9 +3,12 @@ import { connect } from 'react-redux';
 import Wrapper from "./Wrapper";
 import {
     getDriverData,
-    clearViewDriverAccountState
+    clearViewDriverAccountState,
+    driverAccountReviewersChanged
 } from "../actions";
 import {  Spinner } from "react-bootstrap";
+import actionCable from "actioncable";
+import { ACTION_CABLE_ROUTE } from "../actions/types";
 
 class ViewDriverAccount extends Component{
 
@@ -17,14 +20,30 @@ class ViewDriverAccount extends Component{
 
         const params = props.match.params;
 
+        const cable = actionCable.createConsumer(ACTION_CABLE_ROUTE);
+
+        const driver_account_channel_subscription = null;
+
         this.state = {
             history,
-            params
+            params,
+            cable,
+            driver_account_channel_subscription
         };
 
     }
 
     componentWillUnmount(){
+
+        const cable = this.state.cable;
+
+        const driver_account_channel_subscription = this.state.driver_account_channel_subscription;
+
+        if(driver_account_channel_subscription !== null){
+
+            cable.subscriptions.remove(driver_account_channel_subscription);
+
+        }
 
         this.props.clearViewDriverAccountState();
 
@@ -37,10 +56,11 @@ class ViewDriverAccount extends Component{
             access_token,
             client,
             uid,
-            getDriverData
+            getDriverData,
+            driverAccountReviewersChanged
         } = this.props;
 
-        const { history, params  } = this.state;
+        const { history, params } = this.state;
 
         if(!logged_in){
 
@@ -51,6 +71,52 @@ class ViewDriverAccount extends Component{
             const driver_id = params.driver_id;
 
             getDriverData(driver_id, access_token, client, uid, history);
+
+            const cable = this.state.cable;
+
+            let driver_account_channel_subscription = this.state.driver_account_channel_subscription;
+
+            if(driver_account_channel_subscription === null){
+
+                driver_account_channel_subscription = cable.subscriptions.create(
+                    {
+                        channel: 'DriverAccountChannel',
+                        access_token: access_token,
+                        client: client,
+                        uid: uid,
+                        driver_id: driver_id
+                    },
+                    {
+                        connected: () => {
+
+                            console.log('DriverAccountChannel Connected!');
+
+                        },
+                        received: (data) => {
+
+                            console.log("DriverAccountChannel Received!");
+
+                            console.log(data);
+
+
+                            if(data.current_reviewers !== undefined){
+
+                                const current_reviewers = data.current_reviewers;
+
+                                console.log(current_reviewers);
+
+                                driverAccountReviewersChanged(current_reviewers);
+
+                            }
+
+
+                        }
+                    }
+                );
+
+                this.setState({driver_account_channel_subscription: driver_account_channel_subscription});
+
+            }
 
         }
 
@@ -181,5 +247,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     getDriverData,
-    clearViewDriverAccountState
+    clearViewDriverAccountState,
+    driverAccountReviewersChanged
 })(ViewDriverAccount);

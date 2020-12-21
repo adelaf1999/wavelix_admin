@@ -145,3 +145,4 @@ export const DRIVER_ACCOUNTS_CHANGED = "driver_accounts_changed";
 export const GET_DRIVER_DATA = "get_driver_data";
 export const GET_DRIVER_DATA_COMPLETE = "get_driver_data_complete";
 export const CLEAR_VIEW_DRIVER_ACCOUNT_STATE = "clear_view_driver_account_state";
+export const DRIVER_ACCOUNT_REVIEWERS_CHANGED = "driver_account_reviewers_changed";
