@@ -241,6 +241,98 @@ class ViewDriverAccount extends Component{
 
     }
 
+    currentReviewers(){
+
+        const { current_reviewers } = this.props;
+
+        if( current_reviewers.length > 0){
+
+            return(
+
+                <div >
+
+
+                    <Form.Label className="driver-verification-label">
+                        Currently Reviewing
+                    </Form.Label>
+
+
+
+                    <div >
+
+                        {
+                            _.map(current_reviewers, (reviewer, index) => {
+
+                                return(
+
+                                    <Button
+                                        key={index}
+                                        variant="outline-success"
+                                        id="driver-reviewer-button"
+                                    >
+                                        {reviewer + " •" }
+                                    </Button>
+
+                                );
+
+                            })
+                        }
+
+                    </div>
+
+
+
+
+                </div>
+
+
+
+            );
+
+
+        }
+
+    }
+
+    driverVerificationCard(){
+
+        const { roles } = this.props;
+
+        if(roles.includes("root_admin") || roles.includes("account_manager")){
+
+            return(
+
+                <Card
+                    className="view-driver-account-card"
+                >
+
+                    <Card.Header
+                        as="h5"
+                        className="view-driver-account-card-header"
+                    >
+                        Driver Verification Guidelines
+                    </Card.Header>
+
+
+                    <Card.Body id="driver-verification-card-body">
+
+                        <Form>
+
+                            {this.currentReviewers()}
+
+                        </Form>
+
+                    </Card.Body>
+
+
+                </Card>
+
+            );
+        }
+
+    }
+
+
     show(){
 
         const {
@@ -293,7 +385,7 @@ class ViewDriverAccount extends Component{
                     </div>
 
 
-                    <div className="account-container">
+                    <div id="view-driver-account-container">
 
                         <Card className="view-driver-account-card">
 
@@ -565,6 +657,8 @@ class ViewDriverAccount extends Component{
                             </Card.Body>
 
                         </Card>
+
+                        {this.driverVerificationCard()}
 
                     </div>
 
