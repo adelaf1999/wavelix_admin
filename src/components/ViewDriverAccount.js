@@ -320,6 +320,145 @@ class ViewDriverAccount extends Component{
 
                             {this.currentReviewers()}
 
+                            <div>
+
+                                <Form.Label className="store-verification-label">
+                                    Guidelines
+                                </Form.Label>
+
+                                <Alert
+                                    variant="warning"
+                                    className="driver-verification-instructions"
+                                >
+                                    Please do all of the following tasks to verify and validate the driver's information
+                                    and documents. If all information is correct and the driver's documents are valid, click on
+                                    the accept verification button. Else, click on the decline verification button and enter the
+                                    reason for declining verification.
+                                </Alert>
+
+
+                                <Alert variant="primary" className="driver-verification-process">
+                                    Profile Photo Validation
+                                </Alert>
+
+                                <ListGroup className="driver-verification-guidelines-container">
+
+                                    <ListGroup.Item
+                                        className="driver-verification-guidelines"
+                                    >
+                                        Make sure the profile photo is forward-facing, centered and includes the driver's
+                                        full face with no sunglasses. No other subject should be in the frame, and it should
+                                        be well-lit and in focus.
+                                    </ListGroup.Item>
+
+
+                                </ListGroup>
+
+
+                                <Alert variant="primary" className="driver-verification-process">
+                                    Driver's License Validation
+                                </Alert>
+
+
+                                <ListGroup className="driver-verification-guidelines-container">
+
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Make sure the driver's license is certified and signed by a sworn translator,
+                                        a notary public or other relevant government authority.
+                                    </ListGroup.Item>
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Make sure the photo in the driver's license matches the profile photo (i.e. same person).
+                                    </ListGroup.Item>
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Make sure the name in the driver's license matches the name of the driver.
+                                    </ListGroup.Item>
+
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Make sure the driver's license is not expired.
+                                    </ListGroup.Item>
+
+                                </ListGroup>
+
+
+                                <Alert variant="primary" className="driver-verification-process">
+                                    National ID Validation
+                                </Alert>
+
+
+
+                                <ListGroup className="driver-verification-guidelines-container">
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Make sure the National ID is certified and signed by a sworn translator,
+                                        a notary public or other relevant government authority.
+                                    </ListGroup.Item>
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Make sure the photo in the National ID matches the profile photo (i.e. same person).
+                                    </ListGroup.Item>
+
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Make sure the name in the National ID matches the name of the driver.
+                                    </ListGroup.Item>
+
+
+
+                                </ListGroup>
+
+
+                                <Alert variant="primary" className="driver-verification-process">
+                                    Vehicle Registration Document Validation
+                                </Alert>
+
+
+                                <ListGroup className="driver-verification-guidelines-container">
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Make sure the Vehicle Registration Document is certified and signed by a sworn translator,
+                                        a notary public or other relevant government authority.
+                                    </ListGroup.Item>
+
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Make sure the driver's name is included in the vehicle registration document (i.e. the
+                                        driver owns the vehicle).
+                                    </ListGroup.Item>
+
+                                    
+
+
+                                </ListGroup>
+
+
+
+
+
+
+                            </div>
+
                         </Form>
 
                     </Card.Body>
