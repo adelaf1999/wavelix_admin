@@ -10,3 +10,4 @@ export * from "./StoreAccountsActions";
 export * from "./ViewStoreAccountActions";
 export * from "./DriverAccountsActions";
 export * from "./ViewDriverAccountActions";
+export * from "./UserProfilesActions";

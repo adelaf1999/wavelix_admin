@@ -44,6 +44,36 @@ class TopHeader extends Component{
 
     }
 
+
+    profilesTab(){
+
+        const { roles } = this.props;
+
+        const { history } = this.state;
+
+
+        if(roles.includes("root_admin") || roles.includes("profile_manager")){
+
+            return(
+
+                <Nav.Link
+                    onClick={() => {
+                        history.push("/profiles");
+                    }}
+                    className="nav-link"
+                >
+                    Profiles
+                </Nav.Link>
+
+
+            );
+
+        }
+
+
+    }
+
+
     render(){
 
         const { history } = this.state;
@@ -106,6 +136,8 @@ class TopHeader extends Component{
                     >
                         Drivers
                     </Nav.Link>
+
+                    {this.profilesTab()}
 
 
                 </Nav>

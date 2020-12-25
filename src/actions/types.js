@@ -33,6 +33,7 @@ export const SEARCH_DRIVER_ACCOUNTS_ROUTE = `${BACKEND_URL}/search-driver-accoun
 export const VIEW_DRIVER_ACCOUNT_ROUTE = `${BACKEND_URL}/view-driver-account`;
 export const DECLINE_DRIVER_VERIFICATION_ROUTE = `${BACKEND_URL}/decline-driver-verification`;
 export const ACCEPT_DRIVER_VERIFICATION_ROUTE = `${BACKEND_URL}/accept-driver-verification`;
+export const GET_USER_PROFILES_ROUTE = `${BACKEND_URL}/get-profiles`;
 
 
 // Login Types
@@ -153,3 +154,8 @@ export const DRIVER_ACCOUNT_REVIEW_STATUS_CHANGED = "driver_account_review_statu
 export const DRIVER_ACCOUNT_UNVERIFIED_REASONS_CHANGED = "driver_account_unverified_reasons_changed";
 export const DRIVER_ACCOUNT_DRIVER_VERIFIED_CHANGED = "driver_account_driver_verified_changed";
 export const DRIVER_ACCOUNT_VERIFIED_BY_CHANGED = "driver_account_verified_by_changed";
+
+//UserProfiles Types
+export const GET_USER_PROFILES = "get_user_profiles";
+export const GET_USER_PROFILES_COMPLETE = "get_user_profiles_complete";
+export const CLEAR_USER_PROFILES_STATE = "clear_user_profiles_state";

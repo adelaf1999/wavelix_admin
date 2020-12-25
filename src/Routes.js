@@ -16,6 +16,7 @@ import StoreAccounts from "./components/StoreAccounts";
 import ViewStoreAccount from "./components/ViewStoreAccount";
 import DriverAccounts from "./components/DriverAccounts";
 import ViewDriverAccount from "./components/ViewDriverAccount";
+import UserProfiles from "./components/UserProfiles";
 
 export default function Routes() {
 
@@ -51,9 +52,13 @@ export default function Routes() {
 
                 <Route exact path="/store-accounts/store_user_id=:store_user_id" component={ViewStoreAccount} />
 
+
                 <Route exact path="/driver-accounts" component={DriverAccounts} />
 
+
                 <Route exact path="/driver-accounts/driver_id=:driver_id" component={ViewDriverAccount} />
+
+                <Route exact path="/profiles" component={UserProfiles} />
 
 
             </Switch>
