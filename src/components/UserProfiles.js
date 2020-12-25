@@ -113,6 +113,8 @@ class UserProfiles extends Component{
 
         const { profiles } = this.props;
 
+        const { history } = this.state;
+
         return _.map(profiles, (profile, index) => {
 
             return(
@@ -162,7 +164,7 @@ class UserProfiles extends Component{
                         <Button
                             variant="link"
                             onClick={() => {
-                                console.log("view profile");
+                               history.push(`/profiles/profile_id=${profile.id}`);
                             }}
                         >
                             View

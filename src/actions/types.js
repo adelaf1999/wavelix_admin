@@ -35,6 +35,7 @@ export const DECLINE_DRIVER_VERIFICATION_ROUTE = `${BACKEND_URL}/decline-driver-
 export const ACCEPT_DRIVER_VERIFICATION_ROUTE = `${BACKEND_URL}/accept-driver-verification`;
 export const GET_USER_PROFILES_ROUTE = `${BACKEND_URL}/get-profiles`;
 export const SEARCH_USER_PROFILES_ROUTE = `${BACKEND_URL}/search-user-profiles`;
+export const VIEW_USER_PROFILE_ROUTE = `${BACKEND_URL}/get-profile`;
 
 
 // Login Types
@@ -162,3 +163,8 @@ export const GET_USER_PROFILES_COMPLETE = "get_user_profiles_complete";
 export const CLEAR_USER_PROFILES_STATE = "clear_user_profiles_state";
 export const SEARCH_USER_PROFILES_COMPLETE = "search_user_profiles_complete";
 export const SEARCH_USER_PROFILES_LIMIT_CHANGED = "search_user_profiles_limit_changed";
+
+//ViewUserProfile Types
+export const GET_USER_PROFILE = "get_user_profile";
+export const GET_USER_PROFILE_COMPLETE = "get_user_profile_complete";
+export const CLEAR_VIEW_USER_PROFILE_STATE = "clear_view_user_profile_state";

@@ -1,0 +1,120 @@
+import {
+    LOGOUT_SUCCESS,
+    OPEN_TIMEOUT_MODAL,
+    VIEW_USER_PROFILE_ROUTE,
+    GET_USER_PROFILE,
+    GET_USER_PROFILE_COMPLETE,
+    CLEAR_VIEW_USER_PROFILE_STATE
+} from "./types";
+
+import axios from "axios";
+import { getFormData } from "../helpers";
+
+
+export const clearViewUserProfileState = () => {
+
+    return{
+      type: CLEAR_VIEW_USER_PROFILE_STATE
+    };
+
+};
+
+export const getUserProfile = (profile_id,  access_token, client, uid, history) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = getFormData({
+            profile_id: profile_id
+        });
+
+        dispatch({type: GET_USER_PROFILE});
+
+        axios.post(VIEW_USER_PROFILE_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                const data = response.data;
+
+                const success = data.success;
+
+                if(success){
+
+                    const profile_picture = data.profile_picture;
+
+                    const username = data.username;
+
+                    const email = data.email;
+
+                    const user_type = data.user_type;
+
+                    const status = data.status;
+
+                    const blocked_by = data.blocked_by;
+
+                    const profile_bio = data.profile_bio;
+
+                    const story_posts = data.store_posts;
+
+                    const profile_posts = data.profile_posts;
+
+                    const admins_requested_block = data.admins_requested_block;
+
+                    const blocked_reasons = data.blocked_reasons;
+
+                    const block_requests = data.block_requests;
+
+                    dispatch({type: GET_USER_PROFILE_COMPLETE, payload: {
+                        profile_picture: profile_picture,
+                        username: username,
+                        email: email,
+                        user_type: user_type,
+                        status: status,
+                        blocked_by: blocked_by,
+                        profile_bio: profile_bio,
+                        story_posts: story_posts,
+                        profile_posts: profile_posts,
+                        admins_requested_block: admins_requested_block,
+                        blocked_reasons: blocked_reasons,
+                        block_requests: block_requests
+                    }});
+
+
+                }else{
+
+                    history.goBack();
+
+                }
+
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+
+    };
+
+};
