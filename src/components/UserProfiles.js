@@ -6,7 +6,8 @@ import {
     getUserProfiles,
     clearUserProfilesState
 } from "../actions";
-import {  Spinner, Form, FormControl } from "react-bootstrap";
+import {  Spinner, Form, FormControl, Table, Image, Button} from "react-bootstrap";
+import _ from "lodash";
 
 class UserProfiles extends Component{
 
@@ -62,6 +63,128 @@ class UserProfiles extends Component{
 
     }
 
+    renderProfiles(){
+
+        const { profiles } = this.props;
+
+        return _.map(profiles, (profile, index) => {
+
+            return(
+
+                <tr key={index}>
+
+                    <td>
+
+                        <Image
+                            src={profile.profile_picture === null ? 'https://via.placeholder.com/150x180' : profile.profile_picture}
+                            thumbnail
+                            className="profile-photo"
+                        />
+
+                    </td>
+
+
+                    <td>
+
+                        {profile.username}
+
+                    </td>
+
+
+                    <td>
+
+                        {profile.email}
+
+                    </td>
+
+
+                    <td>
+
+                        {profile.user_type === "customer_user" ? 'Personal' : 'Business'}
+
+                    </td>
+
+                    <td>
+
+                        {_.startCase(profile.status)}
+
+                    </td>
+
+
+                    <td>
+
+                        <Button
+                            variant="link"
+                            onClick={() => {
+                                console.log("view profile");
+                            }}
+                        >
+                            View
+                        </Button>
+
+                    </td>
+
+
+                </tr>
+
+            );
+
+        });
+
+    }
+
+    renderUserProfiles(){
+
+        const { profiles } = this.props;
+
+        if(profiles.length === 0){
+
+            return(
+
+                <div className="center-container">
+
+                    <p className="no-accounts-notice">No Accounts Found</p>
+
+                </div>
+
+            );
+
+        }else{
+
+            return(
+
+                <Table striped bordered hover>
+
+                    <thead>
+
+                    <tr>
+                        <th>Profile Picture</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Account Type</th>
+                        <th>Profile Status</th>
+                        <th></th>
+                    </tr>
+
+                    </thead>
+
+
+
+                    <tbody>
+
+                        {this.renderProfiles()}
+
+                    </tbody>
+
+
+                </Table>
+
+            );
+
+        }
+
+    }
+
 
     show(){
 
@@ -107,8 +230,12 @@ class UserProfiles extends Component{
                             }}
                         />
 
-
                     </Form>
+
+
+                    {this.renderUserProfiles()}
+
+
 
                 </div>
 
@@ -157,7 +284,8 @@ const mapStateToProps = (state) => {
 
     const {
         initializing_page,
-        limit
+        limit,
+        profiles
     } = state.user_profiles;
 
     return {
@@ -167,7 +295,8 @@ const mapStateToProps = (state) => {
         logged_in,
         roles,
         initializing_page,
-        limit
+        limit,
+        profiles
     };
 
 };
