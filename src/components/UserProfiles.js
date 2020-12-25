@@ -6,7 +6,7 @@ import {
     getUserProfiles,
     clearUserProfilesState
 } from "../actions";
-import {  Spinner } from "react-bootstrap";
+import {  Spinner, Form, FormControl } from "react-bootstrap";
 
 class UserProfiles extends Component{
 
@@ -16,8 +16,11 @@ class UserProfiles extends Component{
 
         const history = props.history;
 
+        const search = "";
+
         this.state = {
-            history
+            history,
+            search
         };
 
     }
@@ -87,6 +90,25 @@ class UserProfiles extends Component{
             return(
 
                 <div className="page-container">
+
+                    <Form id="user-profiles-searchbar" inline>
+
+                        <FormControl
+                            type="text"
+                            placeholder="Search profile by username or email"
+                            className="mr-sm-2"
+                            id="searchbar"
+                            onChange={(e) => {
+
+                                const new_search = e.target.value;
+
+                                this.setState({search: new_search});
+
+                            }}
+                        />
+
+
+                    </Form>
 
                 </div>
 

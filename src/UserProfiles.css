@@ -1,0 +1,7 @@
+#user-profiles-searchbar{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4rem;
+}
