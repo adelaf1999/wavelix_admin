@@ -61,7 +61,7 @@ export const getUserProfile = (profile_id,  access_token, client, uid, history) 
 
                     const profile_bio = data.profile_bio;
 
-                    const story_posts = data.store_posts;
+                    const story_posts = data.story_posts;
 
                     const profile_posts = data.profile_posts;
 
