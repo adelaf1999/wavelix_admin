@@ -6,12 +6,21 @@ import {
     GET_USER_PROFILES_COMPLETE,
     CLEAR_USER_PROFILES_STATE,
     SEARCH_USER_PROFILES_ROUTE,
-    SEARCH_USER_PROFILES_COMPLETE
+    SEARCH_USER_PROFILES_COMPLETE,
+    SEARCH_USER_PROFILES_LIMIT_CHANGED
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
 
+export const searchUserProfilesLimitChanged = (limit) => {
+
+    return{
+      type: SEARCH_USER_PROFILES_LIMIT_CHANGED,
+      payload: limit
+    };
+
+};
 
 export const searchUserProfiles = (limit, search, access_token, client, uid, history ) => {
 

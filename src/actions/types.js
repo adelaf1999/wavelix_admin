@@ -161,3 +161,4 @@ export const GET_USER_PROFILES = "get_user_profiles";
 export const GET_USER_PROFILES_COMPLETE = "get_user_profiles_complete";
 export const CLEAR_USER_PROFILES_STATE = "clear_user_profiles_state";
 export const SEARCH_USER_PROFILES_COMPLETE = "search_user_profiles_complete";
+export const SEARCH_USER_PROFILES_LIMIT_CHANGED = "search_user_profiles_limit_changed";
