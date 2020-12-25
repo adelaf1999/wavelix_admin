@@ -2,7 +2,8 @@ import {
     LOGOUT_SUCCESS,
     GET_USER_PROFILES,
     GET_USER_PROFILES_COMPLETE,
-    CLEAR_USER_PROFILES_STATE
+    CLEAR_USER_PROFILES_STATE,
+    SEARCH_USER_PROFILES_COMPLETE
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -13,6 +14,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case SEARCH_USER_PROFILES_COMPLETE:
+            return{
+                ...state,
+                profiles: action.payload
+            };
         case GET_USER_PROFILES_COMPLETE:
             return{
                 ...state,

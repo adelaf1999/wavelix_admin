@@ -4,7 +4,8 @@ import TopHeader from "./TopHeader";
 import Wrapper from "./Wrapper";
 import {
     getUserProfiles,
-    clearUserProfilesState
+    clearUserProfilesState,
+    searchUserProfiles
 } from "../actions";
 import {  Spinner, Form, FormControl, Table, Image, Button} from "react-bootstrap";
 import _ from "lodash";
@@ -189,8 +190,15 @@ class UserProfiles extends Component{
     show(){
 
         const {
-            initializing_page
+            initializing_page,
+            searchUserProfiles,
+            limit,
+            access_token,
+            client,
+            uid
         } = this.props;
+
+        const { history } = this.state;
 
         if(initializing_page){
 
@@ -226,6 +234,8 @@ class UserProfiles extends Component{
                                 const new_search = e.target.value;
 
                                 this.setState({search: new_search});
+
+                                searchUserProfiles(limit, new_search, access_token, client, uid, history);
 
                             }}
                         />
@@ -303,5 +313,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     getUserProfiles,
-    clearUserProfilesState
+    clearUserProfilesState,
+    searchUserProfiles
 })(UserProfiles);
