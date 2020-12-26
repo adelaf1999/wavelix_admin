@@ -11,6 +11,7 @@
 @import "DriverAccounts.css";
 @import "ViewDriverAccount.css";
 @import "UserProfiles.css";
+@import "ViewUserProfile.css";
 
 .center-container{
     position: absolute;
