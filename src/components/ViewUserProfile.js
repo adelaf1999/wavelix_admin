@@ -12,7 +12,8 @@ import {
     adminsRequestedBlockChanged,
     blockRequestsChanged,
     blockCustomerProfile,
-    requestStoreProfileBlock
+    requestStoreProfileBlock,
+    toggleStoreProfileStatus
 } from "../actions";
 import {  Spinner, Image, Card, Form, Carousel, Alert, Button, Modal } from "react-bootstrap";
 import actionCable from "actioncable";
@@ -38,6 +39,8 @@ class ViewUserProfile extends Component{
 
         const request_profile_block_modal_visible = false;
 
+        const toggle_store_profile_modal_visible = false;
+
         const reason = "";
 
         this.state = {
@@ -47,7 +50,8 @@ class ViewUserProfile extends Component{
             profile_moderation_channel_subscription,
             block_customer_profile_modal_visible,
             reason,
-            request_profile_block_modal_visible
+            request_profile_block_modal_visible,
+            toggle_store_profile_modal_visible
         };
 
     }
@@ -620,6 +624,58 @@ class ViewUserProfile extends Component{
 
     }
 
+    toggleStoreProfileStatusButton(){
+
+        const { roles, status } = this.props;
+
+        if(roles.includes("root_admin")){
+
+            if(status === "unblocked"){
+
+                return(
+
+                    <Button
+                        variant="outline-danger"
+                        onClick={(e) => {
+
+                            e.preventDefault();
+
+                            this.setState({toggle_store_profile_modal_visible: true});
+
+                        }}
+                        className="block-profile-button"
+                    >
+                       Block Profile
+                    </Button>
+
+                );
+
+            }else{
+
+                return(
+
+                    <Button
+                        variant="outline-primary"
+                        onClick={(e) => {
+
+                            e.preventDefault();
+
+                            this.setState({toggle_store_profile_modal_visible: true});
+
+                        }}
+                        className="block-profile-button"
+                    >
+                        Unblock Profile
+                    </Button>
+
+                );
+
+            }
+
+        }
+
+    }
+
     blockProfileCard(){
 
         const { user_type } = this.props;
@@ -710,6 +766,8 @@ class ViewUserProfile extends Component{
                                 {this.requestProfileBlockButton()}
 
                                 {this.renderBlockRequests()}
+
+                                {this.toggleStoreProfileStatusButton()}
 
 
                             </div>
@@ -1006,6 +1064,132 @@ class ViewUserProfile extends Component{
 
     }
 
+    exitToggleStoreProfileModal(){
+
+        this.setState({toggle_store_profile_modal_visible: false});
+
+    }
+
+
+    toggleStoreProfileModalBody(){
+
+        const { status } = this.props;
+
+        if(status === "unblocked"){
+
+            return(
+
+                <p>
+                    The store's profile will be blocked and they wont be able to post
+                    any new post and their current profile and story posts will be deleted.
+                </p>
+
+            );
+
+        }else{
+
+            return(
+
+                <p>
+                    The store's profile will be unblocked and they will be able to start posting
+                    profile and story posts again.
+                </p>
+
+
+            );
+
+        }
+
+    }
+
+    toggleStoreProfileModal(){
+
+        const { toggle_store_profile_modal_visible, params, history  } = this.state;
+
+        const {
+            status,
+            access_token,
+            client,
+            uid,
+            toggleStoreProfileStatus
+        } = this.props;
+
+
+        const profile_id = params.profile_id;
+
+        if(toggle_store_profile_modal_visible){
+
+            return(
+
+                <Modal
+                    show={toggle_store_profile_modal_visible}
+                    onHide={() => {
+                        this.exitToggleStoreProfileModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>{status === "unblocked" ? "Block" : "Unblock"} Store Profile</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+                        {this.toggleStoreProfileModalBody()}
+
+                    </Modal.Body>
+
+                    <Modal.Footer>
+
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitToggleStoreProfileModal();
+
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        <Button
+                            variant={status === "unblocked" ? "danger" : "primary"}
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                toggleStoreProfileStatus(profile_id, access_token, client, uid, history);
+
+                                this.exitToggleStoreProfileModal();
+
+
+                            }}
+                        >
+                            {status === "unblocked" ? "Block" : "Unblock"} Profile
+                        </Button>
+
+
+                    </Modal.Footer>
+
+
+                </Modal>
+
+
+
+            );
+
+        }
+
+    }
+
     show(){
 
         const {
@@ -1171,6 +1355,8 @@ class ViewUserProfile extends Component{
 
                     {this.requestProfileBlockModal()}
 
+                    {this.toggleStoreProfileModal()}
+
                 </div>
 
             );
@@ -1269,5 +1455,6 @@ export default connect(mapStateToProps, {
     adminsRequestedBlockChanged,
     blockRequestsChanged,
     blockCustomerProfile,
-    requestStoreProfileBlock
+    requestStoreProfileBlock,
+    toggleStoreProfileStatus
 })(ViewUserProfile);

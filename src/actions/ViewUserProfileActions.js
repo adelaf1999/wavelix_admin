@@ -13,11 +13,59 @@ import {
     ADMINS_REQUESTED_BLOCK_CHANGED,
     BLOCK_REQUESTS_CHANGED,
     BLOCK_CUSTOMER_PROFILE_ROUTE,
-    REQUEST_STORE_PROFILE_BLOCK_ROUTE
+    REQUEST_STORE_PROFILE_BLOCK_ROUTE,
+    TOGGLE_STORE_PROFILE_STATUS_ROUTE
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+export const toggleStoreProfileStatus = ( profile_id, access_token, client, uid, history  ) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = getFormData({
+            profile_id: profile_id
+        });
+
+        axios.post(TOGGLE_STORE_PROFILE_STATUS_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                console.log(response);
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+
+    };
+
+};
 
 
 export const requestStoreProfileBlock = ( profile_id, reason, access_token, client, uid, history ) => {
