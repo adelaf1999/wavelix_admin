@@ -192,6 +192,10 @@ export const getUserProfile = (profile_id,  access_token, client, uid, history) 
 
                     const block_requests = data.block_requests;
 
+                    const customer_user_id = data.customer_user_id;
+
+                    const store_user_id = data.store_user_id;
+
                     dispatch({type: GET_USER_PROFILE_COMPLETE, payload: {
                         profile_picture: profile_picture,
                         username: username,
@@ -204,7 +208,9 @@ export const getUserProfile = (profile_id,  access_token, client, uid, history) 
                         profile_posts: profile_posts,
                         admins_requested_block: admins_requested_block,
                         blocked_reasons: blocked_reasons,
-                        block_requests: block_requests
+                        block_requests: block_requests,
+                        customer_user_id: customer_user_id,
+                        store_user_id: store_user_id
                     }});
 
 

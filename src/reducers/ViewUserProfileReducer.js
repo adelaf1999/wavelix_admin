@@ -25,7 +25,9 @@ const INITIAL_STATE = {
     profile_posts: [],
     admins_requested_block: [],
     blocked_reasons: [],
-    block_requests: []
+    block_requests: [],
+    customer_user_id: '',
+    store_user_id: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -80,7 +82,9 @@ export default (state = INITIAL_STATE, action) => {
                 profile_posts: action.payload.profile_posts,
                 admins_requested_block: action.payload.admins_requested_block,
                 blocked_reasons: action.payload.blocked_reasons,
-                block_requests: action.payload.block_requests
+                block_requests: action.payload.block_requests,
+                customer_user_id: action.payload.customer_user_id === undefined ? '' : action.payload.customer_user_id,
+                store_user_id: action.payload.store_user_id === undefined ? '' : action.payload.store_user_id
             };
         case GET_USER_PROFILE:
             return{

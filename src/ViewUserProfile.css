@@ -52,3 +52,9 @@
 .profile-blocked-reason-card{
     margin-bottom: 1.5rem;
 }
+#view-user-profile-button{
+    width: 100%;
+    font-size: 18px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}

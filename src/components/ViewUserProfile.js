@@ -686,8 +686,12 @@ class ViewUserProfile extends Component{
             username,
             email,
             user_type,
-            status
+            status,
+            customer_user_id,
+            store_user_id
         } = this.props;
+
+        const { history } = this.state;
 
         if(initializing_page){
 
@@ -800,6 +804,30 @@ class ViewUserProfile extends Component{
 
                                     {this.renderProfilePosts()}
 
+
+                                    <Button
+                                        variant="outline-primary"
+                                        onClick={(e) => {
+
+                                            e.preventDefault();
+
+                                            if(user_type === "customer_user"){
+
+                                                history.push(`/customer-accounts/customer_user_id=${customer_user_id}`);
+
+                                            }else{
+
+                                                history.push(`/store-accounts/store_user_id=${store_user_id}`);
+
+                                            }
+
+                                        }}
+                                        id="view-user-profile-button"
+                                    >
+                                        {`View ${user_type === "customer_user" ? "Customer" : "Store"} Information`}
+                                    </Button>
+
+
                                 </Form>
 
                             </Card.Body>
@@ -868,7 +896,9 @@ const mapStateToProps = (state) => {
         profile_posts,
         admins_requested_block,
         blocked_reasons,
-        block_requests
+        block_requests,
+        customer_user_id,
+        store_user_id
     } = state.view_user_profile;
 
     return{
@@ -889,7 +919,9 @@ const mapStateToProps = (state) => {
         profile_posts,
         admins_requested_block,
         blocked_reasons,
-        block_requests
+        block_requests,
+        customer_user_id,
+        store_user_id
     };
 
 };
