@@ -36,6 +36,7 @@ export const ACCEPT_DRIVER_VERIFICATION_ROUTE = `${BACKEND_URL}/accept-driver-ve
 export const GET_USER_PROFILES_ROUTE = `${BACKEND_URL}/get-profiles`;
 export const SEARCH_USER_PROFILES_ROUTE = `${BACKEND_URL}/search-user-profiles`;
 export const VIEW_USER_PROFILE_ROUTE = `${BACKEND_URL}/get-profile`;
+export const BLOCK_CUSTOMER_PROFILE_ROUTE = `${BACKEND_URL}/block-customer-profile`;
 
 
 // Login Types

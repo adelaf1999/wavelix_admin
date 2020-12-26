@@ -10,13 +10,14 @@ import {
     storyPostsChanged,
     profilePostsChanged,
     adminsRequestedBlockChanged,
-    blockRequestsChanged
+    blockRequestsChanged,
+    blockCustomerProfile
 } from "../actions";
-import {  Spinner, Image, Card, Form, Carousel } from "react-bootstrap";
+import {  Spinner, Image, Card, Form, Carousel, Alert, Button, Modal } from "react-bootstrap";
 import actionCable from "actioncable";
 import { ACTION_CABLE_ROUTE } from "../actions/types";
 import _ from "lodash";
-import {profileStatusChanged} from "../actions/ViewUserProfileActions";
+
 
 class ViewUserProfile extends Component{
 
@@ -32,11 +33,17 @@ class ViewUserProfile extends Component{
 
         const profile_moderation_channel_subscription = null;
 
+        const block_customer_profile_modal_visible = false;
+
+        const reason = "";
+
         this.state = {
             history,
             params,
             cable,
-            profile_moderation_channel_subscription
+            profile_moderation_channel_subscription,
+            block_customer_profile_modal_visible,
+            reason
         };
 
     }
@@ -389,6 +396,288 @@ class ViewUserProfile extends Component{
 
     }
 
+
+    blockCustomerProfileButton(){
+
+        const { status } = this.props;
+
+        if(status !== "blocked"){
+
+            return(
+
+                <Button
+                    variant="outline-danger"
+                    onClick={(e) => {
+
+                        e.preventDefault();
+
+                        this.setState({block_customer_profile_modal_visible: true});
+
+                    }}
+                    className="block-profile-button"
+                >
+                    Permanently Block Profile
+                </Button>
+
+            );
+
+        }
+
+    }
+
+    renderBlockedReasons(){
+
+        const { blocked_reasons } = this.props;
+
+        if(blocked_reasons.length > 0){
+
+            return(
+
+                <div>
+
+
+                    <Form.Label className="store-verification-label">
+                        Blocked Reasons
+                    </Form.Label>
+
+
+                    {
+                        _.map(blocked_reasons, (blocked_reason, index) => {
+
+                            return(
+
+                                <Card
+                                    key={index}
+                                    className="profile-blocked-reason-card"
+                                >
+
+                                    <Card.Header>{_.startCase(blocked_reason.admin_name)}</Card.Header>
+
+                                    <Card.Body>
+
+                                        <Card.Text>
+                                            {blocked_reason.reason}
+                                        </Card.Text>
+
+
+                                    </Card.Body>
+
+                                </Card>
+
+                            );
+
+                        })
+                    }
+
+
+                </div>
+
+            );
+
+        }
+
+    }
+
+    blockProfileCard(){
+
+        const { user_type } = this.props;
+
+        if(user_type === "customer_user"){
+
+            return(
+
+                <Card className="view-user-profile-card">
+
+                    <Card.Header
+                        as="h5"
+                        className="view-profile-card-header"
+                    >
+                        Profile Blocking Guidelines
+                    </Card.Header>
+
+                    <Card.Body className="user-profile-card-body">
+
+                        <Form>
+
+                            <div>
+
+                                <Form.Label className="profile-block-guidelines-label">
+                                    Guidelines
+                                </Form.Label>
+
+                                <Alert
+                                    variant="warning"
+                                    className="profile-blocking-instructions"
+                                >
+                                    If you have found that a profile has one or more posts
+                                    which contain sexual content, violent or repulsive content,
+                                    hateful or abusive content, harmful or dangerous acts, child
+                                    abuse, promoting terrorism, spam or misleading content, or
+                                    infringing somebody else's copyrighted material you may choose
+                                    to contact the user and warn them once and only once to delete the posts,
+                                    or you may immediately block the profile permanently so that all
+                                    the profile and story posts of the user get deleted, that way they
+                                    wont be able to post harmful content ever again.
+                                </Alert>
+
+                                {this.blockCustomerProfileButton()}
+
+
+                                {this.renderBlockedReasons()}
+
+                            </div>
+
+                        </Form>
+
+                    </Card.Body>
+
+
+
+                </Card>
+
+            );
+
+        }
+
+    }
+
+    exitBlockCustomerProfileModal(){
+
+        this.setState({block_customer_profile_modal_visible: false, reason: ''});
+
+    }
+
+    blockCustomerProfileModalButton(){
+
+        const { reason, params, history } = this.state;
+
+        const profile_id = params.profile_id;
+
+        if(_.isEmpty(reason)){
+
+            return(
+
+                <Button
+                    disabled
+                    variant="danger"
+                >
+                    Permanently Block
+                </Button>
+
+            );
+
+        }else{
+
+            return(
+
+                <Button
+                    variant="danger"
+                    onClick={(e) => {
+
+                        e.preventDefault();
+
+                        const {
+                            access_token,
+                            client,
+                            uid,
+                            blockCustomerProfile
+                        } = this.props;
+
+
+                        blockCustomerProfile(profile_id, reason, access_token, client, uid, history);
+
+                        this.exitBlockCustomerProfileModal();
+
+                    }}
+                >
+                    Permanently Block
+                </Button>
+            );
+
+        }
+
+
+    }
+
+    blockCustomerProfileModal(){
+
+        const { block_customer_profile_modal_visible } = this.state;
+
+        if(block_customer_profile_modal_visible){
+
+            return(
+
+                <Modal
+                    show={block_customer_profile_modal_visible}
+                    onHide={() => {
+                        this.exitBlockCustomerProfileModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Permanently Block Profile</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+                        <Form.Group controlId="formPlaintextCredential">
+
+                            <Form.Label>
+                                The user's profile will be permanently blocked,
+                                their profile and story posts will be deleted and
+                                the user will not be able to create any more posts.
+                                Please enter the reason(s) for permanently blocking
+                                the user's profile:
+                            </Form.Label>
+
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                onChange={(e) => {
+                                    this.setState({reason: e.target.value});
+                                }}
+                            />
+
+                        </Form.Group>
+
+                    </Modal.Body>
+
+                    <Modal.Footer>
+
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitBlockCustomerProfileModal();
+
+                            }}
+                        >
+                            Close
+                        </Button>
+
+                        {this.blockCustomerProfileModalButton()}
+
+
+
+                    </Modal.Footer>
+
+
+                </Modal>
+
+            );
+
+        }
+
+    }
+
     show(){
 
         const {
@@ -432,10 +721,10 @@ class ViewUserProfile extends Component{
 
                     </div>
 
-                    <div className="account-container">
+                    <div id="user-profile-cards-container">
 
 
-                        <Card id="view-user-profile-card">
+                        <Card className="view-user-profile-card">
 
                             <Card.Body>
 
@@ -517,7 +806,12 @@ class ViewUserProfile extends Component{
 
                         </Card>
 
+                        {this.blockProfileCard()}
+
+
                     </div>
+
+                    {this.blockCustomerProfileModal()}
 
                 </div>
 
@@ -609,5 +903,6 @@ export default connect(mapStateToProps, {
     storyPostsChanged,
     profilePostsChanged,
     adminsRequestedBlockChanged,
-    blockRequestsChanged
+    blockRequestsChanged,
+    blockCustomerProfile
 })(ViewUserProfile);

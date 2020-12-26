@@ -11,11 +11,62 @@ import {
     STORY_POSTS_CHANGED,
     PROFILE_POSTS_CHANGED,
     ADMINS_REQUESTED_BLOCK_CHANGED,
-    BLOCK_REQUESTS_CHANGED
+    BLOCK_REQUESTS_CHANGED,
+    BLOCK_CUSTOMER_PROFILE_ROUTE
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+
+export const blockCustomerProfile = ( profile_id, reason, access_token, client, uid, history) => {
+
+    return(dispatch) => {
+
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = getFormData({
+            profile_id: profile_id,
+            reason: reason
+        });
+
+        axios.post(BLOCK_CUSTOMER_PROFILE_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                console.log(response);
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+
+    };
+
+};
 
 export const blockRequestsChanged = (block_requests) => {
 
