@@ -3,12 +3,20 @@ import { connect } from 'react-redux';
 import Wrapper from "./Wrapper";
 import {
     getUserProfile,
-    clearViewUserProfileState
+    clearViewUserProfileState,
+    profileStatusChanged,
+    profileBlockedByChanged,
+    profileBlockedReasonsChanged,
+    storyPostsChanged,
+    profilePostsChanged,
+    adminsRequestedBlockChanged,
+    blockRequestsChanged
 } from "../actions";
 import {  Spinner, Image, Card, Form, Carousel } from "react-bootstrap";
 import actionCable from "actioncable";
 import { ACTION_CABLE_ROUTE } from "../actions/types";
 import _ from "lodash";
+import {profileStatusChanged} from "../actions/ViewUserProfileActions";
 
 class ViewUserProfile extends Component{
 
@@ -58,7 +66,14 @@ class ViewUserProfile extends Component{
             client,
             uid,
             roles,
-            getUserProfile
+            getUserProfile,
+            profileStatusChanged,
+            profileBlockedByChanged,
+            profileBlockedReasonsChanged,
+            storyPostsChanged,
+            profilePostsChanged,
+            adminsRequestedBlockChanged,
+            blockRequestsChanged
         } = this.props;
 
         const { history, params } = this.state;
@@ -103,6 +118,63 @@ class ViewUserProfile extends Component{
                             console.log("ProfileModerationChannel Received!");
 
                             console.log(data);
+
+                            if(data.block_requests !== undefined){
+
+                                const block_requests = data.block_requests;
+
+                                blockRequestsChanged(block_requests);
+
+                            }
+
+
+                            if(data.admins_requested_block !== undefined){
+
+                                const admins_requested_block = data.admins_requested_block;
+
+                                adminsRequestedBlockChanged(admins_requested_block);
+
+                            }
+
+                            if(data.profile_posts !== undefined){
+
+                                const profile_posts = data.profile_posts;
+
+                                profilePostsChanged(profile_posts);
+
+                            }
+
+                            if(data.story_posts !== undefined){
+
+                                const story_posts = data.story_posts;
+
+                                storyPostsChanged(story_posts);
+
+                            }
+
+                            if(data.blocked_reasons !== undefined){
+
+                                const blocked_reasons = data.blocked_reasons;
+
+                                profileBlockedReasonsChanged(blocked_reasons);
+
+                            }
+
+                            if(data.blocked_by !== undefined){
+
+                                const blocked_by = data.blocked_by;
+
+                                profileBlockedByChanged(blocked_by);
+
+                            }
+
+                            if(data.status !== undefined){
+
+                                const status = data.status;
+
+                                profileStatusChanged(status);
+
+                            }
 
                         }
                     }
@@ -530,5 +602,12 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     getUserProfile,
-    clearViewUserProfileState
+    clearViewUserProfileState,
+    profileStatusChanged,
+    profileBlockedByChanged,
+    profileBlockedReasonsChanged,
+    storyPostsChanged,
+    profilePostsChanged,
+    adminsRequestedBlockChanged,
+    blockRequestsChanged
 })(ViewUserProfile);

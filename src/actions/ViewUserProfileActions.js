@@ -4,11 +4,81 @@ import {
     VIEW_USER_PROFILE_ROUTE,
     GET_USER_PROFILE,
     GET_USER_PROFILE_COMPLETE,
-    CLEAR_VIEW_USER_PROFILE_STATE
+    CLEAR_VIEW_USER_PROFILE_STATE,
+    PROFILE_STATUS_CHANGED,
+    PROFILE_BLOCKED_BY_CHANGED,
+    PROFILE_BLOCKED_REASONS_CHANGED,
+    STORY_POSTS_CHANGED,
+    PROFILE_POSTS_CHANGED,
+    ADMINS_REQUESTED_BLOCK_CHANGED,
+    BLOCK_REQUESTS_CHANGED
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+export const blockRequestsChanged = (block_requests) => {
+
+    return{
+      type: BLOCK_REQUESTS_CHANGED,
+      payload: block_requests
+    };
+
+};
+
+export const adminsRequestedBlockChanged = (admins_requested_block_changed) => {
+
+    return{
+      type: ADMINS_REQUESTED_BLOCK_CHANGED,
+      payload: admins_requested_block_changed
+    };
+
+};
+
+export const profilePostsChanged = (profile_posts) => {
+
+    return{
+      type: PROFILE_POSTS_CHANGED,
+      payload: profile_posts
+    };
+
+};
+
+export const storyPostsChanged = (story_posts) => {
+
+    return{
+      type: STORY_POSTS_CHANGED,
+      payload: story_posts
+    };
+
+};
+
+export const profileBlockedReasonsChanged = (blocked_reasons) => {
+
+    return{
+        type: PROFILE_BLOCKED_REASONS_CHANGED,
+        payload: blocked_reasons
+    };
+
+};
+
+export const profileBlockedByChanged = (blocked_by) => {
+
+    return{
+      type: PROFILE_BLOCKED_BY_CHANGED,
+      payload: blocked_by
+    };
+
+};
+
+export const profileStatusChanged = (status) => {
+
+    return{
+      type: PROFILE_STATUS_CHANGED,
+      payload: status
+    };
+
+};
 
 
 export const clearViewUserProfileState = () => {

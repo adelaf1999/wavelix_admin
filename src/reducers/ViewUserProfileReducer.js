@@ -2,7 +2,14 @@ import {
     LOGOUT_SUCCESS,
     GET_USER_PROFILE,
     GET_USER_PROFILE_COMPLETE,
-    CLEAR_VIEW_USER_PROFILE_STATE
+    CLEAR_VIEW_USER_PROFILE_STATE,
+    PROFILE_STATUS_CHANGED,
+    PROFILE_BLOCKED_BY_CHANGED,
+    PROFILE_BLOCKED_REASONS_CHANGED,
+    STORY_POSTS_CHANGED,
+    PROFILE_POSTS_CHANGED,
+    ADMINS_REQUESTED_BLOCK_CHANGED,
+    BLOCK_REQUESTS_CHANGED
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -23,6 +30,41 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case BLOCK_REQUESTS_CHANGED:
+            return{
+                ...state,
+                block_requests: action.payload
+            };
+        case ADMINS_REQUESTED_BLOCK_CHANGED:
+            return{
+                ...state,
+                admins_requested_block: action.payload
+            };
+        case PROFILE_POSTS_CHANGED:
+            return{
+                ...state,
+                profile_posts: action.payload
+            };
+        case STORY_POSTS_CHANGED:
+            return{
+                ...state,
+                story_posts: action.payload
+            };
+        case PROFILE_BLOCKED_REASONS_CHANGED:
+            return{
+                ...state,
+                blocked_reasons: action.payload
+            };
+        case PROFILE_BLOCKED_BY_CHANGED:
+            return{
+                ...state,
+                blocked_by: action.payload
+            };
+        case PROFILE_STATUS_CHANGED:
+            return{
+                ...state,
+                status: action.payload
+            };
         case GET_USER_PROFILE_COMPLETE:
             return{
                 ...state,
