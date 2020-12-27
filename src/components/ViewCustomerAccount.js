@@ -73,8 +73,7 @@ class ViewCustomerAccount extends  Component{
             country,
             phone_number,
             current_sign_in_ip,
-            last_sign_in_ip,
-            profile_link
+            last_sign_in_ip
         } = this.props;
 
         if(initializing_page){
@@ -101,20 +100,6 @@ class ViewCustomerAccount extends  Component{
                 <div className="page-container">
 
                     <div id="view-customer-account-container">
-
-                        <div id="view-customer-profile-container">
-
-                            <Button
-                                variant="primary"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    window.open(profile_link, "_blank")
-                                }}
-                            >
-                                View Profile
-                            </Button>
-
-                        </div>
 
                         <Card id="view-customer-account-card">
 
@@ -334,8 +319,7 @@ const mapStateToProps = (state) => {
         country,
         phone_number,
         current_sign_in_ip,
-        last_sign_in_ip,
-        profile_link
+        last_sign_in_ip
     } = state.view_customer_account;
 
     return {
@@ -352,8 +336,7 @@ const mapStateToProps = (state) => {
         country,
         phone_number,
         current_sign_in_ip,
-        last_sign_in_ip,
-        profile_link
+        last_sign_in_ip
     };
 };
 

@@ -15,8 +15,7 @@ const INITIAL_STATE = {
     country: '',
     phone_number: '',
     current_sign_in_ip: '',
-    last_sign_in_ip: '',
-    profile_link: ''
+    last_sign_in_ip: ''
 };
 
 
@@ -34,8 +33,7 @@ export default (state = INITIAL_STATE, action) => {
                 country: action.payload.country,
                 phone_number: action.payload.phone_number,
                 current_sign_in_ip: action.payload.current_sign_in_ip,
-                last_sign_in_ip: action.payload.last_sign_in_ip,
-                profile_link: action.payload.profile_link
+                last_sign_in_ip: action.payload.last_sign_in_ip
             };
         case GET_CUSTOMER_DATA:
             return{

@@ -64,8 +64,6 @@ export const getCustomerData = (customer_user_id, access_token, client, uid, his
 
                     const last_sign_in_ip = data.last_sign_in_ip;
 
-                    const profile_link = data.profile_link;
-
                     dispatch({type: GET_CUSTOMER_DATA_COMPLETE, payload: {
                         full_name: full_name,
                         email: email,
@@ -75,8 +73,7 @@ export const getCustomerData = (customer_user_id, access_token, client, uid, his
                         country: country,
                         phone_number: phone_number,
                         current_sign_in_ip: current_sign_in_ip,
-                        last_sign_in_ip: last_sign_in_ip,
-                        profile_link: profile_link
+                        last_sign_in_ip: last_sign_in_ip
                     }});
 
 
