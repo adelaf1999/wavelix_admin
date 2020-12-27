@@ -571,7 +571,7 @@ class Login extends Component {
 
                 <Recaptcha
                     ref={ ref => this.recaptcha = ref }
-                    sitekey="6LeFo_QZAAAAACRFtPWMSRJAUzrbMasKK_Cx8Ttn"
+                    sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
                     onResolved={() => {
 
                         this.setState({verifying_recaptcha: true});
