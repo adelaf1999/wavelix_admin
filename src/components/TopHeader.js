@@ -70,6 +70,32 @@ class TopHeader extends Component{
 
         }
 
+    }
+
+    postCasesTab(){
+
+        const { roles } = this.props;
+
+        const { history } = this.state;
+
+        if(roles.includes("root_admin") || roles.includes("profile_manager")){
+
+            return(
+
+                <Nav.Link
+                    onClick={() => {
+                        history.push("/post-cases");
+                    }}
+                    className="nav-link"
+                >
+                    Post Cases
+                </Nav.Link>
+
+
+            );
+
+        }
+
 
     }
 
@@ -138,6 +164,8 @@ class TopHeader extends Component{
                     </Nav.Link>
 
                     {this.profilesTab()}
+
+                    {this.postCasesTab()}
 
 
                 </Nav>

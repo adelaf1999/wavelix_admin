@@ -39,6 +39,7 @@ export const VIEW_USER_PROFILE_ROUTE = `${BACKEND_URL}/get-profile`;
 export const BLOCK_CUSTOMER_PROFILE_ROUTE = `${BACKEND_URL}/block-customer-profile`;
 export const REQUEST_STORE_PROFILE_BLOCK_ROUTE = `${BACKEND_URL}/request-store-profile-block`;
 export const TOGGLE_STORE_PROFILE_STATUS_ROUTE = `${BACKEND_URL}/toggle-store-profile-status`;
+export const GET_POST_CASES_ROUTE = `${BACKEND_URL}/get-post-cases`;
 
 
 // Login Types
@@ -178,3 +179,8 @@ export const STORY_POSTS_CHANGED = "story_posts_changed";
 export const PROFILE_POSTS_CHANGED = "profile_posts_changed";
 export const ADMINS_REQUESTED_BLOCK_CHANGED = "admins_requested_block_changed";
 export const BLOCK_REQUESTS_CHANGED = "block_requests_changed";
+
+//PostCases Types
+export const GET_POST_CASES = "get_post_cases";
+export const GET_POST_CASES_COMPLETE = "get_post_cases_complete";
+export const CLEAR_POST_CASES_STATE = "clear_post_cases_state";

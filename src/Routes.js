@@ -18,6 +18,7 @@ import DriverAccounts from "./components/DriverAccounts";
 import ViewDriverAccount from "./components/ViewDriverAccount";
 import UserProfiles from "./components/UserProfiles";
 import ViewUserProfile from "./components/ViewUserProfile";
+import PostCases from "./components/PostCases";
 
 export default function Routes() {
 
@@ -35,33 +36,34 @@ export default function Routes() {
 
                 <Route exact path="/admin-accounts" component={AdminAccounts} />
 
-
                 <Route exact path="/admin-accounts/admin_id=:admin_id" component={ViewAdminAccount} />
-
 
                 <Route exact path="/admin-accounts/create" component={CreateAdminAccount} />
 
 
                 <Route exact path="/customer-accounts" component={CustomerAccounts} />
 
-
                 <Route exact path="/customer-accounts/customer_user_id=:customer_user_id" component={ViewCustomerAccount} />
 
 
                 <Route exact path="/store-accounts" component={StoreAccounts} />
-
 
                 <Route exact path="/store-accounts/store_user_id=:store_user_id" component={ViewStoreAccount} />
 
 
                 <Route exact path="/driver-accounts" component={DriverAccounts} />
 
-
                 <Route exact path="/driver-accounts/driver_id=:driver_id" component={ViewDriverAccount} />
+
 
                 <Route exact path="/profiles" component={UserProfiles} />
 
                 <Route exact path="/profiles/profile_id=:profile_id" component={ViewUserProfile} />
+
+
+                <Route exact path="/post-cases" component={PostCases} />
+
+
 
 
             </Switch>
