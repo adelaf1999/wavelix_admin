@@ -4,7 +4,8 @@ import {
     GET_POST_CASES,
     GET_POST_CASES_COMPLETE,
     SEARCH_POST_CASES_COMPLETE,
-    SEARCH_POST_CASES_LIMIT_CHANGED
+    SEARCH_POST_CASES_LIMIT_CHANGED,
+    POST_CASES_CHANGED
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -16,6 +17,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case POST_CASES_CHANGED:
+            return{
+                ...state,
+                post_cases: action.payload
+            };
         case SEARCH_POST_CASES_LIMIT_CHANGED:
             return{
                 ...state,

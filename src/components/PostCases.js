@@ -6,7 +6,8 @@ import {
     getPostCases,
     clearPostCasesState,
     searchPostCases,
-    searchPostCasesLimitChanged
+    searchPostCasesLimitChanged,
+    postCasesChanged
 } from "../actions";
 import {  Spinner, Form, FormControl, Table, Button} from "react-bootstrap";
 import _ from "lodash";
@@ -108,7 +109,8 @@ class PostCases extends Component{
             uid,
             roles,
             limit,
-            getPostCases
+            getPostCases,
+            postCasesChanged
         } = this.props;
 
         const { history, cable } = this.state;
@@ -147,6 +149,44 @@ class PostCases extends Component{
                             console.log("PostCasesChannel Received!");
 
                             console.log(data);
+
+                            if(data.new_post_case){
+
+                                const { searchPostCases } = this.props;
+
+                                const { search, selected_review_status } = this.state;
+
+                                searchPostCases(
+                                   limit,
+                                   search,
+                                   selected_review_status,
+                                   access_token,
+                                   client,
+                                   uid,
+                                   history
+                                );
+
+                            }
+
+
+                            if(data.post_case_item !== undefined){
+
+                                const post_case_item = data.post_case_item;
+
+                                let post_cases = _.cloneDeep(this.props.post_cases);
+
+                                const post_case_index = _.findIndex(post_cases, { id: post_case_item.id });
+
+                                if(post_case_index !== -1){
+
+                                    post_cases[post_case_index] = post_case_item;
+
+                                    postCasesChanged(post_cases);
+
+                                }
+
+                            }
+
 
                         }
                     }
@@ -480,5 +520,6 @@ export default connect(mapStateToProps, {
     getPostCases,
     clearPostCasesState,
     searchPostCases,
-    searchPostCasesLimitChanged
+    searchPostCasesLimitChanged,
+    postCasesChanged
 })(PostCases);
