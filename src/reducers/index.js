@@ -17,6 +17,7 @@ import ViewDriverAccountReducer from "./ViewDriverAccountReducer";
 import UserProfilesReducer from "./UserProfilesReducer";
 import ViewUserProfileReducer from "./ViewUserProfileReducer";
 import PostCasesReducer from "./PostCasesReducer";
+import ViewPostCaseReducer from "./ViewPostCaseReducer";
 
 const appReducer = combineReducers({
     login: LoginReducer,
@@ -32,7 +33,8 @@ const appReducer = combineReducers({
     view_driver_account: ViewDriverAccountReducer,
     user_profiles: UserProfilesReducer,
     view_user_profile: ViewUserProfileReducer,
-    post_cases: PostCasesReducer
+    post_cases: PostCasesReducer,
+    view_post_case: ViewPostCaseReducer
 });
 
 

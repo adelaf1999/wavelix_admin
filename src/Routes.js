@@ -19,6 +19,7 @@ import ViewDriverAccount from "./components/ViewDriverAccount";
 import UserProfiles from "./components/UserProfiles";
 import ViewUserProfile from "./components/ViewUserProfile";
 import PostCases from "./components/PostCases";
+import ViewPostCase from "./components/ViewPostCase";
 
 export default function Routes() {
 
@@ -62,6 +63,8 @@ export default function Routes() {
 
 
                 <Route exact path="/post-cases" component={PostCases} />
+
+                <Route exact path="/post-cases/post_case_id=:post_case_id" component={ViewPostCase} />
 
 
 

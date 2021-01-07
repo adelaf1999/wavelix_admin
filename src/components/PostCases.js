@@ -258,6 +258,8 @@ class PostCases extends Component{
 
         const { post_cases } = this.props;
 
+        const { history } = this.state;
+
         return _.map(post_cases, (post_case, index) => {
 
             return(
@@ -280,6 +282,8 @@ class PostCases extends Component{
                             onClick={(e) => {
 
                                 e.preventDefault();
+
+                                history.push(`/post-cases/post_case_id=${post_case.id}`);
 
                             }}
                         >

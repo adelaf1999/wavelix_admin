@@ -41,6 +41,7 @@ export const REQUEST_STORE_PROFILE_BLOCK_ROUTE = `${BACKEND_URL}/request-store-p
 export const TOGGLE_STORE_PROFILE_STATUS_ROUTE = `${BACKEND_URL}/toggle-store-profile-status`;
 export const GET_POST_CASES_ROUTE = `${BACKEND_URL}/get-post-cases`;
 export const SEARCH_POST_CASES_ROUTE = `${BACKEND_URL}/search-post-cases`;
+export const VIEW_POST_CASE_ROUTE =  `${BACKEND_URL}/view-post-case`;
 
 
 // Login Types
@@ -188,3 +189,15 @@ export const CLEAR_POST_CASES_STATE = "clear_post_cases_state";
 export const SEARCH_POST_CASES_COMPLETE = "search_post_cases_complete";
 export const SEARCH_POST_CASES_LIMIT_CHANGED = "search_post_cases_limit_changed";
 export const POST_CASES_CHANGED = "post_cases_changed";
+
+//ViewPostCase Types
+export const GET_POST_CASE = "get_post_case";
+export const GET_POST_CASE_COMPLETE = "get_post_case_complete";
+export const CLEAR_VIEW_POST_CASE_STATE = "clear_view_post_case_state";
+export const POST_CASE_REVIEWERS_CHANGED = "post_case_reviewers_changed";
+export const POST_CASE_DELETED_BY_CHANGED = "post_case_deleted_by_changed";
+export const POST_CASE_REVIEW_STATUS_CHANGED = "post_case_review_status_changed";
+export const POST_CASE_ADMINS_REVIEWED_CHANGED = "post_case_admins_reviewed_changed";
+export const POST_CASE_REVIEWED_BY_CHANGED = "post_case_reviewed_by_changed";
+export const POST_CASE_POST_CHANGED = "post_case_post_changed";
+export const POST_CASE_POST_COMPLAINTS_CHANGED = "post_case_post_complaints_changed";
