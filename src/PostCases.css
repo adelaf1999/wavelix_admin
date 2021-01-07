@@ -1,0 +1,10 @@
+#post-cases-filters-container{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 3rem;
+}
+.post-case-filter-group{
+    width: 20%;
+}

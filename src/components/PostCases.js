@@ -6,7 +6,8 @@ import {
     getPostCases,
     clearPostCasesState
 } from "../actions";
-import {  Spinner } from "react-bootstrap";
+import {  Spinner, Form, FormControl, Table, Button} from "react-bootstrap";
+import _ from "lodash";
 
 class PostCases extends Component{
 
@@ -16,8 +17,14 @@ class PostCases extends Component{
 
         const history = props.history;
 
+        const search = "";
+
+        const selected_review_status = null;
+
         this.state = {
-            history
+            history,
+            search,
+            selected_review_status
         };
 
     }
@@ -60,6 +67,133 @@ class PostCases extends Component{
     }
 
 
+    reviewStatusOptions(){
+
+        const { review_status_options } = this.props;
+
+        let options = [];
+
+        options.push({ label: 'Select Option', value: ''});
+
+        _.map(review_status_options, (label, value) => {
+
+            options.push({
+                label: _.startCase(label),
+                value: value
+            });
+
+        });
+
+        return _.map(options, (option, index) => {
+
+
+            return(
+
+                <option
+                    key={index}
+                    value={option.value}
+                >
+                    {option.label}
+                </option>
+
+            );
+
+        });
+
+    }
+
+    renderCases(){
+
+        const { post_cases } = this.props;
+
+        return _.map(post_cases, (post_case, index) => {
+
+            return(
+
+                <tr key={index}>
+
+                    <td>
+                        {post_case.author_username}
+                    </td>
+
+                    <td>
+                        {_.startCase(post_case.review_status)}
+                    </td>
+
+
+                    <td>
+
+                        <Button
+                            variant="link"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                            }}
+                        >
+                            View
+                        </Button>
+
+                    </td>
+
+
+
+                </tr>
+
+            );
+
+        });
+
+    }
+
+    renderPostCases(){
+
+        const { post_cases } = this.props;
+
+        if(post_cases.length === 0){
+
+            return(
+
+                <div className="center-container">
+
+                    <p className="no-accounts-notice">No Post Cases Found</p>
+
+                </div>
+
+            );
+
+        }else{
+
+            return(
+
+                <Table striped bordered hover>
+
+                    <thead>
+
+                    <tr>
+
+                        <th>Author Username</th>
+                        <th>Review Status</th>
+                        <th></th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {this.renderCases()}
+
+                    </tbody>
+
+                </Table>
+
+            );
+
+        }
+
+    }
+
     show(){
 
         const {
@@ -89,7 +223,58 @@ class PostCases extends Component{
 
                 <div className="page-container">
 
+                    <Form className="searchbar-container" inline>
 
+                        <FormControl
+                            type="text"
+                            placeholder="Search by author username"
+                            className="mr-sm-2"
+                            id="searchbar"
+                            onChange={(e) => {
+
+                                const new_search = e.target.value;
+
+                                this.setState({search: new_search});
+
+                            }}
+                        />
+
+                    </Form>
+
+                    <Form id="post-cases-filters-container">
+
+                        <Form.Group className="post-case-filter-group" >
+
+                            <Form.Label>Review Status</Form.Label>
+
+                            <Form.Control
+                                as="select"
+                                onChange={(e) => {
+
+                                    const new_selected_review_status = e.target.value;
+
+                                    if(_.isEmpty(new_selected_review_status)){
+
+                                        this.setState({selected_review_status: null});
+
+                                    }else{
+
+                                        this.setState({selected_review_status: new_selected_review_status});
+                                    }
+
+
+                                }}
+                            >
+
+                                {this.reviewStatusOptions()}
+
+                            </Form.Control>
+
+                        </Form.Group>
+
+                    </Form>
+
+                    {this.renderPostCases()}
 
                 </div>
 

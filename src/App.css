@@ -12,6 +12,7 @@
 @import "ViewDriverAccount.css";
 @import "UserProfiles.css";
 @import "ViewUserProfile.css";
+@import "PostCases.css";
 
 .center-container{
     position: absolute;
