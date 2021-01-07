@@ -10,6 +10,8 @@ import {
 } from "../actions";
 import {  Spinner, Form, FormControl, Table, Button} from "react-bootstrap";
 import _ from "lodash";
+import actionCable from "actioncable";
+import { ACTION_CABLE_ROUTE } from "../actions/types";
 
 class PostCases extends Component{
 
@@ -25,10 +27,16 @@ class PostCases extends Component{
 
         this.handleScroll = this.handleScroll.bind(this);
 
+        const cable = actionCable.createConsumer(ACTION_CABLE_ROUTE);
+
+        const post_cases_channel_subscription = null;
+
         this.state = {
             history,
             search,
-            selected_review_status
+            selected_review_status,
+            cable,
+            post_cases_channel_subscription
         };
 
     }
@@ -73,6 +81,16 @@ class PostCases extends Component{
 
     componentWillUnmount(){
 
+        const cable = this.state.cable;
+
+        const post_cases_channel_subscription = this.state.post_cases_channel_subscription;
+
+        if(post_cases_channel_subscription !== null){
+
+            cable.subscriptions.remove(post_cases_channel_subscription);
+
+        }
+
         window.removeEventListener("scroll", this.handleScroll);
 
         this.props.clearPostCasesState();
@@ -93,7 +111,7 @@ class PostCases extends Component{
             getPostCases
         } = this.props;
 
-        const { history } = this.state;
+        const { history, cable } = this.state;
 
         if(!logged_in){
 
@@ -106,6 +124,37 @@ class PostCases extends Component{
         }else{
 
             getPostCases(limit, access_token, client, uid, history);
+
+            let post_cases_channel_subscription = this.state.post_cases_channel_subscription;
+
+            if(post_cases_channel_subscription === null){
+
+                post_cases_channel_subscription = cable.subscriptions.create(
+                    {
+                        channel: 'PostCasesChannel',
+                        access_token: access_token,
+                        client: client,
+                        uid: uid
+                    },
+                    {
+                        connected: () => {
+
+                            console.log('PostCasesChannel Connected!');
+
+                        },
+                        received: (data) => {
+
+                            console.log("PostCasesChannel Received!");
+
+                            console.log(data);
+
+                        }
+                    }
+                );
+
+                this.setState({post_cases_channel_subscription: post_cases_channel_subscription});
+
+            }
 
         }
 
