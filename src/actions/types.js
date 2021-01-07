@@ -186,3 +186,4 @@ export const GET_POST_CASES = "get_post_cases";
 export const GET_POST_CASES_COMPLETE = "get_post_cases_complete";
 export const CLEAR_POST_CASES_STATE = "clear_post_cases_state";
 export const SEARCH_POST_CASES_COMPLETE = "search_post_cases_complete";
+export const SEARCH_POST_CASES_LIMIT_CHANGED = "search_post_cases_limit_changed";

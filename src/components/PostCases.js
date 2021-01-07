@@ -5,7 +5,8 @@ import Wrapper from "./Wrapper";
 import {
     getPostCases,
     clearPostCasesState,
-    searchPostCases
+    searchPostCases,
+    searchPostCasesLimitChanged
 } from "../actions";
 import {  Spinner, Form, FormControl, Table, Button} from "react-bootstrap";
 import _ from "lodash";
@@ -22,6 +23,8 @@ class PostCases extends Component{
 
         const selected_review_status = null;
 
+        this.handleScroll = this.handleScroll.bind(this);
+
         this.state = {
             history,
             search,
@@ -30,13 +33,55 @@ class PostCases extends Component{
 
     }
 
+
+    handleScroll() {
+
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+
+        const body = document.body;
+
+        const html = document.documentElement;
+
+        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+
+        const windowBottom = windowHeight + window.pageYOffset;
+
+        if (windowBottom >= docHeight) {
+
+            console.log("bottom reached");
+
+            const {
+                searchPostCases,
+                limit,
+                access_token,
+                client,
+                uid,
+                searchPostCasesLimitChanged
+            } = this.props;
+
+            const {  search, selected_review_status, history } = this.state;
+
+            const new_limit = limit + 50;
+
+            searchPostCasesLimitChanged(new_limit);
+
+            searchPostCases(new_limit, search, selected_review_status, access_token, client, uid, history);
+
+
+        }
+    }
+
     componentWillUnmount(){
+
+        window.removeEventListener("scroll", this.handleScroll);
 
         this.props.clearPostCasesState();
 
     }
 
     componentDidMount(){
+
+        window.addEventListener("scroll", this.handleScroll);
 
         const {
             logged_in,
@@ -183,7 +228,8 @@ class PostCases extends Component{
 
                     <tbody>
 
-                        {this.renderCases()}
+                    {this.renderCases()}
+
 
                     </tbody>
 
@@ -249,13 +295,13 @@ class PostCases extends Component{
                                 } = this.state;
 
                                 searchPostCases(
-                                  limit,
-                                  new_search,
-                                  selected_review_status,
-                                  access_token,
-                                  client,
-                                  uid,
-                                  history
+                                    limit,
+                                    new_search,
+                                    selected_review_status,
+                                    access_token,
+                                    client,
+                                    uid,
+                                    history
                                 );
 
                             }}
@@ -299,7 +345,7 @@ class PostCases extends Component{
                                         history
                                     );
 
-                                    
+
 
                                 }}
                             >
@@ -384,5 +430,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     getPostCases,
     clearPostCasesState,
-    searchPostCases
+    searchPostCases,
+    searchPostCasesLimitChanged
 })(PostCases);

@@ -6,12 +6,22 @@ import {
     GET_POST_CASES_ROUTE,
     GET_POST_CASES_COMPLETE,
     SEARCH_POST_CASES_ROUTE,
-    SEARCH_POST_CASES_COMPLETE
+    SEARCH_POST_CASES_COMPLETE,
+    SEARCH_POST_CASES_LIMIT_CHANGED
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
 import _ from "lodash";
+
+export const searchPostCasesLimitChanged = (limit) => {
+
+    return{
+        type: SEARCH_POST_CASES_LIMIT_CHANGED,
+        payload: limit
+    };
+
+};
 
 export const searchPostCases = (limit, search, review_status, access_token, client, uid, history) => {
 
