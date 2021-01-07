@@ -4,7 +4,8 @@ import TopHeader from "./TopHeader";
 import Wrapper from "./Wrapper";
 import {
     getPostCases,
-    clearPostCasesState
+    clearPostCasesState,
+    searchPostCases
 } from "../actions";
 import {  Spinner, Form, FormControl, Table, Button} from "react-bootstrap";
 import _ from "lodash";
@@ -197,8 +198,15 @@ class PostCases extends Component{
     show(){
 
         const {
-            initializing_page
+            initializing_page,
+            access_token,
+            client,
+            uid,
+            limit,
+            searchPostCases,
         } = this.props;
+
+        const { history } = this.state;
 
 
         if(initializing_page){
@@ -236,6 +244,20 @@ class PostCases extends Component{
 
                                 this.setState({search: new_search});
 
+                                const {
+                                    selected_review_status
+                                } = this.state;
+
+                                searchPostCases(
+                                  limit,
+                                  new_search,
+                                  selected_review_status,
+                                  access_token,
+                                  client,
+                                  uid,
+                                  history
+                                );
+
                             }}
                         />
 
@@ -262,6 +284,22 @@ class PostCases extends Component{
                                         this.setState({selected_review_status: new_selected_review_status});
                                     }
 
+
+                                    const {
+                                        search
+                                    } = this.state;
+
+                                    searchPostCases(
+                                        limit,
+                                        search,
+                                        new_selected_review_status,
+                                        access_token,
+                                        client,
+                                        uid,
+                                        history
+                                    );
+
+                                    
 
                                 }}
                             >
@@ -345,5 +383,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     getPostCases,
-    clearPostCasesState
+    clearPostCasesState,
+    searchPostCases
 })(PostCases);

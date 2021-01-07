@@ -40,6 +40,7 @@ export const BLOCK_CUSTOMER_PROFILE_ROUTE = `${BACKEND_URL}/block-customer-profi
 export const REQUEST_STORE_PROFILE_BLOCK_ROUTE = `${BACKEND_URL}/request-store-profile-block`;
 export const TOGGLE_STORE_PROFILE_STATUS_ROUTE = `${BACKEND_URL}/toggle-store-profile-status`;
 export const GET_POST_CASES_ROUTE = `${BACKEND_URL}/get-post-cases`;
+export const SEARCH_POST_CASES_ROUTE = `${BACKEND_URL}/search-post-cases`;
 
 
 // Login Types
@@ -184,3 +185,4 @@ export const BLOCK_REQUESTS_CHANGED = "block_requests_changed";
 export const GET_POST_CASES = "get_post_cases";
 export const GET_POST_CASES_COMPLETE = "get_post_cases_complete";
 export const CLEAR_POST_CASES_STATE = "clear_post_cases_state";
+export const SEARCH_POST_CASES_COMPLETE = "search_post_cases_complete";
