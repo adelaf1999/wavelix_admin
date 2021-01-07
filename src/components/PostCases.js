@@ -188,6 +188,23 @@ class PostCases extends Component{
                             }
 
 
+                            if(data.post_case_deleted){
+
+                                const post_case_id = data.id;
+
+                                let post_cases = _.cloneDeep(this.props.post_cases);
+
+                                _.remove(post_cases, function(post_case) {
+                                    return post_case.id === post_case_id;
+                                });
+
+
+                                postCasesChanged(post_cases);
+
+
+                            }
+
+
                         }
                     }
                 );
