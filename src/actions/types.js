@@ -43,7 +43,7 @@ export const GET_POST_CASES_ROUTE = `${BACKEND_URL}/get-post-cases`;
 export const SEARCH_POST_CASES_ROUTE = `${BACKEND_URL}/search-post-cases`;
 export const VIEW_POST_CASE_ROUTE =  `${BACKEND_URL}/view-post-case`;
 export const MARK_POST_SAFE_ROUTE = `${BACKEND_URL}/mark-post-safe`;
-
+export const DELETE_UNSAFE_POST_ROUTE = `${BACKEND_URL}/destroy-unsafe-post`;
 
 // Login Types
 export const CHECK_EMAIL = "check_email";

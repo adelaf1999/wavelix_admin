@@ -11,7 +11,8 @@ import {
     postCaseReviewedByChanged,
     postCasePostChanged,
     postCasePostComplaintsChanged,
-    markPostSafe
+    markPostSafe,
+    deleteUnsafePost
 } from "../actions";
 import {  Spinner, Card, Form, Image, ListGroup, Button, Modal } from "react-bootstrap";
 import actionCable from "actioncable";
@@ -34,12 +35,15 @@ class ViewPostCase extends Component{
 
         const mark_post_safe_modal_visible = false;
 
+        const delete_unsafe_post_modal_visible = false;
+
         this.state = {
             history,
             params,
             cable,
             view_post_case_channel_subscription,
-            mark_post_safe_modal_visible
+            mark_post_safe_modal_visible,
+            delete_unsafe_post_modal_visible
         };
 
     }
@@ -573,7 +577,7 @@ class ViewPostCase extends Component{
                                 return(
 
 
-                                    <ListGroup.Item>
+                                    <ListGroup.Item key={index}>
                                         {_.startCase(admin_name)}
                                     </ListGroup.Item>
 
@@ -638,6 +642,7 @@ class ViewPostCase extends Component{
                     variant="outline-danger"
                     onClick={(e) => {
                         e.preventDefault();
+                        this.setState({delete_unsafe_post_modal_visible: true});
                     }}
                     className="post-case-action-button"
                 >
@@ -743,6 +748,100 @@ class ViewPostCase extends Component{
         }
 
     }
+
+    exitDeleteUnsafePostModal(){
+
+        this.setState({delete_unsafe_post_modal_visible: false});
+
+    }
+
+    deleteUnsafePostModalVisible(){
+
+        const { delete_unsafe_post_modal_visible, history, params } = this.state;
+
+        if(delete_unsafe_post_modal_visible){
+
+            return(
+
+                <Modal
+                    show={delete_unsafe_post_modal_visible}
+                    onHide={() => {
+                        this.exitDeleteUnsafePostModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Delete Unsafe Post</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+                        <p>
+                            By deleting this post you confirm that you have gone through all the necessary
+                            case examining guidelines and have concluded that the post contains one or more
+                            of the mentioned inappropriate content or that it violates somebody's copyrighted
+                            material.
+                        </p>
+
+                    </Modal.Body>
+
+                    <Modal.Footer>
+
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitDeleteUnsafePostModal();
+
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        <Button
+                            variant="danger"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                const {
+                                    deleteUnsafePost,
+                                    access_token,
+                                    client,
+                                    uid
+                                } = this.props;
+
+                                const post_case_id = params.post_case_id;
+
+                                deleteUnsafePost(post_case_id, access_token, client, uid, history);
+
+                                this.exitDeleteUnsafePostModal();
+
+                            }}
+                        >
+                            Delete Unsafe Post
+                        </Button>
+
+                    </Modal.Footer>
+
+
+                </Modal>
+
+            );
+
+        }
+
+    }
+
 
     show(){
 
@@ -955,6 +1054,8 @@ class ViewPostCase extends Component{
 
                     {this.markSafePostModalVisible()}
 
+                    {this.deleteUnsafePostModalVisible()}
+
                 </div>
 
             );
@@ -1042,5 +1143,6 @@ export default connect(mapStateToProps, {
     postCaseReviewedByChanged,
     postCasePostChanged,
     postCasePostComplaintsChanged,
-    markPostSafe
+    markPostSafe,
+    deleteUnsafePost
 })(ViewPostCase);
