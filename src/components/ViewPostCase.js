@@ -12,9 +12,10 @@ import {
     postCasePostChanged,
     postCasePostComplaintsChanged
 } from "../actions";
-import {  Spinner  } from "react-bootstrap";
+import {  Spinner, Card, Form, Image, ListGroup, Button } from "react-bootstrap";
 import actionCable from "actioncable";
 import { ACTION_CABLE_ROUTE } from "../actions/types";
+import _ from "lodash";
 
 class ViewPostCase extends Component{
 
@@ -198,10 +199,307 @@ class ViewPostCase extends Component{
 
     }
 
+    renderPost(post){
+
+        if(post.media_type === "video"){
+
+            return(
+
+                <video id="post-case-video"  width="724" height="407"  controls>
+
+
+                    <source src={post.video_file.url} />
+
+                </video>
+
+            );
+
+        }else{
+
+            return(
+
+                <Image
+                    src={post.image_file.url}
+                    thumbnail
+                    id="post-case-image"
+                />
+
+            );
+
+        }
+
+    }
+
+
+    renderPostCaption(post){
+
+        const caption = post.caption;
+
+
+        if(caption !== null && !_.isEmpty(caption)){
+
+            return(
+
+
+                <div id="post-caption-container">
+
+                    <Form.Group>
+
+                        <Form.Label>Caption</Form.Label>
+
+                        <Form.Control
+                            as="textarea"
+                            rows={5}
+                            value={caption}
+                            readOnly
+                        />
+
+                    </Form.Group>
+
+                </div>
+
+
+
+            );
+
+        }
+
+    }
+
+
+
+
+    renderPostSection(){
+
+        const { post } = this.props;
+
+        if( _.size(post) > 0 ){
+
+            return(
+
+                <div>
+
+
+                    <div id="post-container">
+
+                        {this.renderPost(post)}
+
+                    </div>
+
+                    {this.renderPostCaption(post)}
+
+                    {this.renderPostComments(post)}
+
+
+
+                </div>
+
+            );
+
+        }
+
+    }
+
+    renderDeletedBy(){
+
+        const {  deleted_by } = this.props;
+
+        if(!_.isEmpty(deleted_by)){
+
+            return(
+
+                <Form.Group>
+
+                    <Form.Label >
+                        Deleted By
+                    </Form.Label>
+
+
+                    <Form.Control
+                        readOnly
+                        type="text"
+                        value={deleted_by}
+                    />
+
+                </Form.Group>
+
+            );
+
+        }
+
+    }
+
+    renderComments(comments){
+
+        const { history } = this.state;
+
+        return _.map(comments, (comment, index) => {
+
+            return(
+
+                <ListGroup.Item key={index}>
+
+                    <Form.Group>
+
+                        <div className="post-case-list-header">
+
+                            <Form.Label>
+                                {comment.author_username}
+                            </Form.Label>
+
+                            <Button
+                                variant="link"
+                                onClick={(e) => {
+
+                                    e.preventDefault();
+
+                                    history.push(`/profiles/profile_id=${comment.author_profile_id}`);
+
+                                }}
+                            >
+                                View Profile
+                            </Button>
+
+                        </div>
+
+
+
+                        <Form.Control
+                            as="textarea"
+                            rows={3}
+                            value={comment.text}
+                            readOnly
+                        />
+
+                    </Form.Group>
+
+
+                </ListGroup.Item>
+
+            );
+
+        });
+
+    }
+
+    renderPostComments(post){
+
+        const comments = post.comments;
+
+        if(!_.isEmpty(comments)){
+
+            return(
+
+                <ListGroup className="post-case-list-group-container">
+
+                    <Form.Label>Comments</Form.Label>
+
+                    {this.renderComments(comments)}
+
+                </ListGroup>
+
+            );
+
+        }
+
+    }
+
+
+    postComplaintAdditionalInfo(additional_info){
+
+        if(!_.isEmpty(additional_info)){
+
+            return(
+
+                <Form.Control
+                    as="textarea"
+                    rows={3}
+                    value={additional_info}
+                    readOnly
+                />
+
+            );
+
+        }
+
+    }
+
+    renderPostComplaints(post_complaints){
+
+        const { history } = this.state;
+
+        return _.map(post_complaints, (post_complaint, index) => {
+
+            return(
+
+                <ListGroup.Item key={index}>
+
+                    <div className="post-case-list-header">
+
+                        <Form.Label>
+                            {post_complaint.username}
+                        </Form.Label>
+
+                        <Button
+                            variant="link"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                history.push(`/profiles/profile_id=${post_complaint.profile_id}`);
+
+                            }}
+                        >
+                            View Profile
+                        </Button>
+
+                    </div>
+
+                    <p id="post-case-report-type">Report Type: {_.startCase(post_complaint.report_type)}</p>
+
+                    {this.postComplaintAdditionalInfo(post_complaint.additional_info)}
+
+                </ListGroup.Item>
+
+            );
+
+        });
+
+
+    }
+
+    renderPostComplaintsSection(){
+
+        const { post_complaints } = this.props;
+
+        if(!_.isEmpty(post_complaints)){
+
+            return(
+
+                <ListGroup className="post-case-list-group-container" >
+
+                    <Form.Label>Reporter(s)</Form.Label>
+
+                    {this.renderPostComplaints(post_complaints)}
+
+                </ListGroup>
+
+            );
+
+        }
+
+    }
 
     show(){
 
-        const  { initializing_page } = this.props;
+        const  {
+            initializing_page,
+            post_author_username,
+            review_status,
+            post_author_profile_id
+        } = this.props;
+
+        const { history  } = this.state;
 
         if(initializing_page){
 
@@ -224,6 +522,87 @@ class ViewPostCase extends Component{
             return(
 
                 <div className="page-container">
+
+                    <div id="view-store-account-container">
+
+                        <Card className="view-post-case-card">
+
+                            <Card.Header
+                                as="h5"
+                                className="view-post-case-card-header"
+                            >
+                                Case Details
+                            </Card.Header>
+
+                            <Card.Body>
+
+                                <Form>
+
+                                    {this.renderPostSection()}
+
+
+                                    <Form.Group>
+
+                                       <div id="post-case-author-username-container">
+
+                                           <Form.Label >
+                                               Author Username
+                                           </Form.Label>
+
+                                           <Button
+                                               variant="link"
+                                               onClick={(e) => {
+
+                                                   e.preventDefault();
+
+                                                   history.push(`/profiles/profile_id=${post_author_profile_id}`);
+
+                                               }}
+                                           >
+                                               View Profile
+                                           </Button>
+
+
+
+                                       </div>
+
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={post_author_username}
+                                        />
+
+                                    </Form.Group>
+
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Review Status
+                                        </Form.Label>
+
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={_.startCase(review_status)}
+                                        />
+
+                                    </Form.Group>
+
+                                    {this.renderDeletedBy()}
+
+                                    {this.renderPostComplaintsSection()}
+
+
+                                </Form>
+
+                            </Card.Body>
+
+                        </Card>
+
+                    </div>
 
                 </div>
 

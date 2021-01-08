@@ -13,6 +13,7 @@
 @import "UserProfiles.css";
 @import "ViewUserProfile.css";
 @import "PostCases.css";
+@import "ViewPostCase.css";
 
 .center-container{
     position: absolute;

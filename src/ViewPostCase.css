@@ -1,0 +1,56 @@
+#view-post-case-container{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.view-post-case-card{
+    width: 60%;
+    margin-bottom: 2rem;
+}
+.view-post-case-card-header{
+    text-align: center;
+    padding: 1rem;
+}
+#post-case-video{
+    object-fit: contain;
+}
+#post-container{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+}
+#post-case-image{
+    width: 500px;
+    height: 500px;
+    object-fit: contain;
+}
+#post-caption-container{
+    margin-bottom: 1.5rem;
+}
+.post-case-list-group-container{
+    max-height: 300px;
+    margin-bottom: 1.5rem;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.post-case-list-header{
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    flex-direction: row;
+}
+#post-case-author-username-container{
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    flex-direction: row;
+}
+#post-case-report-type{
+    font-size: 14px;
+    font-weight: bold;
+}
