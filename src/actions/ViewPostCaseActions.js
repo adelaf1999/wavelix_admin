@@ -11,11 +11,60 @@ import {
     POST_CASE_ADMINS_REVIEWED_CHANGED,
     POST_CASE_REVIEWED_BY_CHANGED,
     POST_CASE_POST_CHANGED,
-    POST_CASE_POST_COMPLAINTS_CHANGED
+    POST_CASE_POST_COMPLAINTS_CHANGED,
+    MARK_POST_SAFE_ROUTE
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+export const markPostSafe = (post_case_id, access_token, client, uid, history) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = getFormData({
+            post_case_id: post_case_id
+        });
+
+
+        axios.post(MARK_POST_SAFE_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                console.log(response);
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+
+    };
+
+};
 
 export const postCasePostComplaintsChanged = (post_complaints) => {
 

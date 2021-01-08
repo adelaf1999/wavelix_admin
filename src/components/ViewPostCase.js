@@ -10,9 +10,10 @@ import {
     postCaseAdminsReviewedChanged,
     postCaseReviewedByChanged,
     postCasePostChanged,
-    postCasePostComplaintsChanged
+    postCasePostComplaintsChanged,
+    markPostSafe
 } from "../actions";
-import {  Spinner, Card, Form, Image, ListGroup, Button } from "react-bootstrap";
+import {  Spinner, Card, Form, Image, ListGroup, Button, Modal } from "react-bootstrap";
 import actionCable from "actioncable";
 import { ACTION_CABLE_ROUTE } from "../actions/types";
 import _ from "lodash";
@@ -31,11 +32,14 @@ class ViewPostCase extends Component{
 
         const view_post_case_channel_subscription = null;
 
+        const mark_post_safe_modal_visible = false;
+
         this.state = {
             history,
             params,
             cable,
-            view_post_case_channel_subscription
+            view_post_case_channel_subscription,
+            mark_post_safe_modal_visible
         };
 
     }
@@ -595,7 +599,11 @@ class ViewPostCase extends Component{
 
     markSafePostButton(){
 
-        const { admins_reviewed, post, id } = this.props;
+        const {
+            admins_reviewed,
+            post,
+            id
+        } = this.props;
 
         if(_.size(post) > 0 && !admins_reviewed.includes(id)){
 
@@ -605,6 +613,7 @@ class ViewPostCase extends Component{
                     variant="outline-primary"
                     onClick={(e) => {
                         e.preventDefault();
+                        this.setState({mark_post_safe_modal_visible: true});
                     }}
                     className="post-case-action-button"
                 >
@@ -634,6 +643,100 @@ class ViewPostCase extends Component{
                 >
                    Delete Unsafe Post
                 </Button>
+
+            );
+
+        }
+
+    }
+
+    exitMarkSafePostModal(){
+
+        this.setState({mark_post_safe_modal_visible: false});
+
+    }
+
+    markSafePostModalVisible(){
+
+        const { mark_post_safe_modal_visible, history, params } = this.state;
+
+        if(mark_post_safe_modal_visible){
+
+            return(
+
+                <Modal
+                    show={mark_post_safe_modal_visible}
+                    onHide={() => {
+                        this.exitMarkSafePostModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Mark as Safe Post</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+                        <p>
+                            By marking the post as safe you confirm that you have gone through all the
+                            necessary case examining guidelines and have made sure that the post doesn't
+                            violate somebody's copyrighted material and that it doesn't contain sexual content,
+                            violent content, hateful speech, harmful acts, child abuse, content promoting
+                            terrorism or violence, and spam.
+                        </p>
+
+                    </Modal.Body>
+
+                    <Modal.Footer>
+
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitMarkSafePostModal();
+
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        <Button
+                            variant="primary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                const {
+                                    markPostSafe,
+                                    access_token,
+                                    client,
+                                    uid
+                                } = this.props;
+
+                                const post_case_id = params.post_case_id;
+
+                                markPostSafe(post_case_id, access_token, client, uid, history);
+
+                                this.exitMarkSafePostModal();
+
+                            }}
+                        >
+                            Mark as Safe Post
+                        </Button>
+
+                    </Modal.Footer>
+
+
+                </Modal>
 
             );
 
@@ -816,7 +919,16 @@ class ViewPostCase extends Component{
                                                 If a user made a copyright violation complaint and the post doesn't
                                                 seem to do so you may ask the user for any supporting links, or documents
                                                 to prove that their intellectual property or that of someone else is being violated
-                                                and then decide whether to delete the post or not.
+                                                and then decide whether to delete the post or mark the post as safe.
+                                            </ListGroup.Item>
+
+
+                                            <ListGroup.Item
+                                                className="post-case-guidelines"
+                                            >
+                                                If the post doesn't contain any of the mentioned examples of inappropriate
+                                                content and doesn't violate somebody's copyrighted material then mark the
+                                                post as safe.
                                             </ListGroup.Item>
 
 
@@ -840,6 +952,8 @@ class ViewPostCase extends Component{
                         </Card>
 
                     </div>
+
+                    {this.markSafePostModalVisible()}
 
                 </div>
 
@@ -927,5 +1041,6 @@ export default connect(mapStateToProps, {
     postCaseAdminsReviewedChanged,
     postCaseReviewedByChanged,
     postCasePostChanged,
-    postCasePostComplaintsChanged
+    postCasePostComplaintsChanged,
+    markPostSafe
 })(ViewPostCase);
