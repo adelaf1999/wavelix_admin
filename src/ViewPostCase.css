@@ -54,3 +54,23 @@
     font-size: 14px;
     font-weight: bold;
 }
+.post-case-form-label{
+    font-size: 20px;
+    margin-bottom: 1.5rem;
+}
+#post-case-reviewer-button{
+    margin-right: 1rem;
+    font-size: 18px;
+    margin-bottom: 1.5rem;
+}
+.post-case-examining-guidelines-container{
+    margin-bottom: 1.5rem;
+}
+.post-case-guidelines{
+    font-size: 18px;
+}
+.post-case-action-button{
+    width: 100%;
+    font-size: 18px;
+    margin-bottom: 1.5rem;
+}

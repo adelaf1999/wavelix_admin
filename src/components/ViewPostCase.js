@@ -490,6 +490,157 @@ class ViewPostCase extends Component{
 
     }
 
+    currentReviewers(){
+
+
+        const { current_reviewers } = this.props;
+
+        if( current_reviewers.length > 0){
+
+            return(
+
+                <div >
+
+
+                    <Form.Label className="post-case-form-label">
+                        Currently Reviewing
+                    </Form.Label>
+
+
+
+                    <div >
+
+                        {
+                            _.map(current_reviewers, (reviewer, index) => {
+
+                                return(
+
+                                    <Button
+                                        key={index}
+                                        variant="outline-success"
+                                        id="post-case-reviewer-button"
+                                    >
+                                        {reviewer + " •" }
+                                    </Button>
+
+                                );
+
+                            })
+                        }
+
+                    </div>
+
+
+
+
+                </div>
+
+
+
+            );
+
+
+        }
+
+    }
+
+
+    renderReviewedBy(){
+
+        const { reviewed_by } = this.props;
+
+        if(!_.isEmpty(reviewed_by)){
+
+            return(
+
+                <div>
+
+
+                    <Form.Label className="post-case-form-label">
+                        Reviewed By
+                    </Form.Label>
+
+
+                    <ListGroup >
+
+                        {
+                            _.map(reviewed_by, (admin_name, index) => {
+
+                                return(
+
+
+                                    <ListGroup.Item>
+                                        {_.startCase(admin_name)}
+                                    </ListGroup.Item>
+
+
+                                );
+
+                            })
+                        }
+
+                    </ListGroup>
+
+
+
+
+
+                </div>
+
+            );
+
+        }
+
+    }
+
+    markSafePostButton(){
+
+        const { admins_reviewed, post, id } = this.props;
+
+        if(_.size(post) > 0 && !admins_reviewed.includes(id)){
+
+            return(
+
+                <Button
+                    variant="outline-primary"
+                    onClick={(e) => {
+                        e.preventDefault();
+                    }}
+                    className="post-case-action-button"
+                >
+                    Mark as Safe Post
+                </Button>
+
+            );
+
+        }
+
+    }
+
+    deletePostButton(){
+
+        const { post } = this.props;
+
+        if(_.size(post) > 0 ){
+
+            return(
+
+                <Button
+                    variant="outline-danger"
+                    onClick={(e) => {
+                        e.preventDefault();
+                    }}
+                    className="post-case-action-button"
+                >
+                   Delete Unsafe Post
+                </Button>
+
+            );
+
+        }
+
+    }
+
     show(){
 
         const  {
@@ -543,28 +694,28 @@ class ViewPostCase extends Component{
 
                                     <Form.Group>
 
-                                       <div id="post-case-author-username-container">
+                                        <div id="post-case-author-username-container">
 
-                                           <Form.Label >
-                                               Author Username
-                                           </Form.Label>
+                                            <Form.Label >
+                                                Author Username
+                                            </Form.Label>
 
-                                           <Button
-                                               variant="link"
-                                               onClick={(e) => {
+                                            <Button
+                                                variant="link"
+                                                onClick={(e) => {
 
-                                                   e.preventDefault();
+                                                    e.preventDefault();
 
-                                                   history.push(`/profiles/profile_id=${post_author_profile_id}`);
+                                                    history.push(`/profiles/profile_id=${post_author_profile_id}`);
 
-                                               }}
-                                           >
-                                               View Profile
-                                           </Button>
+                                                }}
+                                            >
+                                                View Profile
+                                            </Button>
 
 
 
-                                       </div>
+                                        </div>
 
 
                                         <Form.Control
@@ -599,6 +750,92 @@ class ViewPostCase extends Component{
                                 </Form>
 
                             </Card.Body>
+
+                        </Card>
+
+
+                        <Card className="view-post-case-card">
+
+                            <Card.Header
+                                as="h5"
+                                className="view-post-case-card-header"
+                            >
+                                Case Examining Guidelines
+                            </Card.Header>
+
+                            <Card.Body>
+
+                                <Form>
+
+                                    {this.currentReviewers()}
+
+                                    <div>
+
+                                        <Form.Label className="post-case-form-label">
+                                            Guidelines
+                                        </Form.Label>
+
+                                        <ListGroup className="post-case-examining-guidelines-container">
+
+                                            <ListGroup.Item
+                                                className="post-case-guidelines"
+                                            >
+                                                Read the post caption (if available).
+                                            </ListGroup.Item>
+
+
+                                            <ListGroup.Item
+                                                className="post-case-guidelines"
+                                            >
+                                                Skim through and read some of the post comments (if available).
+                                            </ListGroup.Item>
+
+
+                                            <ListGroup.Item
+                                                className="post-case-guidelines"
+                                            >
+                                                If the post contains sexual content (nudity, pornography, etc.),
+                                                violent content, hateful speech, harmful acts, child abuse, promotes
+                                                terrorism or violence, or contains spam immediately delete the post.
+                                            </ListGroup.Item>
+
+
+
+                                            <ListGroup.Item
+                                                className="post-case-guidelines"
+                                            >
+                                                If the post is a video clip, drawing, music of a certain artist,
+                                                a movie film or violates somebody's copyright or intellectual property
+                                                immediately delete the post.
+                                            </ListGroup.Item>
+
+
+                                            <ListGroup.Item
+                                                className="post-case-guidelines"
+                                            >
+                                                If a user made a copyright violation complaint and the post doesn't
+                                                seem to do so you may ask the user for any supporting links, or documents
+                                                to prove that their intellectual property or that of someone else is being violated
+                                                and then decide whether to delete the post or not.
+                                            </ListGroup.Item>
+
+
+
+                                        </ListGroup>
+
+                                        {this.markSafePostButton()}
+
+                                        {this.deletePostButton()}
+
+                                        {this.renderReviewedBy()}
+
+                                    </div>
+
+                                </Form>
+
+
+                            </Card.Body>
+
 
                         </Card>
 
