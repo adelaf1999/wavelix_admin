@@ -37,13 +37,16 @@ class ViewPostCase extends Component{
 
         const delete_unsafe_post_modal_visible = false;
 
+        const post_case_deleted_modal_visible = false;
+
         this.state = {
             history,
             params,
             cable,
             view_post_case_channel_subscription,
             mark_post_safe_modal_visible,
-            delete_unsafe_post_modal_visible
+            delete_unsafe_post_modal_visible,
+            post_case_deleted_modal_visible
         };
 
     }
@@ -192,6 +195,16 @@ class ViewPostCase extends Component{
                                 console.log(post_complaints);
 
                                 postCasePostComplaintsChanged(post_complaints);
+
+                            }
+
+                            if(data.post_case_deleted){
+
+                                this.setState({
+                                    mark_post_safe_modal_visible: false,
+                                    delete_unsafe_post_modal_visible: false,
+                                    post_case_deleted_modal_visible: true
+                                });
 
                             }
 
@@ -842,6 +855,64 @@ class ViewPostCase extends Component{
 
     }
 
+    exitPostCaseDeletedModal(){
+
+        this.setState({post_case_deleted_modal_visible: false});
+
+        this.state.history.push("/post-cases");
+
+    }
+
+
+    postCaseDeletedModal(){
+
+        const { post_case_deleted_modal_visible } = this.state;
+
+        if(post_case_deleted_modal_visible){
+
+            return(
+
+                <Modal
+                    show={post_case_deleted_modal_visible}
+                    onHide={() => {
+                        this.exitPostCaseDeletedModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Post Deleted</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        The post has been deleted and this post case has been closed.
+                    </Modal.Body>
+
+                    <Modal.Footer>
+
+
+                        <Button variant="primary" onClick={() => {
+                            this.exitPostCaseDeletedModal();
+                        }}>
+                            Back
+                        </Button>
+
+                    </Modal.Footer>
+
+
+                </Modal>
+
+            );
+
+        }
+
+    }
+
+
 
     show(){
 
@@ -1055,6 +1126,8 @@ class ViewPostCase extends Component{
                     {this.markSafePostModalVisible()}
 
                     {this.deleteUnsafePostModalVisible()}
+
+                    {this.postCaseDeletedModal()}
 
                 </div>
 
