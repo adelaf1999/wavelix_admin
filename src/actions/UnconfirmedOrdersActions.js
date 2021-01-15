@@ -4,10 +4,86 @@ import {
     UNCONFIRMED_ORDERS_INDEX_ROUTE,
     INITIALIZE_UNCONFIRMED_ORDERS_PAGE,
     INITIALIZE_UNCONFIRMED_ORDERS_PAGE_COMPLETE,
-    CLEAR_UNCONFIRMED_ORDERS_STATE
+    CLEAR_UNCONFIRMED_ORDERS_STATE,
+    SEARCH_UNCONFIRMED_ORDERS_ROUTE,
+    SEARCH_UNCONFIRMED_ORDERS_COMPLETE
 } from "./types";
 
 import axios from "axios";
+import _ from "lodash";
+
+
+export const searchUnconfirmedOrders =  (access_token, client, uid, history, search, country, time_exceeded)  => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = new FormData();
+
+        let data = {
+            search: search
+        };
+
+        if(!_.isEmpty(country)){
+
+            data.country = country;
+
+        }
+
+        if(!_.isEmpty(time_exceeded)){
+
+            data.time_exceeded = time_exceeded;
+
+        }
+
+        _.each(data, (value, key) => {
+
+            bodyFormData.append(key, value);
+
+        });
+
+        axios.post(SEARCH_UNCONFIRMED_ORDERS_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                const data = response.data;
+
+                const unconfirmed_orders = data.unconfirmed_orders;
+
+                dispatch({type: SEARCH_UNCONFIRMED_ORDERS_COMPLETE, payload: unconfirmed_orders});
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+
+
+    };
+
+};
 
 export const clearUnconfirmedOrdersState = () => {
 

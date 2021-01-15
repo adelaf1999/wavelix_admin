@@ -4,7 +4,8 @@ import TopHeader from "./TopHeader";
 import Wrapper from "./Wrapper";
 import {
     initializeUnconfirmedOrdersPage,
-    clearUnconfirmedOrdersState
+    clearUnconfirmedOrdersState,
+    searchUnconfirmedOrders
 } from "../actions";
 import {  Spinner, Form, FormControl, Table, Button } from "react-bootstrap";
 import _ from "lodash";
@@ -142,7 +143,7 @@ class UnconfirmedOrders extends Component{
         });
 
     }
-    
+
 
     renderOrders(){
 
@@ -289,9 +290,14 @@ class UnconfirmedOrders extends Component{
     show(){
 
         const {
-            initializing_page
+            initializing_page,
+            searchUnconfirmedOrders,
+            access_token,
+            client,
+            uid
         } = this.props;
 
+        const { history } = this.state;
 
         if(initializing_page){
 
@@ -328,6 +334,10 @@ class UnconfirmedOrders extends Component{
 
                                 this.setState({search: new_search});
 
+                                const { selected_country, selected_time_exceeded } = this.state;
+
+                                searchUnconfirmedOrders(access_token, client, uid, history, new_search, selected_country, selected_time_exceeded);
+
                             }}
                         />
 
@@ -357,6 +367,10 @@ class UnconfirmedOrders extends Component{
                                     }
 
 
+                                    const { selected_time_exceeded, search } = this.state;
+
+
+                                    searchUnconfirmedOrders(access_token, client, uid, history, search, new_selected_country, selected_time_exceeded);
 
                                 }}
                             >
@@ -388,6 +402,9 @@ class UnconfirmedOrders extends Component{
                                         this.setState({selected_time_exceeded: new_selected_time_exceeded});
                                     }
 
+                                    const { search, selected_country } = this.state;
+
+                                    searchUnconfirmedOrders(access_token, client, uid, history, search, selected_country, new_selected_time_exceeded);
 
 
                                 }}
@@ -474,5 +491,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     initializeUnconfirmedOrdersPage,
-    clearUnconfirmedOrdersState
+    clearUnconfirmedOrdersState,
+    searchUnconfirmedOrders
 })(UnconfirmedOrders);

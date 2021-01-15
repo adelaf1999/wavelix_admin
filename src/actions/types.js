@@ -45,6 +45,7 @@ export const VIEW_POST_CASE_ROUTE =  `${BACKEND_URL}/view-post-case`;
 export const MARK_POST_SAFE_ROUTE = `${BACKEND_URL}/mark-post-safe`;
 export const DELETE_UNSAFE_POST_ROUTE = `${BACKEND_URL}/destroy-unsafe-post`;
 export const UNCONFIRMED_ORDERS_INDEX_ROUTE =  `${BACKEND_URL}/unconfirmed-orders-index`;
+export const SEARCH_UNCONFIRMED_ORDERS_ROUTE = `${BACKEND_URL}/search-unconfirmed-orders`;
 
 // Login Types
 export const CHECK_EMAIL = "check_email";
@@ -208,3 +209,4 @@ export const POST_CASE_POST_COMPLAINTS_CHANGED = "post_case_post_complaints_chan
 export const INITIALIZE_UNCONFIRMED_ORDERS_PAGE = "initialize_unconfirmed_orders_page";
 export const INITIALIZE_UNCONFIRMED_ORDERS_PAGE_COMPLETE = "initialize_unconfirmed_orders_page_complete";
 export const CLEAR_UNCONFIRMED_ORDERS_STATE = "clear_unconfirmed_orders_state";
+export const SEARCH_UNCONFIRMED_ORDERS_COMPLETE = "search_unconfirmed_orders_complete";
