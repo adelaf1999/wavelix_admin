@@ -6,8 +6,9 @@ import {
     initializeUnconfirmedOrdersPage,
     clearUnconfirmedOrdersState
 } from "../actions";
-import {  Spinner, Form, FormControl } from "react-bootstrap";
+import {  Spinner, Form, FormControl, Table, Button } from "react-bootstrap";
 import _ from "lodash";
+import Timer from 'react-compound-timer'
 
 class UnconfirmedOrders extends Component{
 
@@ -140,7 +141,148 @@ class UnconfirmedOrders extends Component{
 
         });
 
+    }
+    
 
+    renderOrders(){
+
+        const { unconfirmed_orders } = this.props;
+
+        return _.map(unconfirmed_orders, (order, index) => {
+
+            const delivery_time_limit = new Date(order.delivery_time_limit).getTime();
+
+            const current_time = new Date().getTime();
+
+            const initial_time = ( current_time - delivery_time_limit );
+
+
+
+
+
+            return(
+
+                <tr key={index}>
+
+                    <td>
+                        {order.store_name}
+                    </td>
+
+                    <td>
+                        {order.store_has_sensitive_products ? 'Yes' : 'No'}
+                    </td>
+
+                    <td>
+                        {order.customer_name}
+                    </td>
+
+                    <td>
+                        {order.country}
+                    </td>
+
+
+                    <td>
+
+                        <Timer
+                            initialTime={initial_time}
+                            direction="forward"
+                        >
+                            {() => (
+                                <React.Fragment>
+
+                                    <Timer.Days /> days&nbsp;
+
+                                    <Timer.Hours /> hours&nbsp;
+
+                                    <Timer.Minutes /> minutes&nbsp;
+
+                                    <Timer.Seconds /> seconds&nbsp;
+
+                                </React.Fragment>
+                            )}
+                        </Timer>
+
+                    </td>
+
+                    <td>
+                        {order.ordered_at}
+                    </td>
+
+                    <td>
+
+                        <Button
+                            variant="link"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+
+                            }}
+                        >
+                            View
+                        </Button>
+
+                    </td>
+
+
+                </tr>
+
+            );
+
+        });
+
+    }
+
+    renderUnconfirmedOrders(){
+
+        const { unconfirmed_orders } = this.props;
+
+        if(unconfirmed_orders.length === 0){
+
+            return(
+
+                <div className="center-container">
+
+                    <p className="no-accounts-notice">No Unconfirmed Orders Found</p>
+
+                </div>
+
+            );
+
+        }else{
+
+            return(
+
+                <Table striped bordered hover>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Store Name</th>
+                            <th>Food Service</th>
+                            <th>Customer Name</th>
+                            <th>Country</th>
+                            <th>Time Exceeded</th>
+                            <th>Ordered At</th>
+                            <th></th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {this.renderOrders()}
+
+                    </tbody>
+
+                </Table>
+
+            );
+
+        }
 
     }
 
@@ -259,6 +401,8 @@ class UnconfirmedOrders extends Component{
 
 
                     </Form>
+
+                    {this.renderUnconfirmedOrders()}
 
                 </div>
 
