@@ -99,6 +99,32 @@ class TopHeader extends Component{
 
     }
 
+    unconfirmedOrdersTab(){
+
+        const { roles } = this.props;
+
+        const { history } = this.state;
+
+        if(roles.includes("root_admin") || roles.includes("order_manager")){
+
+            return(
+
+                <Nav.Link
+                    onClick={() => {
+                        history.push("/unconfirmed-orders");
+                    }}
+                    className="nav-link"
+                >
+                    Unconfirmed Orders
+                </Nav.Link>
+
+
+            );
+
+        }
+
+    }
+
 
     render(){
 
@@ -166,6 +192,8 @@ class TopHeader extends Component{
                     {this.profilesTab()}
 
                     {this.postCasesTab()}
+
+                    {this.unconfirmedOrdersTab()}
 
 
                 </Nav>
