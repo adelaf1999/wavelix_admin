@@ -6,7 +6,8 @@ import {
     initializeUnconfirmedOrdersPage,
     clearUnconfirmedOrdersState
 } from "../actions";
-import {  Spinner } from "react-bootstrap";
+import {  Spinner, Form, FormControl } from "react-bootstrap";
+import _ from "lodash";
 
 class UnconfirmedOrders extends Component{
 
@@ -16,8 +17,17 @@ class UnconfirmedOrders extends Component{
 
         const history = props.history;
 
+        const search = "";
+
+        const selected_country = null;
+
+        const selected_time_exceeded = null;
+
         this.state = {
-            history
+            history,
+            search,
+            selected_country,
+            selected_time_exceeded
         };
 
     }
@@ -60,6 +70,80 @@ class UnconfirmedOrders extends Component{
     }
 
 
+    getCountries(){
+
+        const { countries } = this.props;
+
+        let country_options = [];
+
+        country_options.push({ label: 'Select Country', value: ''});
+
+        _.map(countries, (country_name, country_code) => {
+
+
+            country_options.push({
+                label: country_name,
+                value: country_code
+            });
+
+        });
+
+
+        return _.map(country_options, (country, index) => {
+
+
+            return(
+
+                <option
+                    key={index}
+                    value={country.value}
+                >
+                    {country.label}
+                </option>
+
+            );
+
+        });
+
+    }
+
+    timeExceededOptions(){
+
+        const { time_exceeded_filters } = this.props;
+
+        let time_exceeded_options = [];
+
+        time_exceeded_options.push({ label: 'Select Option', value: ''});
+
+        _.map(time_exceeded_filters, (time_label, time_value) => {
+
+            time_exceeded_options.push({
+                label: time_label,
+                value: time_value
+            });
+
+        });
+
+        return _.map(time_exceeded_options, (time_option, index) => {
+
+
+            return(
+
+                <option
+                    key={index}
+                    value={time_option.value}
+                >
+                    {time_option.label}
+                </option>
+
+            );
+
+        });
+
+
+
+    }
+
     show(){
 
         const {
@@ -88,6 +172,93 @@ class UnconfirmedOrders extends Component{
             return(
 
                 <div className="page-container">
+
+                    <Form className="searchbar-container" inline>
+
+                        <FormControl
+                            type="text"
+                            placeholder="Search by store name or customer name"
+                            className="mr-sm-2"
+                            id="searchbar"
+                            onChange={(e) => {
+
+                                const new_search = e.target.value;
+
+                                this.setState({search: new_search});
+
+                            }}
+                        />
+
+                    </Form>
+
+                    <Form id="unconfirmed-orders-filters-container">
+
+
+
+                        <Form.Group className="unconfirmed-order-filter-group" >
+
+                            <Form.Label>Country</Form.Label>
+
+                            <Form.Control
+                                as="select"
+                                onChange={(e) => {
+
+                                    const new_selected_country = e.target.value;
+
+                                    if(_.isEmpty(new_selected_country)){
+
+                                        this.setState({selected_country: null});
+
+                                    }else{
+
+                                        this.setState({selected_country: new_selected_country});
+                                    }
+
+
+
+                                }}
+                            >
+
+                                {this.getCountries()}
+
+                            </Form.Control>
+
+
+                        </Form.Group>
+
+
+                        <Form.Group className="unconfirmed-order-filter-group" >
+
+                            <Form.Label>Time Exceeded</Form.Label>
+
+                            <Form.Control
+                                as="select"
+                                onChange={(e) => {
+
+                                    const new_selected_time_exceeded = e.target.value;
+
+                                    if(_.isEmpty(new_selected_time_exceeded)){
+
+                                        this.setState({selected_time_exceeded: null});
+
+                                    }else{
+
+                                        this.setState({selected_time_exceeded: new_selected_time_exceeded});
+                                    }
+
+
+
+                                }}
+                            >
+
+                                {this.timeExceededOptions()}
+
+                            </Form.Control>
+
+                        </Form.Group>
+
+
+                    </Form>
 
                 </div>
 

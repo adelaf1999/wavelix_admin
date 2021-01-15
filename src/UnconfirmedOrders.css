@@ -1,0 +1,10 @@
+#unconfirmed-orders-filters-container{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 3rem;
+}
+.unconfirmed-order-filter-group{
+    width: 25%;
+}
