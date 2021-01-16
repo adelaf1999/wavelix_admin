@@ -15,6 +15,7 @@
 @import "PostCases.css";
 @import "ViewPostCase.css";
 @import "UnconfirmedOrders.css";
+@import "ViewUnconfirmedOrder.css";
 
 .center-container{
     position: absolute;

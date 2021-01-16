@@ -1,0 +1,43 @@
+#view-unconfirmed-order-container{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.view-unconfirmed-order-card{
+    width: 60%;
+    margin-bottom: 2rem;
+}
+.view-unconfirmed-order-card-header{
+    text-align: center;
+    padding: 1rem;
+}
+.unconfirmed-order-label-link{
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.view-unconfirmed-order-data-button{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    align-self: center;
+}
+#unconfirmed-order-products-container{
+    margin-top: 1rem;
+}
+.unconfirmed-order-product-image-container{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+    display: flex;
+    flex: 1;
+    align-items: center;
+}
+.unconfirmed-order-product-image{
+    width: 180px;
+    height: 210px;
+    object-fit: cover;
+}

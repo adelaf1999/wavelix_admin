@@ -23,7 +23,7 @@ const INITIAL_STATE = {
     ordered_at: '',
     total_price: '',
     total_price_currency: '',
-    receipt_url: '',
+    receipt_url: null,
     products: [],
     delivery_location: {}
 };
