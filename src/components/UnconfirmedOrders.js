@@ -69,10 +69,17 @@ class UnconfirmedOrders extends Component{
             client,
             uid,
             roles,
-            initializeUnconfirmedOrdersPage
+            initializeUnconfirmedOrdersPage,
+            searchUnconfirmedOrders
         } = this.props;
 
-        const { history, cable } = this.state;
+        const {
+            history,
+            cable,
+            search,
+            selected_country,
+            selected_time_exceeded
+        } = this.state;
 
         if(!logged_in){
 
@@ -108,6 +115,12 @@ class UnconfirmedOrders extends Component{
                             console.log("UnconfirmedOrdersChannel Received!");
 
                             console.log(data);
+
+                            if(data.new_unconfirmed_order){
+
+                                searchUnconfirmedOrders(access_token, client, uid, history, search, selected_country, selected_time_exceeded);
+                            }
+
 
                         }
                     }
