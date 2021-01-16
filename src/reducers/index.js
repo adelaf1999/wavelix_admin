@@ -19,6 +19,7 @@ import ViewUserProfileReducer from "./ViewUserProfileReducer";
 import PostCasesReducer from "./PostCasesReducer";
 import ViewPostCaseReducer from "./ViewPostCaseReducer";
 import UnconfirmedOrdersReducer from "./UnconfirmedOrdersReducer";
+import ViewUnconfirmedOrderReducer from "./ViewUnconfirmedOrderReducer";
 
 const appReducer = combineReducers({
     login: LoginReducer,
@@ -36,7 +37,8 @@ const appReducer = combineReducers({
     view_user_profile: ViewUserProfileReducer,
     post_cases: PostCasesReducer,
     view_post_case: ViewPostCaseReducer,
-    unconfirmed_orders: UnconfirmedOrdersReducer
+    unconfirmed_orders: UnconfirmedOrdersReducer,
+    view_unconfirmed_order: ViewUnconfirmedOrderReducer
 });
 
 

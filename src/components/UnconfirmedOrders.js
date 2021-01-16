@@ -213,6 +213,8 @@ class UnconfirmedOrders extends Component{
 
         const { unconfirmed_orders } = this.props;
 
+        const { history } = this.state;
+
         return _.map(unconfirmed_orders, (order, index) => {
 
             const delivery_time_limit = new Date(order.delivery_time_limit).getTime();
@@ -220,9 +222,6 @@ class UnconfirmedOrders extends Component{
             const current_time = new Date().getTime();
 
             const initial_time = ( current_time - delivery_time_limit );
-
-
-
 
 
             return(
@@ -281,6 +280,7 @@ class UnconfirmedOrders extends Component{
 
                                 e.preventDefault();
 
+                                history.push(`/unconfirmed-orders/order_id=${order.id}`);
 
                             }}
                         >

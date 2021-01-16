@@ -46,6 +46,7 @@ export const MARK_POST_SAFE_ROUTE = `${BACKEND_URL}/mark-post-safe`;
 export const DELETE_UNSAFE_POST_ROUTE = `${BACKEND_URL}/destroy-unsafe-post`;
 export const UNCONFIRMED_ORDERS_INDEX_ROUTE =  `${BACKEND_URL}/unconfirmed-orders-index`;
 export const SEARCH_UNCONFIRMED_ORDERS_ROUTE = `${BACKEND_URL}/search-unconfirmed-orders`;
+export const VIEW_UNCONFIRMED_ORDER_ROUTE = `${BACKEND_URL}/view-unconfirmed-order`;
 
 // Login Types
 export const CHECK_EMAIL = "check_email";
@@ -210,3 +211,9 @@ export const INITIALIZE_UNCONFIRMED_ORDERS_PAGE = "initialize_unconfirmed_orders
 export const INITIALIZE_UNCONFIRMED_ORDERS_PAGE_COMPLETE = "initialize_unconfirmed_orders_page_complete";
 export const CLEAR_UNCONFIRMED_ORDERS_STATE = "clear_unconfirmed_orders_state";
 export const SEARCH_UNCONFIRMED_ORDERS_COMPLETE = "search_unconfirmed_orders_complete";
+
+//ViewUnconfirmedOrder Types
+export const GET_UNCONFIRMED_ORDER = "get_unconfirmed_order";
+export const GET_UNCONFIRMED_ORDER_COMPLETE = "get_unconfirmed_order_complete";
+export const CLEAR_VIEW_UNCONFIRMED_ORDER_STATE = "clear_view_unconfirmed_order_state";
+export const UNCONFIRMED_ORDER_REVIEWERS_CHANGED = "unconfirmed_order_reviewers_changed";
