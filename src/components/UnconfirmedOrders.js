@@ -10,6 +10,8 @@ import {
 import {  Spinner, Form, FormControl, Table, Button } from "react-bootstrap";
 import _ from "lodash";
 import Timer from 'react-compound-timer'
+import actionCable from "actioncable";
+import { ACTION_CABLE_ROUTE } from "../actions/types";
 
 class UnconfirmedOrders extends Component{
 
@@ -25,17 +27,34 @@ class UnconfirmedOrders extends Component{
 
         const selected_time_exceeded = null;
 
+        const cable = actionCable.createConsumer(ACTION_CABLE_ROUTE);
+
+        const unconfirmed_orders_channel_subscription = null;
+
         this.state = {
             history,
             search,
             selected_country,
-            selected_time_exceeded
+            selected_time_exceeded,
+            cable,
+            unconfirmed_orders_channel_subscription
         };
 
     }
 
 
     componentWillUnmount(){
+
+        const cable = this.state.cable;
+
+        const unconfirmed_orders_channel_subscription = this.state.unconfirmed_orders_channel_subscription;
+
+        if(unconfirmed_orders_channel_subscription !== null){
+
+            cable.subscriptions.remove(unconfirmed_orders_channel_subscription);
+
+        }
+
 
         this.props.clearUnconfirmedOrdersState();
 
@@ -53,7 +72,7 @@ class UnconfirmedOrders extends Component{
             initializeUnconfirmedOrdersPage
         } = this.props;
 
-        const { history } = this.state;
+        const { history, cable } = this.state;
 
         if(!logged_in){
 
@@ -66,6 +85,38 @@ class UnconfirmedOrders extends Component{
         }else{
 
             initializeUnconfirmedOrdersPage(access_token, client, uid, history);
+
+            let unconfirmed_orders_channel_subscription = this.state.unconfirmed_orders_channel_subscription;
+
+            if(unconfirmed_orders_channel_subscription === null){
+
+                unconfirmed_orders_channel_subscription = cable.subscriptions.create(
+                    {
+                        channel: 'UnconfirmedOrdersChannel',
+                        access_token: access_token,
+                        client: client,
+                        uid: uid
+                    },
+                    {
+                        connected: () => {
+
+                            console.log('UnconfirmedOrdersChannel Connected!');
+
+                        },
+                        received: (data) => {
+
+                            console.log("UnconfirmedOrdersChannel Received!");
+
+                            console.log(data);
+
+                        }
+                    }
+                );
+
+                this.setState({unconfirmed_orders_channel_subscription: unconfirmed_orders_channel_subscription});
+
+            }
+
 
         }
 
