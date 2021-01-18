@@ -123,7 +123,7 @@ class UnconfirmedOrders extends Component{
                                 searchUnconfirmedOrders(access_token, client, uid, history, search, selected_country, selected_time_exceeded);
                             }
 
-                            if(data.order_confirmed && data.order_id !== undefined){
+                            if( ( data.order_confirmed || data.order_canceled )  && data.order_id !== undefined){
 
                                 const order_id = data.order_id;
 
