@@ -4,7 +4,9 @@ import {
     GET_UNCONFIRMED_ORDER_COMPLETE,
     CLEAR_VIEW_UNCONFIRMED_ORDER_STATE,
     UNCONFIRMED_ORDER_REVIEWERS_CHANGED,
-    UNCONFIRMED_ORDER_RECEIPT_URL_CHANGED
+    UNCONFIRMED_ORDER_RECEIPT_URL_CHANGED,
+    OPEN_UNCONFIRMED_ORDER_LOADING_MODAL,
+    CLOSE_UNCONFIRMED_ORDER_LOADING_MODAL
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -26,11 +28,22 @@ const INITIAL_STATE = {
     total_price_currency: '',
     receipt_url: null,
     products: [],
-    delivery_location: {}
+    delivery_location: {},
+    unconfirmed_order_loading_modal_visible: false
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case CLOSE_UNCONFIRMED_ORDER_LOADING_MODAL:
+            return{
+                ...state,
+                unconfirmed_order_loading_modal_visible: false
+            };
+        case OPEN_UNCONFIRMED_ORDER_LOADING_MODAL:
+            return{
+                ...state,
+                unconfirmed_order_loading_modal_visible: true
+            };
         case UNCONFIRMED_ORDER_RECEIPT_URL_CHANGED:
             return{
                 ...state,

@@ -6,11 +6,82 @@ import {
     GET_UNCONFIRMED_ORDER_COMPLETE,
     CLEAR_VIEW_UNCONFIRMED_ORDER_STATE,
     UNCONFIRMED_ORDER_REVIEWERS_CHANGED,
-    UNCONFIRMED_ORDER_RECEIPT_URL_CHANGED
+    UNCONFIRMED_ORDER_RECEIPT_URL_CHANGED,
+    CONFIRM_UNCONFIRMED_ORDER_ROUTE,
+    OPEN_UNCONFIRMED_ORDER_LOADING_MODAL,
+    CLOSE_UNCONFIRMED_ORDER_LOADING_MODAL
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+export const closeUnconfirmedOrderLoadingModal = () => {
+
+    return{
+      type: CLOSE_UNCONFIRMED_ORDER_LOADING_MODAL
+    };
+
+};
+
+export const confirmUnconfirmedOrder = (access_token, client, uid, history, order_id) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = getFormData({
+            order_id: order_id
+        });
+
+        dispatch({type: OPEN_UNCONFIRMED_ORDER_LOADING_MODAL});
+
+        axios.post(CONFIRM_UNCONFIRMED_ORDER_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                const data = response.data;
+
+                const success = data.success;
+
+                if(success){
+
+                    dispatch({type: CLOSE_UNCONFIRMED_ORDER_LOADING_MODAL});
+
+                }else{
+
+                    history.goBack();
+
+                }
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+    };
+
+};
 
 export const unconfirmedOrderReceiptUrlChanged = (receipt_url) => {
 

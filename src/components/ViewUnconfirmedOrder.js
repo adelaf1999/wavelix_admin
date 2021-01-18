@@ -5,9 +5,11 @@ import {
     getUnconfirmedOrder,
     clearViewUnconfirmedOrderState,
     unconfirmedOrderReviewersChanged,
-    unconfirmedOrderReceiptUrlChanged
+    unconfirmedOrderReceiptUrlChanged,
+    confirmUnconfirmedOrder,
+    closeUnconfirmedOrderLoadingModal
 } from "../actions";
-import {  Spinner, Card, Form, Button, Accordion, Image, Alert, ListGroup} from "react-bootstrap";
+import {  Spinner, Card, Form, Button, Accordion, Image, Alert, ListGroup, Modal} from "react-bootstrap";
 import actionCable from "actioncable";
 import { ACTION_CABLE_ROUTE } from "../actions/types";
 import Timer from 'react-compound-timer'
@@ -27,11 +29,20 @@ class ViewUnconfirmedOrder extends Component{
 
         const view_unconfirmed_order_channel_subscription = null;
 
+        const confirm_order_modal_visible = false;
+
+        const notification_modal_visible = false;
+
+        const notification_modal_body = "";
+
         this.state = {
             history,
             params,
             cable,
-            view_unconfirmed_order_channel_subscription
+            view_unconfirmed_order_channel_subscription,
+            confirm_order_modal_visible,
+            notification_modal_visible,
+            notification_modal_body
         };
 
     }
@@ -62,7 +73,8 @@ class ViewUnconfirmedOrder extends Component{
             roles,
             getUnconfirmedOrder,
             unconfirmedOrderReviewersChanged,
-            unconfirmedOrderReceiptUrlChanged
+            unconfirmedOrderReceiptUrlChanged,
+            closeUnconfirmedOrderLoadingModal
         } = this.props;
 
         const { history, params } = this.state;
@@ -126,6 +138,28 @@ class ViewUnconfirmedOrder extends Component{
                                 console.log(receipt_url);
 
                                 unconfirmedOrderReceiptUrlChanged(receipt_url);
+
+                            }
+
+                            if(data.order_confirmed){
+
+                                closeUnconfirmedOrderLoadingModal();
+
+                                this.setState({
+                                    notification_modal_visible: true,
+                                    notification_modal_body: 'The order has been confirmed.'
+                                });
+
+                            }
+
+                            if(data.order_canceled){
+
+                                closeUnconfirmedOrderLoadingModal();
+
+                                this.setState({
+                                    notification_modal_visible: true,
+                                    notification_modal_body: 'The order has been canceled.'
+                                });
 
                             }
 
@@ -383,6 +417,204 @@ class ViewUnconfirmedOrder extends Component{
 
             );
 
+
+        }
+
+    }
+
+    loadingModal(){
+
+        const { unconfirmed_order_loading_modal_visible } = this.props;
+
+        if(unconfirmed_order_loading_modal_visible){
+
+            return(
+
+                <Modal
+                    show={unconfirmed_order_loading_modal_visible}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+
+                    <Modal.Header >
+
+                        <Modal.Title>Loading...</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+                        <p>Action will be completed in few moments.</p>
+
+                    </Modal.Body>
+
+                </Modal>
+
+            );
+
+        }
+
+
+    }
+
+    exitNotificationModal(){
+
+        this.setState({notification_modal_visible: false, notification_modal_body: ''});
+
+        this.state.history.goBack();
+
+    }
+
+    notificationModal(){
+
+        const { notification_modal_visible, notification_modal_body } = this.state;
+
+
+        if(notification_modal_visible){
+
+            return(
+
+                <Modal
+                    show={notification_modal_visible}
+                    onHide={() => {
+                        this.exitNotificationModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+                    <Modal.Header >
+
+                        <Modal.Title>Action Complete</Modal.Title>
+
+                    </Modal.Header>
+
+
+                    <Modal.Body>
+
+                        <p>{notification_modal_body}</p>
+
+                    </Modal.Body>
+
+                    <Modal.Footer>
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                               this.exitNotificationModal();
+
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+
+                    </Modal.Footer>
+
+                </Modal>
+
+
+            );
+
+        }
+
+    }
+
+    exitConfirmOrderModal(){
+
+        this.setState({confirm_order_modal_visible: false});
+
+    }
+
+    confirmOrderModal(){
+
+        const { confirm_order_modal_visible, params, history } = this.state;
+
+        const order_id = params.order_id;
+
+        if(confirm_order_modal_visible){
+
+            return(
+
+                <Modal
+                    show={confirm_order_modal_visible}
+                    onHide={() => {
+                        this.exitConfirmOrderModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Confirm Order</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+                        <p>
+                            By confirming the order you confirm that you have gone through all the
+                            necessary guidelines for resolving an unconfirmed order, and have concluded
+                            that the store did deliver the order to the customer, by contacting the customer
+                            who confirmed that they did receive the order or the store has proved that they
+                            delivered the order by attaching a receipt to the order.
+                        </p>
+
+                    </Modal.Body>
+
+                    <Modal.Footer>
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitConfirmOrderModal();
+
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        <Button
+                            variant="success"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                const {
+                                    confirmUnconfirmedOrder,
+                                    access_token,
+                                    client,
+                                    uid
+                                } = this.props;
+
+
+                                confirmUnconfirmedOrder(access_token, client, uid, history, order_id);
+
+                                this.exitConfirmOrderModal();
+
+
+                            }}
+                        >
+                            Confirm Order
+                        </Button>
+
+
+                    </Modal.Footer>
+
+                </Modal>
+
+            );
 
         }
 
@@ -813,6 +1045,7 @@ class ViewUnconfirmedOrder extends Component{
                                             variant="outline-success"
                                             onClick={(e) => {
                                                 e.preventDefault();
+                                                this.setState({confirm_order_modal_visible: true});
                                             }}
                                             className="unconfirmed-order-action-button"
                                         >
@@ -836,11 +1069,17 @@ class ViewUnconfirmedOrder extends Component{
 
                             </Card.Body>
 
-
                         </Card>
 
-
                     </div>
+
+                    {this.confirmOrderModal()}
+
+
+                    {this.loadingModal()}
+
+                    {this.notificationModal()}
+
 
                 </div>
 
@@ -903,7 +1142,8 @@ const mapStateToProps = (state) => {
         total_price_currency,
         receipt_url,
         products,
-        delivery_location
+        delivery_location,
+        unconfirmed_order_loading_modal_visible
     } = state.view_unconfirmed_order;
 
 
@@ -932,7 +1172,8 @@ const mapStateToProps = (state) => {
         total_price_currency,
         receipt_url,
         products,
-        delivery_location
+        delivery_location,
+        unconfirmed_order_loading_modal_visible
     };
 
 };
@@ -941,5 +1182,7 @@ export default connect(mapStateToProps, {
     getUnconfirmedOrder,
     clearViewUnconfirmedOrderState,
     unconfirmedOrderReviewersChanged,
-    unconfirmedOrderReceiptUrlChanged
+    unconfirmedOrderReceiptUrlChanged,
+    confirmUnconfirmedOrder,
+    closeUnconfirmedOrderLoadingModal
 })(ViewUnconfirmedOrder);
