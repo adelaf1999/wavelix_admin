@@ -6,11 +6,22 @@ import {
     INITIALIZE_UNCONFIRMED_ORDERS_PAGE_COMPLETE,
     CLEAR_UNCONFIRMED_ORDERS_STATE,
     SEARCH_UNCONFIRMED_ORDERS_ROUTE,
-    SEARCH_UNCONFIRMED_ORDERS_COMPLETE
+    SEARCH_UNCONFIRMED_ORDERS_COMPLETE,
+    UNCONFIRMED_ORDERS_CHANGED
 } from "./types";
 
 import axios from "axios";
 import _ from "lodash";
+
+
+export const unconfirmedOrdersChanged = (unconfirmed_orders) => {
+
+    return{
+      type: UNCONFIRMED_ORDERS_CHANGED,
+      payload: unconfirmed_orders
+    };
+
+};
 
 
 export const searchUnconfirmedOrders =  (access_token, client, uid, history, search, country, time_exceeded)  => {

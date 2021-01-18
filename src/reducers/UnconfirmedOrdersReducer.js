@@ -3,7 +3,8 @@ import {
     CLEAR_UNCONFIRMED_ORDERS_STATE,
     INITIALIZE_UNCONFIRMED_ORDERS_PAGE,
     INITIALIZE_UNCONFIRMED_ORDERS_PAGE_COMPLETE,
-    SEARCH_UNCONFIRMED_ORDERS_COMPLETE
+    SEARCH_UNCONFIRMED_ORDERS_COMPLETE,
+    UNCONFIRMED_ORDERS_CHANGED
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -15,6 +16,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case UNCONFIRMED_ORDERS_CHANGED:
+            return{
+                ...state,
+                unconfirmed_orders: action.payload
+            };
         case SEARCH_UNCONFIRMED_ORDERS_COMPLETE:
             return{
                 ...state,

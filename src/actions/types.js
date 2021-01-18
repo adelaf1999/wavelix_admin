@@ -211,6 +211,7 @@ export const INITIALIZE_UNCONFIRMED_ORDERS_PAGE = "initialize_unconfirmed_orders
 export const INITIALIZE_UNCONFIRMED_ORDERS_PAGE_COMPLETE = "initialize_unconfirmed_orders_page_complete";
 export const CLEAR_UNCONFIRMED_ORDERS_STATE = "clear_unconfirmed_orders_state";
 export const SEARCH_UNCONFIRMED_ORDERS_COMPLETE = "search_unconfirmed_orders_complete";
+export const UNCONFIRMED_ORDERS_CHANGED = "unconfirmed_orders_changed";
 
 //ViewUnconfirmedOrder Types
 export const GET_UNCONFIRMED_ORDER = "get_unconfirmed_order";

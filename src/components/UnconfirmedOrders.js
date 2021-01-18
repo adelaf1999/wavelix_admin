@@ -5,7 +5,8 @@ import Wrapper from "./Wrapper";
 import {
     initializeUnconfirmedOrdersPage,
     clearUnconfirmedOrdersState,
-    searchUnconfirmedOrders
+    searchUnconfirmedOrders,
+    unconfirmedOrdersChanged
 } from "../actions";
 import {  Spinner, Form, FormControl, Table, Button } from "react-bootstrap";
 import _ from "lodash";
@@ -70,7 +71,8 @@ class UnconfirmedOrders extends Component{
             uid,
             roles,
             initializeUnconfirmedOrdersPage,
-            searchUnconfirmedOrders
+            searchUnconfirmedOrders,
+            unconfirmedOrdersChanged
         } = this.props;
 
         const {
@@ -119,6 +121,20 @@ class UnconfirmedOrders extends Component{
                             if(data.new_unconfirmed_order){
 
                                 searchUnconfirmedOrders(access_token, client, uid, history, search, selected_country, selected_time_exceeded);
+                            }
+
+                            if(data.order_confirmed && data.order_id !== undefined){
+
+                                const order_id = data.order_id;
+
+                                let unconfirmed_orders = _.cloneDeep(this.props.unconfirmed_orders);
+
+                                _.remove(unconfirmed_orders, function(order) {
+                                    return order.id === order_id;
+                                });
+
+                                unconfirmedOrdersChanged(unconfirmed_orders);
+
                             }
 
 
@@ -556,5 +572,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     initializeUnconfirmedOrdersPage,
     clearUnconfirmedOrdersState,
-    searchUnconfirmedOrders
+    searchUnconfirmedOrders,
+    unconfirmedOrdersChanged
 })(UnconfirmedOrders);
