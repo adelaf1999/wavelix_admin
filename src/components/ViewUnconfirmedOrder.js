@@ -7,7 +7,8 @@ import {
     unconfirmedOrderReviewersChanged,
     unconfirmedOrderReceiptUrlChanged,
     confirmUnconfirmedOrder,
-    closeUnconfirmedOrderLoadingModal
+    closeUnconfirmedOrderLoadingModal,
+    cancelUnconfirmedOrder
 } from "../actions";
 import {  Spinner, Card, Form, Button, Accordion, Image, Alert, ListGroup, Modal} from "react-bootstrap";
 import actionCable from "actioncable";
@@ -35,6 +36,8 @@ class ViewUnconfirmedOrder extends Component{
 
         const notification_modal_body = "";
 
+        const cancel_order_modal_visible = false;
+
         this.state = {
             history,
             params,
@@ -42,7 +45,8 @@ class ViewUnconfirmedOrder extends Component{
             view_unconfirmed_order_channel_subscription,
             confirm_order_modal_visible,
             notification_modal_visible,
-            notification_modal_body
+            notification_modal_body,
+            cancel_order_modal_visible
         };
 
     }
@@ -147,7 +151,9 @@ class ViewUnconfirmedOrder extends Component{
 
                                 this.setState({
                                     notification_modal_visible: true,
-                                    notification_modal_body: 'The order has been confirmed.'
+                                    notification_modal_body: 'The order has been confirmed.',
+                                    confirm_order_modal_visible: false,
+                                    cancel_order_modal_visible: false
                                 });
 
                             }
@@ -158,7 +164,9 @@ class ViewUnconfirmedOrder extends Component{
 
                                 this.setState({
                                     notification_modal_visible: true,
-                                    notification_modal_body: 'The order has been canceled.'
+                                    notification_modal_body: 'The order has been canceled.',
+                                    confirm_order_modal_visible: false,
+                                    cancel_order_modal_visible: false
                                 });
 
                             }
@@ -526,6 +534,107 @@ class ViewUnconfirmedOrder extends Component{
 
     }
 
+
+    exitCancelOrderModal(){
+
+        this.setState({cancel_order_modal_visible: false});
+
+    }
+
+    cancelOrderModal(){
+
+        const { cancel_order_modal_visible, params, history  } = this.state;
+
+        const order_id = params.order_id;
+
+        if(cancel_order_modal_visible){
+
+            return(
+
+                <Modal
+                    show={cancel_order_modal_visible}
+                    onHide={() => {
+                        this.exitCancelOrderModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Cancel Order</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+                        <p>
+                            By canceling the order you confirm that you have gone through all the
+                            necessary guidelines for resolving an unconfirmed order, and have concluded that
+                            the store did not deliver the order to the customer, by contacting the customer
+                            who claimed that they didn't receive the order and by contacting the store and they
+                            said that they couldn't deliver the order to the customer or they could't prove that
+                            they indeed delivered the order to the customer by attaching a receipt to the order.
+                            A refund will be issued for the customer for the order they made and the order will be
+                            canceled.
+                        </p>
+
+                    </Modal.Body>
+
+
+                    <Modal.Footer>
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitCancelOrderModal();
+
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        <Button
+                            variant="danger"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                const {
+                                    cancelUnconfirmedOrder,
+                                    access_token,
+                                    client,
+                                    uid
+                                } = this.props;
+
+
+                                cancelUnconfirmedOrder(access_token, client, uid, history, order_id);
+
+                                this.exitCancelOrderModal();
+
+                            }}
+                        >
+                            Cancel Order
+                        </Button>
+
+
+                    </Modal.Footer>
+
+
+
+                </Modal>
+
+            );
+
+        }
+
+    }
+
     exitConfirmOrderModal(){
 
         this.setState({confirm_order_modal_visible: false});
@@ -564,7 +673,8 @@ class ViewUnconfirmedOrder extends Component{
                             necessary guidelines for resolving an unconfirmed order, and have concluded
                             that the store did deliver the order to the customer, by contacting the customer
                             who confirmed that they did receive the order or the store has proved that they
-                            delivered the order by attaching a receipt to the order.
+                            delivered the order by attaching a receipt to the order. The order will be marked
+                            as complete and the store will receive the payment from the customer for the order.
                         </p>
 
                     </Modal.Body>
@@ -1056,6 +1166,7 @@ class ViewUnconfirmedOrder extends Component{
                                             variant="outline-danger"
                                             onClick={(e) => {
                                                 e.preventDefault();
+                                                this.setState({cancel_order_modal_visible: true});
                                             }}
                                             className="unconfirmed-order-action-button"
                                         >
@@ -1075,11 +1186,11 @@ class ViewUnconfirmedOrder extends Component{
 
                     {this.confirmOrderModal()}
 
-
                     {this.loadingModal()}
 
                     {this.notificationModal()}
 
+                    {this.cancelOrderModal()}
 
                 </div>
 
@@ -1184,5 +1295,6 @@ export default connect(mapStateToProps, {
     unconfirmedOrderReviewersChanged,
     unconfirmedOrderReceiptUrlChanged,
     confirmUnconfirmedOrder,
-    closeUnconfirmedOrderLoadingModal
+    closeUnconfirmedOrderLoadingModal,
+    cancelUnconfirmedOrder
 })(ViewUnconfirmedOrder);
