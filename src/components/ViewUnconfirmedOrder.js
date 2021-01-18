@@ -7,7 +7,7 @@ import {
     unconfirmedOrderReviewersChanged,
     unconfirmedOrderReceiptUrlChanged
 } from "../actions";
-import {  Spinner, Card, Form, Button, Accordion, Image} from "react-bootstrap";
+import {  Spinner, Card, Form, Button, Accordion, Image, Alert, ListGroup} from "react-bootstrap";
 import actionCable from "actioncable";
 import { ACTION_CABLE_ROUTE } from "../actions/types";
 import Timer from 'react-compound-timer'
@@ -178,6 +178,16 @@ class ViewUnconfirmedOrder extends Component{
 
             );
 
+        }else{
+
+            return(
+
+                <p id="unconfirmed-order-receipt-not-found">
+                    Order Receipt Not Attached
+                </p>
+
+            );
+
         }
 
     }
@@ -321,6 +331,60 @@ class ViewUnconfirmedOrder extends Component{
             );
 
         });
+
+    }
+
+    currentReviewers(){
+
+
+        const { current_reviewers } = this.props;
+
+        if( current_reviewers.length > 0){
+
+            return(
+
+                <div >
+
+
+                    <Form.Label className="post-case-form-label">
+                        Currently Reviewing
+                    </Form.Label>
+
+
+
+                    <div >
+
+                        {
+                            _.map(current_reviewers, (reviewer, index) => {
+
+                                return(
+
+                                    <Button
+                                        key={index}
+                                        variant="outline-success"
+                                        id="unconfirmed-order-reviewer-button"
+                                    >
+                                        {reviewer + " •" }
+                                    </Button>
+
+                                );
+
+                            })
+                        }
+
+                    </div>
+
+
+
+
+                </div>
+
+
+
+            );
+
+
+        }
 
     }
 
@@ -645,6 +709,136 @@ class ViewUnconfirmedOrder extends Component{
 
 
                         </Card>
+
+
+
+                        <Card className="view-unconfirmed-order-card">
+
+                            <Card.Header
+                                as="h5"
+                                className="view-unconfirmed-order-card-header"
+                            >
+                                Resolving Unconfirmed Order Guidelines
+                            </Card.Header>
+
+
+                            <Card.Body>
+
+                                <Form>
+
+                                    {this.currentReviewers()}
+
+                                    <div>
+
+                                        <Form.Label className="unconfirmed-order-form-label">
+                                            Guidelines
+                                        </Form.Label>
+
+                                        <Alert
+                                            variant="warning"
+                                            className="resolving-unconfirmed-order-instructions"
+                                        >
+                                            Please make sure to check the time in the store's and the customer's location before calling
+                                            them to avoid disturbing the person you are calling (note that some locations might have different
+                                            timezones even if they are within the same country). If you called the store owner or customer and
+                                            they did't answer the call you may send them a message or call them again later.
+                                        </Alert>
+
+
+                                        <ListGroup className="resolving-unconfirmed-order-guidelines-container">
+
+
+
+
+                                            <ListGroup.Item
+                                                className="unconfirmed-order-guidelines"
+                                            >
+                                                Call the customer ({customer_name}) and ask them if they received the order from the store
+                                                or not. Make sure to introduce yourself so the customer knows who they are talking with<br/>
+                                                1) Hello this is [YOUR NAME] from Wavelix customer service<br/>
+                                                2) Did you receive the order you made from {store_name} ?
+                                            </ListGroup.Item>
+
+
+                                            <ListGroup.Item
+                                                className="unconfirmed-order-guidelines"
+                                            >
+                                                If the customer said that they received the order, then confirm order
+                                                so the store can receive the payment from the customer.
+                                            </ListGroup.Item>
+
+
+                                            <ListGroup.Item
+                                                className="unconfirmed-order-guidelines"
+                                            >
+                                                If the customer said that they didn't receive the order, check if the store
+                                                uploaded the order receipt. If the receipt was uploaded check it and if all
+                                                ordered items are included, confirm the order so the store can receive the
+                                                payment from the customer.
+                                            </ListGroup.Item>
+
+                                            <ListGroup.Item
+                                                className="unconfirmed-order-guidelines"
+                                            >
+                                                If the store did not upload the receipt then call the store ({store_name})
+                                                and ask them if they did deliver the order to the customer ({customer_name})
+                                                or not<br/>
+                                                1) Hello this is [YOUR NAME] from Wavelix customer service<br/>
+                                                2) Did you deliver the order to your customer {customer_name} ?
+                                            </ListGroup.Item>
+
+
+                                            <ListGroup.Item
+                                                className="unconfirmed-order-guidelines"
+                                            >
+                                                If the store said that they did deliver the order to their customer {customer_name},
+                                                then ask them to attach the receipt to the order in the orders page. Make sure to check it
+                                                and if all ordered items are included, confirm the order so the store can receive the
+                                                payment from the customer.
+                                            </ListGroup.Item>
+
+
+                                            <ListGroup.Item
+                                                className="unconfirmed-order-guidelines"
+                                            >
+                                                If the store said that they didn't deliver the order to the customer (i.e. something happened)
+                                                or couldn't prove that they delivered the order to the customer by attaching a receipt
+                                                to the order and the customer claimed that they didn't receive the order, then cancel the order
+                                                so that the customer can receive a refund for the order they made.
+                                            </ListGroup.Item>
+
+                                        </ListGroup>
+
+                                        <Button
+                                            variant="outline-success"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                            }}
+                                            className="unconfirmed-order-action-button"
+                                        >
+                                            Confirm Order
+                                        </Button>
+
+                                        <Button
+                                            variant="outline-danger"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                            }}
+                                            className="unconfirmed-order-action-button"
+                                        >
+                                            Cancel Order
+                                        </Button>
+
+
+                                    </div>
+
+                                </Form>
+
+                            </Card.Body>
+
+
+                        </Card>
+
 
                     </div>
 

@@ -549,11 +549,6 @@ class ViewStoreAccount extends Component{
                                     </ListGroup.Item>
 
 
-                                    <ListGroup.Item
-                                        className="store-verification-guidelines"
-                                    >
-
-                                    </ListGroup.Item>
 
                                 </ListGroup>
 

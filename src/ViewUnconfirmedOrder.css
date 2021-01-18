@@ -41,3 +41,35 @@
     height: 210px;
     object-fit: cover;
 }
+#unconfirmed-order-reviewer-button{
+    margin-right: 1rem;
+    font-size: 18px;
+    margin-bottom: 1.5rem;
+}
+.unconfirmed-order-form-label{
+    font-size: 20px;
+    margin-bottom: 1.5rem;
+}
+.resolving-unconfirmed-order-instructions{
+    font-size: 18px;
+    margin-bottom: 1.5rem;
+}
+.resolving-unconfirmed-order-guidelines-container{
+    margin-bottom: 1.5rem;
+}
+.unconfirmed-order-guidelines{
+    font-size: 18px;
+}
+#unconfirmed-order-receipt-not-found{
+    font-size: 18px;
+    text-align: center;
+    color: #ffa500;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.unconfirmed-order-action-button{
+    margin-bottom: 1.5rem;
+    width: 100%;
+    align-self: center;
+    font-size: 18px;
+}
