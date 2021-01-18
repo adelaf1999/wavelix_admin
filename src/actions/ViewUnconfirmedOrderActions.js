@@ -5,11 +5,21 @@ import {
     GET_UNCONFIRMED_ORDER,
     GET_UNCONFIRMED_ORDER_COMPLETE,
     CLEAR_VIEW_UNCONFIRMED_ORDER_STATE,
-    UNCONFIRMED_ORDER_REVIEWERS_CHANGED
+    UNCONFIRMED_ORDER_REVIEWERS_CHANGED,
+    UNCONFIRMED_ORDER_RECEIPT_URL_CHANGED
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+export const unconfirmedOrderReceiptUrlChanged = (receipt_url) => {
+
+    return{
+      type: UNCONFIRMED_ORDER_RECEIPT_URL_CHANGED,
+      payload: receipt_url
+    };
+
+};
 
 export const unconfirmedOrderReviewersChanged = (current_reviewers) => {
 

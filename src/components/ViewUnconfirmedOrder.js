@@ -4,7 +4,8 @@ import Wrapper from "./Wrapper";
 import {
     getUnconfirmedOrder,
     clearViewUnconfirmedOrderState,
-    unconfirmedOrderReviewersChanged
+    unconfirmedOrderReviewersChanged,
+    unconfirmedOrderReceiptUrlChanged
 } from "../actions";
 import {  Spinner, Card, Form, Button, Accordion, Image} from "react-bootstrap";
 import actionCable from "actioncable";
@@ -60,7 +61,8 @@ class ViewUnconfirmedOrder extends Component{
             uid,
             roles,
             getUnconfirmedOrder,
-            unconfirmedOrderReviewersChanged
+            unconfirmedOrderReviewersChanged,
+            unconfirmedOrderReceiptUrlChanged
         } = this.props;
 
         const { history, params } = this.state;
@@ -113,6 +115,17 @@ class ViewUnconfirmedOrder extends Component{
                                 console.log(current_reviewers);
 
                                 unconfirmedOrderReviewersChanged(current_reviewers);
+
+                            }
+
+
+                            if(data.receipt_url !== undefined){
+
+                                const receipt_url = data.receipt_url;
+
+                                console.log(receipt_url);
+
+                                unconfirmedOrderReceiptUrlChanged(receipt_url);
 
                             }
 
@@ -733,5 +746,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     getUnconfirmedOrder,
     clearViewUnconfirmedOrderState,
-    unconfirmedOrderReviewersChanged
+    unconfirmedOrderReviewersChanged,
+    unconfirmedOrderReceiptUrlChanged
 })(ViewUnconfirmedOrder);

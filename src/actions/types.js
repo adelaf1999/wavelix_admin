@@ -217,3 +217,4 @@ export const GET_UNCONFIRMED_ORDER = "get_unconfirmed_order";
 export const GET_UNCONFIRMED_ORDER_COMPLETE = "get_unconfirmed_order_complete";
 export const CLEAR_VIEW_UNCONFIRMED_ORDER_STATE = "clear_view_unconfirmed_order_state";
 export const UNCONFIRMED_ORDER_REVIEWERS_CHANGED = "unconfirmed_order_reviewers_changed";
+export const UNCONFIRMED_ORDER_RECEIPT_URL_CHANGED = "unconfirmed_order_receipt_url_changed";

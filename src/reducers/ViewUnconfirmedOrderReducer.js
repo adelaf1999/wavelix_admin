@@ -3,7 +3,8 @@ import {
     GET_UNCONFIRMED_ORDER,
     GET_UNCONFIRMED_ORDER_COMPLETE,
     CLEAR_VIEW_UNCONFIRMED_ORDER_STATE,
-    UNCONFIRMED_ORDER_REVIEWERS_CHANGED
+    UNCONFIRMED_ORDER_REVIEWERS_CHANGED,
+    UNCONFIRMED_ORDER_RECEIPT_URL_CHANGED
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -30,6 +31,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case UNCONFIRMED_ORDER_RECEIPT_URL_CHANGED:
+            return{
+                ...state,
+                receipt_url: action.payload
+            };
         case UNCONFIRMED_ORDER_REVIEWERS_CHANGED:
             return{
                 ...state,
