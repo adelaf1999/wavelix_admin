@@ -57,7 +57,7 @@ export const cancelUnconfirmedOrder = (access_token, client, uid, history, order
 
                 }else{
 
-                    history.goBack();
+                    history.push("/unconfirmed-orders");
 
                 }
 
@@ -118,7 +118,7 @@ export const confirmUnconfirmedOrder = (access_token, client, uid, history, orde
 
                 }else{
 
-                    history.goBack();
+                    history.push("/unconfirmed-orders");
 
                 }
 
@@ -260,7 +260,7 @@ export const getUnconfirmedOrder = (access_token, client, uid, history, order_id
 
                 }else{
 
-                    history.goBack();
+                    history.push("/unconfirmed-orders");
 
                 }
 

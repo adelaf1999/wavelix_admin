@@ -469,9 +469,11 @@ class ViewUnconfirmedOrder extends Component{
 
     exitNotificationModal(){
 
+        const { history } = this.state;
+
         this.setState({notification_modal_visible: false, notification_modal_body: ''});
 
-        this.state.history.goBack();
+        history.push("/unconfirmed-orders");
 
     }
 
