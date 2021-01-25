@@ -451,6 +451,66 @@ class ViewDriverAccount extends Component{
                                 </Alert>
 
 
+
+                                <Alert variant="primary" className="driver-verification-process">
+                                    Pre-Existing Account Validation
+                                </Alert>
+
+                                <ListGroup className="driver-verification-guidelines-container">
+
+
+                                    <ListGroup.Item
+                                        className="driver-verification-guidelines"
+                                    >
+                                        Go to the driver accounts page and check if the driver has already registered
+                                        before.
+                                    </ListGroup.Item>
+
+
+                                    <ListGroup.Item
+                                        className="driver-verification-guidelines"
+                                    >
+                                        In case the driver has another account and that account was temporarily
+                                        or permanently blocked then decline verification.
+                                    </ListGroup.Item>
+
+
+                                    <ListGroup.Item
+                                        className="driver-verification-guidelines"
+                                    >
+                                        In case the driver has another account but that account was not verified
+                                        (i.e. declined by some other account manager or not yet reviewed by any account manager),
+                                        then decline verification.
+                                    </ListGroup.Item>
+
+
+
+                                    <ListGroup.Item
+                                        className="driver-verification-guidelines"
+                                    >
+                                        In case the driver has another account that is unblocked in the same
+                                        country they are trying to register from then decline verification. A driver
+                                        can have one and only one account per country.
+                                    </ListGroup.Item>
+
+
+                                    <ListGroup.Item
+                                        className="driver-verification-guidelines"
+                                    >
+                                        In case the driver has another account that is unblocked but the country
+                                        they are trying to register from is different, make sure that they have a valid
+                                        driver's license that can be used in the country they are trying to register from,
+                                        that they have a valid national ID or permanent residence from that country as well,
+                                        and that the driver has a valid vehicle registration document from that country
+                                        (i.e. driver owns a vehicle to operate in that country as well).
+                                    </ListGroup.Item>
+
+
+
+                                </ListGroup>
+
+
+
                                 <Alert variant="primary" className="driver-verification-process">
                                     Profile Photo Validation
                                 </Alert>
@@ -503,6 +563,15 @@ class ViewDriverAccount extends Component{
                                         Make sure the driver's license is not expired.
                                     </ListGroup.Item>
 
+
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Make sure the driver's license can be used in the country they are registering
+                                        from (i.e. can drive in that country with the uploaded license)
+                                    </ListGroup.Item>
+
+
                                 </ListGroup>
 
 
@@ -535,6 +604,14 @@ class ViewDriverAccount extends Component{
                                     </ListGroup.Item>
 
 
+                                    <ListGroup.Item
+                                        className="store-verification-guidelines"
+                                    >
+                                        Make sure the national ID uploaded proves that the driver has legal permanent residence
+                                        or citizenship in the country they are registering from.
+                                    </ListGroup.Item>
+
+
 
                                 </ListGroup>
 
@@ -557,9 +634,13 @@ class ViewDriverAccount extends Component{
                                     <ListGroup.Item
                                         className="store-verification-guidelines"
                                     >
-                                        Make sure the driver's name is included in the vehicle registration document (i.e. the
-                                        driver owns the vehicle).
+                                        Make sure the vehicle registration document proves that the driver owns the vehicle
+                                        (i.e. driver's name is included in the vehicle registration document ) in the
+                                        country they are registering from.
                                     </ListGroup.Item>
+
+
+
 
                                 </ListGroup>
 
@@ -835,7 +916,7 @@ class ViewDriverAccount extends Component{
             phone_number,
             country,
             driver_verified,
-            account_blocked,
+            account_status,
             review_status,
             registered_at,
             latitude,
@@ -967,14 +1048,14 @@ class ViewDriverAccount extends Component{
                                     <Form.Group>
 
                                         <Form.Label >
-                                            Account Blocked
+                                            Account Status
                                         </Form.Label>
 
 
                                         <Form.Control
                                             readOnly
                                             type="text"
-                                            value={account_blocked ? 'Yes' : 'No'}
+                                            value={_.startCase(account_status)}
                                         />
 
                                     </Form.Group>
@@ -1207,7 +1288,7 @@ const mapStateToProps = (state) => {
         phone_number,
         country,
         driver_verified,
-        account_blocked,
+        account_status,
         review_status,
         registered_at,
         latitude,
@@ -1236,7 +1317,7 @@ const mapStateToProps = (state) => {
         phone_number,
         country,
         driver_verified,
-        account_blocked,
+        account_status,
         review_status,
         registered_at,
         latitude,

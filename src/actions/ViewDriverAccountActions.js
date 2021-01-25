@@ -215,7 +215,7 @@ export const getDriverData = (driver_id, access_token, client, uid, history) => 
 
                     const driver_verified = data.driver_verified;
 
-                    const account_blocked = data.account_blocked;
+                    const account_status = data.account_status;
 
                     const review_status = data.review_status;
 
@@ -245,7 +245,7 @@ export const getDriverData = (driver_id, access_token, client, uid, history) => 
                         phone_number: phone_number,
                         country: country,
                         driver_verified: driver_verified,
-                        account_blocked: account_blocked,
+                        account_status: account_status,
                         review_status: review_status,
                         registered_at: registered_at,
                         latitude: latitude,
