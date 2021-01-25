@@ -14,7 +14,8 @@ const INITIAL_STATE = {
     limit: 50,
     driver_accounts: [],
     review_status_options: {},
-    countries: {}
+    countries: {},
+    account_status_options: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -40,7 +41,8 @@ export default (state = INITIAL_STATE, action) => {
                 initializing_page: false,
                 driver_accounts: action.payload.driver_accounts,
                 review_status_options: action.payload.review_status_options,
-                countries: action.payload.countries
+                countries: action.payload.countries,
+                account_status_options: action.payload.account_status_options
             };
         case INITIALIZE_DRIVER_ACCOUNTS_PAGE:
             return{

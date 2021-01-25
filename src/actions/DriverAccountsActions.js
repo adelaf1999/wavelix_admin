@@ -40,7 +40,7 @@ export const searchDriverAccounts = (
     search,
     driver_verified,
     country,
-    account_blocked,
+    account_status,
     review_status,
     access_token,
     client,
@@ -73,9 +73,9 @@ export const searchDriverAccounts = (
 
         }
 
-        if( !_.isEmpty(account_blocked) ){
+        if( !_.isEmpty(account_status) ){
 
-            data.account_blocked = account_blocked;
+            data.account_status = account_status;
         }
 
         if( !_.isEmpty(country) ){
@@ -169,11 +169,14 @@ export const initializeDriverAccountsPage = (limit, access_token, client, uid, h
 
                 const countries = data.countries;
 
+                const account_status_options = data.account_status_options;
+
 
                 dispatch({type: INITIALIZE_DRIVER_ACCOUNTS_PAGE_COMPLETE, payload: {
                     driver_accounts: driver_accounts,
                     review_status_options: review_status_options,
-                    countries: countries
+                    countries: countries,
+                    account_status_options: account_status_options
                 }});
 
 

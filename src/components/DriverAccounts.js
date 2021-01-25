@@ -26,7 +26,7 @@ class DriverAccounts extends Component{
 
         const driver_verified = null;
 
-        const account_blocked = null;
+        const selected_account_status = null;
 
         const selected_country = null;
 
@@ -42,7 +42,7 @@ class DriverAccounts extends Component{
             history,
             search,
             driver_verified,
-            account_blocked,
+            selected_account_status,
             selected_country,
             selected_review_status,
             cable,
@@ -82,7 +82,7 @@ class DriverAccounts extends Component{
                 search,
                 driver_verified,
                 selected_country,
-                account_blocked,
+                selected_account_status,
                 selected_review_status,
                 history
             } = this.state;
@@ -96,7 +96,7 @@ class DriverAccounts extends Component{
                 search,
                 driver_verified,
                 selected_country,
-                account_blocked,
+                selected_account_status,
                 selected_review_status,
                 access_token,
                 client,
@@ -191,7 +191,7 @@ class DriverAccounts extends Component{
                                     search,
                                     driver_verified,
                                     selected_country,
-                                    account_blocked,
+                                    selected_account_status,
                                     selected_review_status,
                                     history
                                 } = this.state;
@@ -201,7 +201,7 @@ class DriverAccounts extends Component{
                                     search,
                                     driver_verified,
                                     selected_country,
-                                    account_blocked,
+                                    selected_account_status,
                                     selected_review_status,
                                     access_token,
                                     client,
@@ -291,40 +291,7 @@ class DriverAccounts extends Component{
     }
 
 
-    reviewStatusOptions(){
 
-        const { review_status_options } = this.props;
-
-        let options = [];
-
-        options.push({ label: 'Select Option', value: ''});
-
-        _.map(review_status_options, (label, value) => {
-
-            options.push({
-                label: _.startCase(label),
-                value: value
-            });
-
-        });
-
-        return _.map(options, (option, index) => {
-
-
-            return(
-
-                <option
-                    key={index}
-                    value={option.value}
-                >
-                    {option.label}
-                </option>
-
-            );
-
-        });
-
-    }
 
     renderAccounts(){
 
@@ -361,7 +328,7 @@ class DriverAccounts extends Component{
                     </td>
 
                     <td>
-                        {driver_account.account_blocked ? 'Yes' : 'No'}
+                        {_.startCase(driver_account.account_status)}
                     </td>
 
                     <td>
@@ -428,7 +395,7 @@ class DriverAccounts extends Component{
                         <th>Name</th>
                         <th>Country</th>
                         <th>Verified</th>
-                        <th>Account Blocked</th>
+                        <th>Account Status</th>
                         <th>Review Status</th>
                         <th>Registered At</th>
                         <th></th>
@@ -450,6 +417,82 @@ class DriverAccounts extends Component{
             );
 
         }
+
+    }
+
+
+    reviewStatusOptions(){
+
+        const { review_status_options } = this.props;
+
+        let options = [];
+
+        options.push({ label: 'Select Option', value: ''});
+
+        _.map(review_status_options, (value, label) => {
+
+            options.push({
+                label: _.startCase(label),
+                value: value
+            });
+
+        });
+
+        return _.map(options, (option, index) => {
+
+
+            return(
+
+                <option
+                    key={index}
+                    value={option.value}
+                >
+                    {option.label}
+                </option>
+
+            );
+
+        });
+
+    }
+
+    accountStatusOptions(){
+
+
+        const { account_status_options } = this.props;
+
+        let options = [];
+
+        options.push({ label: 'Select Option', value: ''});
+
+
+        _.map(account_status_options, (value, label) => {
+
+                options.push({
+                    label: _.startCase(label),
+                    value: value
+                });
+
+        });
+
+
+        return _.map(options, (option, index) => {
+
+
+            return(
+
+                <option
+                    key={index}
+                    value={option.value}
+                >
+                    {option.label}
+                </option>
+
+            );
+
+        });
+
+
 
     }
 
@@ -504,7 +547,7 @@ class DriverAccounts extends Component{
 
                                 const {
                                     driver_verified,
-                                    account_blocked,
+                                    selected_account_status,
                                     selected_country,
                                     selected_review_status
                                 } = this.state;
@@ -514,7 +557,7 @@ class DriverAccounts extends Component{
                                     new_search,
                                     driver_verified,
                                     selected_country,
-                                    account_blocked,
+                                    selected_account_status,
                                     selected_review_status,
                                     access_token,
                                     client,
@@ -552,7 +595,7 @@ class DriverAccounts extends Component{
 
                                     const {
                                         search,
-                                        account_blocked,
+                                        selected_account_status,
                                         selected_country,
                                         selected_review_status
                                     } = this.state;
@@ -562,7 +605,7 @@ class DriverAccounts extends Component{
                                         search,
                                         new_driver_verified,
                                         selected_country,
-                                        account_blocked,
+                                        selected_account_status,
                                         selected_review_status,
                                         access_token,
                                         client,
@@ -603,22 +646,22 @@ class DriverAccounts extends Component{
 
                         <Form.Group className="driver-account-filter-group" >
 
-                            <Form.Label>Account Blocked</Form.Label>
+                            <Form.Label>Account Status</Form.Label>
 
 
                             <Form.Control
                                 as="select"
                                 onChange={(e) => {
 
-                                    const new_account_blocked = e.target.value;
+                                    const new_selected_account_status = e.target.value;
 
-                                    if(new_account_blocked === "true" || new_account_blocked === "false"){
+                                    if(_.isEmpty(new_selected_account_status)){
 
-                                        this.setState({account_blocked: new_account_blocked});
+                                        this.setState({selected_account_status: null});
 
                                     }else{
 
-                                        this.setState({account_blocked: null});
+                                        this.setState({selected_account_status: new_selected_account_status});
                                     }
 
 
@@ -635,7 +678,7 @@ class DriverAccounts extends Component{
                                         search,
                                         driver_verified,
                                         selected_country,
-                                        new_account_blocked,
+                                        new_selected_account_status,
                                         selected_review_status,
                                         access_token,
                                         client,
@@ -648,25 +691,8 @@ class DriverAccounts extends Component{
                                 }}
                             >
 
-                                <option
-                                    value=""
-                                >
-                                    Select option
-                                </option>
 
-
-                                <option
-                                    value={true}
-                                >
-                                    Yes
-                                </option>
-
-
-                                <option
-                                    value={false}
-                                >
-                                    No
-                                </option>
+                                {this.accountStatusOptions()}
 
 
                             </Form.Control>
@@ -698,7 +724,7 @@ class DriverAccounts extends Component{
                                     const {
                                         search,
                                         driver_verified,
-                                        account_blocked,
+                                        selected_account_status,
                                         selected_review_status
                                     } = this.state;
 
@@ -708,7 +734,7 @@ class DriverAccounts extends Component{
                                         search,
                                         driver_verified,
                                         new_selected_country,
-                                        account_blocked,
+                                        selected_account_status,
                                         selected_review_status,
                                         access_token,
                                         client,
@@ -751,7 +777,7 @@ class DriverAccounts extends Component{
                                     const {
                                         search,
                                         driver_verified,
-                                        account_blocked,
+                                        selected_account_status,
                                         selected_country
                                     } = this.state;
 
@@ -761,7 +787,7 @@ class DriverAccounts extends Component{
                                         search,
                                         driver_verified,
                                         selected_country,
-                                        account_blocked,
+                                        selected_account_status,
                                         new_selected_review_status,
                                         access_token,
                                         client,
@@ -835,7 +861,8 @@ const mapStateToProps = (state) => {
         limit,
         driver_accounts,
         review_status_options,
-        countries
+        countries,
+        account_status_options
     } = state.driver_accounts;
 
     return {
@@ -847,7 +874,8 @@ const mapStateToProps = (state) => {
         limit,
         driver_accounts,
         review_status_options,
-        countries
+        countries,
+        account_status_options
     };
 
 };
