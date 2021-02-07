@@ -16,6 +16,7 @@
 @import "ViewPostCase.css";
 @import "UnconfirmedOrders.css";
 @import "ViewUnconfirmedOrder.css";
+@import "UnsuccessfulOrders.css";
 
 .center-container{
     position: absolute;

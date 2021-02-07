@@ -1,0 +1,21 @@
+#unsuccessful-orders-warning-container{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex: 1;
+    margin-bottom: 1rem;
+}
+#unsuccessful-orders-warning-text{
+    width: 50%;
+    font-size: 17px;
+}
+#unsuccessful-orders-filters-container{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 3rem;
+}
+.unsuccessful-order-filter-group{
+    width: 25%;
+}

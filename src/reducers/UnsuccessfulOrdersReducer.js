@@ -7,7 +7,7 @@ import {
 
 const INITIAL_STATE = {
     initializing_page: false,
-    unsuccessful_orders: [],
+    drivers: [],
     countries: {}
 };
 
