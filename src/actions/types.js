@@ -50,6 +50,7 @@ export const VIEW_UNCONFIRMED_ORDER_ROUTE = `${BACKEND_URL}/view-unconfirmed-ord
 export const CONFIRM_UNCONFIRMED_ORDER_ROUTE = `${BACKEND_URL}/confirm-unconfirmed-order`;
 export const CANCEL_UNCONFIRMED_ORDER_ROUTE = `${BACKEND_URL}/cancel-unconfirmed-order`;
 export const UNSUCCESSFUL_ORDERS_INDEX_ROUTE = `${BACKEND_URL}/unsuccessful-orders-index`;
+export const SEARCH_DRIVERS_UNSUCCESSFUL_ORDERS_ROUTE =  `${BACKEND_URL}/search-drivers-unsuccessful-orders`;
 
 // Login Types
 export const CHECK_EMAIL = "check_email";
@@ -229,3 +230,4 @@ export const CLOSE_UNCONFIRMED_ORDER_LOADING_MODAL = "close_unconfirmed_order_lo
 export const INITIALIZE_UNSUCCESSFUL_ORDERS_PAGE = "initialize_unsuccessful_orders_page";
 export const INITIALIZE_UNSUCCESSFUL_ORDERS_PAGE_COMPLETE = "initialize_unsuccessful_orders_page_complete";
 export const CLEAR_UNSUCCESSFUL_ORDERS_STATE = "clear_unsuccessful_orders_state";
+export const SEARCH_DRIVERS_UNSUCCESSFUL_ORDERS_COMPLETE = "search_drivers_unsuccessful_orders_complete";

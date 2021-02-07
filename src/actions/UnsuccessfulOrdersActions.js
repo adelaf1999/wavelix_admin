@@ -4,11 +4,79 @@ import {
     UNSUCCESSFUL_ORDERS_INDEX_ROUTE,
     INITIALIZE_UNSUCCESSFUL_ORDERS_PAGE,
     INITIALIZE_UNSUCCESSFUL_ORDERS_PAGE_COMPLETE,
-    CLEAR_UNSUCCESSFUL_ORDERS_STATE
+    CLEAR_UNSUCCESSFUL_ORDERS_STATE,
+    SEARCH_DRIVERS_UNSUCCESSFUL_ORDERS_COMPLETE,
+    SEARCH_DRIVERS_UNSUCCESSFUL_ORDERS_ROUTE
 } from "./types";
 
 import axios from "axios";
 import _ from "lodash";
+
+export const searchDriversUnsuccessfulOrders = (access_token, client, uid, history, search, country) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = new FormData();
+
+        let data = {
+            search: search
+        };
+
+        if(!_.isEmpty(country)){
+
+            data.country = country;
+
+        }
+
+        _.each(data, (value, key) => {
+
+            bodyFormData.append(key, value);
+
+        });
+
+        axios.post(SEARCH_DRIVERS_UNSUCCESSFUL_ORDERS_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                const data = response.data;
+
+                const drivers = data.drivers;
+
+                dispatch({type: SEARCH_DRIVERS_UNSUCCESSFUL_ORDERS_COMPLETE, payload: drivers});
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+
+
+    };
+
+};
 
 export const clearUnsuccessfulOrdersState = () => {
 

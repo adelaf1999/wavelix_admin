@@ -4,7 +4,8 @@ import TopHeader from "./TopHeader";
 import Wrapper from "./Wrapper";
 import {
     initializeUnsuccessfulOrdersPage,
-    clearUnsuccessfulOrdersState
+    clearUnsuccessfulOrdersState,
+    searchDriversUnsuccessfulOrders
 } from "../actions";
 import {  Spinner, Form, FormControl, Table, Button, Alert } from "react-bootstrap";
 import _ from "lodash";
@@ -195,7 +196,7 @@ class UnsuccessfulOrders extends Component{
 
                 <div className="center-container">
 
-                    <p className="no-accounts-notice">No Drivers Found</p>
+                    <p id="no-driver-accounts-notice">No Drivers Found</p>
 
                 </div>
 
@@ -238,10 +239,17 @@ class UnsuccessfulOrders extends Component{
     show(){
 
         const {
-            initializing_page
+            initializing_page,
+            searchDriversUnsuccessfulOrders,
+            access_token,
+            client,
+            uid
         } = this.props;
 
 
+        const {
+            history
+        } = this.state;
 
         if(initializing_page){
 
@@ -277,6 +285,10 @@ class UnsuccessfulOrders extends Component{
                                 const new_search = e.target.value;
 
                                 this.setState({search: new_search});
+
+                                const { selected_country } = this.state;
+
+                                searchDriversUnsuccessfulOrders(access_token, client, uid, history, new_search, selected_country);
 
 
                             }}
@@ -318,6 +330,11 @@ class UnsuccessfulOrders extends Component{
 
                                         this.setState({selected_country: new_selected_country});
                                     }
+
+
+                                    const { search } = this.state;
+
+                                    searchDriversUnsuccessfulOrders(access_token, client, uid, history, search, new_selected_country);
 
 
                                 }}
@@ -405,5 +422,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     initializeUnsuccessfulOrdersPage,
-    clearUnsuccessfulOrdersState
+    clearUnsuccessfulOrdersState,
+    searchDriversUnsuccessfulOrders
 })(UnsuccessfulOrders);

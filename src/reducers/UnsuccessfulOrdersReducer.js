@@ -2,7 +2,8 @@ import {
     LOGOUT_SUCCESS,
     CLEAR_UNSUCCESSFUL_ORDERS_STATE,
     INITIALIZE_UNSUCCESSFUL_ORDERS_PAGE,
-    INITIALIZE_UNSUCCESSFUL_ORDERS_PAGE_COMPLETE
+    INITIALIZE_UNSUCCESSFUL_ORDERS_PAGE_COMPLETE,
+    SEARCH_DRIVERS_UNSUCCESSFUL_ORDERS_COMPLETE
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -13,6 +14,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case SEARCH_DRIVERS_UNSUCCESSFUL_ORDERS_COMPLETE:
+            return{
+                ...state,
+                drivers: action.payload
+            };
         case INITIALIZE_UNSUCCESSFUL_ORDERS_PAGE_COMPLETE:
             return{
                 ...state,

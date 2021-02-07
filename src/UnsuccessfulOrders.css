@@ -19,3 +19,8 @@
 .unsuccessful-order-filter-group{
     width: 25%;
 }
+#no-driver-accounts-notice{
+    text-align: center;
+    font-size: 22px;
+    margin-top: 3rem;
+}
