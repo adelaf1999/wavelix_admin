@@ -49,6 +49,7 @@ export const SEARCH_UNCONFIRMED_ORDERS_ROUTE = `${BACKEND_URL}/search-unconfirme
 export const VIEW_UNCONFIRMED_ORDER_ROUTE = `${BACKEND_URL}/view-unconfirmed-order`;
 export const CONFIRM_UNCONFIRMED_ORDER_ROUTE = `${BACKEND_URL}/confirm-unconfirmed-order`;
 export const CANCEL_UNCONFIRMED_ORDER_ROUTE = `${BACKEND_URL}/cancel-unconfirmed-order`;
+export const UNSUCCESSFUL_ORDERS_INDEX_ROUTE = `${BACKEND_URL}/unsuccessful-orders-index`;
 
 // Login Types
 export const CHECK_EMAIL = "check_email";
@@ -223,3 +224,8 @@ export const UNCONFIRMED_ORDER_REVIEWERS_CHANGED = "unconfirmed_order_reviewers_
 export const UNCONFIRMED_ORDER_RECEIPT_URL_CHANGED = "unconfirmed_order_receipt_url_changed";
 export const OPEN_UNCONFIRMED_ORDER_LOADING_MODAL = "open_unconfirmed_order_loading_modal";
 export const CLOSE_UNCONFIRMED_ORDER_LOADING_MODAL = "close_unconfirmed_order_loading_modal";
+
+// UnsuccessfulOrders Types
+export const INITIALIZE_UNSUCCESSFUL_ORDERS_PAGE = "initialize_unsuccessful_orders_page";
+export const INITIALIZE_UNSUCCESSFUL_ORDERS_PAGE_COMPLETE = "initialize_unsuccessful_orders_page_complete";
+export const CLEAR_UNSUCCESSFUL_ORDERS_STATE = "clear_unsuccessful_orders_state";

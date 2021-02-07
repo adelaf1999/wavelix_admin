@@ -22,6 +22,7 @@ import PostCases from "./components/PostCases";
 import ViewPostCase from "./components/ViewPostCase";
 import UnconfirmedOrders from "./components/UnconfirmedOrders";
 import ViewUnconfirmedOrder from "./components/ViewUnconfirmedOrder";
+import UnsuccessfulOrders from "./components/UnsuccessfulOrders";
 
 export default function Routes() {
 
@@ -72,6 +73,9 @@ export default function Routes() {
                 <Route exact path="/unconfirmed-orders" component={UnconfirmedOrders} />
 
                 <Route exact path="/unconfirmed-orders/order_id=:order_id" component={ViewUnconfirmedOrder} />
+
+
+                <Route exact path="/unsuccessful-orders" component={UnsuccessfulOrders} />
 
 
             </Switch>

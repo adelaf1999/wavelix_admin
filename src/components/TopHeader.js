@@ -125,6 +125,33 @@ class TopHeader extends Component{
 
     }
 
+    unsuccessfulOrdersTab(){
+
+        const { roles } = this.props;
+
+        const { history } = this.state;
+
+        if(roles.includes("root_admin") || roles.includes("order_manager")){
+
+            return(
+
+                <Nav.Link
+                    onClick={() => {
+                        history.push("/unsuccessful-orders");
+                    }}
+                    className="nav-link"
+                >
+                    Unsuccessful Orders
+                </Nav.Link>
+
+
+            );
+
+        }
+
+
+    }
+
 
     render(){
 
@@ -194,6 +221,8 @@ class TopHeader extends Component{
                     {this.postCasesTab()}
 
                     {this.unconfirmedOrdersTab()}
+
+                    {this.unsuccessfulOrdersTab()}
 
 
                 </Nav>
