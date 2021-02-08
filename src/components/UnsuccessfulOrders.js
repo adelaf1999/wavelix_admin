@@ -10,6 +10,8 @@ import {
 import {  Spinner, Form, FormControl, Table, Button, Alert } from "react-bootstrap";
 import _ from "lodash";
 import Timer from 'react-compound-timer'
+import actionCable from "actioncable";
+import { ACTION_CABLE_ROUTE } from "../actions/types";
 
 class UnsuccessfulOrders extends Component{
 
@@ -23,16 +25,33 @@ class UnsuccessfulOrders extends Component{
 
         const selected_country = null;
 
+        const cable = actionCable.createConsumer(ACTION_CABLE_ROUTE);
+
+        const unsuccessful_orders_channel_subscription = null;
+
         this.state = {
             history,
             search,
-            selected_country
+            selected_country,
+            cable,
+            unsuccessful_orders_channel_subscription
         };
 
     }
 
 
     componentWillUnmount(){
+
+        const cable = this.state.cable;
+
+        const unsuccessful_orders_channel_subscription = this.state.unsuccessful_orders_channel_subscription;
+
+        if(unsuccessful_orders_channel_subscription !== null){
+
+            cable.subscriptions.remove(unsuccessful_orders_channel_subscription);
+
+        }
+
 
         this.props.clearUnsuccessfulOrdersState();
 
@@ -51,7 +70,8 @@ class UnsuccessfulOrders extends Component{
         } = this.props;
 
         const {
-            history
+            history,
+            cable
         } = this.state;
 
         if(!logged_in){
@@ -65,6 +85,39 @@ class UnsuccessfulOrders extends Component{
         }else{
 
             initializeUnsuccessfulOrdersPage(access_token, client, uid, history);
+
+
+            let unsuccessful_orders_channel_subscription = this.state.unsuccessful_orders_channel_subscription;
+
+            if(unsuccessful_orders_channel_subscription === null){
+
+                unsuccessful_orders_channel_subscription = cable.subscriptions.create(
+                    {
+                        channel: 'UnsuccessfulOrdersChannel',
+                        access_token: access_token,
+                        client: client,
+                        uid: uid
+                    },
+                    {
+                        connected: () => {
+
+                            console.log('UnsuccessfulOrdersChannel Connected!');
+
+                        },
+                        received: (data) => {
+
+                            console.log("UnsuccessfulOrdersChannel Received!");
+
+                            console.log(data);
+                        }
+                    }
+                );
+
+                this.setState({unsuccessful_orders_channel_subscription: unsuccessful_orders_channel_subscription});
+
+
+            }
+
 
         }
 
