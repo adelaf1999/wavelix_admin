@@ -231,3 +231,4 @@ export const INITIALIZE_UNSUCCESSFUL_ORDERS_PAGE = "initialize_unsuccessful_orde
 export const INITIALIZE_UNSUCCESSFUL_ORDERS_PAGE_COMPLETE = "initialize_unsuccessful_orders_page_complete";
 export const CLEAR_UNSUCCESSFUL_ORDERS_STATE = "clear_unsuccessful_orders_state";
 export const SEARCH_DRIVERS_UNSUCCESSFUL_ORDERS_COMPLETE = "search_drivers_unsuccessful_orders_complete";
+export const DRIVERS_UNSUCCESSFUL_ORDERS_CHANGED = "drivers_unsuccessful_orders_changed";

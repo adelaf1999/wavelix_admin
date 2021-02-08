@@ -5,7 +5,8 @@ import Wrapper from "./Wrapper";
 import {
     initializeUnsuccessfulOrdersPage,
     clearUnsuccessfulOrdersState,
-    searchDriversUnsuccessfulOrders
+    searchDriversUnsuccessfulOrders,
+    driversUnsuccessfulOrdersChanged
 } from "../actions";
 import {  Spinner, Form, FormControl, Table, Button, Alert } from "react-bootstrap";
 import _ from "lodash";
@@ -67,7 +68,8 @@ class UnsuccessfulOrders extends Component{
             uid,
             roles,
             initializeUnsuccessfulOrdersPage,
-            searchDriversUnsuccessfulOrders
+            searchDriversUnsuccessfulOrders,
+            driversUnsuccessfulOrdersChanged
         } = this.props;
 
         const {
@@ -118,6 +120,22 @@ class UnsuccessfulOrders extends Component{
                                 searchDriversUnsuccessfulOrders(access_token, client, uid, history, search, selected_country);
 
                             }
+
+
+                            if(data.delete_driver && data.driver_id !== undefined ){
+
+                                const driver_id = data.driver_id;
+
+                                let drivers = _.cloneDeep(this.props.drivers);
+
+                                _.remove(drivers, function(driver) {
+                                    return driver.id === driver_id;
+                                });
+
+                                driversUnsuccessfulOrdersChanged(drivers);
+
+                            }
+
 
                         }
                     }
@@ -486,5 +504,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     initializeUnsuccessfulOrdersPage,
     clearUnsuccessfulOrdersState,
-    searchDriversUnsuccessfulOrders
+    searchDriversUnsuccessfulOrders,
+    driversUnsuccessfulOrdersChanged
 })(UnsuccessfulOrders);

@@ -6,11 +6,21 @@ import {
     INITIALIZE_UNSUCCESSFUL_ORDERS_PAGE_COMPLETE,
     CLEAR_UNSUCCESSFUL_ORDERS_STATE,
     SEARCH_DRIVERS_UNSUCCESSFUL_ORDERS_COMPLETE,
-    SEARCH_DRIVERS_UNSUCCESSFUL_ORDERS_ROUTE
+    SEARCH_DRIVERS_UNSUCCESSFUL_ORDERS_ROUTE,
+    DRIVERS_UNSUCCESSFUL_ORDERS_CHANGED
 } from "./types";
 
 import axios from "axios";
 import _ from "lodash";
+
+export const driversUnsuccessfulOrdersChanged = (drivers) => {
+
+    return{
+      type: DRIVERS_UNSUCCESSFUL_ORDERS_CHANGED,
+      payload: drivers
+    };
+
+};
 
 export const searchDriversUnsuccessfulOrders = (access_token, client, uid, history, search, country) => {
 
