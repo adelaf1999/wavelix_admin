@@ -66,7 +66,8 @@ class UnsuccessfulOrders extends Component{
             client,
             uid,
             roles,
-            initializeUnsuccessfulOrdersPage
+            initializeUnsuccessfulOrdersPage,
+            searchDriversUnsuccessfulOrders
         } = this.props;
 
         const {
@@ -109,6 +110,15 @@ class UnsuccessfulOrders extends Component{
                             console.log("UnsuccessfulOrdersChannel Received!");
 
                             console.log(data);
+
+                            if(data.new_driver){
+
+                                const { search, selected_country } = this.state;
+
+                                searchDriversUnsuccessfulOrders(access_token, client, uid, history, search, selected_country);
+
+                            }
+
                         }
                     }
                 );
