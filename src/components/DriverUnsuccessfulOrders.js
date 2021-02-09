@@ -213,6 +213,59 @@ class DriverUnsuccessfulOrders extends Component{
     }
 
 
+    currentResolvers(){
+
+        const { current_resolvers } = this.props;
+
+        if(current_resolvers.length > 0){
+
+            return(
+
+                <div >
+
+
+                    <Form.Label className="driver-unsuccessful-order-form-label">
+                        Currently Resolving
+                    </Form.Label>
+
+
+
+                    <div >
+
+                        {
+                            _.map(current_resolvers, (resolver, index) => {
+
+                                return(
+
+                                    <Button
+                                        key={index}
+                                        variant="outline-success"
+                                        id="driver-unsuccessful-order-resolver-button"
+                                    >
+                                        {resolver + " •" }
+                                    </Button>
+
+                                );
+
+                            })
+                        }
+
+                    </div>
+
+
+                </div>
+
+
+
+            );
+
+
+        }
+
+
+    }
+
+
     show(){
 
         const  {
@@ -390,17 +443,34 @@ class DriverUnsuccessfulOrders extends Component{
                                         View Last Available Location
                                     </Button>
 
-
-
-
-
-
-
-
                                 </Form>
 
                             </Card.Body>
 
+
+                        </Card>
+
+
+
+                        <Card className="driver-unsuccessful-orders-card">
+
+                            <Card.Header
+                                as="h5"
+                                className="driver-unsuccessful-orders-card-header"
+                            >
+                                Unsuccessful Orders
+                            </Card.Header>
+
+
+                            <Card.Body>
+
+                                <Form>
+
+                                    {this.currentResolvers()}
+
+                                </Form>
+
+                            </Card.Body>
 
                         </Card>
 
