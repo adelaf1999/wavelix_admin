@@ -7,7 +7,7 @@ import {
     driverUnsuccessfulOrdersResolversChanged,
     driverUnsuccessfulOrdersUpdated
 } from "../actions";
-import {  Spinner } from "react-bootstrap";
+import {  Spinner, Button, Modal } from "react-bootstrap";
 import actionCable from "actioncable";
 import { ACTION_CABLE_ROUTE } from "../actions/types";
 import _ from "lodash";
@@ -26,11 +26,14 @@ class DriverUnsuccessfulOrders extends Component{
 
         const view_driver_unsuccessful_orders_channel_subscription = null;
 
+        const orders_resolved_modal_visible = false;
+
         this.state = {
             history,
             params,
             cable,
-            view_driver_unsuccessful_orders_channel_subscription
+            view_driver_unsuccessful_orders_channel_subscription,
+            orders_resolved_modal_visible
         };
     }
 
@@ -120,6 +123,11 @@ class DriverUnsuccessfulOrders extends Component{
 
                                 driverUnsuccessfulOrdersUpdated(unsuccessful_orders);
 
+                                if(unsuccessful_orders.length === 0){
+
+                                    this.setState({orders_resolved_modal_visible: true});
+
+                                }
 
                             }
 
@@ -131,6 +139,74 @@ class DriverUnsuccessfulOrders extends Component{
 
             }
 
+
+        }
+
+    }
+
+
+    exitOrdersResolvedModal(){
+
+        const { history } = this.state;
+
+        this.setState({orders_resolved_modal_visible: false});
+
+        history.push("/unsuccessful-orders");
+
+    }
+
+    ordersResolvedModal(){
+
+        const { orders_resolved_modal_visible } = this.state;
+
+        if(orders_resolved_modal_visible){
+
+            return(
+
+                <Modal
+                    show={orders_resolved_modal_visible}
+                    onHide={() => {
+                        this.exitOrdersResolvedModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+                    <Modal.Header >
+
+                        <Modal.Title>Unsuccessful Orders Resolved</Modal.Title>
+
+                    </Modal.Header>
+
+
+                    <Modal.Body>
+
+                        <p>
+                            All unsuccessful orders of this driver have been resolved.
+                        </p>
+
+                    </Modal.Body>
+
+                    <Modal.Footer>
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitOrdersResolvedModal();
+
+                            }}
+                        >
+                            Close
+                        </Button>
+
+                    </Modal.Footer>
+
+                </Modal>
+
+            );
 
         }
 
@@ -166,6 +242,9 @@ class DriverUnsuccessfulOrders extends Component{
             return(
 
                 <div className="page-container">
+
+
+                    {this.ordersResolvedModal()}
 
                 </div>
 
