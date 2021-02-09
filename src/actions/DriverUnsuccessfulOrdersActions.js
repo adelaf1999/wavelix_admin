@@ -5,18 +5,28 @@ import {
     INITIALIZE_DRIVER_UNSUCCESSFUL_ORDERS_PAGE,
     INITIALIZE_DRIVER_UNSUCCESSFUL_ORDERS_PAGE_COMPLETE,
     CLEAR_DRIVER_UNSUCCESSFUL_ORDERS_STATE,
-    DRIVER_UNSUCCESSFUL_ORDERS_RESOLVERS_CHANGED
+    DRIVER_UNSUCCESSFUL_ORDERS_RESOLVERS_CHANGED,
+    DRIVER_UNSUCCESSFUL_ORDERS_UPDATED
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
 import _ from "lodash";
 
+export const driverUnsuccessfulOrdersUpdated = (unsuccessful_orders) => {
+
+    return{
+        type: DRIVER_UNSUCCESSFUL_ORDERS_UPDATED,
+        payload: unsuccessful_orders
+    };
+
+};
+
 export const driverUnsuccessfulOrdersResolversChanged = (current_resolvers) => {
 
     return{
-      type: DRIVER_UNSUCCESSFUL_ORDERS_RESOLVERS_CHANGED,
-      payload: current_resolvers
+        type: DRIVER_UNSUCCESSFUL_ORDERS_RESOLVERS_CHANGED,
+        payload: current_resolvers
     };
 
 };
@@ -24,7 +34,7 @@ export const driverUnsuccessfulOrdersResolversChanged = (current_resolvers) => {
 export const clearDriverUnsuccessfulOrdersState = () => {
 
     return{
-      type: CLEAR_DRIVER_UNSUCCESSFUL_ORDERS_STATE
+        type: CLEAR_DRIVER_UNSUCCESSFUL_ORDERS_STATE
     };
 
 };

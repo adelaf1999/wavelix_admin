@@ -3,7 +3,8 @@ import {
     INITIALIZE_DRIVER_UNSUCCESSFUL_ORDERS_PAGE,
     INITIALIZE_DRIVER_UNSUCCESSFUL_ORDERS_PAGE_COMPLETE,
     CLEAR_DRIVER_UNSUCCESSFUL_ORDERS_STATE,
-    DRIVER_UNSUCCESSFUL_ORDERS_RESOLVERS_CHANGED
+    DRIVER_UNSUCCESSFUL_ORDERS_RESOLVERS_CHANGED,
+    DRIVER_UNSUCCESSFUL_ORDERS_UPDATED
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -21,6 +22,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case DRIVER_UNSUCCESSFUL_ORDERS_UPDATED:
+            return{
+                ...state,
+                unsuccessful_orders: action.payload
+            };
         case DRIVER_UNSUCCESSFUL_ORDERS_RESOLVERS_CHANGED:
             return{
                 ...state,

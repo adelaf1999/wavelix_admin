@@ -239,3 +239,4 @@ export const INITIALIZE_DRIVER_UNSUCCESSFUL_ORDERS_PAGE = "initialize_driver_uns
 export const INITIALIZE_DRIVER_UNSUCCESSFUL_ORDERS_PAGE_COMPLETE = "initialize_driver_unsuccessful_orders_page_complete";
 export const CLEAR_DRIVER_UNSUCCESSFUL_ORDERS_STATE = "clear_driver_unsuccessful_orders_state";
 export const DRIVER_UNSUCCESSFUL_ORDERS_RESOLVERS_CHANGED = "driver_unsuccessful_orders_resolvers_changed";
+export const DRIVER_UNSUCCESSFUL_ORDERS_UPDATED = "driver_unsuccessful_orders_updated";

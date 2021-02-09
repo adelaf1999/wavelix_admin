@@ -4,7 +4,8 @@ import Wrapper from "./Wrapper";
 import {
     initializeDriverUnsuccessfulOrdersPage,
     clearDriverUnsuccessfulOrdersState,
-    driverUnsuccessfulOrdersResolversChanged
+    driverUnsuccessfulOrdersResolversChanged,
+    driverUnsuccessfulOrdersUpdated
 } from "../actions";
 import {  Spinner } from "react-bootstrap";
 import actionCable from "actioncable";
@@ -59,7 +60,8 @@ class DriverUnsuccessfulOrders extends Component{
             uid,
             roles,
             initializeDriverUnsuccessfulOrdersPage,
-            driverUnsuccessfulOrdersResolversChanged
+            driverUnsuccessfulOrdersResolversChanged,
+            driverUnsuccessfulOrdersUpdated
         } = this.props;
 
 
@@ -109,6 +111,15 @@ class DriverUnsuccessfulOrders extends Component{
                                 const current_resolvers = data.current_resolvers;
 
                                 driverUnsuccessfulOrdersResolversChanged(current_resolvers);
+
+                            }
+
+                            if(data.unsuccessful_orders !== undefined){
+
+                                const unsuccessful_orders = data.unsuccessful_orders;
+
+                                driverUnsuccessfulOrdersUpdated(unsuccessful_orders);
+
 
                             }
 
@@ -234,5 +245,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     initializeDriverUnsuccessfulOrdersPage,
     clearDriverUnsuccessfulOrdersState,
-    driverUnsuccessfulOrdersResolversChanged
+    driverUnsuccessfulOrdersResolversChanged,
+    driverUnsuccessfulOrdersUpdated
 })(DriverUnsuccessfulOrders);
