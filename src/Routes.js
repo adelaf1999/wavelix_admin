@@ -23,6 +23,7 @@ import ViewPostCase from "./components/ViewPostCase";
 import UnconfirmedOrders from "./components/UnconfirmedOrders";
 import ViewUnconfirmedOrder from "./components/ViewUnconfirmedOrder";
 import UnsuccessfulOrders from "./components/UnsuccessfulOrders";
+import DriverUnsuccessfulOrders from "./components/DriverUnsuccessfulOrders";
 
 export default function Routes() {
 
@@ -76,6 +77,8 @@ export default function Routes() {
 
 
                 <Route exact path="/unsuccessful-orders" component={UnsuccessfulOrders} />
+
+                <Route exact path="/unsuccessful-orders/driver_id=:driver_id" component={DriverUnsuccessfulOrders} />
 
 
             </Switch>

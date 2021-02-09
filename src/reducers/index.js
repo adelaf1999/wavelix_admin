@@ -21,6 +21,7 @@ import ViewPostCaseReducer from "./ViewPostCaseReducer";
 import UnconfirmedOrdersReducer from "./UnconfirmedOrdersReducer";
 import ViewUnconfirmedOrderReducer from "./ViewUnconfirmedOrderReducer";
 import UnsuccessfulOrdersReducer from "./UnsuccessfulOrdersReducer";
+import DriverUnsuccessfulOrdersReducer from "./DriverUnsuccessfulOrdersReducer";
 
 const appReducer = combineReducers({
     login: LoginReducer,
@@ -40,7 +41,8 @@ const appReducer = combineReducers({
     view_post_case: ViewPostCaseReducer,
     unconfirmed_orders: UnconfirmedOrdersReducer,
     view_unconfirmed_order: ViewUnconfirmedOrderReducer,
-    unsuccessful_orders: UnsuccessfulOrdersReducer
+    unsuccessful_orders: UnsuccessfulOrdersReducer,
+    driver_unsuccessful_orders: DriverUnsuccessfulOrdersReducer
 });
 
 

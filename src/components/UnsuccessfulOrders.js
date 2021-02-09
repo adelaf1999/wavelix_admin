@@ -250,6 +250,7 @@ class UnsuccessfulOrders extends Component{
 
                                 e.preventDefault();
 
+                                history.push(`/unsuccessful-orders/driver_id=${driver.id}`);
 
                             }}
                         >
