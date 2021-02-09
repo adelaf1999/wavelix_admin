@@ -7,7 +7,7 @@ import {
     driverUnsuccessfulOrdersResolversChanged,
     driverUnsuccessfulOrdersUpdated
 } from "../actions";
-import {  Spinner, Button, Modal } from "react-bootstrap";
+import {  Spinner, Card, Form, Button, Modal, Alert } from "react-bootstrap";
 import actionCable from "actioncable";
 import { ACTION_CABLE_ROUTE } from "../actions/types";
 import _ from "lodash";
@@ -216,10 +216,19 @@ class DriverUnsuccessfulOrders extends Component{
     show(){
 
         const  {
-            initializing_page
+            initializing_page,
+            driver_name,
+            driver_phone_number,
+            driver_country,
+            driver_account_status,
+            driver_balance_usd,
+            driver_latitude,
+            driver_longitude
         } = this.props;
 
-        const {  history } = this.state;
+        const {  history , params} = this.state;
+
+        const driver_id = params.driver_id;
 
         if(initializing_page){
 
@@ -242,6 +251,161 @@ class DriverUnsuccessfulOrders extends Component{
             return(
 
                 <div className="page-container">
+
+                    <div id="driver-unsuccessful-orders-container">
+
+
+                        <div id="driver-unsuccessful-orders-warning-container">
+
+                            <Alert variant="warning" id="driver-unsuccessful-orders-warning-text">
+                                For orders where the store doesn't provide delivery (i.e. Wavelix drivers will be doing delivery),
+                                we only have exactly 7 days to resolve each order from the time the order was accepted
+                                by the driver. If the time limit to resolve an order passed and the order was not resolved,
+                                and the order had to be canceled, we might not be able to recover the cost of the product(s)
+                                for the store from the driver's card if the driver indeed stole them.
+                            </Alert>
+
+                        </div>
+
+
+                        <Card className="driver-unsuccessful-orders-card">
+
+                            <Card.Header
+                                as="h5"
+                                className="driver-unsuccessful-orders-card-header"
+                            >
+                                Driver Information
+                            </Card.Header>
+
+                            <Card.Body>
+
+                                <Form>
+
+                                    <Form.Group>
+
+                                        <div className="driver-unsuccessful-orders-label-link">
+
+                                            <Form.Label >
+                                                Driver Name
+                                            </Form.Label>
+
+                                            <Button
+                                                variant="link"
+                                                onClick={(e) => {
+
+                                                    e.preventDefault();
+
+                                                    history.push(`/driver-accounts/driver_id=${driver_id}`);
+
+                                                }}
+                                            >
+                                                View Account
+                                            </Button>
+
+                                        </div>
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={driver_name}
+                                        />
+
+                                    </Form.Group>
+
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Phone Number
+                                        </Form.Label>
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={driver_phone_number}
+                                        />
+
+                                    </Form.Group>
+
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Country
+                                        </Form.Label>
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={driver_country}
+                                        />
+
+                                    </Form.Group>
+
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Account Status
+                                        </Form.Label>
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={_.startCase(driver_account_status)}
+                                        />
+
+                                    </Form.Group>
+
+
+                                    <Form.Group>
+
+                                        <Form.Label >
+                                            Balance
+                                        </Form.Label>
+
+                                        <Form.Control
+                                            readOnly
+                                            type="text"
+                                            value={`${driver_balance_usd} USD`}
+                                        />
+
+                                    </Form.Group>
+
+
+
+                                    <Button
+                                        variant="outline-primary"
+                                        id="driver-last-available-location-button"
+                                        onClick={(e) => {
+
+                                            e.preventDefault();
+
+                                            const url = `https://www.google.com/maps/search/?api=1&query=${driver_latitude},${driver_longitude}`;
+
+                                            window.open(url, "_blank")
+
+                                        }}
+                                    >
+                                        View Last Available Location
+                                    </Button>
+
+
+
+
+
+
+
+
+                                </Form>
+
+                            </Card.Body>
+
+
+                        </Card>
+
+
+                    </div>
 
 
                     {this.ordersResolvedModal()}
