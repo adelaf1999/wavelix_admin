@@ -7,7 +7,7 @@ import {
     driverUnsuccessfulOrdersResolversChanged,
     driverUnsuccessfulOrdersUpdated
 } from "../actions";
-import {  Spinner, Card, Form, Button, Modal, Alert } from "react-bootstrap";
+import {  Spinner, Card, Form, Button, Modal, Alert, ListGroup } from "react-bootstrap";
 import actionCable from "actioncable";
 import { ACTION_CABLE_ROUTE } from "../actions/types";
 import _ from "lodash";
@@ -224,7 +224,7 @@ class DriverUnsuccessfulOrders extends Component{
                 <div >
 
 
-                    <Form.Label className="driver-unsuccessful-order-form-label">
+                    <Form.Label className="driver-unsuccessful-orders-form-label">
                         Currently Resolving
                     </Form.Label>
 
@@ -240,7 +240,7 @@ class DriverUnsuccessfulOrders extends Component{
                                     <Button
                                         key={index}
                                         variant="outline-success"
-                                        id="driver-unsuccessful-order-resolver-button"
+                                        id="driver-unsuccessful-orders-resolver-button"
                                     >
                                         {resolver + " •" }
                                     </Button>
@@ -467,6 +467,95 @@ class DriverUnsuccessfulOrders extends Component{
                                 <Form>
 
                                     {this.currentResolvers()}
+
+                                    <div>
+
+                                        <Form.Label className="driver-unsuccessful-orders-form-label">
+                                            Guidelines
+                                        </Form.Label>
+
+
+                                        <Alert
+                                            variant="warning"
+                                            className="resolving-unsuccessful-orders-instructions"
+                                        >
+                                            Please do all of the following guidelines and procedures to resolve each unsuccessful
+                                            order. If you had to contact the customer, driver or store please check the time in
+                                            their location to avoid disturbing them. Please make sure to never pass the time
+                                            limit we have to resolve each order as the driver might have planned to steal the
+                                            order, and we might not be able to recover cost of the stolen products for the store
+                                            after the time limit is passed.
+                                        </Alert>
+
+
+                                        <ListGroup className="resolving-unsuccessful-orders-guidelines-container">
+
+                                            <ListGroup.Item
+                                                className="unsuccessful-order-guidelines"
+                                            >
+                                                Call the customer and ask them if they have received the order they
+                                                made from the store or not. Please make sure to introduce yourself
+                                                properly so the customer knows who they are talking with:<br/>
+                                                1) Hello this is [YOUR NAME] from Wavelix customer service<br/>
+                                                2) Did you receive the order you made from the store?
+                                            </ListGroup.Item>
+
+
+                                            <ListGroup.Item
+                                                className="unsuccessful-order-guidelines"
+                                            >
+                                                If the customer claimed that they have received their order,
+                                                click on the confirm order button.
+                                            </ListGroup.Item>
+
+
+                                            <ListGroup.Item
+                                                className="unsuccessful-order-guidelines"
+                                            >
+                                                Else, call the driver and tell them that we have contacted the customer
+                                                and they told us that they haven't received their order and we would like
+                                                to know why their order hasn't been delivered yet.
+                                            </ListGroup.Item>
+
+
+                                            <ListGroup.Item
+                                                className="unsuccessful-order-guidelines"
+                                            >
+                                                If the driver said that they are stuck in traffic, they got lost on
+                                                their way to the delivery location, or that an accident happened with
+                                                them, you can choose to wait for an adequate amount of time and then
+                                                check if the driver has delivered the order to the customer.
+                                            </ListGroup.Item>
+
+
+                                            <ListGroup.Item
+                                                className="unsuccessful-order-guidelines"
+                                            >
+                                                If the driver claimed that an emergency happened with them, and they
+                                                did prove to you (by showing evidence) that indeed an emergency happened
+                                                to them, you can contact the store and customer and tell them about it and
+                                                wait an adequate amount of time and then check if the customer received their order.
+                                            </ListGroup.Item>
+
+
+                                            <ListGroup.Item
+                                                className="unsuccessful-order-guidelines"
+                                            >
+                                                If you have deduced that the driver has most likely planned to steal the order,
+                                                hasn't delivered the order to the customer yet and the time limit to resolve
+                                                the order is close, you contacted the customer again and they didn't receive their
+                                                order, or if the driver is not responding when you are contacting them, etc; immediately
+                                                click on cancel order so the customer gets a refund for their order, and the store gets
+                                                the cost of the products already authorized from the driver's card.
+                                            </ListGroup.Item>
+
+
+                                        </ListGroup>
+
+
+
+
+                                    </div>
 
                                 </Form>
 
