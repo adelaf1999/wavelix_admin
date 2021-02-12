@@ -824,6 +824,90 @@ class DriverUnsuccessfulOrders extends Component{
 
     }
 
+
+    exitConfirmOrderModal(){
+
+        this.setState({confirm_order_modal_visible: false, selected_order_id: null});
+
+    }
+
+    confirmOrderModal(){
+
+        const {  confirm_order_modal_visible, selected_order_id } = this.state;
+
+        if(confirm_order_modal_visible && selected_order_id !== null){
+
+            return(
+
+                <Modal
+                    show={confirm_order_modal_visible}
+                    onHide={() => {
+                        this.exitConfirmOrderModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Confirm Order</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+                        <p className="unsuccessful-order-modal-paragraph">
+                            By confirming the order you confirm that you have gone through all the
+                            necessary guidelines for resolving an unsuccessful order, and have confirmed
+                            that the customer received their order by contacting them.
+                        </p>
+
+                    </Modal.Body>
+
+
+                    <Modal.Footer>
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitConfirmOrderModal();
+
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        <Button
+                            variant="success"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitConfirmOrderModal();
+
+                            }}
+                        >
+                            Confirm Order
+                        </Button>
+
+
+                    </Modal.Footer>
+
+
+
+                </Modal>
+
+            );
+
+        }
+
+    }
+
     cancelOrderModal(){
 
         const {  cancel_order_modal_visible, selected_order_id } = this.state;
@@ -1215,6 +1299,8 @@ class DriverUnsuccessfulOrders extends Component{
                     {this.ordersResolvedModal()}
 
                     {this.cancelOrderModal()}
+
+                    {this.confirmOrderModal()}
 
                 </div>
 
