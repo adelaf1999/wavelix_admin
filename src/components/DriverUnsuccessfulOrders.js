@@ -9,10 +9,11 @@ import {
     driverBalanceUsdChanged,
     driverAccountStatusChanged
 } from "../actions";
-import {  Spinner, Card, Form, Button, Modal, Alert, ListGroup } from "react-bootstrap";
+import {  Spinner, Card, Form, Button, Modal, Alert, ListGroup, Accordion, Image } from "react-bootstrap";
 import actionCable from "actioncable";
 import { ACTION_CABLE_ROUTE } from "../actions/types";
 import _ from "lodash";
+import Timer from 'react-compound-timer';
 
 class DriverUnsuccessfulOrders extends Component{
 
@@ -284,6 +285,513 @@ class DriverUnsuccessfulOrders extends Component{
 
         }
 
+
+    }
+
+
+    renderProductOptions(product_options){
+
+        return _.map(product_options, (value, key) => {
+
+            return(
+
+                <Form.Group key={key}>
+
+                    <Form.Label >
+                        {_.startCase(key)}
+                    </Form.Label>
+
+                    <Form.Control
+                        readOnly
+                        type="text"
+                        value={_.startCase(value)}
+                    />
+
+                </Form.Group>
+
+            );
+
+        });
+
+    }
+
+
+    orderProducts(products){
+
+        return _.map(products, (product, index) => {
+
+            return(
+
+                <Card key={index}>
+
+
+                    <Card.Header>
+
+                        <Accordion.Toggle as={Button} variant="link" eventKey={product.id.toString()}>
+                            {product.name}
+                        </Accordion.Toggle>
+
+                    </Card.Header>
+
+                    <Accordion.Collapse eventKey={product.id.toString()}>
+
+                        <Card.Body>
+
+
+                            <div className="unsuccessful-order-product-image-container">
+
+                                <Image
+                                    className="unsuccessful-order-product-image"
+                                    src={product.picture}
+                                    thumbnail
+                                />
+
+                            </div>
+
+
+
+                            <Form.Group>
+
+                                <Form.Label >
+                                    Quantity
+                                </Form.Label>
+
+                                <Form.Control
+                                    readOnly
+                                    type="text"
+                                    value={product.quantity}
+                                />
+
+                            </Form.Group>
+
+                            <Form.Group>
+
+                                <Form.Label >
+                                    Item Price
+                                </Form.Label>
+
+                                <Form.Control
+                                    readOnly
+                                    type="text"
+                                    value={`${product.price} ${product.currency}`}
+                                />
+
+                            </Form.Group>
+
+
+                            {this.renderProductOptions(product.product_options)}
+
+
+
+                        </Card.Body>
+
+                    </Accordion.Collapse>
+
+                </Card>
+
+            );
+
+        });
+
+    }
+
+
+
+    unsuccessfulOrdersList(){
+
+        const { unsuccessful_orders } = this.props;
+
+        const {  history } = this.state;
+
+        return _.map(unsuccessful_orders, (order, index) => {
+
+            const store_name = order.store_name;
+
+            const customer_name = _.startCase(order.customer_name);
+
+
+            const order_resolve_time_limit = new Date(order.resolve_time_limit).getTime();
+
+            const current_time = new Date().getTime();
+
+            const time_passed = order_resolve_time_limit - current_time;
+
+            const initial_time =  time_passed  < 0 ? 0 : time_passed;
+
+
+
+
+            return(
+
+                <Card key={index}>
+
+                    <Card.Header>
+
+                        <Accordion.Toggle as={Button} variant="link" eventKey={index.toString()}>
+                           From {store_name} to {customer_name}
+                        </Accordion.Toggle>
+
+
+                        <Timer
+                            initialTime={initial_time}
+                            direction="backward"
+                        >
+                            {() => (
+                                <React.Fragment>
+
+                                    ( <Timer.Days /> days&nbsp;
+
+                                    <Timer.Hours /> hours&nbsp;
+
+                                    <Timer.Minutes /> minutes&nbsp;
+
+                                    <Timer.Seconds /> seconds left )&nbsp;
+
+                                </React.Fragment>
+                            )}
+                        </Timer>
+
+
+                    </Card.Header>
+
+                    <Accordion.Collapse eventKey={index.toString()}>
+
+                        <Card.Body>
+
+
+                            <Form.Group>
+
+                                <Form.Label >
+                                    Time Left To Resolve Order
+                                </Form.Label>
+
+
+                                <br/>
+
+                                <Timer
+                                    initialTime={initial_time}
+                                    direction="backward"
+                                >
+                                    {() => (
+                                        <React.Fragment>
+
+                                            <Timer.Days /> days&nbsp;
+
+                                            <Timer.Hours /> hours&nbsp;
+
+                                            <Timer.Minutes /> minutes&nbsp;
+
+                                            <Timer.Seconds /> seconds&nbsp;
+
+                                        </React.Fragment>
+                                    )}
+                                </Timer>
+
+
+                            </Form.Group>
+
+
+
+                            <Form.Group>
+
+                                <Form.Label >
+                                    Total Price
+                                </Form.Label>
+
+                                <Form.Control
+                                    readOnly
+                                    type="text"
+                                    value={`${order.total_price} ${order.total_price_currency}`}
+                                />
+
+                            </Form.Group>
+
+
+                            <Form.Group>
+
+                                <Form.Label >
+                                    Delivery Fee
+                                </Form.Label>
+
+                                <Form.Control
+                                    readOnly
+                                    type="text"
+                                    value={`${order.delivery_fee} ${order.delivery_fee_currency}`}
+                                />
+
+                            </Form.Group>
+
+
+                            <Form.Group>
+
+                                <Form.Label >
+                                    Order Type
+                                </Form.Label>
+
+                                <Form.Control
+                                    readOnly
+                                    type="text"
+                                    value={`${_.startCase(order.order_type)}`}
+                                />
+
+                            </Form.Group>
+
+
+                            <Form.Group>
+
+                                <Form.Label >
+                                    Ordered At
+                                </Form.Label>
+
+                                <Form.Control
+                                    readOnly
+                                    type="text"
+                                    value={order.ordered_at}
+                                />
+
+                            </Form.Group>
+
+
+                            <Form.Group>
+
+                                <Form.Label >
+                                    Delivery Time Limit
+                                </Form.Label>
+
+                                <Form.Control
+                                    readOnly
+                                    type="text"
+                                    value={order.delivery_time_limit}
+                                />
+
+                            </Form.Group>
+
+
+
+                            <Form.Group>
+
+                                <div className="driver-unsuccessful-orders-label-link">
+
+                                    <Form.Label >
+                                        Store Name
+                                    </Form.Label>
+
+                                    <Button
+                                        variant="link"
+                                        onClick={(e) => {
+
+                                            e.preventDefault();
+
+                                            history.push(`/store-accounts/store_user_id=${order.store_user_id}`);
+
+                                        }}
+                                    >
+                                        View Account
+                                    </Button>
+
+                                </div>
+
+                                <Form.Control
+                                    readOnly
+                                    type="text"
+                                    value={store_name}
+                                />
+
+                            </Form.Group>
+
+
+                            <Form.Group>
+
+                                <Form.Label >
+                                    Store Owner
+                                </Form.Label>
+
+                                <Form.Control
+                                    readOnly
+                                    type="text"
+                                    value={order.store_owner}
+                                />
+
+                            </Form.Group>
+
+
+                            <Form.Group>
+
+                                <Form.Label >
+                                    Store Owner Number
+                                </Form.Label>
+
+                                <Form.Control
+                                    readOnly
+                                    type="text"
+                                    value={order.store_owner_number}
+                                />
+
+                            </Form.Group>
+
+
+                            <Form.Group>
+
+                                <Form.Label >
+                                    Store Number
+                                </Form.Label>
+
+                                <Form.Control
+                                    readOnly
+                                    type="text"
+                                    value={order.store_number}
+                                />
+
+                            </Form.Group>
+
+
+                            <Form.Group>
+
+                                <div className="driver-unsuccessful-orders-label-link">
+
+                                    <Form.Label >
+                                        Customer Name
+                                    </Form.Label>
+
+                                    <Button
+                                        variant="link"
+                                        onClick={(e) => {
+
+                                            e.preventDefault();
+
+                                            history.push(`/customer-accounts/customer_user_id=${order.customer_user_id}`);
+
+                                        }}
+                                    >
+                                        View Account
+                                    </Button>
+
+                                </div>
+
+                                <Form.Control
+                                    readOnly
+                                    type="text"
+                                    value={customer_name}
+                                />
+
+                            </Form.Group>
+
+
+                            <Form.Group>
+
+                                <Form.Label >
+                                    Customer Number
+                                </Form.Label>
+
+                                <Form.Control
+                                    readOnly
+                                    type="text"
+                                    value={order.customer_number}
+                                />
+
+                            </Form.Group>
+
+
+                            <Button
+                                variant="outline-primary"
+                                className="unsuccessful-order-data-button"
+                                onClick={(e) => {
+
+                                    e.preventDefault();
+
+                                    const delivery_location = order.delivery_location;
+
+                                    const latitude = delivery_location.latitude;
+
+                                    const longitude = delivery_location.longitude;
+
+                                    const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+
+                                    window.open(url, "_blank");
+
+
+                                }}
+                            >
+                                View Delivery Location
+                            </Button>
+
+
+                            <Form.Group>
+
+                                <Form.Label >
+                                    Products
+                                </Form.Label>
+
+                                <Accordion id="unsuccessful-order-products-accordion">
+
+                                    {this.orderProducts(order.products)}
+
+                                </Accordion>
+
+                            </Form.Group>
+
+
+                            <div
+                                className="unsuccessful-order-action-buttons-container"
+                            >
+
+
+                                <Button
+                                    variant="outline-danger"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                    }}
+                                    className="unsuccessful-order-action-button"
+                                >
+                                    Cancel Order
+                                </Button>
+
+
+                                <Button
+                                    variant="outline-success"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                    }}
+                                    className="unsuccessful-order-action-button"
+                                >
+                                    Confirm Order
+                                </Button>
+
+
+                            </div>
+
+
+
+                        </Card.Body>
+
+                    </Accordion.Collapse>
+
+                </Card>
+
+            );
+
+        });
+
+    }
+
+
+    unsuccessfulOrders(){
+
+        const { unsuccessful_orders } = this.props;
+
+        if(unsuccessful_orders.length > 0){
+
+            return(
+
+                <Accordion id="unsuccessful-orders-accordion">
+
+                    {this.unsuccessfulOrdersList()}
+
+                </Accordion>
+
+            );
+
+        }
 
     }
 
@@ -573,6 +1081,12 @@ class DriverUnsuccessfulOrders extends Component{
 
 
                                         </ListGroup>
+
+
+                                        {this.unsuccessfulOrders()}
+
+
+
 
 
 

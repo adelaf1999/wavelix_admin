@@ -54,3 +54,40 @@
 .unsuccessful-order-guidelines{
     font-size: 18px;
 }
+#unsuccessful-orders-accordion{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.unsuccessful-order-data-button{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    align-self: center;
+}
+#unsuccessful-order-products-accordion{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+.unsuccessful-order-product-image-container{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+    display: flex;
+    flex: 1;
+    align-items: center;
+}
+.unsuccessful-order-product-image{
+    width: 180px;
+    height: 210px;
+    object-fit: cover;
+}
+.unsuccessful-order-action-buttons-container{
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 1rem;
+}
+.unsuccessful-order-action-button{
+    width: 48%;
+}
