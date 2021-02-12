@@ -31,12 +31,21 @@ class DriverUnsuccessfulOrders extends Component{
 
         const orders_resolved_modal_visible = false;
 
+        const selected_order_id = null;
+
+        const cancel_order_modal_visible = false;
+
+        const confirm_order_modal_visible = false;
+
         this.state = {
             history,
             params,
             cable,
             view_driver_unsuccessful_orders_channel_subscription,
-            orders_resolved_modal_visible
+            orders_resolved_modal_visible,
+            selected_order_id,
+            cancel_order_modal_visible,
+            confirm_order_modal_visible
         };
     }
 
@@ -130,7 +139,12 @@ class DriverUnsuccessfulOrders extends Component{
 
                                 if(unsuccessful_orders.length === 0){
 
-                                    this.setState({orders_resolved_modal_visible: true});
+                                    this.setState({
+                                        orders_resolved_modal_visible: true,
+                                        selected_order_id: null,
+                                        cancel_order_modal_visible: false,
+                                        confirm_order_modal_visible: false
+                                    });
 
                                 }
 
@@ -740,6 +754,10 @@ class DriverUnsuccessfulOrders extends Component{
                                     variant="outline-danger"
                                     onClick={(e) => {
                                         e.preventDefault();
+                                        this.setState({
+                                            selected_order_id: order.id,
+                                            cancel_order_modal_visible: true
+                                        });
                                     }}
                                     className="unsuccessful-order-action-button"
                                 >
@@ -751,6 +769,10 @@ class DriverUnsuccessfulOrders extends Component{
                                     variant="outline-success"
                                     onClick={(e) => {
                                         e.preventDefault();
+                                        this.setState({
+                                            selected_order_id: order.id,
+                                            confirm_order_modal_visible: true
+                                        });
                                     }}
                                     className="unsuccessful-order-action-button"
                                 >
@@ -795,6 +817,93 @@ class DriverUnsuccessfulOrders extends Component{
 
     }
 
+
+    exitCancelOrderModal(){
+
+        this.setState({cancel_order_modal_visible: false, selected_order_id: null});
+
+    }
+
+    cancelOrderModal(){
+
+        const {  cancel_order_modal_visible, selected_order_id } = this.state;
+
+        if(cancel_order_modal_visible && selected_order_id !== null){
+
+            return(
+
+                <Modal
+                    show={cancel_order_modal_visible}
+                    onHide={() => {
+                        this.exitCancelOrderModal();
+                    }}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+
+                    <Modal.Header closeButton>
+
+                        <Modal.Title>Cancel Order</Modal.Title>
+
+                    </Modal.Header>
+
+                    <Modal.Body>
+
+                        <p className="unsuccessful-order-modal-paragraph">
+                            By canceling the order you confirm that you have gone through all the
+                            necessary guidelines for resolving an unsuccessful order, and have concluded
+                            that the driver has stolen the order or won't be delivering the order to the
+                            customer (waited an adequate amount of time, contacted the customer and driver
+                            didn't arrive, driver not responding, etc). A refund will be issued to the customer
+                            for their order, the driver's account will be permanently blocked, and a payment will
+                            be issued to the store for the cost of the ordered products from the driver's balance.
+                        </p>
+
+                    </Modal.Body>
+
+
+                    <Modal.Footer>
+
+                        <Button
+                            variant="secondary"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitCancelOrderModal();
+
+                            }}
+                        >
+                            Close
+                        </Button>
+
+
+                        <Button
+                            variant="danger"
+                            onClick={(e) => {
+
+                                e.preventDefault();
+
+                                this.exitCancelOrderModal();
+
+                            }}
+                        >
+                            Cancel Order
+                        </Button>
+
+
+                    </Modal.Footer>
+
+
+
+                </Modal>
+
+            );
+
+        }
+
+    }
 
     show(){
 
@@ -1104,6 +1213,8 @@ class DriverUnsuccessfulOrders extends Component{
 
 
                     {this.ordersResolvedModal()}
+
+                    {this.cancelOrderModal()}
 
                 </div>
 
