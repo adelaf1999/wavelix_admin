@@ -6,7 +6,9 @@ import {
     DRIVER_UNSUCCESSFUL_ORDERS_RESOLVERS_CHANGED,
     DRIVER_UNSUCCESSFUL_ORDERS_UPDATED,
     DRIVER_BALANCE_USD_CHANGED,
-    DRIVER_ACCOUNT_STATUS_CHANGED
+    DRIVER_ACCOUNT_STATUS_CHANGED,
+    RESOLVE_UNSUCCESSFUL_ORDER,
+    RESOLVE_UNSUCCESSFUL_ORDER_COMPLETE
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -19,11 +21,22 @@ const INITIAL_STATE = {
     driver_balance_usd: '',
     driver_latitude: '',
     driver_longitude: '',
-    current_resolvers: []
+    current_resolvers: [],
+    resolving_order: false
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case RESOLVE_UNSUCCESSFUL_ORDER_COMPLETE:
+            return{
+                ...state,
+                resolving_order: false
+            };
+        case RESOLVE_UNSUCCESSFUL_ORDER:
+            return{
+                ...state,
+                resolving_order: true
+            };
         case DRIVER_ACCOUNT_STATUS_CHANGED:
             return{
                 ...state,

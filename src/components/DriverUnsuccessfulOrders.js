@@ -7,7 +7,9 @@ import {
     driverUnsuccessfulOrdersResolversChanged,
     driverUnsuccessfulOrdersUpdated,
     driverBalanceUsdChanged,
-    driverAccountStatusChanged
+    driverAccountStatusChanged,
+    cancelUnsuccessfulOrder,
+    confirmUnsuccessfulOrder
 } from "../actions";
 import {  Spinner, Card, Form, Button, Modal, Alert, ListGroup, Accordion, Image } from "react-bootstrap";
 import actionCable from "actioncable";
@@ -833,7 +835,7 @@ class DriverUnsuccessfulOrders extends Component{
 
     confirmOrderModal(){
 
-        const {  confirm_order_modal_visible, selected_order_id } = this.state;
+        const {  confirm_order_modal_visible, selected_order_id, history } = this.state;
 
         if(confirm_order_modal_visible && selected_order_id !== null){
 
@@ -888,6 +890,10 @@ class DriverUnsuccessfulOrders extends Component{
 
                                 e.preventDefault();
 
+                                const { confirmUnsuccessfulOrder, access_token, client, uid} = this.props;
+
+                                confirmUnsuccessfulOrder(access_token, client, uid, history, selected_order_id);
+
                                 this.exitConfirmOrderModal();
 
                             }}
@@ -910,7 +916,7 @@ class DriverUnsuccessfulOrders extends Component{
 
     cancelOrderModal(){
 
-        const {  cancel_order_modal_visible, selected_order_id } = this.state;
+        const {  cancel_order_modal_visible, selected_order_id, history } = this.state;
 
         if(cancel_order_modal_visible && selected_order_id !== null){
 
@@ -969,6 +975,11 @@ class DriverUnsuccessfulOrders extends Component{
 
                                 e.preventDefault();
 
+                                const { cancelUnsuccessfulOrder, access_token, client, uid} = this.props;
+
+
+                                cancelUnsuccessfulOrder(access_token, client, uid, history, selected_order_id);
+
                                 this.exitCancelOrderModal();
 
                             }}
@@ -999,14 +1010,15 @@ class DriverUnsuccessfulOrders extends Component{
             driver_account_status,
             driver_balance_usd,
             driver_latitude,
-            driver_longitude
+            driver_longitude,
+            resolving_order
         } = this.props;
 
         const {  history , params} = this.state;
 
         const driver_id = params.driver_id;
 
-        if(initializing_page){
+        if(initializing_page || resolving_order){
 
             return(
 
@@ -1354,7 +1366,8 @@ const mapStateToProps = (state) => {
         driver_balance_usd,
         driver_latitude,
         driver_longitude,
-        current_resolvers
+        current_resolvers,
+        resolving_order
     } = state.driver_unsuccessful_orders;
 
     return{
@@ -1372,7 +1385,8 @@ const mapStateToProps = (state) => {
         driver_balance_usd,
         driver_latitude,
         driver_longitude,
-        current_resolvers
+        current_resolvers,
+        resolving_order
     };
 
 };
@@ -1383,5 +1397,7 @@ export default connect(mapStateToProps, {
     driverUnsuccessfulOrdersResolversChanged,
     driverUnsuccessfulOrdersUpdated,
     driverBalanceUsdChanged,
-    driverAccountStatusChanged
+    driverAccountStatusChanged,
+    cancelUnsuccessfulOrder,
+    confirmUnsuccessfulOrder
 })(DriverUnsuccessfulOrders);

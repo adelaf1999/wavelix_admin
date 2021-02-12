@@ -8,12 +8,116 @@ import {
     DRIVER_UNSUCCESSFUL_ORDERS_RESOLVERS_CHANGED,
     DRIVER_UNSUCCESSFUL_ORDERS_UPDATED,
     DRIVER_BALANCE_USD_CHANGED,
-    DRIVER_ACCOUNT_STATUS_CHANGED
+    DRIVER_ACCOUNT_STATUS_CHANGED,
+    RESOLVE_UNSUCCESSFUL_ORDER,
+    RESOLVE_UNSUCCESSFUL_ORDER_COMPLETE,
+    CANCEL_UNSUCCESSFUL_ORDER_ROUTE,
+    CONFIRM_UNSUCCESSFUL_ORDER_ROUTE
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
 import _ from "lodash";
+
+
+export const confirmUnsuccessfulOrder = (access_token, client, uid, history, order_id) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = getFormData({
+            order_id: order_id
+        });
+
+        dispatch({type: RESOLVE_UNSUCCESSFUL_ORDER});
+
+        axios.post(CONFIRM_UNSUCCESSFUL_ORDER_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                dispatch({type: RESOLVE_UNSUCCESSFUL_ORDER_COMPLETE});
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+
+    };
+
+};
+
+
+export const cancelUnsuccessfulOrder = (access_token, client, uid, history, order_id) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = getFormData({
+            order_id: order_id
+        });
+
+        dispatch({type: RESOLVE_UNSUCCESSFUL_ORDER});
+
+        axios.post(CANCEL_UNSUCCESSFUL_ORDER_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                dispatch({type: RESOLVE_UNSUCCESSFUL_ORDER_COMPLETE});
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+
+    };
+
+};
 
 
 export const driverAccountStatusChanged = (driver_account_status) => {
