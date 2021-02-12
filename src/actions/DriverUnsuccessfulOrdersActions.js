@@ -6,12 +6,32 @@ import {
     INITIALIZE_DRIVER_UNSUCCESSFUL_ORDERS_PAGE_COMPLETE,
     CLEAR_DRIVER_UNSUCCESSFUL_ORDERS_STATE,
     DRIVER_UNSUCCESSFUL_ORDERS_RESOLVERS_CHANGED,
-    DRIVER_UNSUCCESSFUL_ORDERS_UPDATED
+    DRIVER_UNSUCCESSFUL_ORDERS_UPDATED,
+    DRIVER_BALANCE_USD_CHANGED,
+    DRIVER_ACCOUNT_STATUS_CHANGED
 } from "./types";
 
 import axios from "axios";
 import { getFormData } from "../helpers";
 import _ from "lodash";
+
+
+export const driverAccountStatusChanged = (driver_account_status) => {
+    return{
+      type: DRIVER_ACCOUNT_STATUS_CHANGED,
+      payload: driver_account_status
+    };
+};
+
+
+export const driverBalanceUsdChanged = (driver_balance_usd) => {
+
+    return{
+      type: DRIVER_BALANCE_USD_CHANGED,
+      payload: driver_balance_usd
+    };
+
+};
 
 export const driverUnsuccessfulOrdersUpdated = (unsuccessful_orders) => {
 

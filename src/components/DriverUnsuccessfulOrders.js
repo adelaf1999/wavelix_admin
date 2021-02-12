@@ -5,7 +5,9 @@ import {
     initializeDriverUnsuccessfulOrdersPage,
     clearDriverUnsuccessfulOrdersState,
     driverUnsuccessfulOrdersResolversChanged,
-    driverUnsuccessfulOrdersUpdated
+    driverUnsuccessfulOrdersUpdated,
+    driverBalanceUsdChanged,
+    driverAccountStatusChanged
 } from "../actions";
 import {  Spinner, Card, Form, Button, Modal, Alert, ListGroup } from "react-bootstrap";
 import actionCable from "actioncable";
@@ -64,7 +66,9 @@ class DriverUnsuccessfulOrders extends Component{
             roles,
             initializeDriverUnsuccessfulOrdersPage,
             driverUnsuccessfulOrdersResolversChanged,
-            driverUnsuccessfulOrdersUpdated
+            driverUnsuccessfulOrdersUpdated,
+            driverBalanceUsdChanged,
+            driverAccountStatusChanged
         } = this.props;
 
 
@@ -130,6 +134,24 @@ class DriverUnsuccessfulOrders extends Component{
                                 }
 
                             }
+
+
+                            if(data.driver_balance_usd !== undefined){
+
+                                const driver_balance_usd = data.driver_balance_usd;
+
+                                driverBalanceUsdChanged(driver_balance_usd);
+
+                            }
+
+                            if(data.driver_account_status !== undefined){
+
+                                const driver_account_status = data.driver_account_status;
+
+                                driverAccountStatusChanged(driver_account_status);
+
+                            }
+
 
                         }
                     }
@@ -648,5 +670,7 @@ export default connect(mapStateToProps, {
     initializeDriverUnsuccessfulOrdersPage,
     clearDriverUnsuccessfulOrdersState,
     driverUnsuccessfulOrdersResolversChanged,
-    driverUnsuccessfulOrdersUpdated
+    driverUnsuccessfulOrdersUpdated,
+    driverBalanceUsdChanged,
+    driverAccountStatusChanged
 })(DriverUnsuccessfulOrders);
