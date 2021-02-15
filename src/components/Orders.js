@@ -7,7 +7,7 @@ import {
     clearOrdersPageState
 } from "../actions";
 import _ from "lodash";
-import {  Spinner, Form, FormControl } from "react-bootstrap";
+import {  Spinner, Form,  Button, Table } from "react-bootstrap";
 
 class Orders extends Component{
 
@@ -148,6 +148,147 @@ class Orders extends Component{
 
         });
 
+
+
+    }
+
+
+
+    ordersList(){
+
+        const {  orders } = this.props;
+
+        const { history } = this.state;
+
+
+        return _.map(orders, (order, index) => {
+
+            return(
+
+                <tr key={index}>
+
+                    <td >
+
+                        {order.store_name}
+
+                    </td>
+
+                    <td >
+
+                        {order.customer_name}
+
+                    </td>
+
+                    <td >
+
+                        {order.driver_name}
+
+                    </td>
+
+                    <td >
+
+                        {_.startCase(order.status)}
+
+                    </td>
+
+                    <td >
+
+                        {order.country}
+
+                    </td>
+
+
+                    <td >
+
+                        {order.store_handles_delivery ? 'Yes' : 'No'}
+
+                    </td>
+
+
+                    <td >
+
+                        {order.ordered_at}
+
+                    </td>
+
+
+                    <td>
+
+
+                        <Button
+                            variant="link"
+                            onClick={(e) => {
+                                e.preventDefault();
+                            }}
+                        >
+                            View
+                        </Button>
+
+                    </td>
+
+
+                </tr>
+
+            );
+
+        });
+
+
+    }
+
+    renderOrdersTable(){
+
+        const {  orders } = this.props;
+
+        if(orders.length === 0){
+
+            return(
+
+                <div className="center-container">
+
+                    <p className="no-accounts-notice">No Orders Found</p>
+
+                </div>
+
+            );
+
+        }else{
+
+
+            return(
+
+                <Table striped bordered hover>
+
+                    <thead>
+
+                    <tr>
+                        <th>Store Name</th>
+                        <th>Customer Name</th>
+                        <th>Driver Name</th>
+                        <th>Status</th>
+                        <th>Country</th>
+                        <th>Store Handles Delivery</th>
+                        <th>Ordered At</th>
+                        <th></th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+
+                        {this.ordersList()}
+
+
+                    </tbody>
+
+                </Table>
+
+
+            );
+
+
+        }
 
 
     }
@@ -363,9 +504,10 @@ class Orders extends Component{
 
                         </Form.Group>
 
-
-
                     </Form>
+
+
+                    {this.renderOrdersTable()}
 
 
                 </div>
