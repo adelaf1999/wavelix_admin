@@ -283,6 +283,7 @@ class Orders extends Component{
                             variant="link"
                             onClick={(e) => {
                                 e.preventDefault();
+                                history.push(`/orders/order_id=${order.id}`);
                             }}
                         >
                             View

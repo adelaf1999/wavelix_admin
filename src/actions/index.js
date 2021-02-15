@@ -19,3 +19,4 @@ export * from "./ViewUnconfirmedOrderActions";
 export * from "./UnsuccessfulOrdersActions";
 export * from "./DriverUnsuccessfulOrdersActions";
 export * from "./OrdersActions";
+export * from "./ViewOrderActions";
