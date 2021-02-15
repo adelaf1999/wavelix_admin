@@ -2,7 +2,8 @@ import {
     LOGOUT_SUCCESS,
     INITIALIZE_ORDERS_PAGE,
     INITIALIZE_ORDERS_PAGE_COMPLETE,
-    CLEAR_ORDERS_PAGE_STATE
+    CLEAR_ORDERS_PAGE_STATE,
+    SEARCH_ORDERS_COMPLETE
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -16,6 +17,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case SEARCH_ORDERS_COMPLETE:
+            return{
+                ...state,
+                orders: action.payload
+            };
         case INITIALIZE_ORDERS_PAGE_COMPLETE:
             return{
                 ...state,

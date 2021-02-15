@@ -4,11 +4,102 @@ import {
     ORDERS_INDEX_ROUTE,
     INITIALIZE_ORDERS_PAGE,
     INITIALIZE_ORDERS_PAGE_COMPLETE,
-    CLEAR_ORDERS_PAGE_STATE
+    CLEAR_ORDERS_PAGE_STATE,
+    SEARCH_ORDERS_ROUTE,
+    SEARCH_ORDERS_COMPLETE
 } from "./types";
 
+import _ from "lodash";
 import axios from "axios";
 import { getFormData } from "../helpers";
+
+
+export const searchOrders = (access_token, client, uid, history, limit, store_name, customer_name, status, country, store_handles_delivery ) => {
+
+    return(dispatch) => {
+
+        const config = {
+            headers: {
+                "access-token": access_token,
+                "client": client,
+                "uid": uid,
+                "Accept": "application/json"
+            }
+        };
+
+        let bodyFormData = new FormData();
+
+        let data = {
+            limit: limit,
+            store_name: store_name,
+            customer_name: customer_name
+        };
+
+
+        if(!_.isEmpty(status)){
+
+            data.status = status;
+
+        }
+
+
+        if(!_.isEmpty(country)){
+
+            data.country = country;
+
+        }
+
+
+        if(_.isBoolean(store_handles_delivery)){
+
+            data.store_handles_delivery = store_handles_delivery;
+
+        }
+
+
+        _.each(data, (value, key) => {
+
+            bodyFormData.append(key, value);
+
+        });
+
+
+        axios.post(SEARCH_ORDERS_ROUTE, bodyFormData, config)
+            .then(response => {
+
+                const data = response.data;
+
+                const orders = data.orders;
+
+                dispatch({type: SEARCH_ORDERS_COMPLETE, payload: orders});
+
+
+            }).catch(error => {
+
+            if(error.response !== undefined){
+
+                const status = error.response.status;
+
+                dispatch({type: LOGOUT_SUCCESS});
+
+                if(status === 440){
+
+                    dispatch({type: OPEN_TIMEOUT_MODAL});
+
+                }
+
+                history.push("/");
+
+            }
+
+        });
+
+
+
+    };
+
+};
+
 
 export const clearOrdersPageState = () => {
 

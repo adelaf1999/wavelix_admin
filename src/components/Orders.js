@@ -4,7 +4,8 @@ import TopHeader from "./TopHeader";
 import Wrapper from "./Wrapper";
 import {
     initializeOrdersPage,
-    clearOrdersPageState
+    clearOrdersPageState,
+    searchOrders
 } from "../actions";
 import _ from "lodash";
 import {  Spinner, Form,  Button, Table } from "react-bootstrap";
@@ -301,7 +302,8 @@ class Orders extends Component{
             limit,
             access_token,
             client,
-            uid
+            uid,
+            searchOrders
         } = this.props;
 
 
@@ -344,7 +346,26 @@ class Orders extends Component{
                                 placeholder="store name"
                                 className="orders-search-input"
                                 onChange={(e) => {
-                                    this.setState({store_name: e.target.value});
+
+                                    const new_store_name = e.target.value;
+
+                                    this.setState({store_name: new_store_name});
+
+                                    const { customer_name, selected_status, selected_country, selected_store_handles_delivery } = this.state;
+
+                                    searchOrders(
+                                        access_token,
+                                        client,
+                                        uid,
+                                        history,
+                                        limit,
+                                        new_store_name,
+                                        customer_name,
+                                        selected_status,
+                                        selected_country,
+                                        selected_store_handles_delivery
+                                    );
+
                                 }}
                             />
 
@@ -362,7 +383,28 @@ class Orders extends Component{
                                 placeholder="customer name"
                                 className="orders-search-input"
                                 onChange={(e) => {
-                                    this.setState({customer_name: e.target.value});
+
+                                    const new_customer_name = e.target.value;
+
+                                    this.setState({customer_name: new_customer_name});
+
+                                    const { store_name, selected_status, selected_country, selected_store_handles_delivery } = this.state;
+
+                                    searchOrders(
+                                        access_token,
+                                        client,
+                                        uid,
+                                        history,
+                                        limit,
+                                        store_name,
+                                        new_customer_name,
+                                        selected_status,
+                                        selected_country,
+                                        selected_store_handles_delivery
+                                    );
+
+
+
                                 }}
                             />
 
@@ -393,6 +435,25 @@ class Orders extends Component{
                                         this.setState({selected_status: new_selected_status});
                                     }
 
+
+                                    const { store_name, customer_name, selected_country, selected_store_handles_delivery } = this.state;
+
+
+                                    searchOrders(
+                                        access_token,
+                                        client,
+                                        uid,
+                                        history,
+                                        limit,
+                                        store_name,
+                                        customer_name,
+                                        new_selected_status,
+                                        selected_country,
+                                        selected_store_handles_delivery
+                                    );
+
+
+
                                 }}
                             >
 
@@ -421,6 +482,24 @@ class Orders extends Component{
 
                                         this.setState({selected_country: new_selected_country});
                                     }
+
+
+                                    const { store_name, customer_name, selected_status, selected_store_handles_delivery } = this.state;
+
+                                    searchOrders(
+                                        access_token,
+                                        client,
+                                        uid,
+                                        history,
+                                        limit,
+                                        store_name,
+                                        customer_name,
+                                        selected_status,
+                                        new_selected_country,
+                                        selected_store_handles_delivery
+                                    );
+
+
 
                                 }}
                             >
@@ -470,6 +549,25 @@ class Orders extends Component{
 
 
                                     }
+
+
+
+                                    const { store_name, customer_name, selected_status, selected_country } = this.state;
+
+
+                                    searchOrders(
+                                        access_token,
+                                        client,
+                                        uid,
+                                        history,
+                                        limit,
+                                        store_name,
+                                        customer_name,
+                                        selected_status,
+                                        selected_country,
+                                        new_selected_store_handles_delivery
+                                    );
+
 
 
 
@@ -581,5 +679,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     initializeOrdersPage,
-    clearOrdersPageState
+    clearOrdersPageState,
+    searchOrders
 })(Orders);
