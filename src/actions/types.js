@@ -254,3 +254,4 @@ export const INITIALIZE_ORDERS_PAGE = "initialize_orders_page";
 export const INITIALIZE_ORDERS_PAGE_COMPLETE = "initialize_orders_page_complete";
 export const CLEAR_ORDERS_PAGE_STATE = "clear_orders_page_state";
 export const SEARCH_ORDERS_COMPLETE = "search_orders_complete";
+export const SEARCH_ORDERS_LIMIT_CHANGED = "search_orders_limit_changed";

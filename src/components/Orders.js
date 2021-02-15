@@ -5,7 +5,8 @@ import Wrapper from "./Wrapper";
 import {
     initializeOrdersPage,
     clearOrdersPageState,
-    searchOrders
+    searchOrders,
+    searchOrdersLimitChanged
 } from "../actions";
 import _ from "lodash";
 import {  Spinner, Form,  Button, Table } from "react-bootstrap";
@@ -28,6 +29,8 @@ class Orders extends Component{
 
         const selected_store_handles_delivery = null;
 
+        this.handleScroll = this.handleScroll.bind(this);
+
         this.state = {
             history,
             store_name,
@@ -39,7 +42,64 @@ class Orders extends Component{
 
     }
 
+
+    handleScroll() {
+
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+
+        const body = document.body;
+
+        const html = document.documentElement;
+
+        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+
+        const windowBottom = windowHeight + window.pageYOffset;
+
+        if (windowBottom >= docHeight) {
+
+            console.log("bottom reached");
+
+            const {
+                searchOrders,
+                searchOrdersLimitChanged,
+                access_token,
+                client,
+                uid
+            } = this.props;
+
+
+            const { history, store_name, customer_name, selected_status, selected_country, selected_store_handles_delivery} = this.state;
+
+            const new_limit = this.props.limit + 50;
+
+            searchOrdersLimitChanged(new_limit);
+
+
+            searchOrders(
+                access_token,
+                client,
+                uid,
+                history,
+                new_limit,
+                store_name,
+                customer_name,
+                selected_status,
+                selected_country,
+                selected_store_handles_delivery
+            );
+
+
+
+        }
+    }
+
+
+
+
     componentWillUnmount(){
+
+
+        window.removeEventListener("scroll", this.handleScroll);
 
         this.props.clearOrdersPageState();
 
@@ -47,6 +107,9 @@ class Orders extends Component{
 
 
     componentDidMount(){
+
+
+        window.addEventListener("scroll", this.handleScroll);
 
         const {
             logged_in,
@@ -279,7 +342,7 @@ class Orders extends Component{
 
 
                         {this.ordersList()}
-
+                    
 
                     </tbody>
 
@@ -680,5 +743,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     initializeOrdersPage,
     clearOrdersPageState,
-    searchOrders
+    searchOrders,
+    searchOrdersLimitChanged
 })(Orders);

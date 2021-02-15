@@ -3,7 +3,8 @@ import {
     INITIALIZE_ORDERS_PAGE,
     INITIALIZE_ORDERS_PAGE_COMPLETE,
     CLEAR_ORDERS_PAGE_STATE,
-    SEARCH_ORDERS_COMPLETE
+    SEARCH_ORDERS_COMPLETE,
+    SEARCH_ORDERS_LIMIT_CHANGED
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -17,6 +18,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case SEARCH_ORDERS_LIMIT_CHANGED:
+            return{
+                ...state,
+                limit: action.payload
+            };
         case SEARCH_ORDERS_COMPLETE:
             return{
                 ...state,

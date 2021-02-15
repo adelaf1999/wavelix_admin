@@ -6,13 +6,22 @@ import {
     INITIALIZE_ORDERS_PAGE_COMPLETE,
     CLEAR_ORDERS_PAGE_STATE,
     SEARCH_ORDERS_ROUTE,
-    SEARCH_ORDERS_COMPLETE
+    SEARCH_ORDERS_COMPLETE,
+    SEARCH_ORDERS_LIMIT_CHANGED
 } from "./types";
 
 import _ from "lodash";
 import axios from "axios";
 import { getFormData } from "../helpers";
 
+export const searchOrdersLimitChanged = (limit) => {
+
+    return{
+      type: SEARCH_ORDERS_LIMIT_CHANGED,
+      payload: limit
+    };
+
+};
 
 export const searchOrders = (access_token, client, uid, history, limit, store_name, customer_name, status, country, store_handles_delivery ) => {
 
