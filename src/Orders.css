@@ -1,0 +1,13 @@
+#orders-search-inputs-container{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+}
+.orders-search-input-container{
+    width: 30%;
+}
+.orders-search-input{
+    border-radius: 20px;
+}

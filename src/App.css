@@ -18,6 +18,7 @@
 @import "ViewUnconfirmedOrder.css";
 @import "UnsuccessfulOrders.css";
 @import "DriverUnsuccessfulOrders.css";
+@import "Orders.css";
 
 .center-container{
     position: absolute;

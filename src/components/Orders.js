@@ -7,7 +7,7 @@ import {
     clearOrdersPageState
 } from "../actions";
 import _ from "lodash";
-import {  Spinner } from "react-bootstrap";
+import {  Spinner, Form, FormControl } from "react-bootstrap";
 
 class Orders extends Component{
 
@@ -17,8 +17,14 @@ class Orders extends Component{
 
         const history = props.history;
 
+        const store_name = "";
+
+        const customer_name = "";
+
         this.state = {
-            history
+            history,
+            store_name,
+            customer_name
         };
 
     }
@@ -95,6 +101,47 @@ class Orders extends Component{
             return(
 
                 <div className="page-container">
+
+
+                    <Form id="orders-search-inputs-container">
+
+
+                        <Form.Group className="orders-search-input-container">
+
+                            <Form.Label>
+                                Store Name
+                            </Form.Label>
+
+                            <Form.Control
+                                type="text"
+                                placeholder="store name"
+                                className="orders-search-input"
+                                onChange={(e) => {
+                                    this.setState({store_name: e.target.value});
+                                }}
+                            />
+
+                        </Form.Group>
+
+
+                        <Form.Group className="orders-search-input-container">
+
+                            <Form.Label>
+                                Customer Name
+                            </Form.Label>
+
+                            <Form.Control
+                                type="text"
+                                placeholder="customer name"
+                                className="orders-search-input"
+                                onChange={(e) => {
+                                    this.setState({customer_name: e.target.value});
+                                }}
+                            />
+
+                        </Form.Group>
+
+                    </Form>
 
 
                 </div>
