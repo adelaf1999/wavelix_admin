@@ -11,3 +11,13 @@
 .orders-search-input{
     border-radius: 20px;
 }
+#orders-filters-container{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+}
+.orders-filter-group{
+    width: 20%;
+}

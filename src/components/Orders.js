@@ -21,10 +21,19 @@ class Orders extends Component{
 
         const customer_name = "";
 
+        const selected_status = null;
+
+        const selected_country = null;
+
+        const selected_store_handles_delivery = null;
+
         this.state = {
             history,
             store_name,
-            customer_name
+            customer_name,
+            selected_status,
+            selected_country,
+            selected_store_handles_delivery
         };
 
     }
@@ -63,6 +72,83 @@ class Orders extends Component{
             initializeOrdersPage(access_token, client, uid, history, limit);
 
         }
+
+    }
+
+    statusOptions(){
+
+        const { status_options } = this.props;
+
+        let options = [];
+
+        options.push({ label: 'Select Option', value: ''});
+
+        _.map(status_options, (value, label) => {
+
+            options.push({
+                label: _.startCase(label),
+                value: value
+            });
+
+        });
+
+
+        return _.map(options, (option, index) => {
+
+
+            return(
+
+                <option
+                    key={index}
+                    value={option.value}
+                >
+                    {option.label}
+                </option>
+
+            );
+
+        });
+
+
+    }
+
+
+    getCountries(){
+
+        const { countries } = this.props;
+
+        let country_options = [];
+
+        country_options.push({ label: 'Select Option', value: ''});
+
+        _.map(countries, (country_name, country_code) => {
+
+
+            country_options.push({
+                label: country_name,
+                value: country_code
+            });
+
+        });
+
+
+        return _.map(country_options, (country, index) => {
+
+
+            return(
+
+                <option
+                    key={index}
+                    value={country.value}
+                >
+                    {country.label}
+                </option>
+
+            );
+
+        });
+
+
 
     }
 
@@ -140,6 +226,144 @@ class Orders extends Component{
                             />
 
                         </Form.Group>
+
+                    </Form>
+
+
+                    <Form id="orders-filters-container">
+
+
+                        <Form.Group className="orders-filter-group" >
+
+                            <Form.Label>Status</Form.Label>
+
+                            <Form.Control
+                                as="select"
+                                onChange={(e) => {
+
+                                    const new_selected_status = e.target.value;
+
+                                    if(_.isEmpty(new_selected_status)){
+
+                                        this.setState({selected_status: null});
+
+                                    }else{
+
+                                        this.setState({selected_status: new_selected_status});
+                                    }
+
+                                }}
+                            >
+
+                                {this.statusOptions()}
+
+                            </Form.Control>
+
+                        </Form.Group>
+
+
+                        <Form.Group className="orders-filter-group" >
+
+                            <Form.Label>Country</Form.Label>
+
+                            <Form.Control
+                                as="select"
+                                onChange={(e) => {
+
+                                    const new_selected_country = e.target.value;
+
+                                    if(_.isEmpty(new_selected_country)){
+
+                                        this.setState({selected_country: null});
+
+                                    }else{
+
+                                        this.setState({selected_country: new_selected_country});
+                                    }
+
+                                }}
+                            >
+
+                                {this.getCountries()}
+
+                            </Form.Control>
+
+                        </Form.Group>
+
+
+
+                        <Form.Group className="orders-filter-group" >
+
+                            <Form.Label>Store handles delivery</Form.Label>
+
+                            <Form.Control
+                                as="select"
+                                onChange={(e) => {
+
+                                    const selected_option = parseInt(e.target.value);
+
+                                    let new_selected_store_handles_delivery;
+
+                                    if(selected_option === -1){
+
+                                        new_selected_store_handles_delivery = "";
+
+
+                                        this.setState({selected_store_handles_delivery: null});
+
+
+                                    }else if(selected_option === 0){
+
+                                        new_selected_store_handles_delivery = false;
+
+
+                                        this.setState({selected_store_handles_delivery: false});
+
+
+                                    }else{
+
+                                        new_selected_store_handles_delivery = true;
+
+
+                                        this.setState({selected_store_handles_delivery: true});
+
+
+                                    }
+
+
+
+
+                                }}
+                            >
+
+                                <option
+                                    value={-1}
+                                >
+                                    Select Option
+                                </option>
+
+
+                                <option
+                                    value={0}
+                                >
+                                    No
+                                </option>
+
+                                <option
+                                    value={1}
+                                >
+                                    Yes
+                                </option>
+
+
+
+
+
+                            </Form.Control>
+
+                        </Form.Group>
+
+
 
                     </Form>
 
