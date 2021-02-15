@@ -24,6 +24,7 @@ import UnconfirmedOrders from "./components/UnconfirmedOrders";
 import ViewUnconfirmedOrder from "./components/ViewUnconfirmedOrder";
 import UnsuccessfulOrders from "./components/UnsuccessfulOrders";
 import DriverUnsuccessfulOrders from "./components/DriverUnsuccessfulOrders";
+import Orders from "./components/Orders";
 
 export default function Routes() {
 
@@ -79,6 +80,9 @@ export default function Routes() {
                 <Route exact path="/unsuccessful-orders" component={UnsuccessfulOrders} />
 
                 <Route exact path="/unsuccessful-orders/driver_id=:driver_id" component={DriverUnsuccessfulOrders} />
+
+
+                <Route exact path="/orders" component={Orders} />
 
 
             </Switch>

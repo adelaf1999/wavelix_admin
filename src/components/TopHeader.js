@@ -152,6 +152,32 @@ class TopHeader extends Component{
 
     }
 
+    ordersTab(){
+
+        const { roles } = this.props;
+
+        const { history } = this.state;
+
+        if( roles.includes("root_admin") ){
+
+            return(
+
+                <Nav.Link
+                    onClick={() => {
+                        history.push("/orders");
+                    }}
+                    className="nav-link"
+                >
+                    Orders
+                </Nav.Link>
+
+
+            );
+
+        }
+
+    }
+
 
     render(){
 
@@ -223,6 +249,8 @@ class TopHeader extends Component{
                     {this.unconfirmedOrdersTab()}
 
                     {this.unsuccessfulOrdersTab()}
+
+                    {this.ordersTab()}
 
 
                 </Nav>

@@ -54,6 +54,7 @@ export const SEARCH_DRIVERS_UNSUCCESSFUL_ORDERS_ROUTE =  `${BACKEND_URL}/search-
 export const VIEW_DRIVER_UNSUCCESSFUL_ORDERS_ROUTE = `${BACKEND_URL}/view-driver-unsuccessful-orders`;
 export const CANCEL_UNSUCCESSFUL_ORDER_ROUTE = `${BACKEND_URL}/cancel-unsuccessful-order`;
 export const CONFIRM_UNSUCCESSFUL_ORDER_ROUTE = `${BACKEND_URL}/confirm-unsuccessful-order`;
+export const ORDERS_INDEX_ROUTE = `${BACKEND_URL}/orders-index`;
 
 // Login Types
 export const CHECK_EMAIL = "check_email";
@@ -246,3 +247,8 @@ export const DRIVER_BALANCE_USD_CHANGED = "driver_balance_usd_changed";
 export const DRIVER_ACCOUNT_STATUS_CHANGED = "driver_account_status_changed";
 export const RESOLVE_UNSUCCESSFUL_ORDER = "resolve_unsuccessful_order";
 export const RESOLVE_UNSUCCESSFUL_ORDER_COMPLETE = "resolve_unsuccessful_order_complete";
+
+// Orders Types
+export const INITIALIZE_ORDERS_PAGE = "initialize_orders_page";
+export const INITIALIZE_ORDERS_PAGE_COMPLETE = "initialize_orders_page_complete";
+export const CLEAR_ORDERS_PAGE_STATE = "clear_orders_page_state";

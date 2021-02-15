@@ -22,6 +22,7 @@ import UnconfirmedOrdersReducer from "./UnconfirmedOrdersReducer";
 import ViewUnconfirmedOrderReducer from "./ViewUnconfirmedOrderReducer";
 import UnsuccessfulOrdersReducer from "./UnsuccessfulOrdersReducer";
 import DriverUnsuccessfulOrdersReducer from "./DriverUnsuccessfulOrdersReducer";
+import OrdersReducer from "./OrdersReducer";
 
 const appReducer = combineReducers({
     login: LoginReducer,
@@ -42,7 +43,8 @@ const appReducer = combineReducers({
     unconfirmed_orders: UnconfirmedOrdersReducer,
     view_unconfirmed_order: ViewUnconfirmedOrderReducer,
     unsuccessful_orders: UnsuccessfulOrdersReducer,
-    driver_unsuccessful_orders: DriverUnsuccessfulOrdersReducer
+    driver_unsuccessful_orders: DriverUnsuccessfulOrdersReducer,
+    orders: OrdersReducer
 });
 
 
