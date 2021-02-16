@@ -1,0 +1,43 @@
+#view-order-container{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.view-order-card{
+     width: 60%;
+     margin-bottom: 2rem;
+ }
+.view-order-card-header{
+    text-align: center;
+    padding: 1rem;
+}
+.order-label-link{
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.order-data-accordion{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+.order-product-image-container{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+    display: flex;
+    flex: 1;
+    align-items: center;
+}
+.order-product-image{
+    width: 180px;
+    height: 210px;
+    object-fit: cover;
+}
+.order-data-button{
+    margin-bottom: 2rem;
+    width: 100%;
+    align-self: center;
+}

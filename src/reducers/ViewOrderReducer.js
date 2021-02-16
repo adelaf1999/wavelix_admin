@@ -50,7 +50,7 @@ export default (state = INITIAL_STATE, action) => {
                 driver_name: action.payload.driver_name === undefined ? '' : action.payload.driver_name,
                 status: action.payload.status,
                 delivery_location: action.payload.delivery_location,
-                ordered_at: action.payload.order_type,
+                ordered_at: action.payload.ordered_at,
                 store_user_id: action.payload.store_user_id,
                 store_name: action.payload.store_name,
                 customer_user_id: action.payload.customer_user_id,
