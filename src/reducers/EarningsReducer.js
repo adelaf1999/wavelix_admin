@@ -2,7 +2,7 @@ import {
     LOGOUT_SUCCESS,
     INITIALIZE_EARNINGS_PAGE,
     INITIALIZE_EARNINGS_PAGE_COMPLETE,
-    CLEAR_EARNINGS_PAGE_STATE
+    CLEAR_EARNINGS_PAGE_STATE, GET_YEAR_EARNINGS_COMPLETE
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -15,6 +15,12 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case GET_YEAR_EARNINGS_COMPLETE:
+            return{
+                ...state,
+                earnings: action.payload,
+                total: action.payload.total === undefined ? null : action.payload.total
+            };
         case INITIALIZE_EARNINGS_PAGE_COMPLETE:
             return{
                 ...state,

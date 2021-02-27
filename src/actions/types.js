@@ -268,3 +268,4 @@ export const CLEAR_VIEW_ORDER_STATE = "clear_view_order_state";
 export const INITIALIZE_EARNINGS_PAGE = "initialize_earnings_page";
 export const INITIALIZE_EARNINGS_PAGE_COMPLETE = "initialize_earnings_page_complete";
 export const CLEAR_EARNINGS_PAGE_STATE = "clear_earnings_page_state";
+export const GET_YEAR_EARNINGS_COMPLETE = "get_year_earnings_complete";

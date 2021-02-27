@@ -20,6 +20,7 @@
 @import "DriverUnsuccessfulOrders.css";
 @import "Orders.css";
 @import "ViewOrder.css";
+@import "Earnings.css";
 
 .center-container{
     position: absolute;
