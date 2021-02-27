@@ -126,6 +126,99 @@ class Earnings extends Component{
     }
 
 
+    pageTitle(){
+
+        const { total } = this.props;
+
+        if(total !== null){
+
+            return(
+
+                <p id="earnings-page-title">
+                    {total} USD
+                </p>
+
+            );
+
+        }
+
+    }
+
+
+    renderEarnings(){
+
+        const { earnings } = this.props;
+
+        if(earnings.length === 0){
+
+            return(
+
+                <div className="center-container">
+
+                    <p className="no-accounts-notice">No Earnings Found</p>
+
+                </div>
+
+            );
+
+        }else{
+
+            return(
+
+                <Table striped bordered hover>
+
+                    <thead>
+
+                    <tr>
+                        <th>Month</th>
+                        <th>Total</th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+
+                    {
+
+                        _.map(earnings, (earning, index) => {
+
+                            return(
+
+                                <tr key={index}>
+
+                                    <td >
+
+                                        {Object.keys(earning)[0]}
+
+                                    </td>
+
+                                    <td >
+
+                                        {Object.values(earning)[0]} USD
+
+                                    </td>
+
+                                </tr>
+
+                            );
+
+                        })
+
+                    }
+
+
+                    </tbody>
+
+                </Table>
+
+
+            );
+
+        }
+
+    }
+
     show() {
 
         const {
@@ -155,6 +248,11 @@ class Earnings extends Component{
                 <div className="page-container">
 
                     {this.yearFilter()}
+
+                    {this.pageTitle()}
+
+                    {this.renderEarnings()}
+
 
                 </div>
 

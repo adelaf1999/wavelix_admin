@@ -18,7 +18,7 @@ export default (state = INITIAL_STATE, action) => {
         case GET_YEAR_EARNINGS_COMPLETE:
             return{
                 ...state,
-                earnings: action.payload,
+                earnings: action.payload.earnings,
                 total: action.payload.total === undefined ? null : action.payload.total
             };
         case INITIALIZE_EARNINGS_PAGE_COMPLETE:
