@@ -24,6 +24,7 @@ import UnsuccessfulOrdersReducer from "./UnsuccessfulOrdersReducer";
 import DriverUnsuccessfulOrdersReducer from "./DriverUnsuccessfulOrdersReducer";
 import OrdersReducer from "./OrdersReducer";
 import ViewOrderReducer from "./ViewOrderReducer";
+import EarningsReducer from "./EarningsReducer";
 
 const appReducer = combineReducers({
     login: LoginReducer,
@@ -46,7 +47,8 @@ const appReducer = combineReducers({
     unsuccessful_orders: UnsuccessfulOrdersReducer,
     driver_unsuccessful_orders: DriverUnsuccessfulOrdersReducer,
     orders: OrdersReducer,
-    view_order: ViewOrderReducer
+    view_order: ViewOrderReducer,
+    earnings: EarningsReducer
 });
 
 

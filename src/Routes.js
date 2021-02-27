@@ -26,6 +26,7 @@ import UnsuccessfulOrders from "./components/UnsuccessfulOrders";
 import DriverUnsuccessfulOrders from "./components/DriverUnsuccessfulOrders";
 import Orders from "./components/Orders";
 import ViewOrder from "./components/ViewOrder";
+import Earnings from "./components/Earnings";
 
 export default function Routes() {
 
@@ -87,6 +88,8 @@ export default function Routes() {
 
                 <Route exact path="/orders/order_id=:order_id" component={ViewOrder} />
 
+
+                <Route exact path="/earnings" component={Earnings} />
 
             </Switch>
 

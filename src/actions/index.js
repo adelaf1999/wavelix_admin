@@ -20,3 +20,4 @@ export * from "./UnsuccessfulOrdersActions";
 export * from "./DriverUnsuccessfulOrdersActions";
 export * from "./OrdersActions";
 export * from "./ViewOrderActions";
+export * from "./EarningsActions";

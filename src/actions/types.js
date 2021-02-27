@@ -57,6 +57,8 @@ export const CONFIRM_UNSUCCESSFUL_ORDER_ROUTE = `${BACKEND_URL}/confirm-unsucces
 export const ORDERS_INDEX_ROUTE = `${BACKEND_URL}/orders-index`;
 export const SEARCH_ORDERS_ROUTE = `${BACKEND_URL}/search-orders`;
 export const VIEW_ORDER_ROUTE = `${BACKEND_URL}/view-order`;
+export const EARNINGS_INDEX_ROUTE = `${BACKEND_URL}/earnings-index`;
+export const GET_YEAR_EARNINGS_ROUTE = `${BACKEND_URL}/get-year-earnings`;
 
 // Login Types
 export const CHECK_EMAIL = "check_email";
@@ -261,3 +263,8 @@ export const SEARCH_ORDERS_LIMIT_CHANGED = "search_orders_limit_changed";
 export const INITIALIZE_VIEW_ORDER_PAGE = "initialize_view_order_page";
 export const INITIALIZE_VIEW_ORDER_PAGE_COMPLETE = "initialize_view_order_page_complete";
 export const CLEAR_VIEW_ORDER_STATE = "clear_view_order_state";
+
+// Earnings Types
+export const INITIALIZE_EARNINGS_PAGE = "initialize_earnings_page";
+export const INITIALIZE_EARNINGS_PAGE_COMPLETE = "initialize_earnings_page_complete";
+export const CLEAR_EARNINGS_PAGE_STATE = "clear_earnings_page_state";

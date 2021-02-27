@@ -179,6 +179,35 @@ class TopHeader extends Component{
     }
 
 
+    earningsTab(){
+
+
+        const { roles } = this.props;
+
+        const { history } = this.state;
+
+        if( roles.includes("root_admin") ){
+
+            return(
+
+                <Nav.Link
+                    onClick={() => {
+                        history.push("/earnings");
+                    }}
+                    className="nav-link"
+                >
+                    Earnings
+                </Nav.Link>
+
+
+            );
+
+        }
+
+
+    }
+
+
     render(){
 
         const { history } = this.state;
@@ -251,6 +280,8 @@ class TopHeader extends Component{
                     {this.unsuccessfulOrdersTab()}
 
                     {this.ordersTab()}
+
+                    {this.earningsTab()}
 
 
                 </Nav>
