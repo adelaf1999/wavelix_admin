@@ -14,6 +14,7 @@ import _ from "lodash";
 import axios from "axios";
 import Recaptcha from 'react-google-invisible-recaptcha';
 import { VERIFY_RECAPTCHA_TOKEN_ROUTE } from "../actions/types";
+import {getRecaptchaSiteKey} from "../helpers";
 
 class Login extends Component {
 
@@ -571,7 +572,7 @@ class Login extends Component {
 
                 <Recaptcha
                     ref={ ref => this.recaptcha = ref }
-                    sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                    sitekey={getRecaptchaSiteKey()}
                     onResolved={() => {
 
                         this.setState({verifying_recaptcha: true});
